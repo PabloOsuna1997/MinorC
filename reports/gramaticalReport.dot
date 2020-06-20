@@ -1,0 +1,1257 @@
+digraph H { parent [ shape=plaintext label=< <table border='1' cellborder='1'>
+<tr><td colspan="3">REPORTE GRAMATICAL</td></tr>
+<tr><td port='port_one'>PRODUCCION</td><td port='port_two'>REGLAS SEMANTICAS</td></tr>
+<tr><td align="left" port='port_one'>S  -&gt; A</td><td align="left" port='port_two'>S.val = A.val</td></tr>
+<tr><td align="left" port='port_one'>A  -&gt; MAIN DOSPUNTOS SENTENCIAS</td><td align="left" port='port_two'>A.val = SENTENCIAS.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; GOTO LABEL PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Goto(LABEL.value)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($a1)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; ETIQUETA</td><td align="left" port='port_two'>SENTENCIA.val = ETIQUETA.val</td></tr>
+<tr><td align="left" port='port_one'>ETIQUETA -&gt; LABEL DOSPUNTOS</td><td align="left" port='port_two'>ETIQUETA.val = Label(LABEL.value)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; GOTO LABEL PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Goto(LABEL.value)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; OPERACION</td><td align="left" port='port_two'>EXPRESION.val = OPERACION.val</td></tr>
+<tr><td align="left" port='port_one'>OPERACION -&gt; F  OPERADOR F</td><td align="left" port='port_two'>OPERACION.val = BinaryExpression(F1.val,OPERADOR.val,F2.val)</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>OPERADOR -&gt; MAS
+                                                    <BR/>| MENOS
+                                                    <BR/>| DIV
+                                                    <BR/>| POR
+                                                    <BR/>| MODULO
+                                                    <BR/>| AND
+                                                    <BR/>| OR
+                                                    <BR/>| XOR
+                                                    <BR/>| IGUALQUE
+                                                    <BR/>| DIFERENTE
+                                                    <BR/>| MAYORIGUAL
+                                                    <BR/>| MENORIGUAL
+                                                    <BR/>| MAYORQUE
+                                                    <BR/>| MENORQUE
+                                                    <BR/>| ANDBIT
+                                                    <BR/>| ORBIT
+                                                    <BR/>| XORBIT
+                                                    <BR/>| SHIFTIZQ
+                                                    <BR/>| SHIFTDER</td><td align="left" port='port_two'>TIPO.val = NODE.value</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($a1)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($a0)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($sp)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; OPERACION</td><td align="left" port='port_two'>EXPRESION.val = OPERACION.val</td></tr>
+<tr><td align="left" port='port_one'>OPERACION -&gt; F  OPERADOR F</td><td align="left" port='port_two'>OPERACION.val = BinaryExpression(F1.val,OPERADOR.val,F2.val)</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>OPERADOR -&gt; MAS
+                                                    <BR/>| MENOS
+                                                    <BR/>| DIV
+                                                    <BR/>| POR
+                                                    <BR/>| MODULO
+                                                    <BR/>| AND
+                                                    <BR/>| OR
+                                                    <BR/>| XOR
+                                                    <BR/>| IGUALQUE
+                                                    <BR/>| DIFERENTE
+                                                    <BR/>| MAYORIGUAL
+                                                    <BR/>| MENORIGUAL
+                                                    <BR/>| MAYORQUE
+                                                    <BR/>| MENORQUE
+                                                    <BR/>| ANDBIT
+                                                    <BR/>| ORBIT
+                                                    <BR/>| XORBIT
+                                                    <BR/>| SHIFTIZQ
+                                                    <BR/>| SHIFTDER</td><td align="left" port='port_two'>TIPO.val = NODE.value</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($sp)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; OPERACION</td><td align="left" port='port_two'>EXPRESION.val = OPERACION.val</td></tr>
+<tr><td align="left" port='port_one'>OPERACION -&gt; F  OPERADOR F</td><td align="left" port='port_two'>OPERACION.val = BinaryExpression(F1.val,OPERADOR.val,F2.val)</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>OPERADOR -&gt; MAS
+                                                    <BR/>| MENOS
+                                                    <BR/>| DIV
+                                                    <BR/>| POR
+                                                    <BR/>| MODULO
+                                                    <BR/>| AND
+                                                    <BR/>| OR
+                                                    <BR/>| XOR
+                                                    <BR/>| IGUALQUE
+                                                    <BR/>| DIFERENTE
+                                                    <BR/>| MAYORIGUAL
+                                                    <BR/>| MENORIGUAL
+                                                    <BR/>| MAYORQUE
+                                                    <BR/>| MENORQUE
+                                                    <BR/>| ANDBIT
+                                                    <BR/>| ORBIT
+                                                    <BR/>| XORBIT
+                                                    <BR/>| SHIFTIZQ
+                                                    <BR/>| SHIFTDER</td><td align="left" port='port_two'>TIPO.val = NODE.value</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($a0)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($a0)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($sp)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; OPERACION</td><td align="left" port='port_two'>EXPRESION.val = OPERACION.val</td></tr>
+<tr><td align="left" port='port_one'>OPERACION -&gt; F  OPERADOR F</td><td align="left" port='port_two'>OPERACION.val = BinaryExpression(F1.val,OPERADOR.val,F2.val)</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>OPERADOR -&gt; MAS
+                                                    <BR/>| MENOS
+                                                    <BR/>| DIV
+                                                    <BR/>| POR
+                                                    <BR/>| MODULO
+                                                    <BR/>| AND
+                                                    <BR/>| OR
+                                                    <BR/>| XOR
+                                                    <BR/>| IGUALQUE
+                                                    <BR/>| DIFERENTE
+                                                    <BR/>| MAYORIGUAL
+                                                    <BR/>| MENORIGUAL
+                                                    <BR/>| MAYORQUE
+                                                    <BR/>| MENORQUE
+                                                    <BR/>| ANDBIT
+                                                    <BR/>| ORBIT
+                                                    <BR/>| XORBIT
+                                                    <BR/>| SHIFTIZQ
+                                                    <BR/>| SHIFTDER</td><td align="left" port='port_two'>TIPO.val = NODE.value</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($sp)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; OPERACION</td><td align="left" port='port_two'>EXPRESION.val = OPERACION.val</td></tr>
+<tr><td align="left" port='port_one'>OPERACION -&gt; F  OPERADOR F</td><td align="left" port='port_two'>OPERACION.val = BinaryExpression(F1.val,OPERADOR.val,F2.val)</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>OPERADOR -&gt; MAS
+                                                    <BR/>| MENOS
+                                                    <BR/>| DIV
+                                                    <BR/>| POR
+                                                    <BR/>| MODULO
+                                                    <BR/>| AND
+                                                    <BR/>| OR
+                                                    <BR/>| XOR
+                                                    <BR/>| IGUALQUE
+                                                    <BR/>| DIFERENTE
+                                                    <BR/>| MAYORIGUAL
+                                                    <BR/>| MENORIGUAL
+                                                    <BR/>| MAYORQUE
+                                                    <BR/>| MENORQUE
+                                                    <BR/>| ANDBIT
+                                                    <BR/>| ORBIT
+                                                    <BR/>| XORBIT
+                                                    <BR/>| SHIFTIZQ
+                                                    <BR/>| SHIFTDER</td><td align="left" port='port_two'>TIPO.val = NODE.value</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($a0)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; ETIQUETA</td><td align="left" port='port_two'>SENTENCIA.val = ETIQUETA.val</td></tr>
+<tr><td align="left" port='port_one'>ETIQUETA -&gt; LABEL DOSPUNTOS</td><td align="left" port='port_two'>ETIQUETA.val = Label(LABEL.value)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; GOTO LABEL PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Goto(LABEL.value)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($a0)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($sp)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; OPERACION</td><td align="left" port='port_two'>EXPRESION.val = OPERACION.val</td></tr>
+<tr><td align="left" port='port_one'>OPERACION -&gt; F  OPERADOR F</td><td align="left" port='port_two'>OPERACION.val = BinaryExpression(F1.val,OPERADOR.val,F2.val)</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>OPERADOR -&gt; MAS
+                                                    <BR/>| MENOS
+                                                    <BR/>| DIV
+                                                    <BR/>| POR
+                                                    <BR/>| MODULO
+                                                    <BR/>| AND
+                                                    <BR/>| OR
+                                                    <BR/>| XOR
+                                                    <BR/>| IGUALQUE
+                                                    <BR/>| DIFERENTE
+                                                    <BR/>| MAYORIGUAL
+                                                    <BR/>| MENORIGUAL
+                                                    <BR/>| MAYORQUE
+                                                    <BR/>| MENORQUE
+                                                    <BR/>| ANDBIT
+                                                    <BR/>| ORBIT
+                                                    <BR/>| XORBIT
+                                                    <BR/>| SHIFTIZQ
+                                                    <BR/>| SHIFTDER</td><td align="left" port='port_two'>TIPO.val = NODE.value</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($sp)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; OPERACION</td><td align="left" port='port_two'>EXPRESION.val = OPERACION.val</td></tr>
+<tr><td align="left" port='port_one'>OPERACION -&gt; F  OPERADOR F</td><td align="left" port='port_two'>OPERACION.val = BinaryExpression(F1.val,OPERADOR.val,F2.val)</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>OPERADOR -&gt; MAS
+                                                    <BR/>| MENOS
+                                                    <BR/>| DIV
+                                                    <BR/>| POR
+                                                    <BR/>| MODULO
+                                                    <BR/>| AND
+                                                    <BR/>| OR
+                                                    <BR/>| XOR
+                                                    <BR/>| IGUALQUE
+                                                    <BR/>| DIFERENTE
+                                                    <BR/>| MAYORIGUAL
+                                                    <BR/>| MENORIGUAL
+                                                    <BR/>| MAYORQUE
+                                                    <BR/>| MENORQUE
+                                                    <BR/>| ANDBIT
+                                                    <BR/>| ORBIT
+                                                    <BR/>| XORBIT
+                                                    <BR/>| SHIFTIZQ
+                                                    <BR/>| SHIFTDER</td><td align="left" port='port_two'>TIPO.val = NODE.value</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($a0)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; OPERACION</td><td align="left" port='port_two'>EXPRESION.val = OPERACION.val</td></tr>
+<tr><td align="left" port='port_one'>OPERACION -&gt; F  OPERADOR F</td><td align="left" port='port_two'>OPERACION.val = BinaryExpression(F1.val,OPERADOR.val,F2.val)</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>OPERADOR -&gt; MAS
+                                                    <BR/>| MENOS
+                                                    <BR/>| DIV
+                                                    <BR/>| POR
+                                                    <BR/>| MODULO
+                                                    <BR/>| AND
+                                                    <BR/>| OR
+                                                    <BR/>| XOR
+                                                    <BR/>| IGUALQUE
+                                                    <BR/>| DIFERENTE
+                                                    <BR/>| MAYORIGUAL
+                                                    <BR/>| MENORIGUAL
+                                                    <BR/>| MAYORQUE
+                                                    <BR/>| MENORQUE
+                                                    <BR/>| ANDBIT
+                                                    <BR/>| ORBIT
+                                                    <BR/>| XORBIT
+                                                    <BR/>| SHIFTIZQ
+                                                    <BR/>| SHIFTDER</td><td align="left" port='port_two'>TIPO.val = NODE.value</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($a1)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; IF ( EXPRESION ) GOTO LABEL PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = If(EXPRESION.val, LABEL.value</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; OPERACION</td><td align="left" port='port_two'>EXPRESION.val = OPERACION.val</td></tr>
+<tr><td align="left" port='port_one'>OPERACION -&gt; F  OPERADOR F</td><td align="left" port='port_two'>OPERACION.val = BinaryExpression(F1.val,OPERADOR.val,F2.val)</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>OPERADOR -&gt; MAS
+                                                    <BR/>| MENOS
+                                                    <BR/>| DIV
+                                                    <BR/>| POR
+                                                    <BR/>| MODULO
+                                                    <BR/>| AND
+                                                    <BR/>| OR
+                                                    <BR/>| XOR
+                                                    <BR/>| IGUALQUE
+                                                    <BR/>| DIFERENTE
+                                                    <BR/>| MAYORIGUAL
+                                                    <BR/>| MENORIGUAL
+                                                    <BR/>| MAYORQUE
+                                                    <BR/>| MENORQUE
+                                                    <BR/>| ANDBIT
+                                                    <BR/>| ORBIT
+                                                    <BR/>| XORBIT
+                                                    <BR/>| SHIFTIZQ
+                                                    <BR/>| SHIFTDER</td><td align="left" port='port_two'>TIPO.val = NODE.value</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($a1)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; ETIQUETA</td><td align="left" port='port_two'>SENTENCIA.val = ETIQUETA.val</td></tr>
+<tr><td align="left" port='port_one'>ETIQUETA -&gt; LABEL DOSPUNTOS</td><td align="left" port='port_two'>ETIQUETA.val = Label(LABEL.value)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; GOTO LABEL PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Goto(LABEL.value)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; OPERACION</td><td align="left" port='port_two'>EXPRESION.val = OPERACION.val</td></tr>
+<tr><td align="left" port='port_one'>OPERACION -&gt; F  OPERADOR F</td><td align="left" port='port_two'>OPERACION.val = BinaryExpression(F1.val,OPERADOR.val,F2.val)</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($t4)</td></tr>
+<tr><td align="left" port='port_one'>OPERADOR -&gt; MAS
+                                                    <BR/>| MENOS
+                                                    <BR/>| DIV
+                                                    <BR/>| POR
+                                                    <BR/>| MODULO
+                                                    <BR/>| AND
+                                                    <BR/>| OR
+                                                    <BR/>| XOR
+                                                    <BR/>| IGUALQUE
+                                                    <BR/>| DIFERENTE
+                                                    <BR/>| MAYORIGUAL
+                                                    <BR/>| MENORIGUAL
+                                                    <BR/>| MAYORQUE
+                                                    <BR/>| MENORQUE
+                                                    <BR/>| ANDBIT
+                                                    <BR/>| ORBIT
+                                                    <BR/>| XORBIT
+                                                    <BR/>| SHIFTIZQ
+                                                    <BR/>| SHIFTDER</td><td align="left" port='port_two'>TIPO.val = NODE.value</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($a1)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; OPERACION</td><td align="left" port='port_two'>EXPRESION.val = OPERACION.val</td></tr>
+<tr><td align="left" port='port_one'>OPERACION -&gt; F  OPERADOR F</td><td align="left" port='port_two'>OPERACION.val = BinaryExpression(F1.val,OPERADOR.val,F2.val)</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>OPERADOR -&gt; MAS
+                                                    <BR/>| MENOS
+                                                    <BR/>| DIV
+                                                    <BR/>| POR
+                                                    <BR/>| MODULO
+                                                    <BR/>| AND
+                                                    <BR/>| OR
+                                                    <BR/>| XOR
+                                                    <BR/>| IGUALQUE
+                                                    <BR/>| DIFERENTE
+                                                    <BR/>| MAYORIGUAL
+                                                    <BR/>| MENORIGUAL
+                                                    <BR/>| MAYORQUE
+                                                    <BR/>| MENORQUE
+                                                    <BR/>| ANDBIT
+                                                    <BR/>| ORBIT
+                                                    <BR/>| XORBIT
+                                                    <BR/>| SHIFTIZQ
+                                                    <BR/>| SHIFTDER</td><td align="left" port='port_two'>TIPO.val = NODE.value</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($a0)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; IF ( EXPRESION ) GOTO LABEL PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = If(EXPRESION.val, LABEL.value</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; OPERACION</td><td align="left" port='port_two'>EXPRESION.val = OPERACION.val</td></tr>
+<tr><td align="left" port='port_one'>OPERACION -&gt; F  OPERADOR F</td><td align="left" port='port_two'>OPERACION.val = BinaryExpression(F1.val,OPERADOR.val,F2.val)</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>OPERADOR -&gt; MAS
+                                                    <BR/>| MENOS
+                                                    <BR/>| DIV
+                                                    <BR/>| POR
+                                                    <BR/>| MODULO
+                                                    <BR/>| AND
+                                                    <BR/>| OR
+                                                    <BR/>| XOR
+                                                    <BR/>| IGUALQUE
+                                                    <BR/>| DIFERENTE
+                                                    <BR/>| MAYORIGUAL
+                                                    <BR/>| MENORIGUAL
+                                                    <BR/>| MAYORQUE
+                                                    <BR/>| MENORQUE
+                                                    <BR/>| ANDBIT
+                                                    <BR/>| ORBIT
+                                                    <BR/>| XORBIT
+                                                    <BR/>| SHIFTIZQ
+                                                    <BR/>| SHIFTDER</td><td align="left" port='port_two'>TIPO.val = NODE.value</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($a0)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; OPERACION</td><td align="left" port='port_two'>EXPRESION.val = OPERACION.val</td></tr>
+<tr><td align="left" port='port_one'>OPERACION -&gt; F  OPERADOR F</td><td align="left" port='port_two'>OPERACION.val = BinaryExpression(F1.val,OPERADOR.val,F2.val)</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>OPERADOR -&gt; MAS
+                                                    <BR/>| MENOS
+                                                    <BR/>| DIV
+                                                    <BR/>| POR
+                                                    <BR/>| MODULO
+                                                    <BR/>| AND
+                                                    <BR/>| OR
+                                                    <BR/>| XOR
+                                                    <BR/>| IGUALQUE
+                                                    <BR/>| DIFERENTE
+                                                    <BR/>| MAYORIGUAL
+                                                    <BR/>| MENORIGUAL
+                                                    <BR/>| MAYORQUE
+                                                    <BR/>| MENORQUE
+                                                    <BR/>| ANDBIT
+                                                    <BR/>| ORBIT
+                                                    <BR/>| XORBIT
+                                                    <BR/>| SHIFTIZQ
+                                                    <BR/>| SHIFTDER</td><td align="left" port='port_two'>TIPO.val = NODE.value</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($sp)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID CORCHETES</td><td align="left" port='port_two'>F.val = IdentifierArray(ID.value,CORCHETES.val)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($sp)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; IF ( EXPRESION ) GOTO LABEL PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = If(EXPRESION.val, LABEL.value</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; OPERACION</td><td align="left" port='port_two'>EXPRESION.val = OPERACION.val</td></tr>
+<tr><td align="left" port='port_one'>OPERACION -&gt; F  OPERADOR F</td><td align="left" port='port_two'>OPERACION.val = BinaryExpression(F1.val,OPERADOR.val,F2.val)</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>OPERADOR -&gt; MAS
+                                                    <BR/>| MENOS
+                                                    <BR/>| DIV
+                                                    <BR/>| POR
+                                                    <BR/>| MODULO
+                                                    <BR/>| AND
+                                                    <BR/>| OR
+                                                    <BR/>| XOR
+                                                    <BR/>| IGUALQUE
+                                                    <BR/>| DIFERENTE
+                                                    <BR/>| MAYORIGUAL
+                                                    <BR/>| MENORIGUAL
+                                                    <BR/>| MAYORQUE
+                                                    <BR/>| MENORQUE
+                                                    <BR/>| ANDBIT
+                                                    <BR/>| ORBIT
+                                                    <BR/>| XORBIT
+                                                    <BR/>| SHIFTIZQ
+                                                    <BR/>| SHIFTDER</td><td align="left" port='port_two'>TIPO.val = NODE.value</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($sp)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; ETIQUETA</td><td align="left" port='port_two'>SENTENCIA.val = ETIQUETA.val</td></tr>
+<tr><td align="left" port='port_one'>ETIQUETA -&gt; LABEL DOSPUNTOS</td><td align="left" port='port_two'>ETIQUETA.val = Label(LABEL.value)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; EXIT PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Exit( )</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($v0)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; ETIQUETA</td><td align="left" port='port_two'>SENTENCIA.val = ETIQUETA.val</td></tr>
+<tr><td align="left" port='port_one'>ETIQUETA -&gt; LABEL DOSPUNTOS</td><td align="left" port='port_two'>ETIQUETA.val = Label(LABEL.value)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; GOTO LABEL PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Goto(LABEL.value)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($a0)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($sp)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; OPERACION</td><td align="left" port='port_two'>EXPRESION.val = OPERACION.val</td></tr>
+<tr><td align="left" port='port_one'>OPERACION -&gt; F  OPERADOR F</td><td align="left" port='port_two'>OPERACION.val = BinaryExpression(F1.val,OPERADOR.val,F2.val)</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>OPERADOR -&gt; MAS
+                                                    <BR/>| MENOS
+                                                    <BR/>| DIV
+                                                    <BR/>| POR
+                                                    <BR/>| MODULO
+                                                    <BR/>| AND
+                                                    <BR/>| OR
+                                                    <BR/>| XOR
+                                                    <BR/>| IGUALQUE
+                                                    <BR/>| DIFERENTE
+                                                    <BR/>| MAYORIGUAL
+                                                    <BR/>| MENORIGUAL
+                                                    <BR/>| MAYORQUE
+                                                    <BR/>| MENORQUE
+                                                    <BR/>| ANDBIT
+                                                    <BR/>| ORBIT
+                                                    <BR/>| XORBIT
+                                                    <BR/>| SHIFTIZQ
+                                                    <BR/>| SHIFTDER</td><td align="left" port='port_two'>TIPO.val = NODE.value</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($sp)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(3)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(2)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; OPERACION</td><td align="left" port='port_two'>EXPRESION.val = OPERACION.val</td></tr>
+<tr><td align="left" port='port_one'>OPERACION -&gt; MENOS F</td><td align="left" port='port_two'>OPERACION.val = NegativeNumber(F.val)</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; FUNCION</td><td align="left" port='port_two'>EXPRESION.val = FUNCION.val</td></tr>
+<tr><td align="left" port='port_one'>FUNCION -&gt; ARRAY (  )</td><td align="left" port='port_two'>FUNCION.val = 'array'</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(\n)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID CORCHETES</td><td align="left" port='port_two'>F.val = IdentifierArray(ID.value,CORCHETES.val)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(nombre)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(s)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(7)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(nombre)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(\n)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID CORCHETES</td><td align="left" port='port_two'>F.val = IdentifierArray(ID.value,CORCHETES.val)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(nombre)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(s)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(5)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(nombre)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(\n)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID CORCHETES</td><td align="left" port='port_two'>F.val = IdentifierArray(ID.value,CORCHETES.val)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(nombre)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(o)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(4)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(nombre)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(\n)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID CORCHETES</td><td align="left" port='port_two'>F.val = IdentifierArray(ID.value,CORCHETES.val)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(nombre)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(Carla)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(nombre)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID CORCHETES</td><td align="left" port='port_two'>F.val = IdentifierArray(ID.value,CORCHETES.val)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(3)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(\n)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID CORCHETES</td><td align="left" port='port_two'>F.val = IdentifierArray(ID.value,CORCHETES.val)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(2)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(20)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(2)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(10)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(\n)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID CORCHETES</td><td align="left" port='port_two'>F.val = IdentifierArray(ID.value,CORCHETES.val)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(\n)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID CORCHETES</td><td align="left" port='port_two'>F.val = IdentifierArray(ID.value,CORCHETES.val)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(\n)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($t3)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; FUNCION</td><td align="left" port='port_two'>EXPRESION.val = FUNCION.val</td></tr>
+<tr><td align="left" port='port_one'>FUNCION -&gt; ARRAY (  )</td><td align="left" port='port_two'>FUNCION.val = 'array'</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; ETIQUETA</td><td align="left" port='port_two'>SENTENCIA.val = ETIQUETA.val</td></tr>
+<tr><td align="left" port='port_one'>ETIQUETA -&gt; LABEL DOSPUNTOS</td><td align="left" port='port_two'>ETIQUETA.val = Label(LABEL.value)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; GOTO LABEL PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Goto(LABEL.value)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; OPERACION</td><td align="left" port='port_two'>EXPRESION.val = OPERACION.val</td></tr>
+<tr><td align="left" port='port_one'>OPERACION -&gt; F  OPERADOR F</td><td align="left" port='port_two'>OPERACION.val = BinaryExpression(F1.val,OPERADOR.val,F2.val)</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>OPERADOR -&gt; MAS
+                                                    <BR/>| MENOS
+                                                    <BR/>| DIV
+                                                    <BR/>| POR
+                                                    <BR/>| MODULO
+                                                    <BR/>| AND
+                                                    <BR/>| OR
+                                                    <BR/>| XOR
+                                                    <BR/>| IGUALQUE
+                                                    <BR/>| DIFERENTE
+                                                    <BR/>| MAYORIGUAL
+                                                    <BR/>| MENORIGUAL
+                                                    <BR/>| MAYORQUE
+                                                    <BR/>| MENORQUE
+                                                    <BR/>| ANDBIT
+                                                    <BR/>| ORBIT
+                                                    <BR/>| XORBIT
+                                                    <BR/>| SHIFTIZQ
+                                                    <BR/>| SHIFTDER</td><td align="left" port='port_two'>TIPO.val = NODE.value</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($t2)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(\n)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID CORCHETES</td><td align="left" port='port_two'>F.val = IdentifierArray(ID.value,CORCHETES.val)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(telefono)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($t2)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(,)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID CORCHETES</td><td align="left" port='port_two'>F.val = IdentifierArray(ID.value,CORCHETES.val)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(direccion)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($t2)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(,)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; PRINT ( EXPRESION ) PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = Print_(EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID CORCHETES</td><td align="left" port='port_two'>F.val = IdentifierArray(ID.value,CORCHETES.val)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(nombre)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($t2)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; INSTRUCCIONES</td><td align="left" port='port_two'>SENTENCIA.val = INSTRUCCIONES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES -&gt; IF ( EXPRESION ) GOTO LABEL PUNTOCOMA</td><td align="left" port='port_two'>INSTRUCCIONES.val = If(EXPRESION.val, LABEL.value</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; OPERACION</td><td align="left" port='port_two'>EXPRESION.val = OPERACION.val</td></tr>
+<tr><td align="left" port='port_one'>OPERACION -&gt; F  OPERADOR F</td><td align="left" port='port_two'>OPERACION.val = BinaryExpression(F1.val,OPERADOR.val,F2.val)</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(4)</td></tr>
+<tr><td align="left" port='port_one'>OPERADOR -&gt; MAS
+                                                    <BR/>| MENOS
+                                                    <BR/>| DIV
+                                                    <BR/>| POR
+                                                    <BR/>| MODULO
+                                                    <BR/>| AND
+                                                    <BR/>| OR
+                                                    <BR/>| XOR
+                                                    <BR/>| IGUALQUE
+                                                    <BR/>| DIFERENTE
+                                                    <BR/>| MAYORIGUAL
+                                                    <BR/>| MENORIGUAL
+                                                    <BR/>| MAYORQUE
+                                                    <BR/>| MENORQUE
+                                                    <BR/>| ANDBIT
+                                                    <BR/>| ORBIT
+                                                    <BR/>| XORBIT
+                                                    <BR/>| SHIFTIZQ
+                                                    <BR/>| SHIFTDER</td><td align="left" port='port_two'>TIPO.val = NODE.value</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($t2)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; ETIQUETA</td><td align="left" port='port_two'>SENTENCIA.val = ETIQUETA.val</td></tr>
+<tr><td align="left" port='port_one'>ETIQUETA -&gt; LABEL DOSPUNTOS</td><td align="left" port='port_two'>ETIQUETA.val = Label(LABEL.value)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(45124125)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(telefono)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(3)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(12412124)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(telefono)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(3)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(Petapolis)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(direccion)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(3)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(Peter Parker)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(nombre)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(3)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(45784125)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(telefono)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(2)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(12412854)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(telefono)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(2)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(zona 1, San Jose Pinula )</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(direccion)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(2)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(Luis)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(nombre)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(2)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(45784125)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(telefono)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(56412854)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(telefono)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(zona 8, villa nueva)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(direccion)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(Paco)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(nombre)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(1)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(45784565)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(telefono)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(56457854)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(telefono)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS  -&gt; SENCTENCIAS SENTENCIA</td><td align="left" port='port_two'>SENTENCIAS1.val.append(SENTENCIA.val)
+SENTENCIAS.val = SENTENCIA1.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(zona 4)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(direccion)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS -&gt; SENTENCIA</td><td align="left" port='port_two'>SENTENCIA.val = SENTENCIA.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; CORCHETES IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = ExpresionDeclarationArray(CORCHETES.val, EXPRESION.val)</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(Hugo)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETES CORCHETE</td><td align="left" port='port_two'>CORCHETES1.val.append(CORCHETE.val)
+CORCHETES.val = CORCHETES1.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; CADENA</td><td align="left" port='port_two'>F.val = String_(nombre)</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES -&gt; CORCHETE</td><td align="left" port='port_two'>CORCHETES.val = CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE -&gt; CORQIZQ F CORDER</td><td align="left" port='port_two'>CORCHETE.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; NUMERO</td><td align="left" port='port_two'>F.val = Number(0)</td></tr>
+<tr><td align="left" port='port_one'>F -&gt; ID</td><td align="left" port='port_two'>F.val = Identifier($t2)</td></tr>
+<tr><td align="left" port='port_one'>ATOMICO -&gt; F</td><td align="left" port='port_two'>ATOMICO.val = F.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION -&gt; ATOMICO</td><td align="left" port='port_two'>EXPRESION.val = ATOMICO.val</td></tr>
+<tr><td align="left" port='port_one'>ARRAY_ -&gt; IGUAL EXPRESION PUNTOCOMA</td><td align="left" port='port_two'>ARRAY_.val = EXPRESION.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACIONES -&gt; ID ARRAY</td><td align="left" port='port_two'>DECLARACIONES.val = Declaration(ID.value,ARRAY_.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIA -&gt; DECLARACIONES</td><td align="left" port='port_two'>SENTENCIA.val = DECLARACIONES.val</td></tr>
+<tr><td align="left" port='port_one'>SENTENCIAS -&gt; SENTENCIA</td><td align="left" port='port_two'>SENTENCIA.val = SENTENCIA.val</td></tr>
+<tr><td align="left" port='port_one'>A  -&gt; MAIN DOSPUNTOS SENTENCIAS</td><td align="left" port='port_two'>A.val = SENTENCIAS.val</td></tr>
+<tr><td align="left" port='port_one'>S  -&gt; A</td><td align="left" port='port_two'>S.val = A.val</td></tr>
+</table> >]; 
+}
