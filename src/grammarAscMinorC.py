@@ -33,7 +33,7 @@ tokens = [
     'INCREMENTO',
     'DECREMENTO',
     'PUNTO',
-    'FLECHA'
+    'FLECHA',
     'UNARIO',
     'COMA',
     'PUNTOCOMA',
@@ -235,12 +235,10 @@ def p_listaId(t):
                     | ASIGNA'''
 
 def p_asigna(t):
-    '''ASIGNA :     IGUAL ASIG
+    '''ASIGNA :     IGUAL EXPRESION
+                    | CORCHETES
+                    | CORCHETES IGUAL EXPRESION
                     | '''
-
-def p_asig(t):
-    '''ASIG :   EXPRESION
-                | CORCHETES IGUAL EXPRESION '''
 
 def p_asigEmpty(t):
     'ASIG : '
@@ -273,7 +271,8 @@ def p_logicasBit(t):
                         | LOGICAS_BIT ANDBIT LOGICAS_BIT
                         | LOGICAS_BIT ORBIT LOGICAS_BIT
                         | LOGICAS_BIT XORBIT LOGICAS_BIT
-                        | NOTBIT LOGICAS_BIT
+                        | NOTBIT LOGICAS_BIT                        
+                        | ANDBIT LOGICAS_BIT
                         | RELACIONALES'''
 
 def p_relacionales(t):
@@ -304,7 +303,6 @@ def p_f(t):
                 | NUMERO
                 | CADENA
                 | CHAR_
-                | ANDBIT ID
                 | LLAMADA_FUNCION
                 | ID'''
 
@@ -356,11 +354,13 @@ def p_asignaciones(t):
                         | ID OP_ASIGNACION EXPRESION
                         | STRUCT ID ID IGUAL PARIZQ STRUCT ID PARDER MALLOC PARIZQ SIZEOF PARIZQ STRUCT ID PARDER PARDER
                         | ID ACCESO_ATRIBUTO OP_ASIGNACION EXPRESION PUNTOCOMA
-                        | ID ID ASIG PUNTOCOMA'''
+                        | ID ID ASIG PUNTOCOMA
+                        | ID CORCHETES ACCESO_ATRIBUTO OP_ASIGNACION EXPRESION PUNTOCOMA'''
 
 def p_accesoAtributo(t):
     '''ACCESO_ATRIBUTO : LISTA_PUNTOS
-                        | LISTA_FLECHAS'''
+                        | LISTA_FLECHAS
+                        | '''
 
 def p_listaPuntos(t):
     '''LISTA_PUNTOS :   LISTA_PUNTOS PUNTO ID
@@ -445,14 +445,22 @@ def p_error(t):
 def p_declaStructs(t):
     'DECLA_STRUCTS :  STRUCT ID LLAVEIZQ ATRIBUTOS LLAVEDER PUNTOCOMA'
 
-
 def p_atributos(t):
     '''ATRIBUTOS :  ATRIBUTOS ATR
                     | ATR'''
 
 def p_atr(t):
     '''ATR :    DECLA_VARIABLES
-                | STRUCT ID ID ASIGNA PUNTOCOMA'''
+                | STRUCT ID PUNTERO ASIGNA PUNTOCOMA'''
+
+def p_puntero(t):
+    '''PUNTERO :    LISTA_ASTERISCOS ID
+                    | ID LISTA_ASTERISCOS
+                    | ID '''
+
+def p_listaAsteriscos(t):
+    '''LISTA_ASTERISCOS :   LISTA_ASTERISCOS POR
+                            | POR '''
 
 #def parse(input):
 #global input_, sintacticErroList, LexicalErrosList
