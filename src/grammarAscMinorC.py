@@ -183,21 +183,37 @@ def t_error(t):
 ##---------------------------ANALISIS SINTACTICO------------------------
 precedence = (
     
-    ('right','UMENOS'),
-    ('left', 'UNARIO'),    
-    ('left','POR','DIV'),
-    ('left', 'MODULO'),
-    ('left','MAS','MENOS'),
-    ('left', 'SHIFTIZQ', 'SHIFTDER'),
-    ('left', 'AND'),
+    #('right','UMENOS'),
+    #('left', 'UNARIO'),    
+    #('left','POR','DIV'),
+    #('left', 'MODULO'),
+    #('left','MAS','MENOS'),
+    #('left', 'SHIFTIZQ', 'SHIFTDER'),
+    #('left', 'AND'),
+    #('left', 'OR'),
+    #('left', 'NOTLOGICA'),
+    #('left', 'ANDBIT'),
+    #('left', 'ORBIT'),
+    #('left', 'XORBIT'),
+    #('right','NOTBIT'),
+    #('left', 'INCREMENTO', 'DECREMENTO')
+
+    ('left', 'PARIZQ'),
     ('left', 'OR'),
-    ('left', 'NOTLOGICA'),
-    ('left', 'ANDBIT'),
+    ('left', 'AND'),
     ('left', 'ORBIT'),
     ('left', 'XORBIT'),
-    ('right','NOTBIT'),
-    ('left', 'INCREMENTO', 'DECREMENTO')
-    )
+    ('left', 'ANDBIT'),
+    ('nonassoc', 'DIFERENTE','IGUALQUE'),
+    ('nonassoc', 'MENORQUE','MAYORQUE', 'MENORIGUAL', 'MAYORIGUAL'),
+    ('left', 'SHIFTIZQ', 'SHIFTDER'),
+    ('left', 'MAS', 'MENOS'),
+    ('left', 'POR', 'DIV', 'MODULO'),
+    ('right', 'NOTLOGICA'),
+    ('right', 'NOTBIT'),
+    ('right', 'UMENOS'),
+    ('right', 'INT', 'FLOAT', 'CHAR')   
+)
 
 #definition of grammar 
 def p_init(t):
@@ -257,46 +273,47 @@ def p_valorEmpty(t):
     'VALOR : '
 
 def p_expresion(t):
-    'EXPRESION :    LOGICAS'
+    '''EXPRESION :    LOGICAS
+                        | ARITMETICAS
+                        | RELACIONALES
+                        | LOGICAS_BIT
+                        | F '''
 
 def p_logicas(t):
-    '''LOGICAS :    LOGICAS AND LOGICAS 
-                    | LOGICAS OR LOGICAS
-                    | NOTLOGICA LOGICAS
-                    | LOGICAS_BIT'''
+    '''LOGICAS :    EXPRESION AND EXPRESION 
+                    | EXPRESION OR EXPRESION
+                    | NOTLOGICA EXPRESION'''
 
 def p_logicasBit(t):
-    '''LOGICAS_BIT :    LOGICAS_BIT SHIFTIZQ LOGICAS_BIT
-                        | LOGICAS_BIT SHIFTDER LOGICAS_BIT
-                        | LOGICAS_BIT ANDBIT LOGICAS_BIT
-                        | LOGICAS_BIT ORBIT LOGICAS_BIT
-                        | LOGICAS_BIT XORBIT LOGICAS_BIT
-                        | NOTBIT LOGICAS_BIT                        
-                        | ANDBIT LOGICAS_BIT
-                        | RELACIONALES'''
+    '''LOGICAS_BIT :    EXPRESION SHIFTIZQ EXPRESION
+                        | EXPRESION SHIFTDER EXPRESION
+                        | EXPRESION ANDBIT EXPRESION
+                        | EXPRESION ORBIT EXPRESION
+                        | EXPRESION XORBIT EXPRESION
+                        | NOTBIT EXPRESION                        
+                        | ANDBIT EXPRESION'''
 
 def p_relacionales(t):
-    '''RELACIONALES :   RELACIONALES IGUALQUE RELACIONALES
-                        | RELACIONALES DIFERENTE RELACIONALES
-                        | RELACIONALES MENORQUE RELACIONALES
-                        | RELACIONALES MAYORQUE RELACIONALES
-                        | RELACIONALES MENORIGUAL RELACIONALES
-                        | RELACIONALES MAYORIGUAL RELACIONALES
-                        | ARITMETICAS '''
+    '''RELACIONALES :   EXPRESION IGUALQUE EXPRESION
+                        | EXPRESION DIFERENTE EXPRESION
+                        | EXPRESION MENORQUE EXPRESION
+                        | EXPRESION MAYORQUE EXPRESION
+                        | EXPRESION MENORIGUAL EXPRESION
+                        | EXPRESION MAYORIGUAL EXPRESION '''
 
 def p_aritmeticas(t):
-    '''ARITMETICAS :     ARITMETICAS MAS ARITMETICAS
-                        | ARITMETICAS MENOS ARITMETICAS
-                        | ARITMETICAS POR ARITMETICAS
-                        | ARITMETICAS DIV ARITMETICAS
-                        | ARITMETICAS MODULO ARITMETICAS
-                        | MENOS ARITMETICAS %prec UMENOS
+    '''ARITMETICAS :     EXPRESION MAS EXPRESION
+                        | EXPRESION MENOS EXPRESION
+                        | EXPRESION POR EXPRESION
+                        | EXPRESION DIV EXPRESION
+                        | EXPRESION MODULO EXPRESION
+                        | MENOS EXPRESION %prec UMENOS
                         | PARIZQ EXPRESION PARDER
                         | CORIZQ EXPRESION CORDER
                         | SIZEOF PARIZQ ID PARDER
                         | PARIZQ TIPO PARDER EXPRESION
-                        | EXPRESION UNARIO EXPRESION DOSPUNTOS EXPRESION PUNTOCOMA
-                        | F'''
+                        | EXPRESION UNARIO EXPRESION DOSPUNTOS EXPRESION
+                        '''
                         
 def p_f(t):
     '''F :      ID CORCHETES
@@ -343,16 +360,17 @@ def p_instrIn(t):
                     | SWITCH_
                     | LLAMADA_FUNCION
                     | ID DOSPUNTOS
-                    | PRINTF PARIZQ EXPRESION PARDER PUNTOCOMA
+                    | PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA
                     | RETURN EXPRESION PUNTOCOMA
                     | CONTINUE PUNTOCOMA
                     | BREAK PUNTOCOMA
-                    | GOTO ID '''
+                    | GOTO ID PUNTOCOMA'''
 
 def p_asignaciones(t):
     '''ASIGNACIONES :   INCRE_DECRE PUNTOCOMA
-                        | ID OP_ASIGNACION EXPRESION
+                        | ID OP_ASIGNACION EXPRESION PUNTOCOMA
                         | STRUCT ID ID IGUAL PARIZQ STRUCT ID PARDER MALLOC PARIZQ SIZEOF PARIZQ STRUCT ID PARDER PARDER
+                        | STRUCT ID ID ASIG PUNTOCOMA
                         | ID ACCESO_ATRIBUTO OP_ASIGNACION EXPRESION PUNTOCOMA
                         | ID ID ASIG PUNTOCOMA
                         | ID CORCHETES ACCESO_ATRIBUTO OP_ASIGNACION EXPRESION PUNTOCOMA'''
@@ -379,13 +397,13 @@ def p_else(t):
                 | '''
                 
 def p_for(t):
-    'FOR_ :     FOR PARIZQ DECLA_VARIABLES PUNTOCOMA EXPRESION PUNTOCOMA INCRE_DECRE PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'
+    'FOR_ :     FOR PARIZQ DECLA_VARIABLES EXPRESION PUNTOCOMA INCRE_DECRE PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'
 
 def p_while(t):
     'WHILE_ :   WHILE PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'
 
 def p_doWhile(t):
-    'DO_ :  DO LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER WHILE_ PUNTOCOMA'
+    'DO_ :  DO LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER WHILE PARIZQ EXPRESION PARDER PUNTOCOMA'
 
 def p_switch(t):
     'SWITCH_ :  SWITCH PARIZQ EXPRESION PARDER LLAVEIZQ LISTA_CASES DEFAULT_ LLAVEDER'
@@ -402,7 +420,7 @@ def p_break(t):
                 | '''
 
 def p_default(t):
-    '''DEFAULT_ :   DEFAULT
+    '''DEFAULT_ :   DEFAULT DOSPUNTOS INSTRUCCIONES_INTERNAS BREAK_
                     | '''
 
 def p_increDecre(t):

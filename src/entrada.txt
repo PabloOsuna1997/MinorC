@@ -20,14 +20,15 @@ struct hola{
     struct s valor;
 };
 
-d[10] = d;
-char c[15] = d;
-struct hola st;
-st.valor.x = 5;
 
 int main(int hola, char adios){
+    
+    d[10] = d;
+    char c[15] = d;
     struct hola st;
-    st->valor.x = 5;
+    st.valor.x = 5;
+    struct hola st;
+    st->valor->x = 5;
     c[15] = adios[10][15];
     int val = 1+5*2/3, text = "asd";
     hola:
@@ -42,10 +43,10 @@ int main(int hola, char adios){
 int prod(){
     switch(x){
         case 5<7:
-            printf("");
+            printf("h");
             break;
         case 2:
-            printf("");
+            printf("h");
         default:
             printf("asdf");
     }
@@ -57,7 +58,7 @@ int prod(){
 
     do{
         printf("adf");
-    }while(5+20<10);
+    }while(5+20<10 != 3 /4%2<<3);
 
     addd = 5+5+5;
     addd++;
