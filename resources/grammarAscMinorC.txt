@@ -23,8 +23,11 @@ DECLARACION_GLOBAL ->  DECLA_VARIABLES
 ##-------------------------------------------------seccion de variables ----------------------------------------
 DECLA_VARIABLES -> TIPO ID LISTA_ID ';'
 
-LISTA_ID -> VARIABLES ',' ID ASIG 
-            | ASIG
+LISTA_ID -> VARIABLES ',' ID ASIGNA 
+            | ASIGNA
+
+ASIGNA -> IGUAL ASIG
+           |e
 
 ASIG -> '=' EXPRESION
             |CORCHETES '=' EXPRESION                            /* ej: int a[1][1] = 3*/
@@ -57,7 +60,7 @@ ATRIBUTOS -> ATRIBUTOS ATR
             |ATR                                                        /*validar unicamente que sean variables y otros structs*/
 
 ATR -> DECLA_VARIABLES
-        |'struct' ID ID ASIG ';' 
+        |'struct' ID ID ASIGNA ';' 
 
 
 ##---------------------------------------------------------------------------------------------------------------
@@ -78,10 +81,19 @@ INSTR_IN ->     DECLA_VARIABLES
                 | ID ':'                /*  etiqueta   */
 
 ##--------------------------------------------asignaciones ----------------------------------------------
-ASIGNACIONES -> ID OP_ASIGNACION EXPRESION ';'                  //-> para variables 
-                | ID '.' ID OP_ASIGNACION EXPRESION ';'         //-> para structs
-                | ID '->' ID OP_ASIGNACION EXPRESION ';'         //-> para structs punteros
+ASIGNACIONES -> ID OP_ASIGNACION EXPRESION ';'                  //-> para variables
+                | 'struct' ID ID '=' '('struct ID')''malloc''(' 'sizeof' '('struct ID ')' ')' ';'
+                | ID ACCESO_ATRIBUTO OP_ASIGNACION EXPRESION ';'         //-> para structs //-> para structs punteros
                 | ID ID ASIG ';'                                //caso de  punto lista[2];
+
+ACCESO_ATRIBUTO -> LISTA_PUNTOS
+                    |LISTA_FLECHAS
+
+LISTA_PUNTOS -> LISTA_PUNTOS '.' ID
+                | '.' ID
+
+LISTA_FLECHA -> LISTA_FLECHA '-' '>' ID
+                | '-' '>' ID
 
 OP_ASIGNACION -> '='
                 |'+='
