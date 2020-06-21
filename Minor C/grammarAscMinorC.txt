@@ -11,8 +11,7 @@ FUNCIONES DE LECTURA:   printf y scanf (según el formato de la referencia del l
 ###----------------------------gramatica ascendente
 
 S -> A
-A ->    INSTRUCCIONES_GLOBALES 
-        |TIPO 'main () {' INSTRUCCIONES_INTERNAS '}'  
+A -> INSTRUCCIONES_GLOBALES             /* verificar si el main */
 
 INSTRUCCIONES_GLOBALES -> INSTRUCCIONES_GLOBALES DECLARACION_GLOBAL
                 | DECLARACION_GLOBAL
@@ -57,8 +56,8 @@ DECLA_STRUCTS -> 'struct' ID '{' ATRIBUTOS '}' ';'
 ATRIBUTOS -> ATRIBUTOS ATR
             |ATR                                                        /*validar unicamente que sean variables y otros structs*/
 
-ATR -> VARIBALES
-        |STRUCTS
+ATR -> DECLA_VARIABLES
+        |'struct' ID ID ASIG ';' 
 
 
 ##---------------------------------------------------------------------------------------------------------------
@@ -79,7 +78,10 @@ INSTR_IN ->     DECLA_VARIABLES
                 | ID ':'                /*  etiqueta   */
 
 ##--------------------------------------------asignaciones ----------------------------------------------
-ASIGNACIONES -> ID OP_ASIGNACION EXPRESION
+ASIGNACIONES -> ID OP_ASIGNACION EXPRESION ';'                  //-> para variables 
+                | ID '.' ID OP_ASIGNACION EXPRESION ';'         //-> para structs
+                | ID '->' ID OP_ASIGNACION EXPRESION ';'         //-> para structs punteros
+                | ID ID ASIG ';'                                //caso de  punto lista[2];
 
 OP_ASIGNACION -> '='
                 |'+='
@@ -101,10 +103,10 @@ SIG -> '+' '+'
         | e
 
 ##------------------------------------------nativas----------------------------------
-NATIVAS -> 'printf' '(' EXPRESION ')'
-        | 'return' EXPRESION
-        | 'continue'
-        | 'break'
+NATIVAS -> 'printf' '(' EXPRESION ')' ';'
+        | 'return' EXPRESION ';'
+        | 'continue' ';'
+        | 'break' ';'
         | goto ID ';'
 
 ##------------------------------------------if else ----------------------------------
