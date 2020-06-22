@@ -6,9 +6,9 @@
 
 reservadas = {
     'int': 'INT',
+    'float': 'FLOAT',
     'char': 'CHAR',
     'double': 'DOUBLE',
-    'float': 'FLOAT',
     'printf': 'PRINTF',
     'struct': 'STRUCT',
     'break': 'BREAK',
@@ -30,11 +30,24 @@ reservadas = {
 }
 
 tokens = [
+    'C_INT',
+    'C_CHAR',
+    'C_FLOAT',
+    'MASIGUAL',
+    'MENOSIGUAL',
+    'PORIGUAL',
+    'DIVIGUAL',
+    'MODIGUAL',
+    'SIIGUAL',
+    'SDIGUAL',
+    'ANDIGUAL',
+    'XORIGUAL',
+    'ORIGUAL',
     'INCREMENTO',
     'DECREMENTO',
     'PUNTO',
     'FLECHA',
-    'UNARIO',
+    'TERNARIO',
     'COMA',
     'PUNTOCOMA',
     'DOSPUNTOS',
@@ -72,11 +85,24 @@ tokens = [
 ] + list(reservadas.values())
 
 # er tokens
+t_INT       = r'\(int\)'
+t_CHAR      = r'\(char\)'
+t_FLOAT      = r'\(float\)'
+t_MASIGUAL = r'\+\='
+t_MENOSIGUAL = r'\-\='
+t_PORIGUAL  = r'\*\='
+t_DIVIGUAL  = r'\/\='
+t_MODIGUAL  = r'\%\='
+t_SIIGUAL   = r'\<\<\='
+t_SDIGUAL   = r'\>\>\='
+t_ANDIGUAL  = r'\&\='
+t_XORIGUAL  = r'\^\='
+t_ORIGUAL   = r'\|\='
 t_INCREMENTO = r'\+\+'
 t_DECREMENTO = r'\-\-'
 t_PUNTO     = r'\.'
 t_FLECHA    = r'\-\>'
-t_UNARIO    = r'\?'
+t_TERNARIO   = r'\?'
 t_COMA      = r'\,'
 t_PUNTOCOMA  = r'\;'
 t_DOSPUNTOS = r'\:'
@@ -181,24 +207,11 @@ def t_error(t):
 
 
 ##---------------------------ANALISIS SINTACTICO------------------------
-precedence = (
-    
-    #('right','UMENOS'),
-    #('left', 'UNARIO'),    
-    #('left','POR','DIV'),
-    #('left', 'MODULO'),
-    #('left','MAS','MENOS'),
-    #('left', 'SHIFTIZQ', 'SHIFTDER'),
-    #('left', 'AND'),
-    #('left', 'OR'),
-    #('left', 'NOTLOGICA'),
-    #('left', 'ANDBIT'),
-    #('left', 'ORBIT'),
-    #('left', 'XORBIT'),
-    #('right','NOTBIT'),
-    #('left', 'INCREMENTO', 'DECREMENTO')
 
-    ('left', 'PARIZQ'),
+precedence = (
+    ('left', 'COMA'),
+    ('right','IGUAL','MASIGUAL','MENOSIGUAL','PORIGUAL','DIVIGUAL','MODIGUAL','SIIGUAL','SDIGUAL','ANDIGUAL','XORIGUAL','ORIGUAL'),
+    ('right', 'TERNARIO'),
     ('left', 'OR'),
     ('left', 'AND'),
     ('left', 'ORBIT'),
@@ -209,10 +222,8 @@ precedence = (
     ('left', 'SHIFTIZQ', 'SHIFTDER'),
     ('left', 'MAS', 'MENOS'),
     ('left', 'POR', 'DIV', 'MODULO'),
-    ('right', 'NOTLOGICA'),
-    ('right', 'NOTBIT'),
-    ('right', 'UMENOS'),
-    ('right', 'INT', 'FLOAT', 'CHAR')   
+    ('right', 'C_INT', 'C_FLOAT', 'C_CHAR', 'INCREMENTO', 'DECREMENTO', 'UMENOS', 'NOTLOGICA', 'NOTBIT'),
+    ('left', 'PARIZQ', 'CORIZQ') 
 )
 
 #definition of grammar 
@@ -236,7 +247,7 @@ def p_declaracionGlobal(t):
 
 ##----------------------------------DECLARACION DE VARIABLES ------------------
 def p_declaVariable(t):
-    'DECLA_VARIABLES :  TIPO ID LISTA_ID PUNTOCOMA'
+    'DECLA_VARIABLES :  TIPO LISTA_ID PUNTOCOMA'
 
 def p_tipo(t):
     '''TIPO :   INT
@@ -247,17 +258,14 @@ def p_tipo(t):
                 | STRUCT '''
 
 def p_listaId(t):
-    '''LISTA_ID :   LISTA_ID COMA ID ASIGNA
+    '''LISTA_ID :   LISTA_ID COMA ASIGNA
                     | ASIGNA'''
 
 def p_asigna(t):
-    '''ASIGNA :     IGUAL EXPRESION
-                    | CORCHETES
-                    | CORCHETES IGUAL EXPRESION
-                    | '''
-
-def p_asigEmpty(t):
-    'ASIG : '
+    '''ASIGNA :     ID IGUAL EXPRESION
+                    | ID CORCHETES
+                    | ID CORCHETES IGUAL EXPRESION
+                    | ID'''
 
 def p_corchetes(t):
     '''CORCHETES :  CORCHETES CORCHETE
@@ -273,58 +281,47 @@ def p_valorEmpty(t):
     'VALOR : '
 
 def p_expresion(t):
-    '''EXPRESION :    LOGICAS
-                        | ARITMETICAS
-                        | RELACIONALES
-                        | LOGICAS_BIT
-                        | F '''
-
-def p_logicas(t):
-    '''LOGICAS :    EXPRESION AND EXPRESION 
+    '''EXPRESION :  EXPRESION MAS EXPRESION
+                    | EXPRESION MENOS EXPRESION
+                    | EXPRESION POR EXPRESION
+                    | EXPRESION DIV EXPRESION
+                    | EXPRESION MODULO EXPRESION
+                    | EXPRESION IGUALQUE EXPRESION
+                    | EXPRESION DIFERENTE EXPRESION
+                    | EXPRESION MENORQUE EXPRESION
+                    | EXPRESION MAYORQUE EXPRESION
+                    | EXPRESION MENORIGUAL EXPRESION
+                    | EXPRESION MAYORIGUAL EXPRESION
+                    | EXPRESION NOTBIT EXPRESION
+                    | EXPRESION ANDBIT EXPRESION
+                    | EXPRESION XORBIT EXPRESION
+                    | EXPRESION ORBIT EXPRESION
                     | EXPRESION OR EXPRESION
-                    | NOTLOGICA EXPRESION'''
+                    | EXPRESION AND EXPRESION
+                    | SIZEOF PARIZQ EXPRESION PARDER
+                    | NOTLOGICA EXPRESION
+                    | EXPRESION SHIFTIZQ EXPRESION
+                    | EXPRESION SHIFTDER EXPRESION
+                    | PARIZQ EXPRESION PARDER                    
+                    | C_INT EXPRESION
+                    | C_FLOAT EXPRESION
+                    | C_CHAR EXPRESION
+                    | MENOS EXPRESION %prec UMENOS
+                    | NOTBIT EXPRESION
+                    | ANDBIT EXPRESION
+                    | ID CORCHETES
+                    | ID LISTA_PUNTOS
+                    | ID CORCHETES LISTA_PUNTOS
+                    | ID
+                    | CADENA
+                    | CHAR_
+                    | LLAMADA_FUNCION
+                    | NUMERO '''
+                    #| EXPRESION TERNARIO EXPRESION DOSPUNTOS EXPRESION'''
 
-def p_logicasBit(t):
-    '''LOGICAS_BIT :    EXPRESION SHIFTIZQ EXPRESION
-                        | EXPRESION SHIFTDER EXPRESION
-                        | EXPRESION ANDBIT EXPRESION
-                        | EXPRESION ORBIT EXPRESION
-                        | EXPRESION XORBIT EXPRESION
-                        | NOTBIT EXPRESION                        
-                        | ANDBIT EXPRESION'''
-
-def p_relacionales(t):
-    '''RELACIONALES :   EXPRESION IGUALQUE EXPRESION
-                        | EXPRESION DIFERENTE EXPRESION
-                        | EXPRESION MENORQUE EXPRESION
-                        | EXPRESION MAYORQUE EXPRESION
-                        | EXPRESION MENORIGUAL EXPRESION
-                        | EXPRESION MAYORIGUAL EXPRESION '''
-
-def p_aritmeticas(t):
-    '''ARITMETICAS :     EXPRESION MAS EXPRESION
-                        | EXPRESION MENOS EXPRESION
-                        | EXPRESION POR EXPRESION
-                        | EXPRESION DIV EXPRESION
-                        | EXPRESION MODULO EXPRESION
-                        | MENOS EXPRESION %prec UMENOS
-                        | PARIZQ EXPRESION PARDER
-                        | CORIZQ EXPRESION CORDER
-                        | SIZEOF PARIZQ ID PARDER
-                        | PARIZQ TIPO PARDER EXPRESION
-                        | EXPRESION UNARIO EXPRESION DOSPUNTOS EXPRESION
-                        '''
-                        
-def p_f(t):
-    '''F :      ID CORCHETES
-                | NUMERO
-                | CADENA
-                | CHAR_
-                | LLAMADA_FUNCION
-                | ID'''
 
 def p_llamadaFuncion(t):
-    '''LLAMADA_FUNCION :     ID PARIZQ PARAMETROS PARDER PUNTOCOMA
+    '''LLAMADA_FUNCION :     ID PARIZQ PARAMETROS PARDER 
                             | ID PARIZQ PARDER'''
 
 def p_parametros(t):
@@ -344,21 +341,25 @@ def p_recepcionParametrosEmpty(t):
     'RECEPCION_PARAMETROS :  '
 
 def p_param(t):
-    'PARAM :    TIPO ID'
+    'PARAM :    TIPO PUNT'
+
+def p_punt(t):
+    '''PUNT :     ID PUNTERO
+                | ID '''
 
 def p_instruccionesInternas(t):
     '''INSTRUCCIONES_INTERNAS :     INSTRUCCIONES_INTERNAS INSTR_IN
                                     | INSTR_IN'''
 
 def p_instrIn(t):
-    '''INSTR_IN :   DECLA_VARIABLES 
+    '''INSTR_IN :   DECLA_VARIABLES
                     | ASIGNACIONES
                     | IF_
                     | FOR_
                     | WHILE_
                     | DO_
                     | SWITCH_
-                    | LLAMADA_FUNCION
+                    | LLAMADA_FUNCION PUNTOCOMA
                     | ID DOSPUNTOS
                     | PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA
                     | RETURN EXPRESION PUNTOCOMA
@@ -368,33 +369,36 @@ def p_instrIn(t):
 
 def p_asignaciones(t):
     '''ASIGNACIONES :   INCRE_DECRE PUNTOCOMA
-                        | ID OP_ASIGNACION EXPRESION PUNTOCOMA
-                        | STRUCT ID ID IGUAL PARIZQ STRUCT ID PARDER MALLOC PARIZQ SIZEOF PARIZQ STRUCT ID PARDER PARDER
-                        | STRUCT ID ID ASIG PUNTOCOMA
-                        | ID ACCESO_ATRIBUTO OP_ASIGNACION EXPRESION PUNTOCOMA
-                        | ID ID ASIG PUNTOCOMA
-                        | ID CORCHETES ACCESO_ATRIBUTO OP_ASIGNACION EXPRESION PUNTOCOMA'''
+                        | ID_ACCESO_ATRIBUTO PUNTOCOMA
+                        | ID_ACCESO_ATRIBUTO OP_ASIGNACION EXPRESION PUNTOCOMA
+                        | STRUCT PUNTERO PUNTERO IGUAL PARIZQ STRUCT PUNTERO PARDER MALLOC PARIZQ SIZEOF PARIZQ STRUCT PUNTERO PARDER PARDER PUNTOCOMA
+                        | STRUCT PUNTERO PUNTERO ASIGNA_STRUCT PUNTOCOMA'''
 
 def p_accesoAtributo(t):
-    '''ACCESO_ATRIBUTO : LISTA_PUNTOS
-                        | LISTA_FLECHAS
-                        | '''
+    '''ID_ACCESO_ATRIBUTO : ID LISTA_PUNTOS
+                        | ID CORCHETES LISTA_PUNTOS
+                        | ID 
+                        | ID CORCHETES
+                        | ID PUNTERO
+                        | ID PUNTERO CORCHETES'''
 
 def p_listaPuntos(t):
-    '''LISTA_PUNTOS :   LISTA_PUNTOS PUNTO ID
-                        | PUNTO ID'''
+    '''LISTA_PUNTOS :   LISTA_PUNTOS ACCES ID
+                        | LISTA_PUNTOS ACCES ID CORCHETES
+                        | ACCES ID
+                        | ACCES ID CORCHETES'''
 
 def p_listaFlechas(t):
-    '''LISTA_FLECHAS :   LISTA_FLECHAS FLECHA ID
-                        | FLECHA ID'''
+    '''ACCES :   PUNTO
+                | FLECHA'''
 
 def p_if(t):
-    'IF_ :  IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_'
+    '''IF_ :  IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_
+            | IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'''
 
 def p_else(t):
     '''ELSE_ :  ELSE IF_
-                | ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER
-                | '''
+                | ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'''
                 
 def p_for(t):
     'FOR_ :     FOR PARIZQ DECLA_VARIABLES EXPRESION PUNTOCOMA INCRE_DECRE PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'
@@ -437,27 +441,19 @@ def p_pre(t):
     '''SIG :   INCREMENTO
                 | DECREMENTO'''
 
-def p_sigEmpty(t):
-    'SIG : '
-
 def p_opAsignacion(t):
     '''OP_ASIGNACION :  IGUAL
-                        | MAS IGUAL
-                        | MENOS IGUAL
-                        | POR IGUAL
-                        | DIV IGUAL
-                        | MODULO IGUAL
-                        | SHIFTIZQ IGUAL
-                        | SHIFTDER IGUAL
-                        | ANDBIT IGUAL
-                        | XORBIT IGUAL
-                        | ORBIT IGUAL'''
+                        | MASIGUAL
+                        | MENOSIGUAL
+                        | PORIGUAL
+                        | DIVIGUAL
+                        | MODIGUAL
+                        | SIIGUAL
+                        | SDIGUAL
+                        | ANDIGUAL
+                        | XORIGUAL
+                        | ORIGUAL'''
 
-def p_error(t):
-    print("Error sintactico en '%s'" % t.value + "line: "+ str(t.lineno))
-    global sintacticErroList
-    so = sinOb(t.value, t.lineno, find_column(input_, t))
-    sintacticErroList.append(so)
    
 ##---------------------------DECLARACION DE STRUCTS------------------------
 def p_declaStructs(t):
@@ -469,7 +465,11 @@ def p_atributos(t):
 
 def p_atr(t):
     '''ATR :    DECLA_VARIABLES
-                | STRUCT ID PUNTERO ASIGNA PUNTOCOMA'''
+                | STRUCT ID PUNTERO ASIGNA_STRUCT PUNTOCOMA'''
+
+def p_asignaStruct(t):
+    '''ASIGNA_STRUCT :    IGUAL EXPRESION
+                        | '''
 
 def p_puntero(t):
     '''PUNTERO :    LISTA_ASTERISCOS ID
@@ -479,6 +479,14 @@ def p_puntero(t):
 def p_listaAsteriscos(t):
     '''LISTA_ASTERISCOS :   LISTA_ASTERISCOS POR
                             | POR '''
+
+
+def p_error(t):
+    print("Error sintactico en '%s'" % t.value + "line: "+ str(t.lineno))
+    global sintacticErroList
+    so = sinOb(t.value, t.lineno, find_column(input_, t))
+    sintacticErroList.append(so)
+
 
 #def parse(input):
 #global input_, sintacticErroList, LexicalErrosList
