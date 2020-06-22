@@ -130,7 +130,7 @@ struct nodo{
 };
 
 int agregar(struct nodo **temp, int valor){
-    struct nodo* nuevo = (struct nodo*) malloc(sizeof(struct nodo));
+    struct nodo *nuevo = (struct nodo*) malloc(sizeof(struct nodo));
     nuevo->valor = valor;
     nuevo->siguiente = (temp);
     temp = nuevo;

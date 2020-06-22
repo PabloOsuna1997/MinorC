@@ -222,7 +222,7 @@ precedence = (
     ('left', 'SHIFTIZQ', 'SHIFTDER'),
     ('left', 'MAS', 'MENOS'),
     ('left', 'POR', 'DIV', 'MODULO'),
-    ('right', 'C_INT', 'C_FLOAT', 'C_CHAR', 'INCREMENTO', 'DECREMENTO', 'UMENOS', 'NOTLOGICA', 'NOTBIT'),
+    ('right', 'C_INT', 'C_FLOAT', 'C_CHAR', 'INCREMENTO', 'DECREMENTO', 'UMENOS','UANDBIT', 'NOTLOGICA', 'NOTBIT'),
     ('left', 'PARIZQ', 'CORIZQ') 
 )
 
@@ -254,8 +254,8 @@ def p_tipo(t):
                 | FLOAT
                 | DOUBLE
                 | VOID
-                | CHAR
-                | STRUCT '''
+                | CHAR '''
+                #| STRUCT  -> quite el tipo struct 
 
 def p_listaId(t):
     '''LISTA_ID :   LISTA_ID COMA ASIGNA
@@ -308,7 +308,7 @@ def p_expresion(t):
                     | C_CHAR EXPRESION
                     | MENOS EXPRESION %prec UMENOS
                     | NOTBIT EXPRESION
-                    | ANDBIT EXPRESION
+                    | ANDBIT EXPRESION %prec UANDBIT
                     | ID CORCHETES
                     | ID LISTA_PUNTOS
                     | ID CORCHETES LISTA_PUNTOS
@@ -316,9 +316,13 @@ def p_expresion(t):
                     | CADENA
                     | CHAR_
                     | LLAMADA_FUNCION
-                    | NUMERO '''
+                    | NUMERO 
+                    | LISTA_INIT_CORCHETE'''
                     #| EXPRESION TERNARIO EXPRESION DOSPUNTOS EXPRESION'''
 
+def p_listaInitCorchete(t):
+    '''LISTA_INIT_CORCHETE :    CORIZQ PARAMETROS CORDER 
+    '''
 
 def p_llamadaFuncion(t):
     '''LLAMADA_FUNCION :     ID PARIZQ PARAMETROS PARDER 
@@ -341,7 +345,12 @@ def p_recepcionParametrosEmpty(t):
     'RECEPCION_PARAMETROS :  '
 
 def p_param(t):
-    'PARAM :    TIPO PUNT'
+    'PARAM :    TIPO_FUN PUNT'
+
+def p_tipoFuncion(t):
+    '''TIPO_FUN :   TIPO
+                    | STRUCT
+    '''
 
 def p_punt(t):
     '''PUNT :     ID PUNTERO
@@ -353,6 +362,7 @@ def p_instruccionesInternas(t):
 
 def p_instrIn(t):
     '''INSTR_IN :   DECLA_VARIABLES
+                    | DECLARACION_STRUCT_INTERNA
                     | ASIGNACIONES
                     | IF_
                     | FOR_
@@ -367,20 +377,24 @@ def p_instrIn(t):
                     | BREAK PUNTOCOMA
                     | GOTO ID PUNTOCOMA'''
 
+def p_declaracionStructInterna(t):
+    '''DECLARACION_STRUCT_INTERNA : STRUCT ID PUNTERO IGUAL EXPRESION PUNTOCOMA
+                                    | STRUCT ID PUNTERO IGUAL PARIZQ STRUCT PUNTERO PARDER MALLOC PARIZQ SIZEOF PARIZQ STRUCT PUNTERO PARDER PARDER PUNTOCOMA
+                                    | STRUCT ID PUNTERO PUNTOCOMA
+                                    | ID ASISTRCUT PUNTOCOMA
+    '''
+
+def p_asignaStructInterna(t):
+    '''ASISTRCUT :  ID CORCHETES
+                    | ID
+    '''
+
 def p_asignaciones(t):
     '''ASIGNACIONES :   INCRE_DECRE PUNTOCOMA
-                        | ID_ACCESO_ATRIBUTO PUNTOCOMA
-                        | ID_ACCESO_ATRIBUTO OP_ASIGNACION EXPRESION PUNTOCOMA
-                        | STRUCT PUNTERO PUNTERO IGUAL PARIZQ STRUCT PUNTERO PARDER MALLOC PARIZQ SIZEOF PARIZQ STRUCT PUNTERO PARDER PARDER PUNTOCOMA
-                        | STRUCT PUNTERO PUNTERO ASIGNA_STRUCT PUNTOCOMA'''
-
-def p_accesoAtributo(t):
-    '''ID_ACCESO_ATRIBUTO : ID LISTA_PUNTOS
-                        | ID CORCHETES LISTA_PUNTOS
-                        | ID 
-                        | ID CORCHETES
-                        | ID PUNTERO
-                        | ID PUNTERO CORCHETES'''
+                        | ID OP_ASIGNACION EXPRESION PUNTOCOMA
+                        | ID CORCHETES OP_ASIGNACION EXPRESION PUNTOCOMA
+                        | ID CORCHETES LISTA_PUNTOS OP_ASIGNACION EXPRESION PUNTOCOMA
+                        | ID LISTA_PUNTOS OP_ASIGNACION EXPRESION PUNTOCOMA'''
 
 def p_listaPuntos(t):
     '''LISTA_PUNTOS :   LISTA_PUNTOS ACCES ID
@@ -465,7 +479,8 @@ def p_atributos(t):
 
 def p_atr(t):
     '''ATR :    DECLA_VARIABLES
-                | STRUCT ID PUNTERO ASIGNA_STRUCT PUNTOCOMA'''
+                | STRUCT ID PUNTERO ASIGNA_STRUCT PUNTOCOMA
+                | STRUCT ID PUNTERO CORCHETES ASIGNA_STRUCT PUNTOCOMA'''
 
 def p_asignaStruct(t):
     '''ASIGNA_STRUCT :    IGUAL EXPRESION
