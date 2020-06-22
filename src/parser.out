@@ -60,15 +60,15 @@ Rule 49    EXPRESION -> C_CHAR EXPRESION
 Rule 50    EXPRESION -> MENOS EXPRESION
 Rule 51    EXPRESION -> NOTBIT EXPRESION
 Rule 52    EXPRESION -> ANDBIT EXPRESION
-Rule 53    EXPRESION -> ID CORCHETES
-Rule 54    EXPRESION -> ID LISTA_PUNTOS
-Rule 55    EXPRESION -> ID CORCHETES LISTA_PUNTOS
-Rule 56    EXPRESION -> ID
-Rule 57    EXPRESION -> CADENA
-Rule 58    EXPRESION -> CHAR_
-Rule 59    EXPRESION -> LLAMADA_FUNCION
-Rule 60    EXPRESION -> NUMERO
-Rule 61    EXPRESION -> LISTA_INIT_CORCHETE
+Rule 53    EXPRESION -> LLAMADA_FUNCION
+Rule 54    EXPRESION -> LISTA_INIT_CORCHETE
+Rule 55    EXPRESION -> NUMERO
+Rule 56    EXPRESION -> CADENA
+Rule 57    EXPRESION -> CHAR_
+Rule 58    EXPRESION -> ID CORCHETES
+Rule 59    EXPRESION -> ID CORCHETES LISTA_PUNTOS
+Rule 60    EXPRESION -> ID
+Rule 61    EXPRESION -> ID LISTA_PUNTOS
 Rule 62    LISTA_INIT_CORCHETE -> CORIZQ PARAMETROS CORDER
 Rule 63    LLAMADA_FUNCION -> ID PARIZQ PARAMETROS PARDER
 Rule 64    LLAMADA_FUNCION -> ID PARIZQ PARDER
@@ -169,10 +169,10 @@ AND                  : 41
 ANDBIT               : 37 52
 ANDIGUAL             : 139
 BREAK                : 91 121
-CADENA               : 57
+CADENA               : 56
 CASE                 : 120
 CHAR                 : 13
-CHAR_                : 58
+CHAR_                : 57
 COMA                 : 14 65 68
 CONTINUE             : 90
 CORDER               : 22 62
@@ -193,7 +193,7 @@ FLECHA               : 109
 FLOAT                : 10
 FOR                  : 114
 GOTO                 : 92
-ID                   : 16 17 18 19 53 54 55 56 63 64 67 74 75 87 92 93 94 95 96 97 98 100 101 102 103 104 105 106 107 127 128 142 146 147 150 151 152
+ID                   : 16 17 18 19 58 59 60 61 63 64 67 74 75 87 92 93 94 95 96 97 98 100 101 102 103 104 105 106 107 127 128 142 146 147 150 151 152
 IF                   : 110 111
 IGUAL                : 16 18 93 94 131 148
 IGUALQUE             : 30
@@ -214,7 +214,7 @@ MODIGUAL             : 136
 MODULO               : 29
 NOTBIT               : 36 51
 NOTLOGICA            : 43
-NUMERO               : 60
+NUMERO               : 55
 OR                   : 40
 ORBIT                : 39
 ORIGUAL              : 141
@@ -254,7 +254,7 @@ ATRIBUTOS            : 142 143
 BREAK_               : 120 123
 CASE_                : 118 119
 CORCHETE             : 20 21
-CORCHETES            : 17 18 20 53 55 97 101 102 105 107 147
+CORCHETES            : 17 18 20 58 59 97 101 102 105 107 147
 DECLARACION_GLOBAL   : 3 4
 DECLARACION_STRUCT_INTERNA : 79
 DECLA_FUNCIONES      : 6
@@ -275,9 +275,9 @@ INSTR_IN             : 76 77
 LISTA_ASTERISCOS     : 150 151 153
 LISTA_CASES          : 117 118
 LISTA_ID             : 8 14
-LISTA_INIT_CORCHETE  : 61
-LISTA_PUNTOS         : 54 55 102 103 104 105
-LLAMADA_FUNCION      : 59 86
+LISTA_INIT_CORCHETE  : 54
+LISTA_PUNTOS         : 59 61 102 103 104 105
+LLAMADA_FUNCION      : 53 86
 OP_ASIGNACION        : 100 101 102 103
 PARAM                : 68 69
 PARAMETROS           : 62 63 65 88
@@ -573,9 +573,9 @@ state 20
     MENOS           reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
     NOTBIT          reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
     ANDBIT          reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
+    NUMERO          reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
     CADENA          reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
     CHAR_           reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
-    NUMERO          reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
     CORIZQ          reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
     DEFAULT         reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
     CASE            reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
@@ -653,15 +653,15 @@ state 23
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -675,15 +675,15 @@ state 23
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 36
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 24
 
@@ -776,15 +776,15 @@ state 26
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -799,16 +799,16 @@ state 26
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     VALOR                          shift and go to state 54
     EXPRESION                      shift and go to state 55
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 27
 
@@ -906,10 +906,10 @@ state 34
 
 state 35
 
-    (53) EXPRESION -> ID . CORCHETES
-    (54) EXPRESION -> ID . LISTA_PUNTOS
-    (55) EXPRESION -> ID . CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> ID .
+    (58) EXPRESION -> ID . CORCHETES
+    (59) EXPRESION -> ID . CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> ID .
+    (61) EXPRESION -> ID . LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> ID . PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> ID . PARIZQ PARDER
     (20) CORCHETES -> . CORCHETES CORCHETE
@@ -922,30 +922,30 @@ state 35
     (108) ACCES -> . PUNTO
     (109) ACCES -> . FLECHA
 
-    MAS             reduce using rule 56 (EXPRESION -> ID .)
-    MENOS           reduce using rule 56 (EXPRESION -> ID .)
-    POR             reduce using rule 56 (EXPRESION -> ID .)
-    DIV             reduce using rule 56 (EXPRESION -> ID .)
-    MODULO          reduce using rule 56 (EXPRESION -> ID .)
-    IGUALQUE        reduce using rule 56 (EXPRESION -> ID .)
-    DIFERENTE       reduce using rule 56 (EXPRESION -> ID .)
-    MENORQUE        reduce using rule 56 (EXPRESION -> ID .)
-    MAYORQUE        reduce using rule 56 (EXPRESION -> ID .)
-    MENORIGUAL      reduce using rule 56 (EXPRESION -> ID .)
-    MAYORIGUAL      reduce using rule 56 (EXPRESION -> ID .)
-    NOTBIT          reduce using rule 56 (EXPRESION -> ID .)
-    ANDBIT          reduce using rule 56 (EXPRESION -> ID .)
-    XORBIT          reduce using rule 56 (EXPRESION -> ID .)
-    ORBIT           reduce using rule 56 (EXPRESION -> ID .)
-    OR              reduce using rule 56 (EXPRESION -> ID .)
-    AND             reduce using rule 56 (EXPRESION -> ID .)
-    SHIFTIZQ        reduce using rule 56 (EXPRESION -> ID .)
-    SHIFTDER        reduce using rule 56 (EXPRESION -> ID .)
-    PUNTOCOMA       reduce using rule 56 (EXPRESION -> ID .)
-    COMA            reduce using rule 56 (EXPRESION -> ID .)
-    CORDER          reduce using rule 56 (EXPRESION -> ID .)
-    PARDER          reduce using rule 56 (EXPRESION -> ID .)
-    DOSPUNTOS       reduce using rule 56 (EXPRESION -> ID .)
+    MAS             reduce using rule 60 (EXPRESION -> ID .)
+    MENOS           reduce using rule 60 (EXPRESION -> ID .)
+    POR             reduce using rule 60 (EXPRESION -> ID .)
+    DIV             reduce using rule 60 (EXPRESION -> ID .)
+    MODULO          reduce using rule 60 (EXPRESION -> ID .)
+    IGUALQUE        reduce using rule 60 (EXPRESION -> ID .)
+    DIFERENTE       reduce using rule 60 (EXPRESION -> ID .)
+    MENORQUE        reduce using rule 60 (EXPRESION -> ID .)
+    MAYORQUE        reduce using rule 60 (EXPRESION -> ID .)
+    MENORIGUAL      reduce using rule 60 (EXPRESION -> ID .)
+    MAYORIGUAL      reduce using rule 60 (EXPRESION -> ID .)
+    NOTBIT          reduce using rule 60 (EXPRESION -> ID .)
+    ANDBIT          reduce using rule 60 (EXPRESION -> ID .)
+    XORBIT          reduce using rule 60 (EXPRESION -> ID .)
+    ORBIT           reduce using rule 60 (EXPRESION -> ID .)
+    OR              reduce using rule 60 (EXPRESION -> ID .)
+    AND             reduce using rule 60 (EXPRESION -> ID .)
+    SHIFTIZQ        reduce using rule 60 (EXPRESION -> ID .)
+    SHIFTDER        reduce using rule 60 (EXPRESION -> ID .)
+    PUNTOCOMA       reduce using rule 60 (EXPRESION -> ID .)
+    COMA            reduce using rule 60 (EXPRESION -> ID .)
+    CORDER          reduce using rule 60 (EXPRESION -> ID .)
+    PARDER          reduce using rule 60 (EXPRESION -> ID .)
+    DOSPUNTOS       reduce using rule 60 (EXPRESION -> ID .)
     PARIZQ          shift and go to state 67
     CORIZQ          shift and go to state 26
     PUNTO           shift and go to state 69
@@ -1033,15 +1033,15 @@ state 37
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -1055,15 +1055,15 @@ state 37
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 90
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 38
 
@@ -1096,15 +1096,15 @@ state 38
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -1118,15 +1118,15 @@ state 38
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 91
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 39
 
@@ -1159,15 +1159,15 @@ state 39
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -1181,15 +1181,15 @@ state 39
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 92
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 40
 
@@ -1229,15 +1229,15 @@ state 41
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -1251,15 +1251,15 @@ state 41
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 94
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 42
 
@@ -1292,15 +1292,15 @@ state 42
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -1314,15 +1314,15 @@ state 42
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 95
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 43
 
@@ -1355,15 +1355,15 @@ state 43
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -1377,15 +1377,15 @@ state 43
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 96
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 44
 
@@ -1418,15 +1418,15 @@ state 44
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -1440,15 +1440,15 @@ state 44
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 97
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 45
 
@@ -1481,15 +1481,15 @@ state 45
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -1503,164 +1503,164 @@ state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 98
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 46
 
-    (57) EXPRESION -> CADENA .
+    (53) EXPRESION -> LLAMADA_FUNCION .
 
-    MAS             reduce using rule 57 (EXPRESION -> CADENA .)
-    MENOS           reduce using rule 57 (EXPRESION -> CADENA .)
-    POR             reduce using rule 57 (EXPRESION -> CADENA .)
-    DIV             reduce using rule 57 (EXPRESION -> CADENA .)
-    MODULO          reduce using rule 57 (EXPRESION -> CADENA .)
-    IGUALQUE        reduce using rule 57 (EXPRESION -> CADENA .)
-    DIFERENTE       reduce using rule 57 (EXPRESION -> CADENA .)
-    MENORQUE        reduce using rule 57 (EXPRESION -> CADENA .)
-    MAYORQUE        reduce using rule 57 (EXPRESION -> CADENA .)
-    MENORIGUAL      reduce using rule 57 (EXPRESION -> CADENA .)
-    MAYORIGUAL      reduce using rule 57 (EXPRESION -> CADENA .)
-    NOTBIT          reduce using rule 57 (EXPRESION -> CADENA .)
-    ANDBIT          reduce using rule 57 (EXPRESION -> CADENA .)
-    XORBIT          reduce using rule 57 (EXPRESION -> CADENA .)
-    ORBIT           reduce using rule 57 (EXPRESION -> CADENA .)
-    OR              reduce using rule 57 (EXPRESION -> CADENA .)
-    AND             reduce using rule 57 (EXPRESION -> CADENA .)
-    SHIFTIZQ        reduce using rule 57 (EXPRESION -> CADENA .)
-    SHIFTDER        reduce using rule 57 (EXPRESION -> CADENA .)
-    PUNTOCOMA       reduce using rule 57 (EXPRESION -> CADENA .)
-    COMA            reduce using rule 57 (EXPRESION -> CADENA .)
-    CORDER          reduce using rule 57 (EXPRESION -> CADENA .)
-    PARDER          reduce using rule 57 (EXPRESION -> CADENA .)
-    DOSPUNTOS       reduce using rule 57 (EXPRESION -> CADENA .)
+    MAS             reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    MENOS           reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    POR             reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    DIV             reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    MODULO          reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    IGUALQUE        reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    DIFERENTE       reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    MENORQUE        reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    MAYORQUE        reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    MENORIGUAL      reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    MAYORIGUAL      reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    NOTBIT          reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    ANDBIT          reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    XORBIT          reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    ORBIT           reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    OR              reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    AND             reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    SHIFTIZQ        reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    SHIFTDER        reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    PUNTOCOMA       reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    COMA            reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    CORDER          reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    PARDER          reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
+    DOSPUNTOS       reduce using rule 53 (EXPRESION -> LLAMADA_FUNCION .)
 
 
 state 47
 
-    (58) EXPRESION -> CHAR_ .
+    (54) EXPRESION -> LISTA_INIT_CORCHETE .
 
-    MAS             reduce using rule 58 (EXPRESION -> CHAR_ .)
-    MENOS           reduce using rule 58 (EXPRESION -> CHAR_ .)
-    POR             reduce using rule 58 (EXPRESION -> CHAR_ .)
-    DIV             reduce using rule 58 (EXPRESION -> CHAR_ .)
-    MODULO          reduce using rule 58 (EXPRESION -> CHAR_ .)
-    IGUALQUE        reduce using rule 58 (EXPRESION -> CHAR_ .)
-    DIFERENTE       reduce using rule 58 (EXPRESION -> CHAR_ .)
-    MENORQUE        reduce using rule 58 (EXPRESION -> CHAR_ .)
-    MAYORQUE        reduce using rule 58 (EXPRESION -> CHAR_ .)
-    MENORIGUAL      reduce using rule 58 (EXPRESION -> CHAR_ .)
-    MAYORIGUAL      reduce using rule 58 (EXPRESION -> CHAR_ .)
-    NOTBIT          reduce using rule 58 (EXPRESION -> CHAR_ .)
-    ANDBIT          reduce using rule 58 (EXPRESION -> CHAR_ .)
-    XORBIT          reduce using rule 58 (EXPRESION -> CHAR_ .)
-    ORBIT           reduce using rule 58 (EXPRESION -> CHAR_ .)
-    OR              reduce using rule 58 (EXPRESION -> CHAR_ .)
-    AND             reduce using rule 58 (EXPRESION -> CHAR_ .)
-    SHIFTIZQ        reduce using rule 58 (EXPRESION -> CHAR_ .)
-    SHIFTDER        reduce using rule 58 (EXPRESION -> CHAR_ .)
-    PUNTOCOMA       reduce using rule 58 (EXPRESION -> CHAR_ .)
-    COMA            reduce using rule 58 (EXPRESION -> CHAR_ .)
-    CORDER          reduce using rule 58 (EXPRESION -> CHAR_ .)
-    PARDER          reduce using rule 58 (EXPRESION -> CHAR_ .)
-    DOSPUNTOS       reduce using rule 58 (EXPRESION -> CHAR_ .)
+    MAS             reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    MENOS           reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    POR             reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    DIV             reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    MODULO          reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    IGUALQUE        reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    DIFERENTE       reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    MENORQUE        reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    MAYORQUE        reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    MENORIGUAL      reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    MAYORIGUAL      reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    NOTBIT          reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    ANDBIT          reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    XORBIT          reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    ORBIT           reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    OR              reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    AND             reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    SHIFTIZQ        reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    SHIFTDER        reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    PUNTOCOMA       reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    COMA            reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    CORDER          reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    PARDER          reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    DOSPUNTOS       reduce using rule 54 (EXPRESION -> LISTA_INIT_CORCHETE .)
 
 
 state 48
 
-    (59) EXPRESION -> LLAMADA_FUNCION .
+    (55) EXPRESION -> NUMERO .
 
-    MAS             reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    MENOS           reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    POR             reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    DIV             reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    MODULO          reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    IGUALQUE        reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    DIFERENTE       reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    MENORQUE        reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    MAYORQUE        reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    MENORIGUAL      reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    MAYORIGUAL      reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    NOTBIT          reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    ANDBIT          reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    XORBIT          reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    ORBIT           reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    OR              reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    AND             reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    SHIFTIZQ        reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    SHIFTDER        reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    PUNTOCOMA       reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    COMA            reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    CORDER          reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    PARDER          reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
-    DOSPUNTOS       reduce using rule 59 (EXPRESION -> LLAMADA_FUNCION .)
+    MAS             reduce using rule 55 (EXPRESION -> NUMERO .)
+    MENOS           reduce using rule 55 (EXPRESION -> NUMERO .)
+    POR             reduce using rule 55 (EXPRESION -> NUMERO .)
+    DIV             reduce using rule 55 (EXPRESION -> NUMERO .)
+    MODULO          reduce using rule 55 (EXPRESION -> NUMERO .)
+    IGUALQUE        reduce using rule 55 (EXPRESION -> NUMERO .)
+    DIFERENTE       reduce using rule 55 (EXPRESION -> NUMERO .)
+    MENORQUE        reduce using rule 55 (EXPRESION -> NUMERO .)
+    MAYORQUE        reduce using rule 55 (EXPRESION -> NUMERO .)
+    MENORIGUAL      reduce using rule 55 (EXPRESION -> NUMERO .)
+    MAYORIGUAL      reduce using rule 55 (EXPRESION -> NUMERO .)
+    NOTBIT          reduce using rule 55 (EXPRESION -> NUMERO .)
+    ANDBIT          reduce using rule 55 (EXPRESION -> NUMERO .)
+    XORBIT          reduce using rule 55 (EXPRESION -> NUMERO .)
+    ORBIT           reduce using rule 55 (EXPRESION -> NUMERO .)
+    OR              reduce using rule 55 (EXPRESION -> NUMERO .)
+    AND             reduce using rule 55 (EXPRESION -> NUMERO .)
+    SHIFTIZQ        reduce using rule 55 (EXPRESION -> NUMERO .)
+    SHIFTDER        reduce using rule 55 (EXPRESION -> NUMERO .)
+    PUNTOCOMA       reduce using rule 55 (EXPRESION -> NUMERO .)
+    COMA            reduce using rule 55 (EXPRESION -> NUMERO .)
+    CORDER          reduce using rule 55 (EXPRESION -> NUMERO .)
+    PARDER          reduce using rule 55 (EXPRESION -> NUMERO .)
+    DOSPUNTOS       reduce using rule 55 (EXPRESION -> NUMERO .)
 
 
 state 49
 
-    (60) EXPRESION -> NUMERO .
+    (56) EXPRESION -> CADENA .
 
-    MAS             reduce using rule 60 (EXPRESION -> NUMERO .)
-    MENOS           reduce using rule 60 (EXPRESION -> NUMERO .)
-    POR             reduce using rule 60 (EXPRESION -> NUMERO .)
-    DIV             reduce using rule 60 (EXPRESION -> NUMERO .)
-    MODULO          reduce using rule 60 (EXPRESION -> NUMERO .)
-    IGUALQUE        reduce using rule 60 (EXPRESION -> NUMERO .)
-    DIFERENTE       reduce using rule 60 (EXPRESION -> NUMERO .)
-    MENORQUE        reduce using rule 60 (EXPRESION -> NUMERO .)
-    MAYORQUE        reduce using rule 60 (EXPRESION -> NUMERO .)
-    MENORIGUAL      reduce using rule 60 (EXPRESION -> NUMERO .)
-    MAYORIGUAL      reduce using rule 60 (EXPRESION -> NUMERO .)
-    NOTBIT          reduce using rule 60 (EXPRESION -> NUMERO .)
-    ANDBIT          reduce using rule 60 (EXPRESION -> NUMERO .)
-    XORBIT          reduce using rule 60 (EXPRESION -> NUMERO .)
-    ORBIT           reduce using rule 60 (EXPRESION -> NUMERO .)
-    OR              reduce using rule 60 (EXPRESION -> NUMERO .)
-    AND             reduce using rule 60 (EXPRESION -> NUMERO .)
-    SHIFTIZQ        reduce using rule 60 (EXPRESION -> NUMERO .)
-    SHIFTDER        reduce using rule 60 (EXPRESION -> NUMERO .)
-    PUNTOCOMA       reduce using rule 60 (EXPRESION -> NUMERO .)
-    COMA            reduce using rule 60 (EXPRESION -> NUMERO .)
-    CORDER          reduce using rule 60 (EXPRESION -> NUMERO .)
-    PARDER          reduce using rule 60 (EXPRESION -> NUMERO .)
-    DOSPUNTOS       reduce using rule 60 (EXPRESION -> NUMERO .)
+    MAS             reduce using rule 56 (EXPRESION -> CADENA .)
+    MENOS           reduce using rule 56 (EXPRESION -> CADENA .)
+    POR             reduce using rule 56 (EXPRESION -> CADENA .)
+    DIV             reduce using rule 56 (EXPRESION -> CADENA .)
+    MODULO          reduce using rule 56 (EXPRESION -> CADENA .)
+    IGUALQUE        reduce using rule 56 (EXPRESION -> CADENA .)
+    DIFERENTE       reduce using rule 56 (EXPRESION -> CADENA .)
+    MENORQUE        reduce using rule 56 (EXPRESION -> CADENA .)
+    MAYORQUE        reduce using rule 56 (EXPRESION -> CADENA .)
+    MENORIGUAL      reduce using rule 56 (EXPRESION -> CADENA .)
+    MAYORIGUAL      reduce using rule 56 (EXPRESION -> CADENA .)
+    NOTBIT          reduce using rule 56 (EXPRESION -> CADENA .)
+    ANDBIT          reduce using rule 56 (EXPRESION -> CADENA .)
+    XORBIT          reduce using rule 56 (EXPRESION -> CADENA .)
+    ORBIT           reduce using rule 56 (EXPRESION -> CADENA .)
+    OR              reduce using rule 56 (EXPRESION -> CADENA .)
+    AND             reduce using rule 56 (EXPRESION -> CADENA .)
+    SHIFTIZQ        reduce using rule 56 (EXPRESION -> CADENA .)
+    SHIFTDER        reduce using rule 56 (EXPRESION -> CADENA .)
+    PUNTOCOMA       reduce using rule 56 (EXPRESION -> CADENA .)
+    COMA            reduce using rule 56 (EXPRESION -> CADENA .)
+    CORDER          reduce using rule 56 (EXPRESION -> CADENA .)
+    PARDER          reduce using rule 56 (EXPRESION -> CADENA .)
+    DOSPUNTOS       reduce using rule 56 (EXPRESION -> CADENA .)
 
 
 state 50
 
-    (61) EXPRESION -> LISTA_INIT_CORCHETE .
+    (57) EXPRESION -> CHAR_ .
 
-    MAS             reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    MENOS           reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    POR             reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    DIV             reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    MODULO          reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    IGUALQUE        reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    DIFERENTE       reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    MENORQUE        reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    MAYORQUE        reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    MENORIGUAL      reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    MAYORIGUAL      reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    NOTBIT          reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    ANDBIT          reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    XORBIT          reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    ORBIT           reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    OR              reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    AND             reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    SHIFTIZQ        reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    SHIFTDER        reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    PUNTOCOMA       reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    COMA            reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    CORDER          reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    PARDER          reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
-    DOSPUNTOS       reduce using rule 61 (EXPRESION -> LISTA_INIT_CORCHETE .)
+    MAS             reduce using rule 57 (EXPRESION -> CHAR_ .)
+    MENOS           reduce using rule 57 (EXPRESION -> CHAR_ .)
+    POR             reduce using rule 57 (EXPRESION -> CHAR_ .)
+    DIV             reduce using rule 57 (EXPRESION -> CHAR_ .)
+    MODULO          reduce using rule 57 (EXPRESION -> CHAR_ .)
+    IGUALQUE        reduce using rule 57 (EXPRESION -> CHAR_ .)
+    DIFERENTE       reduce using rule 57 (EXPRESION -> CHAR_ .)
+    MENORQUE        reduce using rule 57 (EXPRESION -> CHAR_ .)
+    MAYORQUE        reduce using rule 57 (EXPRESION -> CHAR_ .)
+    MENORIGUAL      reduce using rule 57 (EXPRESION -> CHAR_ .)
+    MAYORIGUAL      reduce using rule 57 (EXPRESION -> CHAR_ .)
+    NOTBIT          reduce using rule 57 (EXPRESION -> CHAR_ .)
+    ANDBIT          reduce using rule 57 (EXPRESION -> CHAR_ .)
+    XORBIT          reduce using rule 57 (EXPRESION -> CHAR_ .)
+    ORBIT           reduce using rule 57 (EXPRESION -> CHAR_ .)
+    OR              reduce using rule 57 (EXPRESION -> CHAR_ .)
+    AND             reduce using rule 57 (EXPRESION -> CHAR_ .)
+    SHIFTIZQ        reduce using rule 57 (EXPRESION -> CHAR_ .)
+    SHIFTDER        reduce using rule 57 (EXPRESION -> CHAR_ .)
+    PUNTOCOMA       reduce using rule 57 (EXPRESION -> CHAR_ .)
+    COMA            reduce using rule 57 (EXPRESION -> CHAR_ .)
+    CORDER          reduce using rule 57 (EXPRESION -> CHAR_ .)
+    PARDER          reduce using rule 57 (EXPRESION -> CHAR_ .)
+    DOSPUNTOS       reduce using rule 57 (EXPRESION -> CHAR_ .)
 
 
 state 51
@@ -1696,15 +1696,15 @@ state 51
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -1718,16 +1718,16 @@ state 51
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     PARAMETROS                     shift and go to state 99
     EXPRESION                      shift and go to state 100
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 52
 
@@ -1760,15 +1760,15 @@ state 52
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -1782,15 +1782,15 @@ state 52
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 101
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 53
 
@@ -2021,8 +2021,8 @@ state 64
 
 state 65
 
-    (53) EXPRESION -> ID CORCHETES .
-    (55) EXPRESION -> ID CORCHETES . LISTA_PUNTOS
+    (58) EXPRESION -> ID CORCHETES .
+    (59) EXPRESION -> ID CORCHETES . LISTA_PUNTOS
     (20) CORCHETES -> CORCHETES . CORCHETE
     (104) LISTA_PUNTOS -> . LISTA_PUNTOS ACCES ID
     (105) LISTA_PUNTOS -> . LISTA_PUNTOS ACCES ID CORCHETES
@@ -2032,30 +2032,30 @@ state 65
     (108) ACCES -> . PUNTO
     (109) ACCES -> . FLECHA
 
-    MAS             reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    MENOS           reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    POR             reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    DIV             reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    MODULO          reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    IGUALQUE        reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    DIFERENTE       reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    MENORQUE        reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    MAYORQUE        reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    MENORIGUAL      reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    MAYORIGUAL      reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    NOTBIT          reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    ANDBIT          reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    XORBIT          reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    ORBIT           reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    OR              reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    AND             reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    SHIFTIZQ        reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    SHIFTDER        reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    PUNTOCOMA       reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    COMA            reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    CORDER          reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    PARDER          reduce using rule 53 (EXPRESION -> ID CORCHETES .)
-    DOSPUNTOS       reduce using rule 53 (EXPRESION -> ID CORCHETES .)
+    MAS             reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    MENOS           reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    POR             reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    DIV             reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    MODULO          reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    IGUALQUE        reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    DIFERENTE       reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    MENORQUE        reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    MAYORQUE        reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    MENORIGUAL      reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    MAYORIGUAL      reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    NOTBIT          reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    ANDBIT          reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    XORBIT          reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    ORBIT           reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    OR              reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    AND             reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    SHIFTIZQ        reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    SHIFTDER        reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    PUNTOCOMA       reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    COMA            reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    CORDER          reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    PARDER          reduce using rule 58 (EXPRESION -> ID CORCHETES .)
+    DOSPUNTOS       reduce using rule 58 (EXPRESION -> ID CORCHETES .)
     CORIZQ          shift and go to state 26
     PUNTO           shift and go to state 69
     FLECHA          shift and go to state 70
@@ -2066,36 +2066,36 @@ state 65
 
 state 66
 
-    (54) EXPRESION -> ID LISTA_PUNTOS .
+    (61) EXPRESION -> ID LISTA_PUNTOS .
     (104) LISTA_PUNTOS -> LISTA_PUNTOS . ACCES ID
     (105) LISTA_PUNTOS -> LISTA_PUNTOS . ACCES ID CORCHETES
     (108) ACCES -> . PUNTO
     (109) ACCES -> . FLECHA
 
-    MAS             reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    MENOS           reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    POR             reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    DIV             reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    MODULO          reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    IGUALQUE        reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    DIFERENTE       reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    MENORQUE        reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    MAYORQUE        reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    MENORIGUAL      reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    MAYORIGUAL      reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    NOTBIT          reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    ANDBIT          reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    XORBIT          reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    ORBIT           reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    OR              reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    AND             reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    SHIFTIZQ        reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    SHIFTDER        reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    PUNTOCOMA       reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    COMA            reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    CORDER          reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    PARDER          reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
-    DOSPUNTOS       reduce using rule 54 (EXPRESION -> ID LISTA_PUNTOS .)
+    MAS             reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    MENOS           reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    POR             reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    DIV             reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    MODULO          reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    IGUALQUE        reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    DIFERENTE       reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    MENORQUE        reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    MAYORQUE        reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    MENORIGUAL      reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    MAYORIGUAL      reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    NOTBIT          reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    ANDBIT          reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    XORBIT          reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    ORBIT           reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    OR              reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    AND             reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    SHIFTIZQ        reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    SHIFTDER        reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    PUNTOCOMA       reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    COMA            reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    CORDER          reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    PARDER          reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
+    DOSPUNTOS       reduce using rule 61 (EXPRESION -> ID LISTA_PUNTOS .)
     PUNTO           shift and go to state 69
     FLECHA          shift and go to state 70
 
@@ -2135,15 +2135,15 @@ state 67
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -2158,16 +2158,16 @@ state 67
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     PARAMETROS                     shift and go to state 114
     EXPRESION                      shift and go to state 100
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 68
 
@@ -2222,15 +2222,15 @@ state 71
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -2244,15 +2244,15 @@ state 71
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 117
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 72
 
@@ -2285,15 +2285,15 @@ state 72
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -2307,15 +2307,15 @@ state 72
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 118
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 73
 
@@ -2348,15 +2348,15 @@ state 73
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -2370,15 +2370,15 @@ state 73
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 119
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 74
 
@@ -2411,15 +2411,15 @@ state 74
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -2433,15 +2433,15 @@ state 74
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 120
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 75
 
@@ -2474,15 +2474,15 @@ state 75
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -2496,15 +2496,15 @@ state 75
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 121
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 76
 
@@ -2537,15 +2537,15 @@ state 76
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -2559,15 +2559,15 @@ state 76
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 122
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 77
 
@@ -2600,15 +2600,15 @@ state 77
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -2622,15 +2622,15 @@ state 77
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 123
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 78
 
@@ -2663,15 +2663,15 @@ state 78
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -2685,15 +2685,15 @@ state 78
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 124
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 79
 
@@ -2726,15 +2726,15 @@ state 79
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -2748,15 +2748,15 @@ state 79
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 125
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 80
 
@@ -2789,15 +2789,15 @@ state 80
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -2811,15 +2811,15 @@ state 80
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 126
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 81
 
@@ -2852,15 +2852,15 @@ state 81
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -2874,15 +2874,15 @@ state 81
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 127
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 82
 
@@ -2915,15 +2915,15 @@ state 82
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -2937,15 +2937,15 @@ state 82
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 128
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 83
 
@@ -2978,15 +2978,15 @@ state 83
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -3000,15 +3000,15 @@ state 83
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 129
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 84
 
@@ -3041,15 +3041,15 @@ state 84
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -3063,15 +3063,15 @@ state 84
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 130
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 85
 
@@ -3104,15 +3104,15 @@ state 85
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -3126,15 +3126,15 @@ state 85
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 131
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 86
 
@@ -3167,15 +3167,15 @@ state 86
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -3189,15 +3189,15 @@ state 86
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 132
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 87
 
@@ -3230,15 +3230,15 @@ state 87
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -3252,15 +3252,15 @@ state 87
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 133
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 88
 
@@ -3293,15 +3293,15 @@ state 88
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -3315,15 +3315,15 @@ state 88
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 134
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 89
 
@@ -3356,15 +3356,15 @@ state 89
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -3378,15 +3378,15 @@ state 89
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 135
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 90
 
@@ -3626,15 +3626,15 @@ state 93
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -3648,15 +3648,15 @@ state 93
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 136
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 94
 
@@ -4304,36 +4304,36 @@ state 111
 
 state 112
 
-    (55) EXPRESION -> ID CORCHETES LISTA_PUNTOS .
+    (59) EXPRESION -> ID CORCHETES LISTA_PUNTOS .
     (104) LISTA_PUNTOS -> LISTA_PUNTOS . ACCES ID
     (105) LISTA_PUNTOS -> LISTA_PUNTOS . ACCES ID CORCHETES
     (108) ACCES -> . PUNTO
     (109) ACCES -> . FLECHA
 
-    MAS             reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    MENOS           reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    POR             reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    DIV             reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    MODULO          reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    IGUALQUE        reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    DIFERENTE       reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    MENORQUE        reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    MAYORQUE        reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    MENORIGUAL      reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    MAYORIGUAL      reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    NOTBIT          reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    ANDBIT          reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    XORBIT          reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    ORBIT           reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    OR              reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    AND             reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    SHIFTIZQ        reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    SHIFTDER        reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    PUNTOCOMA       reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    COMA            reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    CORDER          reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    PARDER          reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
-    DOSPUNTOS       reduce using rule 55 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    MAS             reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    MENOS           reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    POR             reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    DIV             reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    MODULO          reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    IGUALQUE        reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    DIFERENTE       reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    MENORQUE        reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    MAYORQUE        reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    MENORIGUAL      reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    MAYORIGUAL      reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    NOTBIT          reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    ANDBIT          reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    XORBIT          reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    ORBIT           reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    OR              reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    AND             reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    SHIFTIZQ        reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    SHIFTDER        reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    PUNTOCOMA       reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    COMA            reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    CORDER          reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    PARDER          reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
+    DOSPUNTOS       reduce using rule 59 (EXPRESION -> ID CORCHETES LISTA_PUNTOS .)
     PUNTO           shift and go to state 69
     FLECHA          shift and go to state 70
 
@@ -5883,15 +5883,15 @@ state 139
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -5905,15 +5905,15 @@ state 139
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 178
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 140
 
@@ -6393,15 +6393,15 @@ state 155
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -6415,15 +6415,15 @@ state 155
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 204
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 156
 
@@ -6833,15 +6833,15 @@ state 181
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -6855,15 +6855,15 @@ state 181
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 219
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 182
 
@@ -6945,15 +6945,15 @@ state 185
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -6967,15 +6967,15 @@ state 185
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 222
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 186
 
@@ -7078,10 +7078,10 @@ state 189
     MENOS           reduce using rule 131 (OP_ASIGNACION -> IGUAL .)
     NOTBIT          reduce using rule 131 (OP_ASIGNACION -> IGUAL .)
     ANDBIT          reduce using rule 131 (OP_ASIGNACION -> IGUAL .)
-    ID              reduce using rule 131 (OP_ASIGNACION -> IGUAL .)
+    NUMERO          reduce using rule 131 (OP_ASIGNACION -> IGUAL .)
     CADENA          reduce using rule 131 (OP_ASIGNACION -> IGUAL .)
     CHAR_           reduce using rule 131 (OP_ASIGNACION -> IGUAL .)
-    NUMERO          reduce using rule 131 (OP_ASIGNACION -> IGUAL .)
+    ID              reduce using rule 131 (OP_ASIGNACION -> IGUAL .)
     CORIZQ          reduce using rule 131 (OP_ASIGNACION -> IGUAL .)
 
 
@@ -7098,10 +7098,10 @@ state 190
     MENOS           reduce using rule 132 (OP_ASIGNACION -> MASIGUAL .)
     NOTBIT          reduce using rule 132 (OP_ASIGNACION -> MASIGUAL .)
     ANDBIT          reduce using rule 132 (OP_ASIGNACION -> MASIGUAL .)
-    ID              reduce using rule 132 (OP_ASIGNACION -> MASIGUAL .)
+    NUMERO          reduce using rule 132 (OP_ASIGNACION -> MASIGUAL .)
     CADENA          reduce using rule 132 (OP_ASIGNACION -> MASIGUAL .)
     CHAR_           reduce using rule 132 (OP_ASIGNACION -> MASIGUAL .)
-    NUMERO          reduce using rule 132 (OP_ASIGNACION -> MASIGUAL .)
+    ID              reduce using rule 132 (OP_ASIGNACION -> MASIGUAL .)
     CORIZQ          reduce using rule 132 (OP_ASIGNACION -> MASIGUAL .)
 
 
@@ -7118,10 +7118,10 @@ state 191
     MENOS           reduce using rule 133 (OP_ASIGNACION -> MENOSIGUAL .)
     NOTBIT          reduce using rule 133 (OP_ASIGNACION -> MENOSIGUAL .)
     ANDBIT          reduce using rule 133 (OP_ASIGNACION -> MENOSIGUAL .)
-    ID              reduce using rule 133 (OP_ASIGNACION -> MENOSIGUAL .)
+    NUMERO          reduce using rule 133 (OP_ASIGNACION -> MENOSIGUAL .)
     CADENA          reduce using rule 133 (OP_ASIGNACION -> MENOSIGUAL .)
     CHAR_           reduce using rule 133 (OP_ASIGNACION -> MENOSIGUAL .)
-    NUMERO          reduce using rule 133 (OP_ASIGNACION -> MENOSIGUAL .)
+    ID              reduce using rule 133 (OP_ASIGNACION -> MENOSIGUAL .)
     CORIZQ          reduce using rule 133 (OP_ASIGNACION -> MENOSIGUAL .)
 
 
@@ -7138,10 +7138,10 @@ state 192
     MENOS           reduce using rule 134 (OP_ASIGNACION -> PORIGUAL .)
     NOTBIT          reduce using rule 134 (OP_ASIGNACION -> PORIGUAL .)
     ANDBIT          reduce using rule 134 (OP_ASIGNACION -> PORIGUAL .)
-    ID              reduce using rule 134 (OP_ASIGNACION -> PORIGUAL .)
+    NUMERO          reduce using rule 134 (OP_ASIGNACION -> PORIGUAL .)
     CADENA          reduce using rule 134 (OP_ASIGNACION -> PORIGUAL .)
     CHAR_           reduce using rule 134 (OP_ASIGNACION -> PORIGUAL .)
-    NUMERO          reduce using rule 134 (OP_ASIGNACION -> PORIGUAL .)
+    ID              reduce using rule 134 (OP_ASIGNACION -> PORIGUAL .)
     CORIZQ          reduce using rule 134 (OP_ASIGNACION -> PORIGUAL .)
 
 
@@ -7158,10 +7158,10 @@ state 193
     MENOS           reduce using rule 135 (OP_ASIGNACION -> DIVIGUAL .)
     NOTBIT          reduce using rule 135 (OP_ASIGNACION -> DIVIGUAL .)
     ANDBIT          reduce using rule 135 (OP_ASIGNACION -> DIVIGUAL .)
-    ID              reduce using rule 135 (OP_ASIGNACION -> DIVIGUAL .)
+    NUMERO          reduce using rule 135 (OP_ASIGNACION -> DIVIGUAL .)
     CADENA          reduce using rule 135 (OP_ASIGNACION -> DIVIGUAL .)
     CHAR_           reduce using rule 135 (OP_ASIGNACION -> DIVIGUAL .)
-    NUMERO          reduce using rule 135 (OP_ASIGNACION -> DIVIGUAL .)
+    ID              reduce using rule 135 (OP_ASIGNACION -> DIVIGUAL .)
     CORIZQ          reduce using rule 135 (OP_ASIGNACION -> DIVIGUAL .)
 
 
@@ -7178,10 +7178,10 @@ state 194
     MENOS           reduce using rule 136 (OP_ASIGNACION -> MODIGUAL .)
     NOTBIT          reduce using rule 136 (OP_ASIGNACION -> MODIGUAL .)
     ANDBIT          reduce using rule 136 (OP_ASIGNACION -> MODIGUAL .)
-    ID              reduce using rule 136 (OP_ASIGNACION -> MODIGUAL .)
+    NUMERO          reduce using rule 136 (OP_ASIGNACION -> MODIGUAL .)
     CADENA          reduce using rule 136 (OP_ASIGNACION -> MODIGUAL .)
     CHAR_           reduce using rule 136 (OP_ASIGNACION -> MODIGUAL .)
-    NUMERO          reduce using rule 136 (OP_ASIGNACION -> MODIGUAL .)
+    ID              reduce using rule 136 (OP_ASIGNACION -> MODIGUAL .)
     CORIZQ          reduce using rule 136 (OP_ASIGNACION -> MODIGUAL .)
 
 
@@ -7198,10 +7198,10 @@ state 195
     MENOS           reduce using rule 137 (OP_ASIGNACION -> SIIGUAL .)
     NOTBIT          reduce using rule 137 (OP_ASIGNACION -> SIIGUAL .)
     ANDBIT          reduce using rule 137 (OP_ASIGNACION -> SIIGUAL .)
-    ID              reduce using rule 137 (OP_ASIGNACION -> SIIGUAL .)
+    NUMERO          reduce using rule 137 (OP_ASIGNACION -> SIIGUAL .)
     CADENA          reduce using rule 137 (OP_ASIGNACION -> SIIGUAL .)
     CHAR_           reduce using rule 137 (OP_ASIGNACION -> SIIGUAL .)
-    NUMERO          reduce using rule 137 (OP_ASIGNACION -> SIIGUAL .)
+    ID              reduce using rule 137 (OP_ASIGNACION -> SIIGUAL .)
     CORIZQ          reduce using rule 137 (OP_ASIGNACION -> SIIGUAL .)
 
 
@@ -7218,10 +7218,10 @@ state 196
     MENOS           reduce using rule 138 (OP_ASIGNACION -> SDIGUAL .)
     NOTBIT          reduce using rule 138 (OP_ASIGNACION -> SDIGUAL .)
     ANDBIT          reduce using rule 138 (OP_ASIGNACION -> SDIGUAL .)
-    ID              reduce using rule 138 (OP_ASIGNACION -> SDIGUAL .)
+    NUMERO          reduce using rule 138 (OP_ASIGNACION -> SDIGUAL .)
     CADENA          reduce using rule 138 (OP_ASIGNACION -> SDIGUAL .)
     CHAR_           reduce using rule 138 (OP_ASIGNACION -> SDIGUAL .)
-    NUMERO          reduce using rule 138 (OP_ASIGNACION -> SDIGUAL .)
+    ID              reduce using rule 138 (OP_ASIGNACION -> SDIGUAL .)
     CORIZQ          reduce using rule 138 (OP_ASIGNACION -> SDIGUAL .)
 
 
@@ -7238,10 +7238,10 @@ state 197
     MENOS           reduce using rule 139 (OP_ASIGNACION -> ANDIGUAL .)
     NOTBIT          reduce using rule 139 (OP_ASIGNACION -> ANDIGUAL .)
     ANDBIT          reduce using rule 139 (OP_ASIGNACION -> ANDIGUAL .)
-    ID              reduce using rule 139 (OP_ASIGNACION -> ANDIGUAL .)
+    NUMERO          reduce using rule 139 (OP_ASIGNACION -> ANDIGUAL .)
     CADENA          reduce using rule 139 (OP_ASIGNACION -> ANDIGUAL .)
     CHAR_           reduce using rule 139 (OP_ASIGNACION -> ANDIGUAL .)
-    NUMERO          reduce using rule 139 (OP_ASIGNACION -> ANDIGUAL .)
+    ID              reduce using rule 139 (OP_ASIGNACION -> ANDIGUAL .)
     CORIZQ          reduce using rule 139 (OP_ASIGNACION -> ANDIGUAL .)
 
 
@@ -7258,10 +7258,10 @@ state 198
     MENOS           reduce using rule 140 (OP_ASIGNACION -> XORIGUAL .)
     NOTBIT          reduce using rule 140 (OP_ASIGNACION -> XORIGUAL .)
     ANDBIT          reduce using rule 140 (OP_ASIGNACION -> XORIGUAL .)
-    ID              reduce using rule 140 (OP_ASIGNACION -> XORIGUAL .)
+    NUMERO          reduce using rule 140 (OP_ASIGNACION -> XORIGUAL .)
     CADENA          reduce using rule 140 (OP_ASIGNACION -> XORIGUAL .)
     CHAR_           reduce using rule 140 (OP_ASIGNACION -> XORIGUAL .)
-    NUMERO          reduce using rule 140 (OP_ASIGNACION -> XORIGUAL .)
+    ID              reduce using rule 140 (OP_ASIGNACION -> XORIGUAL .)
     CORIZQ          reduce using rule 140 (OP_ASIGNACION -> XORIGUAL .)
 
 
@@ -7278,10 +7278,10 @@ state 199
     MENOS           reduce using rule 141 (OP_ASIGNACION -> ORIGUAL .)
     NOTBIT          reduce using rule 141 (OP_ASIGNACION -> ORIGUAL .)
     ANDBIT          reduce using rule 141 (OP_ASIGNACION -> ORIGUAL .)
-    ID              reduce using rule 141 (OP_ASIGNACION -> ORIGUAL .)
+    NUMERO          reduce using rule 141 (OP_ASIGNACION -> ORIGUAL .)
     CADENA          reduce using rule 141 (OP_ASIGNACION -> ORIGUAL .)
     CHAR_           reduce using rule 141 (OP_ASIGNACION -> ORIGUAL .)
-    NUMERO          reduce using rule 141 (OP_ASIGNACION -> ORIGUAL .)
+    ID              reduce using rule 141 (OP_ASIGNACION -> ORIGUAL .)
     CORIZQ          reduce using rule 141 (OP_ASIGNACION -> ORIGUAL .)
 
 
@@ -7387,15 +7387,15 @@ state 203
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -7409,16 +7409,16 @@ state 203
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     PARAMETROS                     shift and go to state 226
     EXPRESION                      shift and go to state 100
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 204
 
@@ -7605,15 +7605,15 @@ state 210
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -7627,15 +7627,15 @@ state 210
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 230
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 211
 
@@ -7687,15 +7687,15 @@ state 212
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -7709,15 +7709,15 @@ state 212
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 232
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 213
 
@@ -7837,15 +7837,15 @@ state 214
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -7859,15 +7859,15 @@ state 214
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 234
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 215
 
@@ -8104,15 +8104,15 @@ state 223
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -8126,15 +8126,15 @@ state 223
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 237
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 224
 
@@ -8203,15 +8203,15 @@ state 225
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -8225,15 +8225,15 @@ state 225
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 239
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 226
 
@@ -8387,15 +8387,15 @@ state 231
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -8409,15 +8409,15 @@ state 231
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 244
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 232
 
@@ -8712,15 +8712,15 @@ state 238
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -8734,15 +8734,15 @@ state 238
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 249
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 239
 
@@ -8828,15 +8828,15 @@ state 241
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -8850,15 +8850,15 @@ state 241
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 252
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 242
 
@@ -9168,15 +9168,15 @@ state 253
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -9191,15 +9191,15 @@ state 253
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 94
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 254
 
@@ -9707,15 +9707,15 @@ state 266
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -9729,15 +9729,15 @@ state 266
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 274
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 267
 
@@ -9794,15 +9794,15 @@ state 269
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . ID CORCHETES
-    (54) EXPRESION -> . ID LISTA_PUNTOS
-    (55) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (56) EXPRESION -> . ID
-    (57) EXPRESION -> . CADENA
-    (58) EXPRESION -> . CHAR_
-    (59) EXPRESION -> . LLAMADA_FUNCION
-    (60) EXPRESION -> . NUMERO
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . LISTA_INIT_CORCHETE
+    (55) EXPRESION -> . NUMERO
+    (56) EXPRESION -> . CADENA
+    (57) EXPRESION -> . CHAR_
+    (58) EXPRESION -> . ID CORCHETES
+    (59) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (60) EXPRESION -> . ID
+    (61) EXPRESION -> . ID LISTA_PUNTOS
     (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . CORIZQ PARAMETROS CORDER
@@ -9816,15 +9816,15 @@ state 269
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 48
+    CADENA          shift and go to state 49
+    CHAR_           shift and go to state 50
     ID              shift and go to state 35
-    CADENA          shift and go to state 46
-    CHAR_           shift and go to state 47
-    NUMERO          shift and go to state 49
     CORIZQ          shift and go to state 51
 
     EXPRESION                      shift and go to state 278
-    LLAMADA_FUNCION                shift and go to state 48
-    LISTA_INIT_CORCHETE            shift and go to state 50
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 47
 
 state 270
 

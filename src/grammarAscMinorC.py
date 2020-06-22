@@ -138,8 +138,8 @@ import generator as g
 import ply.lex as lex
 import ply.yacc as yacc
 
-from expressions import *
-from instructions import *
+from expresionsMinorC import *
+from instructionsMinorC import *
 from lexicalObject import *
 from sintacticObject import *
 
@@ -229,25 +229,36 @@ precedence = (
 #definition of grammar 
 def p_init(t):
     'S : A'
-
+    t[0] = t[1]
     print("Se ha reconocido la cadena.")
 
 def p_instruccionesGlobal(t):
     'A  :    INSTRUCCIONES_GLOBALES'
+    t[0] = t[1]
 
 def p_listaInstrucciones(t):
     '''INSTRUCCIONES_GLOBALES : INSTRUCCIONES_GLOBALES DECLARACION_GLOBAL
                                 | DECLARACION_GLOBAL'''
+
+    if len(t) == 3:
+        t[1].append(t[2])
+        t[0] = t[1]
+    else:
+        t[0] = [t[1]]
 
 def p_declaracionGlobal(t):
     '''DECLARACION_GLOBAL :     DECLA_VARIABLES
                                 | DECLA_FUNCIONES
                                 | DECLA_STRUCTS'''
 
+    t[0] = t[1]
 
 ##----------------------------------DECLARACION DE VARIABLES ------------------
 def p_declaVariable(t):
     'DECLA_VARIABLES :  TIPO LISTA_ID PUNTOCOMA'
+    #print(f'tipo: {str(t[1])} valor: {str(t[2])}')
+    t[0] = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])
+    print(f'variables: {str(t[2])}')
 
 def p_tipo(t):
     '''TIPO :   INT
@@ -256,10 +267,17 @@ def p_tipo(t):
                 | VOID
                 | CHAR '''
                 #| STRUCT  -> quite el tipo struct 
+    t[0] = t[1]
 
 def p_listaId(t):
     '''LISTA_ID :   LISTA_ID COMA ASIGNA
                     | ASIGNA'''
+
+    if len(t) == 2:
+        t[0] = [t[1]]
+    else: 
+        t[1].append(t[3])
+        t[0] = t[1]
 
 def p_asigna(t):
     '''ASIGNA :     ID IGUAL EXPRESION
@@ -267,18 +285,32 @@ def p_asigna(t):
                     | ID CORCHETES IGUAL EXPRESION
                     | ID'''
 
+    if len(t) == 4: t[0] = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))
+    elif len(t) == 3: t[0] = IdentifierArray(t[1], t[2], t.lineno(1), t.lexpos(1))
+    elif len(t) == 2: t[0] = SingleDeclaration(t[1], '#', t.lineno(1), t.lexpos(1)) #si mando numeral significa que no esta inicializada
+    else: SingleDeclaration(IdentifierArray(t[1], t[2], t.lineno(1), t.lexpos(1)), t[4], t.lineno(3), t.lexpos(3))
+
 def p_corchetes(t):
     '''CORCHETES :  CORCHETES CORCHETE
                     | CORCHETE '''
 
+    if len(t) == 3:
+        t[1].append(t[2])
+        t[0] = t[1]
+    else:
+        t[0] = [t[1]]
+
 def p_corchete(t):
     'CORCHETE :     CORIZQ VALOR CORDER'
+    t[0] = t[2]
 
 def p_valor(t):
     'VALOR :        EXPRESION'
+    t[0] = t[1]
 
 def p_valorEmpty(t):
     'VALOR : '
+    t[0] = []
 
 def p_expresion(t):
     '''EXPRESION :  EXPRESION MAS EXPRESION
@@ -309,17 +341,68 @@ def p_expresion(t):
                     | MENOS EXPRESION %prec UMENOS
                     | NOTBIT EXPRESION
                     | ANDBIT EXPRESION %prec UANDBIT
-                    | ID CORCHETES
-                    | ID LISTA_PUNTOS
-                    | ID CORCHETES LISTA_PUNTOS
-                    | ID
-                    | CADENA
-                    | CHAR_
                     | LLAMADA_FUNCION
-                    | NUMERO 
                     | LISTA_INIT_CORCHETE'''
-                    #| EXPRESION TERNARIO EXPRESION DOSPUNTOS EXPRESION'''
+        # | EXPRESION TERNARIO EXPRESION DOSPUNTOS EXPRESION'''
 
+
+    if len(t) == 4:
+        #aritmetics
+        if(t[2] == '+'): t[0] = BinaryExpression(t[1],t[3],Aritmetics.MAS, t.lineno(2), t.lexpos(2))        
+        elif(t[2] == '-'): t[0] = BinaryExpression(t[1],t[3],Aritmetics.MENOS, t.lineno(2), t.lexpos(2))
+        elif(t[2] == '*'): t[0] = BinaryExpression(t[1],t[3],Aritmetics.POR, t.lineno(2), t.lexpos(2))
+        elif(t[2] == '/'): t[0] = BinaryExpression(t[1],t[3],Aritmetics.DIV, t.lineno(2), t.lexpos(2))
+        elif(t[2] == '%'): t[0] = BinaryExpression(t[1],t[3], Aritmetics.MODULO, t.lineno(2), t.lexpos(2))
+        #logics
+        elif(t[2] == '&&'): t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.AND, t.lineno(2), t.lexpos(2))
+        elif(t[2] == '||'): t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.OR, t.lineno(2), t.lexpos(2))
+        elif(t[2] == '=='): t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.IGUALQUE, t.lineno(2), t.lexpos(2))
+        elif(t[2] == '!='): t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.DIFERENTE, t.lineno(2), t.lexpos(2))
+        elif(t[2] == '>='): t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.MAYORIGUAL, t.lineno(2), t.lexpos(2))
+        elif(t[2] == '<='): t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.MENORIGUAL, t.lineno(2), t.lexpos(2))
+        elif(t[2] == '>'): t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.MAYORQUE, t.lineno(2), t.lexpos(2))
+        elif(t[2] == '<'): t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.MENORQUE, t.lineno(2), t.lexpos(2))
+        #bits
+        elif(t[2] == '|'): t[0] = RelationalBit(t[1],t[3], BitToBit.ORBIT, t.lineno(1), t.lexpos(1))
+        elif(t[2] == '^'): t[0] = RelationalBit(t[1],t[3], BitToBit.XORBIT, t.lineno(1), t.lexpos(1))
+        elif(t[2] == '<<'): t[0] = RelationalBit(t[1],t[3], BitToBit.SHIFTI, t.lineno(1), t.lexpos(1))
+        elif(t[2] == '>>'): t[0] = RelationalBit(t[1],t[3], BitToBit.SHIFTD, t.lineno(1), t.lexpos(1))
+        elif (t[2] == '&'): t[0] = RelationalBit(t[1], t[3], BitToBit.ANDBIT, t.lineno(1), t.lexpos(1))
+    else:
+        if(t[1] == '-'): t[0] = NegativeNumber(t[2], t.lineno(2), t.lexpos(2))
+        elif(t[1] == '~'): t[0] = NotBit(t[2], t.lineno(1), t.lexpos(1))
+        elif(t[1] == '&'):t[0] = ReferenceBit(t[2], t.lineno(1), t.lexpos(1))    
+        elif t[1] == '!' : t[0] = Not(t[2], t.lineno(2), t.lexpos(2))
+        elif t[1] == 'sizeof': t[0] = SizeOf(t[3], t.lineno(1), t.lexpos(1))
+        elif t[1] == '(': t[0] = Parentesis(t[2], t.lineno(2), t.lexpos(2))
+        elif t[1] == '(int)': t[0] = Cast_(t[2], 'int', t.lineno(1), t.lexpos(1))
+        elif t[1] == '(float)': t[0] = Cast_(t[2], 'float', t.lineno(1), t.lexpos(1))
+        elif t[1] == '(char)': t[0] = Cast_(t[2], 'char', t.lineno(1), t.lexpos(1))
+
+def p_expresiones_numero(t):
+    '''EXPRESION :    NUMERO'''
+    t[0] = Number( t.lineno(1), t.lexpos(1), t[1])
+
+def p_expresiones_cadena(t):
+    '''EXPRESION :    CADENA'''
+    t[0] = String_(t[1], t.lineno(1), t.lexpos(1))
+
+def p_expresiones_char(t):
+    '''EXPRESION :    CHAR_'''
+    t[0] = String_(t[1], t.lineno(1), t.lexpos(1))
+
+def p_expresiones_id(t):
+    '''EXPRESION :    ID CORCHETES
+                        | ID CORCHETES LISTA_PUNTOS
+                        | ID 
+        '''
+    if len(t) == 2: t[0] = IdentifierArray(t[1], t[2], t.lineno(1), t.lexpos(1))
+    elif len(t) == 1: t[0] =  Identifier(t[1], t.lineno(1), t.lexpos(1))
+    else: print("lista id-> corchetes-> listaPuntos")
+
+def p_expresiones_id_listapuntos(t):
+    '''EXPRESION :     ID LISTA_PUNTOS '''
+   
 def p_listaInitCorchete(t):
     '''LISTA_INIT_CORCHETE :    CORIZQ PARAMETROS CORDER 
     '''
@@ -490,11 +573,24 @@ def p_puntero(t):
     '''PUNTERO :    LISTA_ASTERISCOS ID
                     | ID LISTA_ASTERISCOS
                     | ID '''
+    if len(t) == 3:
+        if isinstance(t[1], list):
+            t[1].append(t[2])
+            t[0] = t[1]
+        else:
+            t[2].append(t[1])
+            t[0] = t[1]
+    else:
+        t[0] = t[1]
 
 def p_listaAsteriscos(t):
     '''LISTA_ASTERISCOS :   LISTA_ASTERISCOS POR
                             | POR '''
 
+    if len(t) == 2: t[0] = [t[1]]
+    else: 
+        t[1].append(t[2])
+        t[0] = t[1]
 
 def p_error(t):
     print("Error sintactico en '%s'" % t.value + "line: "+ str(t.lineno))
