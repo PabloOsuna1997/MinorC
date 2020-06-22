@@ -740,6 +740,11 @@ class Ui_Augus(object):
 
     def fn_Ejecutar_Ascendente(self):
         try:
+            #inicializacion
+            traduction.augusTxt = ''
+            traduction.contadorT = 0
+            traduction.semanticErrorList = []
+
             content = self.tabWidget.currentWidget().findChild(QtWidgets.QTextEdit,"textEdit").toPlainText()
             content += '\n'        
             content.encode('utf-8')
@@ -769,6 +774,8 @@ class Ui_Augus(object):
                 Augus.setStyleSheet('QMainWindow{background-color: green; border: 1px solid black;}')
                 #si no existen errores mandamos a traducir el ast y pintamos la barra de color verde
                 augus = traduction.execute(result, self.textEditConsole)
+                self.textEditConsole.setPlainText("CODIGO 3D:\n")
+                self.textEditConsole.append(augus)
                 print(f"texto august:\n{augus}")
                 print("traduccion completa")
             

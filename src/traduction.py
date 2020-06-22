@@ -39,32 +39,50 @@ def Declaration_(b):
         if isinstance(i, SingleDeclaration):
             res = valueExpression(i.val)
             augusTxt += '$t'+ str(contadorT)
-            augusTxt += ' = ' + str(res) + '\n'
+            augusTxt += ' = ' + str(res) + ' ;\n'
             contadorT += 1
  
 def valueExpression(instruction):
+    global contadorT, augusTxt
     if isinstance(instruction, BinaryExpression):      
         num1 = valueExpression(instruction.op1)
         num2 = valueExpression(instruction.op2)
         try:
             if instruction.operator == Aritmetics.MAS:
-                #augusTxt += '$t'+ str(contadorT)
-                #augusTxt += ' = ' + str(res) + '\n'
-                #contadorT += 1
-                if isinstance((num1 + num2), str):
-                    return str(num1 + num2)
-                else:
-                    return (num1 + num2)
-            elif instruction.operator == Aritmetics.MENOS: return num1 - num2
-            elif instruction.operator == Aritmetics.POR: return num1 * num2
+                
+                augusTxt += '$t'+ str(contadorT)
+                augusTxt += f' = {str(num1)} + {str(num2)} ;\n'
+                contadorT += 1
+                return f'$t{str(contadorT-1)}'
+
+            elif instruction.operator == Aritmetics.MENOS: 
+                
+                augusTxt += '$t'+ str(contadorT)
+                augusTxt += f' = {str(num1)} - {str(num2)} ;\n'
+                contadorT += 1
+                return f'$t{str(contadorT-1)}'
+
+            elif instruction.operator == Aritmetics.POR:
+                
+                augusTxt += '$t'+ str(contadorT)
+                augusTxt += f' = {str(num1)} * {str(num2)} ;\n'
+                contadorT += 1
+                return f'$t{str(contadorT-1)}'
+
             elif instruction.operator == Aritmetics.DIV: 
-                if num2 != 0:
-                    return num1 / num2
-                else:
-                    seob = seOb('Error Semantico: Division entre 0.', la, co)
-                    semanticErrorList.append(seob)
-                    return '#'
-            elif instruction.operator == Aritmetics.MODULO: return num1 % num2
+                
+                augusTxt += '$t'+ str(contadorT)
+                augusTxt += f' = {str(num1)} / {str(num2)} ;\n'
+                contadorT += 1
+                return f'$t{str(contadorT-1)}'
+
+            elif instruction.operator == Aritmetics.MODULO: 
+                
+                augusTxt += '$t'+ str(contadorT)
+                augusTxt += f' = {str(num1)} % {str(num2)} ;\n'
+                contadorT += 1
+                return f'$t{str(contadorT-1)}'
+                
         except:
             print("trono")
             seob = seOb('Error Semantico: Tipos de datos en operacion aritmetica.', la, co)
