@@ -258,7 +258,6 @@ def p_declaVariable(t):
     'DECLA_VARIABLES :  TIPO LISTA_ID PUNTOCOMA'
     #print(f'tipo: {str(t[1])} valor: {str(t[2])}')
     t[0] = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])
-    print(f'variables: {str(t[2])}')
 
 def p_tipo(t):
     '''TIPO :   INT
@@ -598,27 +597,23 @@ def p_error(t):
     so = sinOb(t.value, t.lineno, find_column(input_, t))
     sintacticErroList.append(so)
 
+def parse(input):
+    global input_, sintacticErroList, LexicalErrosList
 
-#def parse(input):
-#global input_, sintacticErroList, LexicalErrosList
+    sintacticErroList[:] = []
+    LexicalErrosList[:] =[]
 
-#sintacticErroList[:] = []
-#LexicalErrosList[:] =[]
-
-#input_ = input    
-lexer = lex.lex()
-parser = yacc.yacc()
-#instructions = parser.parse(input)
-#lexer.lineno = 1
-#parser.restart()
-#if len(LexicalErrosList) > 0 or len(sintacticErroList) > 0:
-    #if instructions == None:
-        #instructions = []
-    #else:
-        #instructions[:] = []
-    #return instructions
-#return instructions
-
-f = open("./entrada.txt", "r")
-input = f.read()
-parser.parse(input)
+    input_ = input    
+    lexer = lex.lex()
+    parser = yacc.yacc()
+    instructions = parser.parse(input)
+    print(str(instructions))
+    lexer.lineno = 1
+    parser.restart()
+    if len(LexicalErrosList) > 0 or len(sintacticErroList) > 0:
+        if instructions == None:
+            instructions = []
+        else:
+            instructions[:] = []
+        return instructions
+    return instructions
