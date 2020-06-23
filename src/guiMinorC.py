@@ -739,11 +739,12 @@ class Ui_Augus(object):
             self.msgBox.exec()
 
     def fn_Ejecutar_Ascendente(self):
-        try:
+        #try:
             #inicializacion
-            traduction.augusTxt = ''
+            traduction.augusTxt = 'main: \n'
             traduction.contadorT = 0
             traduction.semanticErrorList = []
+            traduction.ultimaPos = 0
 
             content = self.tabWidget.currentWidget().findChild(QtWidgets.QTextEdit,"textEdit").toPlainText()
             content += '\n'        
@@ -779,11 +780,11 @@ class Ui_Augus(object):
                 print(f"texto august:\n{augus}")
                 print("traduccion completa")
             
-        except:
-            self.msgBox = QtWidgets.QMessageBox()
-            self.msgBox.setIcon(QtWidgets.QMessageBox.Critical)
-            self.msgBox.setText("Area Vacia.")
-            self.msgBox.exec()
+        #except:
+            #self.msgBox = QtWidgets.QMessageBox()
+            #self.msgBox.setIcon(QtWidgets.QMessageBox.Critical)
+            #self.msgBox.setText("Area Vacia.")
+            #self.msgBox.exec()
     
     def fn_Ejecutar_Descendente(self):
         try:

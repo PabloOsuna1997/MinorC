@@ -85,9 +85,9 @@ tokens = [
 ] + list(reservadas.values())
 
 # er tokens
-t_INT       = r'\(int\)'
-t_CHAR      = r'\(char\)'
-t_FLOAT      = r'\(float\)'
+t_C_INT       = r'\(int\)'
+t_C_CHAR      = r'\(char\)'
+t_C_FLOAT      = r'\(float\)'
 t_MASIGUAL = r'\+\='
 t_MENOSIGUAL = r'\-\='
 t_PORIGUAL  = r'\*\='
@@ -287,7 +287,7 @@ def p_asigna(t):
     if len(t) == 4: t[0] = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))
     elif len(t) == 3: t[0] = IdentifierArray(t[1], t[2], t.lineno(1), t.lexpos(1))
     elif len(t) == 2: t[0] = SingleDeclaration(t[1], '#', t.lineno(1), t.lexpos(1)) #si mando numeral significa que no esta inicializada
-    else: SingleDeclaration(IdentifierArray(t[1], t[2], t.lineno(1), t.lexpos(1)), t[4], t.lineno(3), t.lexpos(3))
+    else: t[0] = DeclarationArrayInit(t[1], t[2], t[4], t.lineno(3), t.lexpos(3))
 
 def p_corchetes(t):
     '''CORCHETES :  CORCHETES CORCHETE
@@ -340,8 +340,7 @@ def p_expresion(t):
                     | MENOS EXPRESION %prec UMENOS
                     | NOTBIT EXPRESION
                     | ANDBIT EXPRESION %prec UANDBIT
-                    | LLAMADA_FUNCION
-                    | LISTA_INIT_CORCHETE'''
+                    | LLAMADA_FUNCION'''
         # | EXPRESION TERNARIO EXPRESION DOSPUNTOS EXPRESION'''
 
 
@@ -395,16 +394,21 @@ def p_expresiones_id(t):
                         | ID CORCHETES LISTA_PUNTOS
                         | ID 
         '''
-    if len(t) == 2: t[0] = IdentifierArray(t[1], t[2], t.lineno(1), t.lexpos(1))
-    elif len(t) == 1: t[0] =  Identifier(t[1], t.lineno(1), t.lexpos(1))
+    if len(t) == 3: t[0] = IdentifierArray(t[1], t[2], t.lineno(1), t.lexpos(1))
+    elif len(t) == 2: t[0] =  Identifier(t[1], t.lineno(1), t.lexpos(1))
     else: print("lista id-> corchetes-> listaPuntos")
 
 def p_expresiones_id_listapuntos(t):
     '''EXPRESION :     ID LISTA_PUNTOS '''
    
+def p_expresiones_listaCorchetesInit(t):
+    '''EXPRESION :   LISTA_INIT_CORCHETE'''
+    t[0] = t[1]
+
 def p_listaInitCorchete(t):
     '''LISTA_INIT_CORCHETE :    CORIZQ PARAMETROS CORDER 
     '''
+    t[0] = InitializationArray(t.lineno(1), t.lexpos(1), t[2])
 
 def p_llamadaFuncion(t):
     '''LLAMADA_FUNCION :     ID PARIZQ PARAMETROS PARDER 
@@ -414,10 +418,16 @@ def p_parametros(t):
     '''PARAMETROS :     PARAMETROS COMA EXPRESION
                         | EXPRESION '''
 
+    if len(t) == 4:
+        t[1].append(t[3])
+        t[0] = t[1]
+    else:
+        t[0] = [t[1]]
 
 ##----------------------DECLARACION DE FUNCIONES---------------------
 def p_declaFuncion(t):
     'DECLA_FUNCIONES :    TIPO ID PARIZQ RECEPCION_PARAMETROS PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'
+
 
 def p_recepcionParametros(t):
     '''RECEPCION_PARAMETROS :   RECEPCION_PARAMETROS COMA PARAM
@@ -427,7 +437,7 @@ def p_recepcionParametrosEmpty(t):
     'RECEPCION_PARAMETROS :  '
 
 def p_param(t):
-    'PARAM :    TIPO_FUN PUNT'
+    'PARAM :    TIPO_FUN ID'
 
 def p_tipoFuncion(t):
     '''TIPO_FUN :   TIPO
@@ -457,7 +467,8 @@ def p_instrIn(t):
                     | RETURN EXPRESION PUNTOCOMA
                     | CONTINUE PUNTOCOMA
                     | BREAK PUNTOCOMA
-                    | GOTO ID PUNTOCOMA'''
+                    | GOTO ID PUNTOCOMA
+                    | PUNTOCOMA'''
 
 def p_declaracionStructInterna(t):
     '''DECLARACION_STRUCT_INTERNA : STRUCT ID PUNTERO IGUAL EXPRESION PUNTOCOMA
@@ -617,3 +628,9 @@ def parse(input):
             instructions[:] = []
         return instructions
     return instructions
+"""    
+lexer = lex.lex()
+parser = yacc.yacc()
+f = open("./entrada.txt", "r")
+input = f.read()
+parser.parse(input)"""

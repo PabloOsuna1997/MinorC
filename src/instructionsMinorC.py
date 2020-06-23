@@ -51,3 +51,12 @@ class Label(Instruction):
         self.line = line
         self.column = column
 
+class DeclacionFunction(Instruction):
+    'function'
+    def __init__(self, type_, id, params, ret, line, column):
+        self.type_ = type_
+        self.id = id
+        self.params = params
+        self.ret = ret
+        self.line = line
+        self.column = column

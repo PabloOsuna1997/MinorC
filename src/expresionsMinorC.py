@@ -25,6 +25,9 @@ class BitToBit(Enum):
     SHIFTI = 4
     SHIFTD = 5
 
+class Expretion:
+     ''' this class represent an expresion'''
+
 ########--------------- declaration Section
 class DeclarationExp:
     ''' this class represent an numeric expresion'''
@@ -186,5 +189,19 @@ class ExpressionsDeclarationArray(Array):
     def __init__(self, expressionIzq, expressionDer, line, column):
         self.expressionIzq = expressionIzq
         self.expressionDer = expressionDer
+        self.line = line
+        self.column = column
+
+class InitializationArray(Expretion):
+    def __init__(self, line, column, val = []):
+        self.val = val
+        self.line = line
+        self.column = column
+
+class DeclarationArrayInit(Expretion):
+    def __init__(self, id, dimentions, val, line, column):
+        self.id = id
+        self.dimentions = dimentions
+        self.val = val
         self.line = line
         self.column = column
