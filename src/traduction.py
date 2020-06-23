@@ -11,16 +11,18 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 import time
 
-
 augusTxt = 'main: \n'
 contadorT = 0
 semanticErrorList = []
 ultimaPos = 0
-tableGlobal = {}  #tabla en la que guardare el id y el $tn correspondiente   
+tableGlobal = {}  #tabla en la que guardare el id y el $tn correspondiente
+arrayTables = []    #guardare todas las tablas de simbolos, servira como una pila con append y pop
+contadorEtiquetas = 0
 
 def execute(input, textEdit): 
     global tableGlobal 
-    tableGlobal.clear()   
+    tableGlobal.clear()  
+    arrayTables.append(tableGlobal) 
     process(input, tableGlobal)
     print(f"tsGlobal: {str(tableGlobal)}")
     return augusTxt
@@ -40,10 +42,11 @@ def process(instructions,ts):
     except:
         pass
 
-def FunctionDeclaration_(b, ts):
+def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del padre
     global augusTxt
     tsLocal = {}
     tsLocal.clear()
+    arrayTables.append(tsLocal) 
     augusTxt += f'{str(b.id)} :\n'
     #recorrer las listas de instrucciones
     i = 0
@@ -53,85 +56,186 @@ def FunctionDeclaration_(b, ts):
             Declaration_(a.listId, tsLocal)
         elif isinstance(a, Asignation):
             Asignation_(a, tsLocal)
+        elif isinstance(a, If):
+            If_(a, tsLocal)
         i += 1
     
     print(f"tsLocal: {str(tsLocal)}")
 
+def If_(b, tsPadre):
+    global contadorT, augusTxt, contadorEtiquetas, arrayTables
+    augusAuxAux = ''
+    augusAux = ''
+    tsLocal = {}
+    tsLocal.clear()
+    arrayTables.append(tsLocal)
+    condition  = valueExpression(b.condition, tsPadre)
+    augusTxt += f'if({str(condition)}) goto L{str(contadorEtiquetas)};\n'    
+    augusAux += F'L{str(contadorEtiquetas)}:\n'                         #debajo del salto debo poner las instrucciones si son falsas
+    augusAuxAux += augusTxt                                             #hacemos un backup de 
+    augusTxt = ''
+    contadorEtiquetas += 1
+    i = 0                                                               #mandamos a hacer las instrucciones
+    while i < len(b.instructions):
+        a = b.instructions[i]
+        if isinstance(a, Declaration):
+            Declaration_(a.listId, tsLocal)
+        elif isinstance(a, Asignation):
+            Asignation_(a, tsLocal)
+        elif isinstance(a, If):
+            If_(a, tsLocal)
+        i += 1
+    
+                                                                       # termino de realizar etiquetas
+    augusTxt += f'goto L{len(b.ifElse)};\n'                             # termine de reconocer el FALSE Y INTERMACAMBIO LOS VALORES salto hasta la ultima etiquetas de if elses
+    augusAux += augusTxt
+    augusTxt = augusAuxAux                                              #le regresamos el contenido anterior
+                                                                        #recorremos todos los ifelses
+    if len(b.ifElse) > 0:                                               #hay if else's
+        for a in b.ifElse:
+            if isinstance(a, IfElse):
+                condition  = valueExpression(a.condition, tsPadre)
+                augusTxt += f'if({str(condition)}) goto L{str(contadorEtiquetas)};\n'
+                augusAux += f'L{str(contadorEtiquetas)}:\n'
+                augusAuxAux = ''
+                augusAuxAux += augusTxt                                 #hacemos un backup de 
+                augusTxt = ''
+                contadorEtiquetas += 1
+                                                                        #mandamos a hacer las instrucciones
+                x = 0
+                while x < len(a.instructions):
+                    z = a.instructions[x]
+                    if isinstance(z, Declaration):
+                        Declaration_(z.listId, tsLocal)
+                    elif isinstance(z, Asignation):
+                        Asignation_(z, tsLocal)
+                    elif isinstance(z, If):
+                        If_(a, tsLocal)
+                    x += 1
+                                                                        # termino de realizar etiquetas
+                
+                augusAux += augusTxt
+                augusAux += f'goto L{len(b.ifElse)};\n'                 #salto hasta la ultima etiquetas de if elses
+                augusTxt = augusAuxAux                                  #le regresamos el contenido anterior 
+            else:
+                x = 0
+                while x < len(a.instructions):
+                    z = a.instructions[x]
+                    if isinstance(z, Declaration):
+                        Declaration_(z.listId, tsLocal)
+                    elif isinstance(z, Asignation):
+                        Asignation_(z, tsLocal)
+                    elif isinstance(z, If):
+                        If_(z, tsLocal)
+                    x += 1
+                augusTxt += f'goto L{len(b.ifElse)};\n'
+        augusTxt += augusAux
+        augusTxt += f'L{str(len(b.ifElse))}:\n'
+    else:
+        print("no hay ifelse")
+        augusTxt += augusAux
+        augusTxt += f'L{str(len(b.ifElse))}:\n'
+    contadorEtiquetas += 1
+
 def Asignation_(b, ts):
     try:
-        global contadorT, augusTxt
+        global contadorT, augusTxt, arrayTables
         res = valueExpression(b.expresion,ts)
-        id = ts.get(b.id)
+        id = valueExpression(Identifier(b.id,0,0), ts)
         if id != None:
             if b.op == '=':
                 #print(f"id: {id}")
                 augusTxt += id
                 augusTxt += ' = ' + str(res) + ' ;\n'
+                arrayTables.pop()
                 ts.setdefault(b.id, f'$t{str(contadorT)}')
+                arrayTables.append(ts)
                 contadorT += 1
             elif b.op == '+=':
                 #print(f"id: {id}")
                 augusTxt += f'{id} = {id} + {str(res)};\n'
+                arrayTables.pop()
                 ts.setdefault(b.id, f'$t{str(contadorT)}')
+                arrayTables.append(ts)
                 contadorT += 1
             elif b.op == '-=':
                 #print(f"id: {id}")
                 augusTxt += f'{id} = {id} - {str(res)};\n'
+                arrayTables.pop()
                 ts.setdefault(b.id, f'$t{str(contadorT)}')
+                arrayTables.append(ts)
                 contadorT += 1
             elif b.op == '*=':
                 #print(f"id: {id}")
                 augusTxt += f'{id} = {id} * {str(res)};\n'
+                arrayTables.pop()
                 ts.setdefault(b.id, f'$t{str(contadorT)}')
+                arrayTables.append(ts)
                 contadorT += 1    
             elif b.op == '/=':
                 #print(f"id: {id}")
                 augusTxt += f'{id} = {id} / {str(res)};\n'
+                arrayTables.pop()
                 ts.setdefault(b.id, f'$t{str(contadorT)}')
+                arrayTables.append(ts)
                 contadorT += 1  
             elif b.op == '%=':
                 #print(f"id: {id}")
                 augusTxt += f'{id} = {id} % {str(res)};\n'
+                arrayTables.pop()
                 ts.setdefault(b.id, f'$t{str(contadorT)}')
+                arrayTables.append(ts)
                 contadorT += 1
             elif b.op == '<<=':
                 #print(f"id: {id}")
                 augusTxt += f'{id} = {id} << {str(res)};\n'
+                arrayTables.pop()
                 ts.setdefault(b.id, f'$t{str(contadorT)}')
+                arrayTables.append(ts)
                 contadorT += 1
             elif b.op == '>>=':
                 #print(f"id: {id}")
                 augusTxt += f'{id} = {id} >> {str(res)};\n'
+                arrayTables.pop()
                 ts.setdefault(b.id, f'$t{str(contadorT)}')
+                arrayTables.append(ts)
                 contadorT += 1
             elif b.op == '&=':
                 #print(f"id: {id}")
                 augusTxt += f'{id} = {id} & {str(res)};\n'
+                arrayTables.pop()
                 ts.setdefault(b.id, f'$t{str(contadorT)}')
+                arrayTables.append(ts)
                 contadorT += 1
             elif b.op == '^=':
                 #print(f"id: {id}")
                 augusTxt += f'{id} = {id} ^ {str(res)};\n'
+                arrayTables.pop()
                 ts.setdefault(b.id, f'$t{str(contadorT)}')
+                arrayTables.append(ts)
                 contadorT += 1
             elif b.op == '|=':
                 #print(f"id: {id}")
                 augusTxt += f'{id} = {id} | {str(res)};\n'
+                arrayTables.pop()
                 ts.setdefault(b.id, f'$t{str(contadorT)}')
+                arrayTables.append(ts)
                 contadorT += 1
         else:
-            print("Error semantico la varibale indicada no existe")
+            print("Error semantico la varibale indicada no existe asignacion")
     except:
-        print("Error semantico la varibale indicada no existe")
+        print("Error semantico la varibale indicada no existe except asignacion")
 
 def Declaration_(b, ts):
-    global augusTxt, contadorT
+    global augusTxt, contadorT, arrayTables
     for i in b:
         if isinstance(i, SingleDeclaration):
             res = valueExpression(i.val, ts)
             augusTxt += '$t'+ str(contadorT)
             augusTxt += ' = ' + str(res) + ' ;\n'
+            arrayTables.pop()
             ts.setdefault(i.id, f'$t{str(contadorT)}')
+            arrayTables.append(ts)
             contadorT += 1
         elif isinstance(i, IdentifierArray):
             augusTxt += '$t' + str(contadorT)
@@ -146,7 +250,9 @@ def Declaration_(b, ts):
                     else:
                         augusTxt += '$t' + str(contadorT)
                         augusTxt += f'[{str(res)}] = 0;\n'
+            arrayTables.pop()
             ts.setdefault(i.id, f'$t{str(contadorT)}')
+            arrayTables.append(ts)
             contadorT += 1
         elif isinstance(i, DeclarationArrayInit):
             dime = valueExpression(i.dimentions[0], ts)
@@ -158,7 +264,9 @@ def Declaration_(b, ts):
                     for v in range(ultimaPos, dime):
                         augusTxt += f'$t{str(contadorT)}[{str(v)}]'
                         augusTxt += ' = 0 ;\n'            
+                    arrayTables.pop()
                     ts.setdefault(i.id, f'$t{str(contadorT)}')
+                    arrayTables.append(ts)
                     contadorT += 1
                 
                 else:
@@ -170,11 +278,13 @@ def Declaration_(b, ts):
                 if isinstance(res, str):
                     ts.setdefault(i.id, f'{str(res)}')
                 else:
+                    arrayTables.pop()
                     ts.setdefault(i.id, f'$t{str(contadorT)}')
+                    arrayTables.append(ts)
                 contadorT += 1
 
 def valueExpression(instruction, ts):
-    global contadorT, augusTxt
+    global contadorT, augusTxt, arrayTables
     if isinstance(instruction, BinaryExpression):      
         num1 = valueExpression(instruction.op1, ts)
         num2 = valueExpression(instruction.op2, ts)
@@ -296,8 +406,13 @@ def valueExpression(instruction, ts):
         contadorT += 1
         return f'$t{str(contadorT-1)}'
     elif isinstance(instruction, Identifier): 
-        #buscar en tabla local y en tabla global de lo contrario reportar error
-        return ts.get(instruction.id)
+        #si no encuentra la variable en la ts actual, buscarla en las demas ts que estan en la pila
+        tablesAux = arrayTables[:]
+        tablesAux.reverse()
+        for i in tablesAux:
+            if instruction.id in i:
+                return i.get(instruction.id)
+        return None
     elif isinstance(instruction, Number): return instruction.val
     elif isinstance(instruction, Cast_):
         num1 = valueExpression(instruction.expression, ts)

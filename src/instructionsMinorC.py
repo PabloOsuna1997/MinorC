@@ -43,10 +43,26 @@ class Exit(Instruction):
         self.exit = exit
 
 class If(Instruction):
-    '''if statment, recieve a label for jump'''
-    def __init__(self, expression, label, line, column):
-        self.label = label
-        self.expression = expression
+    '''if statment'''
+    def __init__(self, condition, instructions, ifElse, line, column):
+        self.instructions = instructions
+        self.condition = condition
+        self.ifElse = ifElse
+        self.line = line
+        self.column = column
+
+class IfElse(Instruction):
+    '''else statment'''
+    def __init__(self,condition, instructions, line, column):
+        self.condition = condition
+        self.instructions = instructions
+        self.line = line
+        self.column = column
+
+class Else(Instruction):
+    '''else statment'''
+    def __init__(self,instructions, line, column):
+        self.instructions = instructions
         self.line = line
         self.column = column
 

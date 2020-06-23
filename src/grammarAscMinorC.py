@@ -518,12 +518,48 @@ def p_listaPuntos(t):
                         | PUNTO ID CORCHETES'''
 
 def p_if(t):
-    '''IF_ :  IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_
-            | IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'''
+    # Si -> if (condicion) instrucciones ( else if (condicion) instrucciones) * ( else instrucciones)?
+
+    '''IF_ :  IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_'''
+
+    t[0] = If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))
+
+def p_elseIf_(t):
+    '''
+    ELSE_IF_ :   ELSE_IF
+                | ELSE_
+                | ELSE_IF ELSE_
+                | 
+    '''
+    if len(t) == 2:
+        t[0] = [t[1]]
+    elif len(t) == 3:
+        t[1].append(t[2])
+        t[0] = t[1]
+    else:
+        t[0] = []
+
+def p_elseIf(t):
+    '''
+    ELSE_IF :   ELSE_IF  ELIF
+                | ELIF
+    '''
+    if len(t) == 3:
+        t[1].append(t[2])
+        t[0] = t[1]
+    else:
+        t[0] = [t[1]]
+
+def p_elif(t):
+    '''
+    ELIF :  ELSE IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER
+    '''
+    t[0] = IfElse(t[4], t[7], t.lineno(1), t.lexpos(1))
 
 def p_else(t):
-    '''ELSE_ :  ELSE IF_
-                | ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'''
+    '''ELSE_ :  ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER 
+    '''
+    t[0] = Else(t[3], t.lineno(1), t.lexpos(1))
                 
 def p_for(t):
     'FOR_ :     FOR PARIZQ DECLA_VARIABLES EXPRESION PUNTOCOMA INCRE_DECRE PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'
