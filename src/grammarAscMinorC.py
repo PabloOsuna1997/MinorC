@@ -352,26 +352,27 @@ def p_expresion(t):
                     | MENOS EXPRESION %prec UMENOS
                     | NOTBIT EXPRESION
                     | ANDBIT EXPRESION %prec UANDBIT
-                    | LLAMADA_FUNCION'''
-        #       | EXPRESION TERNARIO EXPRESION DOSPUNTOS EXPRESION'''
+                    | LLAMADA_FUNCION
+                    | SCANF PARIZQ PARDER'''
+            #       | EXPRESION TERNARIO EXPRESION DOSPUNTOS EXPRESION'''
 
 
     if len(t) == 4:
         #aritmetics
-        if(t[2] == '+'): t[0] = BinaryExpression(t[1],t[3],Aritmetics.MAS, t.lineno(2), t.lexpos(2))        
-        elif(t[2] == '-'): t[0] = BinaryExpression(t[1],t[3],Aritmetics.MENOS, t.lineno(2), t.lexpos(2))
-        elif(t[2] == '*'): t[0] = BinaryExpression(t[1],t[3],Aritmetics.POR, t.lineno(2), t.lexpos(2))
-        elif(t[2] == '/'): t[0] = BinaryExpression(t[1],t[3],Aritmetics.DIV, t.lineno(2), t.lexpos(2))
-        elif(t[2] == '%'): t[0] = BinaryExpression(t[1],t[3], Aritmetics.MODULO, t.lineno(2), t.lexpos(2))
+        if t[2] == '+': t[0] = BinaryExpression(t[1],t[3],Aritmetics.MAS, t.lineno(2), t.lexpos(2))        
+        elif t[2] == '-': t[0] = BinaryExpression(t[1],t[3],Aritmetics.MENOS, t.lineno(2), t.lexpos(2))
+        elif t[2] == '*': t[0] = BinaryExpression(t[1],t[3],Aritmetics.POR, t.lineno(2), t.lexpos(2))
+        elif t[2] == '/': t[0] = BinaryExpression(t[1],t[3],Aritmetics.DIV, t.lineno(2), t.lexpos(2))
+        elif t[2] == '%': t[0] = BinaryExpression(t[1],t[3], Aritmetics.MODULO, t.lineno(2), t.lexpos(2))
         #logics
-        elif(t[2] == '&&'): t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.AND, t.lineno(2), t.lexpos(2))
-        elif(t[2] == '||'): t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.OR, t.lineno(2), t.lexpos(2))
-        elif(t[2] == '=='): t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.IGUALQUE, t.lineno(2), t.lexpos(2))
-        elif(t[2] == '!='): t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.DIFERENTE, t.lineno(2), t.lexpos(2))
-        elif(t[2] == '>='): t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.MAYORIGUAL, t.lineno(2), t.lexpos(2))
-        elif(t[2] == '<='): t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.MENORIGUAL, t.lineno(2), t.lexpos(2))
-        elif(t[2] == '>'): t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.MAYORQUE, t.lineno(2), t.lexpos(2))
-        elif(t[2] == '<'): 
+        elif t[2] == '&&': t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.AND, t.lineno(2), t.lexpos(2))
+        elif t[2] == '||': t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.OR, t.lineno(2), t.lexpos(2))
+        elif t[2] == '==': t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.IGUALQUE, t.lineno(2), t.lexpos(2))
+        elif t[2] == '!=': t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.DIFERENTE, t.lineno(2), t.lexpos(2))
+        elif t[2] == '>=': t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.MAYORIGUAL, t.lineno(2), t.lexpos(2))
+        elif t[2] == '<=': t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.MENORIGUAL, t.lineno(2), t.lexpos(2))
+        elif t[2] == '>': t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.MAYORQUE, t.lineno(2), t.lexpos(2))
+        elif t[2] == '<': 
             print("menor que")
             t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.MENORQUE, t.lineno(2), t.lexpos(2))
         #bits
@@ -380,10 +381,13 @@ def p_expresion(t):
         elif(t[2] == '<<'): t[0] = RelationalBit(t[1],t[3], BitToBit.SHIFTI, t.lineno(1), t.lexpos(1))
         elif(t[2] == '>>'): t[0] = RelationalBit(t[1],t[3], BitToBit.SHIFTD, t.lineno(1), t.lexpos(1))
         elif (t[2] == '&'): t[0] = RelationalBit(t[1], t[3], BitToBit.ANDBIT, t.lineno(1), t.lexpos(1))
+        
+        elif t[1] == 'scanf': t[0] = Scanf(t.lineno(1), t.lexpos(1))
+        elif t[1] == '(': t[0] = t[2]
     else:
-        if(t[1] == '-'): t[0] = NegativeNumber(t[2], t.lineno(2), t.lexpos(2))
-        elif(t[1] == '~'): t[0] = NotBit(t[2], t.lineno(1), t.lexpos(1))
-        elif(t[1] == '&'):t[0] = ReferenceBit(t[2], t.lineno(1), t.lexpos(1))    
+        if t[1] == '-' : t[0] = NegativeNumber(t[2], t.lineno(2), t.lexpos(2))
+        elif t[1] == '~' : t[0] = NotBit(t[2], t.lineno(1), t.lexpos(1))
+        elif t[1] == '&' :t[0] = ReferenceBit(t[2], t.lineno(1), t.lexpos(1))    
         elif t[1] == '!' : t[0] = Not(t[2], t.lineno(2), t.lexpos(2))
         elif t[1] == 'sizeof': t[0] = SizeOf(t[3], t.lineno(1), t.lexpos(1))
         elif t[1] == '(': t[0] = Parentesis(t[2], t.lineno(2), t.lexpos(2))
