@@ -62,62 +62,65 @@ def Asignation_(b, ts):
         global contadorT, augusTxt
         res = valueExpression(b.expresion,ts)
         id = ts.get(b.id)
-        if b.op == '=':
-            #print(f"id: {id}")
-            augusTxt += id
-            augusTxt += ' = ' + str(res) + ' ;\n'
-            ts.setdefault(b.id, f'$t{str(contadorT)}')
-            contadorT += 1
-        elif b.op == '+=':
-            #print(f"id: {id}")
-            augusTxt += f'{id} = {id} + {str(res)};\n'
-            ts.setdefault(b.id, f'$t{str(contadorT)}')
-            contadorT += 1
-        elif b.op == '-=':
-            #print(f"id: {id}")
-            augusTxt += f'{id} = {id} - {str(res)};\n'
-            ts.setdefault(b.id, f'$t{str(contadorT)}')
-            contadorT += 1
-        elif b.op == '*=':
-            #print(f"id: {id}")
-            augusTxt += f'{id} = {id} * {str(res)};\n'
-            ts.setdefault(b.id, f'$t{str(contadorT)}')
-            contadorT += 1    
-        elif b.op == '/=':
-            #print(f"id: {id}")
-            augusTxt += f'{id} = {id} / {str(res)};\n'
-            ts.setdefault(b.id, f'$t{str(contadorT)}')
-            contadorT += 1  
-        elif b.op == '%=':
-            #print(f"id: {id}")
-            augusTxt += f'{id} = {id} % {str(res)};\n'
-            ts.setdefault(b.id, f'$t{str(contadorT)}')
-            contadorT += 1
-        elif b.op == '<<=':
-            #print(f"id: {id}")
-            augusTxt += f'{id} = {id} << {str(res)};\n'
-            ts.setdefault(b.id, f'$t{str(contadorT)}')
-            contadorT += 1
-        elif b.op == '>>=':
-            #print(f"id: {id}")
-            augusTxt += f'{id} = {id} >> {str(res)};\n'
-            ts.setdefault(b.id, f'$t{str(contadorT)}')
-            contadorT += 1
-        elif b.op == '&=':
-            #print(f"id: {id}")
-            augusTxt += f'{id} = {id} & {str(res)};\n'
-            ts.setdefault(b.id, f'$t{str(contadorT)}')
-            contadorT += 1
-        elif b.op == '^=':
-            #print(f"id: {id}")
-            augusTxt += f'{id} = {id} ^ {str(res)};\n'
-            ts.setdefault(b.id, f'$t{str(contadorT)}')
-            contadorT += 1
-        elif b.op == '|=':
-            #print(f"id: {id}")
-            augusTxt += f'{id} = {id} | {str(res)};\n'
-            ts.setdefault(b.id, f'$t{str(contadorT)}')
-            contadorT += 1
+        if id != None:
+            if b.op == '=':
+                #print(f"id: {id}")
+                augusTxt += id
+                augusTxt += ' = ' + str(res) + ' ;\n'
+                ts.setdefault(b.id, f'$t{str(contadorT)}')
+                contadorT += 1
+            elif b.op == '+=':
+                #print(f"id: {id}")
+                augusTxt += f'{id} = {id} + {str(res)};\n'
+                ts.setdefault(b.id, f'$t{str(contadorT)}')
+                contadorT += 1
+            elif b.op == '-=':
+                #print(f"id: {id}")
+                augusTxt += f'{id} = {id} - {str(res)};\n'
+                ts.setdefault(b.id, f'$t{str(contadorT)}')
+                contadorT += 1
+            elif b.op == '*=':
+                #print(f"id: {id}")
+                augusTxt += f'{id} = {id} * {str(res)};\n'
+                ts.setdefault(b.id, f'$t{str(contadorT)}')
+                contadorT += 1    
+            elif b.op == '/=':
+                #print(f"id: {id}")
+                augusTxt += f'{id} = {id} / {str(res)};\n'
+                ts.setdefault(b.id, f'$t{str(contadorT)}')
+                contadorT += 1  
+            elif b.op == '%=':
+                #print(f"id: {id}")
+                augusTxt += f'{id} = {id} % {str(res)};\n'
+                ts.setdefault(b.id, f'$t{str(contadorT)}')
+                contadorT += 1
+            elif b.op == '<<=':
+                #print(f"id: {id}")
+                augusTxt += f'{id} = {id} << {str(res)};\n'
+                ts.setdefault(b.id, f'$t{str(contadorT)}')
+                contadorT += 1
+            elif b.op == '>>=':
+                #print(f"id: {id}")
+                augusTxt += f'{id} = {id} >> {str(res)};\n'
+                ts.setdefault(b.id, f'$t{str(contadorT)}')
+                contadorT += 1
+            elif b.op == '&=':
+                #print(f"id: {id}")
+                augusTxt += f'{id} = {id} & {str(res)};\n'
+                ts.setdefault(b.id, f'$t{str(contadorT)}')
+                contadorT += 1
+            elif b.op == '^=':
+                #print(f"id: {id}")
+                augusTxt += f'{id} = {id} ^ {str(res)};\n'
+                ts.setdefault(b.id, f'$t{str(contadorT)}')
+                contadorT += 1
+            elif b.op == '|=':
+                #print(f"id: {id}")
+                augusTxt += f'{id} = {id} | {str(res)};\n'
+                ts.setdefault(b.id, f'$t{str(contadorT)}')
+                contadorT += 1
+        else:
+            print("Error semantico la varibale indicada no existe")
     except:
         print("Error semantico la varibale indicada no existe")
 

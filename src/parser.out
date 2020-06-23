@@ -50,14 +50,14 @@ Rule 38    EXPRESION -> EXPRESION XORBIT EXPRESION
 Rule 39    EXPRESION -> EXPRESION ORBIT EXPRESION
 Rule 40    EXPRESION -> EXPRESION OR EXPRESION
 Rule 41    EXPRESION -> EXPRESION AND EXPRESION
-Rule 42    EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER
-Rule 43    EXPRESION -> NOTLOGICA EXPRESION
-Rule 44    EXPRESION -> EXPRESION SHIFTIZQ EXPRESION
-Rule 45    EXPRESION -> EXPRESION SHIFTDER EXPRESION
-Rule 46    EXPRESION -> PARIZQ EXPRESION PARDER
-Rule 47    EXPRESION -> C_INT EXPRESION
-Rule 48    EXPRESION -> C_FLOAT EXPRESION
-Rule 49    EXPRESION -> C_CHAR EXPRESION
+Rule 42    EXPRESION -> EXPRESION SHIFTIZQ EXPRESION
+Rule 43    EXPRESION -> EXPRESION SHIFTDER EXPRESION
+Rule 44    EXPRESION -> PARIZQ EXPRESION PARDER
+Rule 45    EXPRESION -> C_INT EXPRESION
+Rule 46    EXPRESION -> C_FLOAT EXPRESION
+Rule 47    EXPRESION -> C_CHAR EXPRESION
+Rule 48    EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER
+Rule 49    EXPRESION -> NOTLOGICA EXPRESION
 Rule 50    EXPRESION -> MENOS EXPRESION
 Rule 51    EXPRESION -> NOTBIT EXPRESION
 Rule 52    EXPRESION -> ANDBIT EXPRESION
@@ -172,9 +172,9 @@ COMA                 : 14 65 68
 CONTINUE             : 90
 CORDER               : 22
 CORIZQ               : 22
-C_CHAR               : 49
-C_FLOAT              : 48
-C_INT                : 47
+C_CHAR               : 47
+C_FLOAT              : 46
+C_INT                : 45
 DECREMENTO           : 129
 DEFAULT              : 122
 DIFERENTE            : 31
@@ -208,13 +208,13 @@ MENOSIGUAL           : 132
 MODIGUAL             : 135
 MODULO               : 29
 NOTBIT               : 36 51
-NOTLOGICA            : 43
+NOTLOGICA            : 49
 NUMERO               : 54
 OR                   : 40
 ORBIT                : 39
 ORIGUAL              : 140
-PARDER               : 42 46 63 64 67 88 95 95 95 109 110 113 114 115 116
-PARIZQ               : 42 46 63 64 67 88 95 95 95 109 110 113 114 115 116
+PARDER               : 44 48 63 64 67 88 95 95 95 109 110 113 114 115 116
+PARIZQ               : 44 48 63 64 67 88 95 95 95 109 110 113 114 115 116
 POR                  : 27
 PORIGUAL             : 133
 PRINTF               : 88
@@ -223,10 +223,10 @@ PUNTOCOMA            : 8 86 88 89 90 91 92 93 94 95 96 97 100 101 102 103 104 11
 RETURN               : 89
 SCANF                : 
 SDIGUAL              : 137
-SHIFTDER             : 45
-SHIFTIZQ             : 44
+SHIFTDER             : 43
+SHIFTIZQ             : 42
 SIIGUAL              : 136
-SIZEOF               : 42 95
+SIZEOF               : 48 95
 STRUCT               : 73 94 95 95 95 96 141 145 146
 SWITCH               : 116
 TERNARIO             : 
@@ -257,7 +257,7 @@ DECLA_VARIABLES      : 5 78 113 144
 DEFAULT_             : 116
 DO_                  : 84
 ELSE_                : 109
-EXPRESION            : 16 18 23 25 25 26 26 27 27 28 28 29 29 30 30 31 31 32 32 33 33 34 34 35 35 36 36 37 37 38 38 39 39 40 40 41 41 42 43 44 44 45 45 46 47 48 49 50 51 52 65 66 89 94 101 102 103 104 109 110 113 114 115 116 119 147
+EXPRESION            : 16 18 23 25 25 26 26 27 27 28 28 29 29 30 30 31 31 32 32 33 33 34 34 35 35 36 36 37 37 38 38 39 39 40 40 41 41 42 42 43 43 44 45 46 47 48 49 50 51 52 65 66 89 94 101 102 103 104 109 110 113 114 115 116 119 147
 FOR_                 : 82
 IF_                  : 81 111
 INCRE_DECRE          : 100 113
@@ -557,12 +557,12 @@ state 20
     SWITCH          reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
     INCREMENTO      reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
     DECREMENTO      reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
-    SIZEOF          reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
-    NOTLOGICA       reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
     PARIZQ          reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
     C_INT           reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
     C_FLOAT         reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
     C_CHAR          reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
+    SIZEOF          reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
+    NOTLOGICA       reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
     MENOS           reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
     NOTBIT          reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
     ANDBIT          reduce using rule 8 (DECLA_VARIABLES -> TIPO LISTA_ID PUNTOCOMA .)
@@ -635,14 +635,14 @@ state 23
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -659,12 +659,12 @@ state 23
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -758,14 +758,14 @@ state 26
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -783,12 +783,12 @@ state 26
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
     CORDER          reduce using rule 24 (VALOR -> .)
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -966,8 +966,8 @@ state 36
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     PUNTOCOMA       reduce using rule 16 (ASIGNA -> ID IGUAL EXPRESION .)
     COMA            reduce using rule 16 (ASIGNA -> ID IGUAL EXPRESION .)
@@ -1012,14 +1012,14 @@ state 37
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -1036,12 +1036,12 @@ state 37
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -1075,14 +1075,14 @@ state 38
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -1099,12 +1099,12 @@ state 38
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -1138,14 +1138,14 @@ state 39
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -1162,12 +1162,12 @@ state 39
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -1183,14 +1183,7 @@ state 39
 
 state 40
 
-    (42) EXPRESION -> SIZEOF . PARIZQ EXPRESION PARDER
-
-    PARIZQ          shift and go to state 91
-
-
-state 41
-
-    (46) EXPRESION -> PARIZQ . EXPRESION PARDER
+    (44) EXPRESION -> PARIZQ . EXPRESION PARDER
     (25) EXPRESION -> . EXPRESION MAS EXPRESION
     (26) EXPRESION -> . EXPRESION MENOS EXPRESION
     (27) EXPRESION -> . EXPRESION POR EXPRESION
@@ -1208,14 +1201,14 @@ state 41
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -1232,12 +1225,75 @@ state 41
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
+    MENOS           shift and go to state 37
+    NOTBIT          shift and go to state 38
+    ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 47
+    CADENA          shift and go to state 48
+    CHAR_           shift and go to state 49
+    ID              shift and go to state 35
+    LLAVEIZQ        shift and go to state 51
+
+    EXPRESION                      shift and go to state 91
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 50
+
+state 41
+
+    (45) EXPRESION -> C_INT . EXPRESION
+    (25) EXPRESION -> . EXPRESION MAS EXPRESION
+    (26) EXPRESION -> . EXPRESION MENOS EXPRESION
+    (27) EXPRESION -> . EXPRESION POR EXPRESION
+    (28) EXPRESION -> . EXPRESION DIV EXPRESION
+    (29) EXPRESION -> . EXPRESION MODULO EXPRESION
+    (30) EXPRESION -> . EXPRESION IGUALQUE EXPRESION
+    (31) EXPRESION -> . EXPRESION DIFERENTE EXPRESION
+    (32) EXPRESION -> . EXPRESION MENORQUE EXPRESION
+    (33) EXPRESION -> . EXPRESION MAYORQUE EXPRESION
+    (34) EXPRESION -> . EXPRESION MENORIGUAL EXPRESION
+    (35) EXPRESION -> . EXPRESION MAYORIGUAL EXPRESION
+    (36) EXPRESION -> . EXPRESION NOTBIT EXPRESION
+    (37) EXPRESION -> . EXPRESION ANDBIT EXPRESION
+    (38) EXPRESION -> . EXPRESION XORBIT EXPRESION
+    (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
+    (40) EXPRESION -> . EXPRESION OR EXPRESION
+    (41) EXPRESION -> . EXPRESION AND EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
+    (50) EXPRESION -> . MENOS EXPRESION
+    (51) EXPRESION -> . NOTBIT EXPRESION
+    (52) EXPRESION -> . ANDBIT EXPRESION
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . NUMERO
+    (55) EXPRESION -> . CADENA
+    (56) EXPRESION -> . CHAR_
+    (57) EXPRESION -> . ID CORCHETES
+    (58) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (59) EXPRESION -> . ID
+    (60) EXPRESION -> . ID LISTA_PUNTOS
+    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
+    (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
+    (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
+
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -1253,7 +1309,7 @@ state 41
 
 state 42
 
-    (43) EXPRESION -> NOTLOGICA . EXPRESION
+    (46) EXPRESION -> C_FLOAT . EXPRESION
     (25) EXPRESION -> . EXPRESION MAS EXPRESION
     (26) EXPRESION -> . EXPRESION MENOS EXPRESION
     (27) EXPRESION -> . EXPRESION POR EXPRESION
@@ -1271,14 +1327,14 @@ state 42
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -1295,12 +1351,12 @@ state 42
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -1316,7 +1372,7 @@ state 42
 
 state 43
 
-    (47) EXPRESION -> C_INT . EXPRESION
+    (47) EXPRESION -> C_CHAR . EXPRESION
     (25) EXPRESION -> . EXPRESION MAS EXPRESION
     (26) EXPRESION -> . EXPRESION MENOS EXPRESION
     (27) EXPRESION -> . EXPRESION POR EXPRESION
@@ -1334,14 +1390,14 @@ state 43
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -1358,12 +1414,12 @@ state 43
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -1379,70 +1435,14 @@ state 43
 
 state 44
 
-    (48) EXPRESION -> C_FLOAT . EXPRESION
-    (25) EXPRESION -> . EXPRESION MAS EXPRESION
-    (26) EXPRESION -> . EXPRESION MENOS EXPRESION
-    (27) EXPRESION -> . EXPRESION POR EXPRESION
-    (28) EXPRESION -> . EXPRESION DIV EXPRESION
-    (29) EXPRESION -> . EXPRESION MODULO EXPRESION
-    (30) EXPRESION -> . EXPRESION IGUALQUE EXPRESION
-    (31) EXPRESION -> . EXPRESION DIFERENTE EXPRESION
-    (32) EXPRESION -> . EXPRESION MENORQUE EXPRESION
-    (33) EXPRESION -> . EXPRESION MAYORQUE EXPRESION
-    (34) EXPRESION -> . EXPRESION MENORIGUAL EXPRESION
-    (35) EXPRESION -> . EXPRESION MAYORIGUAL EXPRESION
-    (36) EXPRESION -> . EXPRESION NOTBIT EXPRESION
-    (37) EXPRESION -> . EXPRESION ANDBIT EXPRESION
-    (38) EXPRESION -> . EXPRESION XORBIT EXPRESION
-    (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
-    (40) EXPRESION -> . EXPRESION OR EXPRESION
-    (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
-    (50) EXPRESION -> . MENOS EXPRESION
-    (51) EXPRESION -> . NOTBIT EXPRESION
-    (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . LLAMADA_FUNCION
-    (54) EXPRESION -> . NUMERO
-    (55) EXPRESION -> . CADENA
-    (56) EXPRESION -> . CHAR_
-    (57) EXPRESION -> . ID CORCHETES
-    (58) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (59) EXPRESION -> . ID
-    (60) EXPRESION -> . ID LISTA_PUNTOS
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
-    (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
-    (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
-    (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
+    (48) EXPRESION -> SIZEOF . PARIZQ EXPRESION PARDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
-    MENOS           shift and go to state 37
-    NOTBIT          shift and go to state 38
-    ANDBIT          shift and go to state 39
-    NUMERO          shift and go to state 47
-    CADENA          shift and go to state 48
-    CHAR_           shift and go to state 49
-    ID              shift and go to state 35
-    LLAVEIZQ        shift and go to state 51
+    PARIZQ          shift and go to state 95
 
-    EXPRESION                      shift and go to state 95
-    LLAMADA_FUNCION                shift and go to state 46
-    LISTA_INIT_CORCHETE            shift and go to state 50
 
 state 45
 
-    (49) EXPRESION -> C_CHAR . EXPRESION
+    (49) EXPRESION -> NOTLOGICA . EXPRESION
     (25) EXPRESION -> . EXPRESION MAS EXPRESION
     (26) EXPRESION -> . EXPRESION MENOS EXPRESION
     (27) EXPRESION -> . EXPRESION POR EXPRESION
@@ -1460,14 +1460,14 @@ state 45
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -1484,12 +1484,12 @@ state 45
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -1680,14 +1680,14 @@ state 51
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -1704,12 +1704,12 @@ state 51
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -1744,14 +1744,14 @@ state 52
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -1768,12 +1768,12 @@ state 52
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -1858,8 +1858,8 @@ state 55
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     CORDER          reduce using rule 23 (VALOR -> EXPRESION .)
     MAS             shift and go to state 69
@@ -2105,14 +2105,14 @@ state 67
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -2130,12 +2130,12 @@ state 67
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
     PARDER          shift and go to state 110
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -2178,14 +2178,14 @@ state 69
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -2202,12 +2202,12 @@ state 69
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -2241,14 +2241,14 @@ state 70
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -2265,12 +2265,12 @@ state 70
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -2304,14 +2304,14 @@ state 71
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -2328,12 +2328,12 @@ state 71
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -2367,14 +2367,14 @@ state 72
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -2391,12 +2391,12 @@ state 72
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -2430,14 +2430,14 @@ state 73
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -2454,12 +2454,12 @@ state 73
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -2493,14 +2493,14 @@ state 74
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -2517,12 +2517,12 @@ state 74
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -2556,14 +2556,14 @@ state 75
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -2580,12 +2580,12 @@ state 75
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -2619,14 +2619,14 @@ state 76
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -2643,12 +2643,12 @@ state 76
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -2682,14 +2682,14 @@ state 77
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -2706,12 +2706,12 @@ state 77
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -2745,14 +2745,14 @@ state 78
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -2769,12 +2769,12 @@ state 78
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -2808,14 +2808,14 @@ state 79
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -2832,12 +2832,12 @@ state 79
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -2871,14 +2871,14 @@ state 80
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -2895,12 +2895,12 @@ state 80
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -2934,14 +2934,14 @@ state 81
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -2958,12 +2958,12 @@ state 81
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -2997,14 +2997,14 @@ state 82
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -3021,12 +3021,12 @@ state 82
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -3060,14 +3060,14 @@ state 83
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -3084,12 +3084,12 @@ state 83
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -3123,14 +3123,14 @@ state 84
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -3147,12 +3147,12 @@ state 84
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -3186,14 +3186,14 @@ state 85
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -3210,12 +3210,12 @@ state 85
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -3231,7 +3231,7 @@ state 85
 
 state 86
 
-    (44) EXPRESION -> EXPRESION SHIFTIZQ . EXPRESION
+    (42) EXPRESION -> EXPRESION SHIFTIZQ . EXPRESION
     (25) EXPRESION -> . EXPRESION MAS EXPRESION
     (26) EXPRESION -> . EXPRESION MENOS EXPRESION
     (27) EXPRESION -> . EXPRESION POR EXPRESION
@@ -3249,14 +3249,14 @@ state 86
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -3273,12 +3273,12 @@ state 86
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -3294,7 +3294,7 @@ state 86
 
 state 87
 
-    (45) EXPRESION -> EXPRESION SHIFTDER . EXPRESION
+    (43) EXPRESION -> EXPRESION SHIFTDER . EXPRESION
     (25) EXPRESION -> . EXPRESION MAS EXPRESION
     (26) EXPRESION -> . EXPRESION MENOS EXPRESION
     (27) EXPRESION -> . EXPRESION POR EXPRESION
@@ -3312,14 +3312,14 @@ state 87
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -3336,12 +3336,12 @@ state 87
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -3375,8 +3375,8 @@ state 88
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     MAS             reduce using rule 50 (EXPRESION -> MENOS EXPRESION .)
     MENOS           reduce using rule 50 (EXPRESION -> MENOS EXPRESION .)
@@ -3445,8 +3445,8 @@ state 89
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     MAS             reduce using rule 51 (EXPRESION -> NOTBIT EXPRESION .)
     MENOS           reduce using rule 51 (EXPRESION -> NOTBIT EXPRESION .)
@@ -3515,8 +3515,8 @@ state 90
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     MAS             reduce using rule 52 (EXPRESION -> ANDBIT EXPRESION .)
     MENOS           reduce using rule 52 (EXPRESION -> ANDBIT EXPRESION .)
@@ -3567,70 +3567,7 @@ state 90
 
 state 91
 
-    (42) EXPRESION -> SIZEOF PARIZQ . EXPRESION PARDER
-    (25) EXPRESION -> . EXPRESION MAS EXPRESION
-    (26) EXPRESION -> . EXPRESION MENOS EXPRESION
-    (27) EXPRESION -> . EXPRESION POR EXPRESION
-    (28) EXPRESION -> . EXPRESION DIV EXPRESION
-    (29) EXPRESION -> . EXPRESION MODULO EXPRESION
-    (30) EXPRESION -> . EXPRESION IGUALQUE EXPRESION
-    (31) EXPRESION -> . EXPRESION DIFERENTE EXPRESION
-    (32) EXPRESION -> . EXPRESION MENORQUE EXPRESION
-    (33) EXPRESION -> . EXPRESION MAYORQUE EXPRESION
-    (34) EXPRESION -> . EXPRESION MENORIGUAL EXPRESION
-    (35) EXPRESION -> . EXPRESION MAYORIGUAL EXPRESION
-    (36) EXPRESION -> . EXPRESION NOTBIT EXPRESION
-    (37) EXPRESION -> . EXPRESION ANDBIT EXPRESION
-    (38) EXPRESION -> . EXPRESION XORBIT EXPRESION
-    (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
-    (40) EXPRESION -> . EXPRESION OR EXPRESION
-    (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
-    (50) EXPRESION -> . MENOS EXPRESION
-    (51) EXPRESION -> . NOTBIT EXPRESION
-    (52) EXPRESION -> . ANDBIT EXPRESION
-    (53) EXPRESION -> . LLAMADA_FUNCION
-    (54) EXPRESION -> . NUMERO
-    (55) EXPRESION -> . CADENA
-    (56) EXPRESION -> . CHAR_
-    (57) EXPRESION -> . ID CORCHETES
-    (58) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
-    (59) EXPRESION -> . ID
-    (60) EXPRESION -> . ID LISTA_PUNTOS
-    (61) EXPRESION -> . LISTA_INIT_CORCHETE
-    (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
-    (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
-    (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
-
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
-    MENOS           shift and go to state 37
-    NOTBIT          shift and go to state 38
-    ANDBIT          shift and go to state 39
-    NUMERO          shift and go to state 47
-    CADENA          shift and go to state 48
-    CHAR_           shift and go to state 49
-    ID              shift and go to state 35
-    LLAVEIZQ        shift and go to state 51
-
-    EXPRESION                      shift and go to state 131
-    LLAMADA_FUNCION                shift and go to state 46
-    LISTA_INIT_CORCHETE            shift and go to state 50
-
-state 92
-
-    (46) EXPRESION -> PARIZQ EXPRESION . PARDER
+    (44) EXPRESION -> PARIZQ EXPRESION . PARDER
     (25) EXPRESION -> EXPRESION . MAS EXPRESION
     (26) EXPRESION -> EXPRESION . MENOS EXPRESION
     (27) EXPRESION -> EXPRESION . POR EXPRESION
@@ -3648,10 +3585,10 @@ state 92
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
-    PARDER          shift and go to state 132
+    PARDER          shift and go to state 131
     MAS             shift and go to state 69
     MENOS           shift and go to state 70
     POR             shift and go to state 71
@@ -3673,9 +3610,9 @@ state 92
     SHIFTDER        shift and go to state 87
 
 
-state 93
+state 92
 
-    (43) EXPRESION -> NOTLOGICA EXPRESION .
+    (45) EXPRESION -> C_INT EXPRESION .
     (25) EXPRESION -> EXPRESION . MAS EXPRESION
     (26) EXPRESION -> EXPRESION . MENOS EXPRESION
     (27) EXPRESION -> EXPRESION . POR EXPRESION
@@ -3693,36 +3630,106 @@ state 93
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
-    MAS             reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    MENOS           reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    POR             reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    DIV             reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    MODULO          reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    IGUALQUE        reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    DIFERENTE       reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    MENORQUE        reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    MAYORQUE        reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    MENORIGUAL      reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    MAYORIGUAL      reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    ANDBIT          reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    XORBIT          reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    ORBIT           reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    OR              reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    AND             reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    SHIFTIZQ        reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    SHIFTDER        reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    PUNTOCOMA       reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    COMA            reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    CORDER          reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    PARDER          reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    LLAVEDER        reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
-    DOSPUNTOS       reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .)
+    MAS             reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    MENOS           reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    POR             reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    DIV             reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    MODULO          reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    IGUALQUE        reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    DIFERENTE       reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    MENORQUE        reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    MAYORQUE        reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    MENORIGUAL      reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    MAYORIGUAL      reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    ANDBIT          reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    XORBIT          reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    ORBIT           reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    OR              reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    AND             reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    SHIFTIZQ        reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    SHIFTDER        reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    PUNTOCOMA       reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    COMA            reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    CORDER          reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    PARDER          reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    LLAVEDER        reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
+    DOSPUNTOS       reduce using rule 45 (EXPRESION -> C_INT EXPRESION .)
     NOTBIT          shift and go to state 80
 
-  ! NOTBIT          [ reduce using rule 43 (EXPRESION -> NOTLOGICA EXPRESION .) ]
+  ! NOTBIT          [ reduce using rule 45 (EXPRESION -> C_INT EXPRESION .) ]
+  ! MAS             [ shift and go to state 69 ]
+  ! MENOS           [ shift and go to state 70 ]
+  ! POR             [ shift and go to state 71 ]
+  ! DIV             [ shift and go to state 72 ]
+  ! MODULO          [ shift and go to state 73 ]
+  ! IGUALQUE        [ shift and go to state 74 ]
+  ! DIFERENTE       [ shift and go to state 75 ]
+  ! MENORQUE        [ shift and go to state 76 ]
+  ! MAYORQUE        [ shift and go to state 77 ]
+  ! MENORIGUAL      [ shift and go to state 78 ]
+  ! MAYORIGUAL      [ shift and go to state 79 ]
+  ! ANDBIT          [ shift and go to state 81 ]
+  ! XORBIT          [ shift and go to state 82 ]
+  ! ORBIT           [ shift and go to state 83 ]
+  ! OR              [ shift and go to state 84 ]
+  ! AND             [ shift and go to state 85 ]
+  ! SHIFTIZQ        [ shift and go to state 86 ]
+  ! SHIFTDER        [ shift and go to state 87 ]
+
+
+state 93
+
+    (46) EXPRESION -> C_FLOAT EXPRESION .
+    (25) EXPRESION -> EXPRESION . MAS EXPRESION
+    (26) EXPRESION -> EXPRESION . MENOS EXPRESION
+    (27) EXPRESION -> EXPRESION . POR EXPRESION
+    (28) EXPRESION -> EXPRESION . DIV EXPRESION
+    (29) EXPRESION -> EXPRESION . MODULO EXPRESION
+    (30) EXPRESION -> EXPRESION . IGUALQUE EXPRESION
+    (31) EXPRESION -> EXPRESION . DIFERENTE EXPRESION
+    (32) EXPRESION -> EXPRESION . MENORQUE EXPRESION
+    (33) EXPRESION -> EXPRESION . MAYORQUE EXPRESION
+    (34) EXPRESION -> EXPRESION . MENORIGUAL EXPRESION
+    (35) EXPRESION -> EXPRESION . MAYORIGUAL EXPRESION
+    (36) EXPRESION -> EXPRESION . NOTBIT EXPRESION
+    (37) EXPRESION -> EXPRESION . ANDBIT EXPRESION
+    (38) EXPRESION -> EXPRESION . XORBIT EXPRESION
+    (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
+    (40) EXPRESION -> EXPRESION . OR EXPRESION
+    (41) EXPRESION -> EXPRESION . AND EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+
+    MAS             reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    MENOS           reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    POR             reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    DIV             reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    MODULO          reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    IGUALQUE        reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    DIFERENTE       reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    MENORQUE        reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    MAYORQUE        reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    MENORIGUAL      reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    MAYORIGUAL      reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    ANDBIT          reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    XORBIT          reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    ORBIT           reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    OR              reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    AND             reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    SHIFTIZQ        reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    SHIFTDER        reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    PUNTOCOMA       reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    COMA            reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    CORDER          reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    PARDER          reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    LLAVEDER        reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    DOSPUNTOS       reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .)
+    NOTBIT          shift and go to state 80
+
+  ! NOTBIT          [ reduce using rule 46 (EXPRESION -> C_FLOAT EXPRESION .) ]
   ! MAS             [ shift and go to state 69 ]
   ! MENOS           [ shift and go to state 70 ]
   ! POR             [ shift and go to state 71 ]
@@ -3745,7 +3752,7 @@ state 93
 
 state 94
 
-    (47) EXPRESION -> C_INT EXPRESION .
+    (47) EXPRESION -> C_CHAR EXPRESION .
     (25) EXPRESION -> EXPRESION . MAS EXPRESION
     (26) EXPRESION -> EXPRESION . MENOS EXPRESION
     (27) EXPRESION -> EXPRESION . POR EXPRESION
@@ -3763,36 +3770,36 @@ state 94
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
-    MAS             reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    MENOS           reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    POR             reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    DIV             reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    MODULO          reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    IGUALQUE        reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    DIFERENTE       reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    MENORQUE        reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    MAYORQUE        reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    MENORIGUAL      reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    MAYORIGUAL      reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    ANDBIT          reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    XORBIT          reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    ORBIT           reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    OR              reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    AND             reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    SHIFTIZQ        reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    SHIFTDER        reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    PUNTOCOMA       reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    COMA            reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    CORDER          reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    PARDER          reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    LLAVEDER        reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
-    DOSPUNTOS       reduce using rule 47 (EXPRESION -> C_INT EXPRESION .)
+    MAS             reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    MENOS           reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    POR             reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    DIV             reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    MODULO          reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    IGUALQUE        reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    DIFERENTE       reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    MENORQUE        reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    MAYORQUE        reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    MENORIGUAL      reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    MAYORIGUAL      reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    ANDBIT          reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    XORBIT          reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    ORBIT           reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    OR              reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    AND             reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    SHIFTIZQ        reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    SHIFTDER        reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    PUNTOCOMA       reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    COMA            reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    CORDER          reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    PARDER          reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    LLAVEDER        reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
+    DOSPUNTOS       reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .)
     NOTBIT          shift and go to state 80
 
-  ! NOTBIT          [ reduce using rule 47 (EXPRESION -> C_INT EXPRESION .) ]
+  ! NOTBIT          [ reduce using rule 47 (EXPRESION -> C_CHAR EXPRESION .) ]
   ! MAS             [ shift and go to state 69 ]
   ! MENOS           [ shift and go to state 70 ]
   ! POR             [ shift and go to state 71 ]
@@ -3815,77 +3822,70 @@ state 94
 
 state 95
 
-    (48) EXPRESION -> C_FLOAT EXPRESION .
-    (25) EXPRESION -> EXPRESION . MAS EXPRESION
-    (26) EXPRESION -> EXPRESION . MENOS EXPRESION
-    (27) EXPRESION -> EXPRESION . POR EXPRESION
-    (28) EXPRESION -> EXPRESION . DIV EXPRESION
-    (29) EXPRESION -> EXPRESION . MODULO EXPRESION
-    (30) EXPRESION -> EXPRESION . IGUALQUE EXPRESION
-    (31) EXPRESION -> EXPRESION . DIFERENTE EXPRESION
-    (32) EXPRESION -> EXPRESION . MENORQUE EXPRESION
-    (33) EXPRESION -> EXPRESION . MAYORQUE EXPRESION
-    (34) EXPRESION -> EXPRESION . MENORIGUAL EXPRESION
-    (35) EXPRESION -> EXPRESION . MAYORIGUAL EXPRESION
-    (36) EXPRESION -> EXPRESION . NOTBIT EXPRESION
-    (37) EXPRESION -> EXPRESION . ANDBIT EXPRESION
-    (38) EXPRESION -> EXPRESION . XORBIT EXPRESION
-    (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
-    (40) EXPRESION -> EXPRESION . OR EXPRESION
-    (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (48) EXPRESION -> SIZEOF PARIZQ . EXPRESION PARDER
+    (25) EXPRESION -> . EXPRESION MAS EXPRESION
+    (26) EXPRESION -> . EXPRESION MENOS EXPRESION
+    (27) EXPRESION -> . EXPRESION POR EXPRESION
+    (28) EXPRESION -> . EXPRESION DIV EXPRESION
+    (29) EXPRESION -> . EXPRESION MODULO EXPRESION
+    (30) EXPRESION -> . EXPRESION IGUALQUE EXPRESION
+    (31) EXPRESION -> . EXPRESION DIFERENTE EXPRESION
+    (32) EXPRESION -> . EXPRESION MENORQUE EXPRESION
+    (33) EXPRESION -> . EXPRESION MAYORQUE EXPRESION
+    (34) EXPRESION -> . EXPRESION MENORIGUAL EXPRESION
+    (35) EXPRESION -> . EXPRESION MAYORIGUAL EXPRESION
+    (36) EXPRESION -> . EXPRESION NOTBIT EXPRESION
+    (37) EXPRESION -> . EXPRESION ANDBIT EXPRESION
+    (38) EXPRESION -> . EXPRESION XORBIT EXPRESION
+    (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
+    (40) EXPRESION -> . EXPRESION OR EXPRESION
+    (41) EXPRESION -> . EXPRESION AND EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
+    (50) EXPRESION -> . MENOS EXPRESION
+    (51) EXPRESION -> . NOTBIT EXPRESION
+    (52) EXPRESION -> . ANDBIT EXPRESION
+    (53) EXPRESION -> . LLAMADA_FUNCION
+    (54) EXPRESION -> . NUMERO
+    (55) EXPRESION -> . CADENA
+    (56) EXPRESION -> . CHAR_
+    (57) EXPRESION -> . ID CORCHETES
+    (58) EXPRESION -> . ID CORCHETES LISTA_PUNTOS
+    (59) EXPRESION -> . ID
+    (60) EXPRESION -> . ID LISTA_PUNTOS
+    (61) EXPRESION -> . LISTA_INIT_CORCHETE
+    (63) LLAMADA_FUNCION -> . ID PARIZQ PARAMETROS PARDER
+    (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
+    (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    MAS             reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    MENOS           reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    POR             reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    DIV             reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    MODULO          reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    IGUALQUE        reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    DIFERENTE       reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    MENORQUE        reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    MAYORQUE        reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    MENORIGUAL      reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    MAYORIGUAL      reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    ANDBIT          reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    XORBIT          reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    ORBIT           reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    OR              reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    AND             reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    SHIFTIZQ        reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    SHIFTDER        reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    PUNTOCOMA       reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    COMA            reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    CORDER          reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    PARDER          reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    LLAVEDER        reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    DOSPUNTOS       reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .)
-    NOTBIT          shift and go to state 80
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
+    MENOS           shift and go to state 37
+    NOTBIT          shift and go to state 38
+    ANDBIT          shift and go to state 39
+    NUMERO          shift and go to state 47
+    CADENA          shift and go to state 48
+    CHAR_           shift and go to state 49
+    ID              shift and go to state 35
+    LLAVEIZQ        shift and go to state 51
 
-  ! NOTBIT          [ reduce using rule 48 (EXPRESION -> C_FLOAT EXPRESION .) ]
-  ! MAS             [ shift and go to state 69 ]
-  ! MENOS           [ shift and go to state 70 ]
-  ! POR             [ shift and go to state 71 ]
-  ! DIV             [ shift and go to state 72 ]
-  ! MODULO          [ shift and go to state 73 ]
-  ! IGUALQUE        [ shift and go to state 74 ]
-  ! DIFERENTE       [ shift and go to state 75 ]
-  ! MENORQUE        [ shift and go to state 76 ]
-  ! MAYORQUE        [ shift and go to state 77 ]
-  ! MENORIGUAL      [ shift and go to state 78 ]
-  ! MAYORIGUAL      [ shift and go to state 79 ]
-  ! ANDBIT          [ shift and go to state 81 ]
-  ! XORBIT          [ shift and go to state 82 ]
-  ! ORBIT           [ shift and go to state 83 ]
-  ! OR              [ shift and go to state 84 ]
-  ! AND             [ shift and go to state 85 ]
-  ! SHIFTIZQ        [ shift and go to state 86 ]
-  ! SHIFTDER        [ shift and go to state 87 ]
-
+    EXPRESION                      shift and go to state 132
+    LLAMADA_FUNCION                shift and go to state 46
+    LISTA_INIT_CORCHETE            shift and go to state 50
 
 state 96
 
-    (49) EXPRESION -> C_CHAR EXPRESION .
+    (49) EXPRESION -> NOTLOGICA EXPRESION .
     (25) EXPRESION -> EXPRESION . MAS EXPRESION
     (26) EXPRESION -> EXPRESION . MENOS EXPRESION
     (27) EXPRESION -> EXPRESION . POR EXPRESION
@@ -3903,36 +3903,36 @@ state 96
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
-    MAS             reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    MENOS           reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    POR             reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    DIV             reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    MODULO          reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    IGUALQUE        reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    DIFERENTE       reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    MENORQUE        reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    MAYORQUE        reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    MENORIGUAL      reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    MAYORIGUAL      reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    ANDBIT          reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    XORBIT          reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    ORBIT           reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    OR              reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    AND             reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    SHIFTIZQ        reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    SHIFTDER        reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    PUNTOCOMA       reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    COMA            reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    CORDER          reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    PARDER          reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    LLAVEDER        reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
-    DOSPUNTOS       reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .)
+    MAS             reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    MENOS           reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    POR             reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    DIV             reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    MODULO          reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    IGUALQUE        reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    DIFERENTE       reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    MENORQUE        reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    MAYORQUE        reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    MENORIGUAL      reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    MAYORIGUAL      reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    ANDBIT          reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    XORBIT          reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    ORBIT           reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    OR              reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    AND             reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    SHIFTIZQ        reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    SHIFTDER        reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    PUNTOCOMA       reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    COMA            reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    CORDER          reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    PARDER          reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    LLAVEDER        reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
+    DOSPUNTOS       reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .)
     NOTBIT          shift and go to state 80
 
-  ! NOTBIT          [ reduce using rule 49 (EXPRESION -> C_CHAR EXPRESION .) ]
+  ! NOTBIT          [ reduce using rule 49 (EXPRESION -> NOTLOGICA EXPRESION .) ]
   ! MAS             [ shift and go to state 69 ]
   ! MENOS           [ shift and go to state 70 ]
   ! POR             [ shift and go to state 71 ]
@@ -3982,8 +3982,8 @@ state 98
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     LLAVEDER        reduce using rule 66 (PARAMETROS -> EXPRESION .)
     COMA            reduce using rule 66 (PARAMETROS -> EXPRESION .)
@@ -4029,8 +4029,8 @@ state 99
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     PUNTOCOMA       reduce using rule 18 (ASIGNA -> ID CORCHETES IGUAL EXPRESION .)
     COMA            reduce using rule 18 (ASIGNA -> ID CORCHETES IGUAL EXPRESION .)
@@ -4384,8 +4384,8 @@ state 112
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     MAS             reduce using rule 25 (EXPRESION -> EXPRESION MAS EXPRESION .)
     MENOS           reduce using rule 25 (EXPRESION -> EXPRESION MAS EXPRESION .)
@@ -4454,8 +4454,8 @@ state 113
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     MAS             reduce using rule 26 (EXPRESION -> EXPRESION MENOS EXPRESION .)
     MENOS           reduce using rule 26 (EXPRESION -> EXPRESION MENOS EXPRESION .)
@@ -4524,8 +4524,8 @@ state 114
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     MAS             reduce using rule 27 (EXPRESION -> EXPRESION POR EXPRESION .)
     MENOS           reduce using rule 27 (EXPRESION -> EXPRESION POR EXPRESION .)
@@ -4594,8 +4594,8 @@ state 115
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     MAS             reduce using rule 28 (EXPRESION -> EXPRESION DIV EXPRESION .)
     MENOS           reduce using rule 28 (EXPRESION -> EXPRESION DIV EXPRESION .)
@@ -4664,8 +4664,8 @@ state 116
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     MAS             reduce using rule 29 (EXPRESION -> EXPRESION MODULO EXPRESION .)
     MENOS           reduce using rule 29 (EXPRESION -> EXPRESION MODULO EXPRESION .)
@@ -4734,8 +4734,8 @@ state 117
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     IGUALQUE        reduce using rule 30 (EXPRESION -> EXPRESION IGUALQUE EXPRESION .)
     DIFERENTE       reduce using rule 30 (EXPRESION -> EXPRESION IGUALQUE EXPRESION .)
@@ -4804,8 +4804,8 @@ state 118
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     IGUALQUE        reduce using rule 31 (EXPRESION -> EXPRESION DIFERENTE EXPRESION .)
     DIFERENTE       reduce using rule 31 (EXPRESION -> EXPRESION DIFERENTE EXPRESION .)
@@ -4874,8 +4874,8 @@ state 119
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     IGUALQUE        reduce using rule 32 (EXPRESION -> EXPRESION MENORQUE EXPRESION .)
     DIFERENTE       reduce using rule 32 (EXPRESION -> EXPRESION MENORQUE EXPRESION .)
@@ -4944,8 +4944,8 @@ state 120
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     IGUALQUE        reduce using rule 33 (EXPRESION -> EXPRESION MAYORQUE EXPRESION .)
     DIFERENTE       reduce using rule 33 (EXPRESION -> EXPRESION MAYORQUE EXPRESION .)
@@ -5014,8 +5014,8 @@ state 121
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     IGUALQUE        reduce using rule 34 (EXPRESION -> EXPRESION MENORIGUAL EXPRESION .)
     DIFERENTE       reduce using rule 34 (EXPRESION -> EXPRESION MENORIGUAL EXPRESION .)
@@ -5084,8 +5084,8 @@ state 122
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     IGUALQUE        reduce using rule 35 (EXPRESION -> EXPRESION MAYORIGUAL EXPRESION .)
     DIFERENTE       reduce using rule 35 (EXPRESION -> EXPRESION MAYORIGUAL EXPRESION .)
@@ -5154,8 +5154,8 @@ state 123
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     MAS             reduce using rule 36 (EXPRESION -> EXPRESION NOTBIT EXPRESION .)
     MENOS           reduce using rule 36 (EXPRESION -> EXPRESION NOTBIT EXPRESION .)
@@ -5224,8 +5224,8 @@ state 124
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     ANDBIT          reduce using rule 37 (EXPRESION -> EXPRESION ANDBIT EXPRESION .)
     XORBIT          reduce using rule 37 (EXPRESION -> EXPRESION ANDBIT EXPRESION .)
@@ -5294,8 +5294,8 @@ state 125
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     XORBIT          reduce using rule 38 (EXPRESION -> EXPRESION XORBIT EXPRESION .)
     ORBIT           reduce using rule 38 (EXPRESION -> EXPRESION XORBIT EXPRESION .)
@@ -5364,8 +5364,8 @@ state 126
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     ORBIT           reduce using rule 39 (EXPRESION -> EXPRESION ORBIT EXPRESION .)
     OR              reduce using rule 39 (EXPRESION -> EXPRESION ORBIT EXPRESION .)
@@ -5434,8 +5434,8 @@ state 127
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     OR              reduce using rule 40 (EXPRESION -> EXPRESION OR EXPRESION .)
     PUNTOCOMA       reduce using rule 40 (EXPRESION -> EXPRESION OR EXPRESION .)
@@ -5504,8 +5504,8 @@ state 128
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     OR              reduce using rule 41 (EXPRESION -> EXPRESION AND EXPRESION .)
     AND             reduce using rule 41 (EXPRESION -> EXPRESION AND EXPRESION .)
@@ -5556,7 +5556,7 @@ state 128
 
 state 129
 
-    (44) EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .
+    (42) EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .
     (25) EXPRESION -> EXPRESION . MAS EXPRESION
     (26) EXPRESION -> EXPRESION . MENOS EXPRESION
     (27) EXPRESION -> EXPRESION . POR EXPRESION
@@ -5574,28 +5574,28 @@ state 129
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
-    IGUALQUE        reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
-    DIFERENTE       reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
-    MENORQUE        reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
-    MAYORQUE        reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
-    MENORIGUAL      reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
-    MAYORIGUAL      reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
-    ANDBIT          reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
-    XORBIT          reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
-    ORBIT           reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
-    OR              reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
-    AND             reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
-    SHIFTIZQ        reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
-    SHIFTDER        reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
-    PUNTOCOMA       reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
-    COMA            reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
-    CORDER          reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
-    PARDER          reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
-    LLAVEDER        reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
-    DOSPUNTOS       reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
+    IGUALQUE        reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
+    DIFERENTE       reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
+    MENORQUE        reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
+    MAYORQUE        reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
+    MENORIGUAL      reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
+    MAYORIGUAL      reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
+    ANDBIT          reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
+    XORBIT          reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
+    ORBIT           reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
+    OR              reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
+    AND             reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
+    SHIFTIZQ        reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
+    SHIFTDER        reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
+    PUNTOCOMA       reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
+    COMA            reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
+    CORDER          reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
+    PARDER          reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
+    LLAVEDER        reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
+    DOSPUNTOS       reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .)
     MAS             shift and go to state 69
     MENOS           shift and go to state 70
     POR             shift and go to state 71
@@ -5603,12 +5603,12 @@ state 129
     MODULO          shift and go to state 73
     NOTBIT          shift and go to state 80
 
-  ! MAS             [ reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .) ]
-  ! MENOS           [ reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .) ]
-  ! POR             [ reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .) ]
-  ! DIV             [ reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .) ]
-  ! MODULO          [ reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .) ]
-  ! NOTBIT          [ reduce using rule 44 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .) ]
+  ! MAS             [ reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .) ]
+  ! MENOS           [ reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .) ]
+  ! POR             [ reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .) ]
+  ! DIV             [ reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .) ]
+  ! MODULO          [ reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .) ]
+  ! NOTBIT          [ reduce using rule 42 (EXPRESION -> EXPRESION SHIFTIZQ EXPRESION .) ]
   ! IGUALQUE        [ shift and go to state 74 ]
   ! DIFERENTE       [ shift and go to state 75 ]
   ! MENORQUE        [ shift and go to state 76 ]
@@ -5626,7 +5626,7 @@ state 129
 
 state 130
 
-    (45) EXPRESION -> EXPRESION SHIFTDER EXPRESION .
+    (43) EXPRESION -> EXPRESION SHIFTDER EXPRESION .
     (25) EXPRESION -> EXPRESION . MAS EXPRESION
     (26) EXPRESION -> EXPRESION . MENOS EXPRESION
     (27) EXPRESION -> EXPRESION . POR EXPRESION
@@ -5644,28 +5644,28 @@ state 130
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
-    IGUALQUE        reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
-    DIFERENTE       reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
-    MENORQUE        reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
-    MAYORQUE        reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
-    MENORIGUAL      reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
-    MAYORIGUAL      reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
-    ANDBIT          reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
-    XORBIT          reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
-    ORBIT           reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
-    OR              reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
-    AND             reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
-    SHIFTIZQ        reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
-    SHIFTDER        reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
-    PUNTOCOMA       reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
-    COMA            reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
-    CORDER          reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
-    PARDER          reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
-    LLAVEDER        reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
-    DOSPUNTOS       reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
+    IGUALQUE        reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
+    DIFERENTE       reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
+    MENORQUE        reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
+    MAYORQUE        reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
+    MENORIGUAL      reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
+    MAYORIGUAL      reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
+    ANDBIT          reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
+    XORBIT          reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
+    ORBIT           reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
+    OR              reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
+    AND             reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
+    SHIFTIZQ        reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
+    SHIFTDER        reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
+    PUNTOCOMA       reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
+    COMA            reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
+    CORDER          reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
+    PARDER          reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
+    LLAVEDER        reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
+    DOSPUNTOS       reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .)
     MAS             shift and go to state 69
     MENOS           shift and go to state 70
     POR             shift and go to state 71
@@ -5673,12 +5673,12 @@ state 130
     MODULO          shift and go to state 73
     NOTBIT          shift and go to state 80
 
-  ! MAS             [ reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .) ]
-  ! MENOS           [ reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .) ]
-  ! POR             [ reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .) ]
-  ! DIV             [ reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .) ]
-  ! MODULO          [ reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .) ]
-  ! NOTBIT          [ reduce using rule 45 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .) ]
+  ! MAS             [ reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .) ]
+  ! MENOS           [ reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .) ]
+  ! POR             [ reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .) ]
+  ! DIV             [ reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .) ]
+  ! MODULO          [ reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .) ]
+  ! NOTBIT          [ reduce using rule 43 (EXPRESION -> EXPRESION SHIFTDER EXPRESION .) ]
   ! IGUALQUE        [ shift and go to state 74 ]
   ! DIFERENTE       [ shift and go to state 75 ]
   ! MENORQUE        [ shift and go to state 76 ]
@@ -5696,7 +5696,38 @@ state 130
 
 state 131
 
-    (42) EXPRESION -> SIZEOF PARIZQ EXPRESION . PARDER
+    (44) EXPRESION -> PARIZQ EXPRESION PARDER .
+
+    MAS             reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    MENOS           reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    POR             reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    DIV             reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    MODULO          reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    IGUALQUE        reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    DIFERENTE       reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    MENORQUE        reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    MAYORQUE        reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    MENORIGUAL      reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    MAYORIGUAL      reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    NOTBIT          reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    ANDBIT          reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    XORBIT          reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    ORBIT           reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    OR              reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    AND             reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    SHIFTIZQ        reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    SHIFTDER        reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    PUNTOCOMA       reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    COMA            reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    CORDER          reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    PARDER          reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    LLAVEDER        reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+    DOSPUNTOS       reduce using rule 44 (EXPRESION -> PARIZQ EXPRESION PARDER .)
+
+
+state 132
+
+    (48) EXPRESION -> SIZEOF PARIZQ EXPRESION . PARDER
     (25) EXPRESION -> EXPRESION . MAS EXPRESION
     (26) EXPRESION -> EXPRESION . MENOS EXPRESION
     (27) EXPRESION -> EXPRESION . POR EXPRESION
@@ -5714,8 +5745,8 @@ state 131
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     PARDER          shift and go to state 170
     MAS             shift and go to state 69
@@ -5737,37 +5768,6 @@ state 131
     AND             shift and go to state 85
     SHIFTIZQ        shift and go to state 86
     SHIFTDER        shift and go to state 87
-
-
-state 132
-
-    (46) EXPRESION -> PARIZQ EXPRESION PARDER .
-
-    MAS             reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    MENOS           reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    POR             reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    DIV             reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    MODULO          reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    IGUALQUE        reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    DIFERENTE       reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    MENORQUE        reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    MAYORQUE        reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    MENORIGUAL      reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    MAYORIGUAL      reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    NOTBIT          reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    ANDBIT          reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    XORBIT          reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    ORBIT           reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    OR              reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    AND             reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    SHIFTIZQ        reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    SHIFTDER        reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    PUNTOCOMA       reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    COMA            reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    CORDER          reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    PARDER          reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    LLAVEDER        reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
-    DOSPUNTOS       reduce using rule 46 (EXPRESION -> PARIZQ EXPRESION PARDER .)
 
 
 state 133
@@ -5821,14 +5821,14 @@ state 134
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -5845,12 +5845,12 @@ state 134
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -6367,14 +6367,14 @@ state 151
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -6391,12 +6391,12 @@ state 151
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -6654,33 +6654,33 @@ state 169
 
 state 170
 
-    (42) EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .
+    (48) EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .
 
-    MAS             reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    MENOS           reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    POR             reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    DIV             reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    MODULO          reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    IGUALQUE        reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    DIFERENTE       reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    MENORQUE        reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    MAYORQUE        reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    MENORIGUAL      reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    MAYORIGUAL      reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    NOTBIT          reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    ANDBIT          reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    XORBIT          reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    ORBIT           reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    OR              reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    AND             reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    SHIFTIZQ        reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    SHIFTDER        reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    PUNTOCOMA       reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    COMA            reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    CORDER          reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    PARDER          reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    LLAVEDER        reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
-    DOSPUNTOS       reduce using rule 42 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    MAS             reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    MENOS           reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    POR             reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    DIV             reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    MODULO          reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    IGUALQUE        reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    DIFERENTE       reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    MENORQUE        reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    MAYORQUE        reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    MENORIGUAL      reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    MAYORIGUAL      reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    NOTBIT          reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    ANDBIT          reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    XORBIT          reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    ORBIT           reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    OR              reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    AND             reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    SHIFTIZQ        reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    SHIFTDER        reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    PUNTOCOMA       reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    COMA            reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    CORDER          reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    PARDER          reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    LLAVEDER        reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
+    DOSPUNTOS       reduce using rule 48 (EXPRESION -> SIZEOF PARIZQ EXPRESION PARDER .)
 
 
 state 171
@@ -6703,8 +6703,8 @@ state 171
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     LLAVEDER        reduce using rule 65 (PARAMETROS -> PARAMETROS COMA EXPRESION .)
     COMA            reduce using rule 65 (PARAMETROS -> PARAMETROS COMA EXPRESION .)
@@ -6772,14 +6772,14 @@ state 174
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -6796,12 +6796,12 @@ state 174
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -6885,14 +6885,14 @@ state 178
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -6909,12 +6909,12 @@ state 178
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -7012,12 +7012,12 @@ state 182
 
     (130) OP_ASIGNACION -> IGUAL .
 
-    SIZEOF          reduce using rule 130 (OP_ASIGNACION -> IGUAL .)
-    NOTLOGICA       reduce using rule 130 (OP_ASIGNACION -> IGUAL .)
     PARIZQ          reduce using rule 130 (OP_ASIGNACION -> IGUAL .)
     C_INT           reduce using rule 130 (OP_ASIGNACION -> IGUAL .)
     C_FLOAT         reduce using rule 130 (OP_ASIGNACION -> IGUAL .)
     C_CHAR          reduce using rule 130 (OP_ASIGNACION -> IGUAL .)
+    SIZEOF          reduce using rule 130 (OP_ASIGNACION -> IGUAL .)
+    NOTLOGICA       reduce using rule 130 (OP_ASIGNACION -> IGUAL .)
     MENOS           reduce using rule 130 (OP_ASIGNACION -> IGUAL .)
     NOTBIT          reduce using rule 130 (OP_ASIGNACION -> IGUAL .)
     ANDBIT          reduce using rule 130 (OP_ASIGNACION -> IGUAL .)
@@ -7032,12 +7032,12 @@ state 183
 
     (131) OP_ASIGNACION -> MASIGUAL .
 
-    SIZEOF          reduce using rule 131 (OP_ASIGNACION -> MASIGUAL .)
-    NOTLOGICA       reduce using rule 131 (OP_ASIGNACION -> MASIGUAL .)
     PARIZQ          reduce using rule 131 (OP_ASIGNACION -> MASIGUAL .)
     C_INT           reduce using rule 131 (OP_ASIGNACION -> MASIGUAL .)
     C_FLOAT         reduce using rule 131 (OP_ASIGNACION -> MASIGUAL .)
     C_CHAR          reduce using rule 131 (OP_ASIGNACION -> MASIGUAL .)
+    SIZEOF          reduce using rule 131 (OP_ASIGNACION -> MASIGUAL .)
+    NOTLOGICA       reduce using rule 131 (OP_ASIGNACION -> MASIGUAL .)
     MENOS           reduce using rule 131 (OP_ASIGNACION -> MASIGUAL .)
     NOTBIT          reduce using rule 131 (OP_ASIGNACION -> MASIGUAL .)
     ANDBIT          reduce using rule 131 (OP_ASIGNACION -> MASIGUAL .)
@@ -7052,12 +7052,12 @@ state 184
 
     (132) OP_ASIGNACION -> MENOSIGUAL .
 
-    SIZEOF          reduce using rule 132 (OP_ASIGNACION -> MENOSIGUAL .)
-    NOTLOGICA       reduce using rule 132 (OP_ASIGNACION -> MENOSIGUAL .)
     PARIZQ          reduce using rule 132 (OP_ASIGNACION -> MENOSIGUAL .)
     C_INT           reduce using rule 132 (OP_ASIGNACION -> MENOSIGUAL .)
     C_FLOAT         reduce using rule 132 (OP_ASIGNACION -> MENOSIGUAL .)
     C_CHAR          reduce using rule 132 (OP_ASIGNACION -> MENOSIGUAL .)
+    SIZEOF          reduce using rule 132 (OP_ASIGNACION -> MENOSIGUAL .)
+    NOTLOGICA       reduce using rule 132 (OP_ASIGNACION -> MENOSIGUAL .)
     MENOS           reduce using rule 132 (OP_ASIGNACION -> MENOSIGUAL .)
     NOTBIT          reduce using rule 132 (OP_ASIGNACION -> MENOSIGUAL .)
     ANDBIT          reduce using rule 132 (OP_ASIGNACION -> MENOSIGUAL .)
@@ -7072,12 +7072,12 @@ state 185
 
     (133) OP_ASIGNACION -> PORIGUAL .
 
-    SIZEOF          reduce using rule 133 (OP_ASIGNACION -> PORIGUAL .)
-    NOTLOGICA       reduce using rule 133 (OP_ASIGNACION -> PORIGUAL .)
     PARIZQ          reduce using rule 133 (OP_ASIGNACION -> PORIGUAL .)
     C_INT           reduce using rule 133 (OP_ASIGNACION -> PORIGUAL .)
     C_FLOAT         reduce using rule 133 (OP_ASIGNACION -> PORIGUAL .)
     C_CHAR          reduce using rule 133 (OP_ASIGNACION -> PORIGUAL .)
+    SIZEOF          reduce using rule 133 (OP_ASIGNACION -> PORIGUAL .)
+    NOTLOGICA       reduce using rule 133 (OP_ASIGNACION -> PORIGUAL .)
     MENOS           reduce using rule 133 (OP_ASIGNACION -> PORIGUAL .)
     NOTBIT          reduce using rule 133 (OP_ASIGNACION -> PORIGUAL .)
     ANDBIT          reduce using rule 133 (OP_ASIGNACION -> PORIGUAL .)
@@ -7092,12 +7092,12 @@ state 186
 
     (134) OP_ASIGNACION -> DIVIGUAL .
 
-    SIZEOF          reduce using rule 134 (OP_ASIGNACION -> DIVIGUAL .)
-    NOTLOGICA       reduce using rule 134 (OP_ASIGNACION -> DIVIGUAL .)
     PARIZQ          reduce using rule 134 (OP_ASIGNACION -> DIVIGUAL .)
     C_INT           reduce using rule 134 (OP_ASIGNACION -> DIVIGUAL .)
     C_FLOAT         reduce using rule 134 (OP_ASIGNACION -> DIVIGUAL .)
     C_CHAR          reduce using rule 134 (OP_ASIGNACION -> DIVIGUAL .)
+    SIZEOF          reduce using rule 134 (OP_ASIGNACION -> DIVIGUAL .)
+    NOTLOGICA       reduce using rule 134 (OP_ASIGNACION -> DIVIGUAL .)
     MENOS           reduce using rule 134 (OP_ASIGNACION -> DIVIGUAL .)
     NOTBIT          reduce using rule 134 (OP_ASIGNACION -> DIVIGUAL .)
     ANDBIT          reduce using rule 134 (OP_ASIGNACION -> DIVIGUAL .)
@@ -7112,12 +7112,12 @@ state 187
 
     (135) OP_ASIGNACION -> MODIGUAL .
 
-    SIZEOF          reduce using rule 135 (OP_ASIGNACION -> MODIGUAL .)
-    NOTLOGICA       reduce using rule 135 (OP_ASIGNACION -> MODIGUAL .)
     PARIZQ          reduce using rule 135 (OP_ASIGNACION -> MODIGUAL .)
     C_INT           reduce using rule 135 (OP_ASIGNACION -> MODIGUAL .)
     C_FLOAT         reduce using rule 135 (OP_ASIGNACION -> MODIGUAL .)
     C_CHAR          reduce using rule 135 (OP_ASIGNACION -> MODIGUAL .)
+    SIZEOF          reduce using rule 135 (OP_ASIGNACION -> MODIGUAL .)
+    NOTLOGICA       reduce using rule 135 (OP_ASIGNACION -> MODIGUAL .)
     MENOS           reduce using rule 135 (OP_ASIGNACION -> MODIGUAL .)
     NOTBIT          reduce using rule 135 (OP_ASIGNACION -> MODIGUAL .)
     ANDBIT          reduce using rule 135 (OP_ASIGNACION -> MODIGUAL .)
@@ -7132,12 +7132,12 @@ state 188
 
     (136) OP_ASIGNACION -> SIIGUAL .
 
-    SIZEOF          reduce using rule 136 (OP_ASIGNACION -> SIIGUAL .)
-    NOTLOGICA       reduce using rule 136 (OP_ASIGNACION -> SIIGUAL .)
     PARIZQ          reduce using rule 136 (OP_ASIGNACION -> SIIGUAL .)
     C_INT           reduce using rule 136 (OP_ASIGNACION -> SIIGUAL .)
     C_FLOAT         reduce using rule 136 (OP_ASIGNACION -> SIIGUAL .)
     C_CHAR          reduce using rule 136 (OP_ASIGNACION -> SIIGUAL .)
+    SIZEOF          reduce using rule 136 (OP_ASIGNACION -> SIIGUAL .)
+    NOTLOGICA       reduce using rule 136 (OP_ASIGNACION -> SIIGUAL .)
     MENOS           reduce using rule 136 (OP_ASIGNACION -> SIIGUAL .)
     NOTBIT          reduce using rule 136 (OP_ASIGNACION -> SIIGUAL .)
     ANDBIT          reduce using rule 136 (OP_ASIGNACION -> SIIGUAL .)
@@ -7152,12 +7152,12 @@ state 189
 
     (137) OP_ASIGNACION -> SDIGUAL .
 
-    SIZEOF          reduce using rule 137 (OP_ASIGNACION -> SDIGUAL .)
-    NOTLOGICA       reduce using rule 137 (OP_ASIGNACION -> SDIGUAL .)
     PARIZQ          reduce using rule 137 (OP_ASIGNACION -> SDIGUAL .)
     C_INT           reduce using rule 137 (OP_ASIGNACION -> SDIGUAL .)
     C_FLOAT         reduce using rule 137 (OP_ASIGNACION -> SDIGUAL .)
     C_CHAR          reduce using rule 137 (OP_ASIGNACION -> SDIGUAL .)
+    SIZEOF          reduce using rule 137 (OP_ASIGNACION -> SDIGUAL .)
+    NOTLOGICA       reduce using rule 137 (OP_ASIGNACION -> SDIGUAL .)
     MENOS           reduce using rule 137 (OP_ASIGNACION -> SDIGUAL .)
     NOTBIT          reduce using rule 137 (OP_ASIGNACION -> SDIGUAL .)
     ANDBIT          reduce using rule 137 (OP_ASIGNACION -> SDIGUAL .)
@@ -7172,12 +7172,12 @@ state 190
 
     (138) OP_ASIGNACION -> ANDIGUAL .
 
-    SIZEOF          reduce using rule 138 (OP_ASIGNACION -> ANDIGUAL .)
-    NOTLOGICA       reduce using rule 138 (OP_ASIGNACION -> ANDIGUAL .)
     PARIZQ          reduce using rule 138 (OP_ASIGNACION -> ANDIGUAL .)
     C_INT           reduce using rule 138 (OP_ASIGNACION -> ANDIGUAL .)
     C_FLOAT         reduce using rule 138 (OP_ASIGNACION -> ANDIGUAL .)
     C_CHAR          reduce using rule 138 (OP_ASIGNACION -> ANDIGUAL .)
+    SIZEOF          reduce using rule 138 (OP_ASIGNACION -> ANDIGUAL .)
+    NOTLOGICA       reduce using rule 138 (OP_ASIGNACION -> ANDIGUAL .)
     MENOS           reduce using rule 138 (OP_ASIGNACION -> ANDIGUAL .)
     NOTBIT          reduce using rule 138 (OP_ASIGNACION -> ANDIGUAL .)
     ANDBIT          reduce using rule 138 (OP_ASIGNACION -> ANDIGUAL .)
@@ -7192,12 +7192,12 @@ state 191
 
     (139) OP_ASIGNACION -> XORIGUAL .
 
-    SIZEOF          reduce using rule 139 (OP_ASIGNACION -> XORIGUAL .)
-    NOTLOGICA       reduce using rule 139 (OP_ASIGNACION -> XORIGUAL .)
     PARIZQ          reduce using rule 139 (OP_ASIGNACION -> XORIGUAL .)
     C_INT           reduce using rule 139 (OP_ASIGNACION -> XORIGUAL .)
     C_FLOAT         reduce using rule 139 (OP_ASIGNACION -> XORIGUAL .)
     C_CHAR          reduce using rule 139 (OP_ASIGNACION -> XORIGUAL .)
+    SIZEOF          reduce using rule 139 (OP_ASIGNACION -> XORIGUAL .)
+    NOTLOGICA       reduce using rule 139 (OP_ASIGNACION -> XORIGUAL .)
     MENOS           reduce using rule 139 (OP_ASIGNACION -> XORIGUAL .)
     NOTBIT          reduce using rule 139 (OP_ASIGNACION -> XORIGUAL .)
     ANDBIT          reduce using rule 139 (OP_ASIGNACION -> XORIGUAL .)
@@ -7212,12 +7212,12 @@ state 192
 
     (140) OP_ASIGNACION -> ORIGUAL .
 
-    SIZEOF          reduce using rule 140 (OP_ASIGNACION -> ORIGUAL .)
-    NOTLOGICA       reduce using rule 140 (OP_ASIGNACION -> ORIGUAL .)
     PARIZQ          reduce using rule 140 (OP_ASIGNACION -> ORIGUAL .)
     C_INT           reduce using rule 140 (OP_ASIGNACION -> ORIGUAL .)
     C_FLOAT         reduce using rule 140 (OP_ASIGNACION -> ORIGUAL .)
     C_CHAR          reduce using rule 140 (OP_ASIGNACION -> ORIGUAL .)
+    SIZEOF          reduce using rule 140 (OP_ASIGNACION -> ORIGUAL .)
+    NOTLOGICA       reduce using rule 140 (OP_ASIGNACION -> ORIGUAL .)
     MENOS           reduce using rule 140 (OP_ASIGNACION -> ORIGUAL .)
     NOTBIT          reduce using rule 140 (OP_ASIGNACION -> ORIGUAL .)
     ANDBIT          reduce using rule 140 (OP_ASIGNACION -> ORIGUAL .)
@@ -7321,14 +7321,14 @@ state 196
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -7345,12 +7345,12 @@ state 196
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -7385,8 +7385,8 @@ state 197
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     PUNTOCOMA       shift and go to state 220
     MAS             shift and go to state 69
@@ -7534,14 +7534,14 @@ state 203
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -7558,12 +7558,12 @@ state 203
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -7616,14 +7616,14 @@ state 205
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -7640,12 +7640,12 @@ state 205
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -7768,14 +7768,14 @@ state 207
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -7792,12 +7792,12 @@ state 207
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -7906,8 +7906,8 @@ state 212
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     PUNTOCOMA       reduce using rule 147 (ASIGNA_STRUCT -> IGUAL EXPRESION .)
     MAS             shift and go to state 69
@@ -7991,8 +7991,8 @@ state 215
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     PUNTOCOMA       shift and go to state 229
     MAS             shift and go to state 69
@@ -8036,14 +8036,14 @@ state 216
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -8060,12 +8060,12 @@ state 216
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -8131,14 +8131,14 @@ state 218
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -8155,12 +8155,12 @@ state 218
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -8272,8 +8272,8 @@ state 223
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     PARDER          shift and go to state 236
     MAS             shift and go to state 69
@@ -8317,14 +8317,14 @@ state 224
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -8341,12 +8341,12 @@ state 224
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -8380,8 +8380,8 @@ state 225
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     PARDER          shift and go to state 238
     MAS             shift and go to state 69
@@ -8513,8 +8513,8 @@ state 227
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     PARDER          shift and go to state 240
     MAS             shift and go to state 69
@@ -8600,8 +8600,8 @@ state 230
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     PUNTOCOMA       shift and go to state 241
     MAS             shift and go to state 69
@@ -8645,14 +8645,14 @@ state 231
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -8669,12 +8669,12 @@ state 231
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -8708,8 +8708,8 @@ state 232
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     PUNTOCOMA       shift and go to state 243
     MAS             shift and go to state 69
@@ -8761,14 +8761,14 @@ state 234
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -8786,11 +8786,11 @@ state 234
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
     PARIZQ          shift and go to state 246
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -8861,8 +8861,8 @@ state 237
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     PUNTOCOMA       shift and go to state 248
     MAS             shift and go to state 69
@@ -8956,8 +8956,8 @@ state 242
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     PUNTOCOMA       shift and go to state 252
     MAS             shift and go to state 69
@@ -9059,8 +9059,8 @@ state 245
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     PUNTOCOMA       shift and go to state 253
     MAS             shift and go to state 69
@@ -9087,7 +9087,7 @@ state 245
 state 246
 
     (95) DECLARACION_STRUCT_INTERNA -> STRUCT ID ID IGUAL PARIZQ . STRUCT ID PARDER MALLOC PARIZQ SIZEOF PARIZQ STRUCT ID PARDER PARDER PUNTOCOMA
-    (46) EXPRESION -> PARIZQ . EXPRESION PARDER
+    (44) EXPRESION -> PARIZQ . EXPRESION PARDER
     (25) EXPRESION -> . EXPRESION MAS EXPRESION
     (26) EXPRESION -> . EXPRESION MENOS EXPRESION
     (27) EXPRESION -> . EXPRESION POR EXPRESION
@@ -9105,14 +9105,14 @@ state 246
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -9130,12 +9130,12 @@ state 246
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
     STRUCT          shift and go to state 254
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -9145,7 +9145,7 @@ state 246
     ID              shift and go to state 35
     LLAVEIZQ        shift and go to state 51
 
-    EXPRESION                      shift and go to state 92
+    EXPRESION                      shift and go to state 91
     LLAMADA_FUNCION                shift and go to state 46
     LISTA_INIT_CORCHETE            shift and go to state 50
 
@@ -9646,14 +9646,14 @@ state 259
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -9670,12 +9670,12 @@ state 259
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -9733,14 +9733,14 @@ state 262
     (39) EXPRESION -> . EXPRESION ORBIT EXPRESION
     (40) EXPRESION -> . EXPRESION OR EXPRESION
     (41) EXPRESION -> . EXPRESION AND EXPRESION
-    (42) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
-    (43) EXPRESION -> . NOTLOGICA EXPRESION
-    (44) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
-    (45) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
-    (46) EXPRESION -> . PARIZQ EXPRESION PARDER
-    (47) EXPRESION -> . C_INT EXPRESION
-    (48) EXPRESION -> . C_FLOAT EXPRESION
-    (49) EXPRESION -> . C_CHAR EXPRESION
+    (42) EXPRESION -> . EXPRESION SHIFTIZQ EXPRESION
+    (43) EXPRESION -> . EXPRESION SHIFTDER EXPRESION
+    (44) EXPRESION -> . PARIZQ EXPRESION PARDER
+    (45) EXPRESION -> . C_INT EXPRESION
+    (46) EXPRESION -> . C_FLOAT EXPRESION
+    (47) EXPRESION -> . C_CHAR EXPRESION
+    (48) EXPRESION -> . SIZEOF PARIZQ EXPRESION PARDER
+    (49) EXPRESION -> . NOTLOGICA EXPRESION
     (50) EXPRESION -> . MENOS EXPRESION
     (51) EXPRESION -> . NOTBIT EXPRESION
     (52) EXPRESION -> . ANDBIT EXPRESION
@@ -9757,12 +9757,12 @@ state 262
     (64) LLAMADA_FUNCION -> . ID PARIZQ PARDER
     (62) LISTA_INIT_CORCHETE -> . LLAVEIZQ PARAMETROS LLAVEDER
 
-    SIZEOF          shift and go to state 40
-    NOTLOGICA       shift and go to state 42
-    PARIZQ          shift and go to state 41
-    C_INT           shift and go to state 43
-    C_FLOAT         shift and go to state 44
-    C_CHAR          shift and go to state 45
+    PARIZQ          shift and go to state 40
+    C_INT           shift and go to state 41
+    C_FLOAT         shift and go to state 42
+    C_CHAR          shift and go to state 43
+    SIZEOF          shift and go to state 44
+    NOTLOGICA       shift and go to state 45
     MENOS           shift and go to state 37
     NOTBIT          shift and go to state 38
     ANDBIT          shift and go to state 39
@@ -9873,8 +9873,8 @@ state 267
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     PARDER          shift and go to state 276
     MAS             shift and go to state 69
@@ -9941,8 +9941,8 @@ state 271
     (39) EXPRESION -> EXPRESION . ORBIT EXPRESION
     (40) EXPRESION -> EXPRESION . OR EXPRESION
     (41) EXPRESION -> EXPRESION . AND EXPRESION
-    (44) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
-    (45) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
+    (42) EXPRESION -> EXPRESION . SHIFTIZQ EXPRESION
+    (43) EXPRESION -> EXPRESION . SHIFTDER EXPRESION
 
     DOSPUNTOS       shift and go to state 279
     MAS             shift and go to state 69

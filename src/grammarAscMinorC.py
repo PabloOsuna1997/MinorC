@@ -329,14 +329,14 @@ def p_expresion(t):
                     | EXPRESION ORBIT EXPRESION
                     | EXPRESION OR EXPRESION
                     | EXPRESION AND EXPRESION
-                    | SIZEOF PARIZQ EXPRESION PARDER
-                    | NOTLOGICA EXPRESION
                     | EXPRESION SHIFTIZQ EXPRESION
                     | EXPRESION SHIFTDER EXPRESION
                     | PARIZQ EXPRESION PARDER                    
                     | C_INT EXPRESION
                     | C_FLOAT EXPRESION
-                    | C_CHAR EXPRESION
+                    | C_CHAR EXPRESION                    
+                    | SIZEOF PARIZQ EXPRESION PARDER                    
+                    | NOTLOGICA EXPRESION
                     | MENOS EXPRESION %prec UMENOS
                     | NOTBIT EXPRESION
                     | ANDBIT EXPRESION %prec UANDBIT
