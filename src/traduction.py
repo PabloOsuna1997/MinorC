@@ -510,4 +510,7 @@ def valueExpression(instruction, ts):
             ultimaPos += 1
             augusTxt += f'$t{str(contadorT)}[{str(i)}]'
             augusTxt += ' = ' + str(valueExpression(instruction.val[i], ts)) + ' ;\n'
-
+    elif isinstance(instruction, Scanf):
+        augusTxt += f'$t{str(contadorT)} = read();\n'
+        contadorT += 1
+        return f'$t{str(contadorT-1)}'

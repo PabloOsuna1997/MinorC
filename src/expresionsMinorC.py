@@ -180,6 +180,13 @@ class ReadConsole(Read):
         self.line = line
         self.column = column
 
+class Scanf(Read):
+     def __init__(self, line, column, scan = 1):
+        self.scan = scan
+        self.line = line
+        self.column = column
+
+
 
 ###-------------------------array section
 class Array:
