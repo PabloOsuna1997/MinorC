@@ -15,9 +15,10 @@ augusTxt = 'main: \n'
 contadorT = 0
 semanticErrorList = []
 ultimaPos = 0
-tableGlobal = {}  #tabla en la que guardare el id y el $tn correspondiente
-arrayTables = []    #guardare todas las tablas de simbolos, servira como una pila con append y pop
+tableGlobal = {}            #tabla en la que guardare el id y el $tn correspondiente
+arrayTables = []            #guardare todas las tablas de simbolos, servira como una pila con append y pop
 contadorEtiquetas = 0
+contadorEtiquetasAux = 0
 
 def execute(input, textEdit): 
     global tableGlobal 
@@ -63,7 +64,7 @@ def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del pad
     print(f"tsLocal: {str(tsLocal)}")
 
 def If_(b, tsPadre):
-    global contadorT, augusTxt, contadorEtiquetas, arrayTables
+    global contadorT, augusTxt, contadorEtiquetas, contadorEtiquetasAux, arrayTables
     augusAuxAux = ''
     augusAux = ''
     tsLocal = {}
@@ -87,7 +88,11 @@ def If_(b, tsPadre):
         i += 1
     
                                                                        # termino de realizar etiquetas
-    augusTxt += f'goto L{len(b.ifElse)};\n'                             # termine de reconocer el FALSE Y INTERMACAMBIO LOS VALORES salto hasta la ultima etiquetas de if elses
+    
+    if len(b.ifElse) <= 0:
+        contadorEtiquetasAux += 1
+
+    augusTxt += f'goto L{len(b.ifElse) + contadorEtiquetasAux};\n'                             # termine de reconocer el FALSE Y INTERMACAMBIO LOS VALORES salto hasta la ultima etiquetas de if elses
     augusAux += augusTxt
     augusTxt = augusAuxAux                                              #le regresamos el contenido anterior
                                                                         #recorremos todos los ifelses
@@ -95,8 +100,8 @@ def If_(b, tsPadre):
         for a in b.ifElse:
             if isinstance(a, IfElse):
                 condition  = valueExpression(a.condition, tsPadre)
-                augusTxt += f'if({str(condition)}) goto L{str(contadorEtiquetas)};\n'
-                augusAux += f'L{str(contadorEtiquetas)}:\n'
+                augusTxt += f'if({str(condition)}) goto L{str(contadorEtiquetas + contadorEtiquetasAux )};\n'
+                augusAux += f'L{str(contadorEtiquetas + contadorEtiquetasAux)}:\n'
                 augusAuxAux = ''
                 augusAuxAux += augusTxt                                 #hacemos un backup de 
                 augusTxt = ''
@@ -115,7 +120,7 @@ def If_(b, tsPadre):
                                                                         # termino de realizar etiquetas
                 
                 augusAux += augusTxt
-                augusAux += f'goto L{len(b.ifElse)};\n'                 #salto hasta la ultima etiquetas de if elses
+                augusAux += f'goto L{len(b.ifElse) + contadorEtiquetasAux};\n'                 #salto hasta la ultima etiquetas de if elses
                 augusTxt = augusAuxAux                                  #le regresamos el contenido anterior 
             else:
                 x = 0
@@ -128,14 +133,15 @@ def If_(b, tsPadre):
                     elif isinstance(z, If):
                         If_(z, tsLocal)
                     x += 1
-                augusTxt += f'goto L{len(b.ifElse)};\n'
+                augusTxt += f'goto L{len(b.ifElse) + contadorEtiquetasAux};\n'
         augusTxt += augusAux
-        augusTxt += f'L{str(len(b.ifElse))}:\n'
-    else:
-        print("no hay ifelse")
+        augusTxt += f'L{str(len(b.ifElse) + contadorEtiquetasAux)}:\n'
+    else:        
+        augusTxt += f'goto L{len(b.ifElse) + contadorEtiquetasAux};\n' 
         augusTxt += augusAux
-        augusTxt += f'L{str(len(b.ifElse))}:\n'
+        augusTxt += f'L{str(len(b.ifElse) + contadorEtiquetasAux)}:\n'
     contadorEtiquetas += 1
+    contadorEtiquetasAux = contadorEtiquetas
 
 def Asignation_(b, ts):
     try:

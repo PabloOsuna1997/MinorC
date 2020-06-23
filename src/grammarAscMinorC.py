@@ -217,8 +217,8 @@ precedence = (
     ('left', 'ORBIT'),
     ('left', 'XORBIT'),
     ('left', 'ANDBIT'),
-    ('nonassoc', 'DIFERENTE','IGUALQUE'),
-    ('nonassoc', 'MENORQUE','MAYORQUE', 'MENORIGUAL', 'MAYORIGUAL'),
+    ('left', 'DIFERENTE','IGUALQUE'),
+    ('left', 'MENORQUE','MAYORQUE', 'MENORIGUAL', 'MAYORIGUAL'),
     ('left', 'SHIFTIZQ', 'SHIFTDER'),
     ('left', 'MAS', 'MENOS'),
     ('left', 'POR', 'DIV', 'MODULO'),
@@ -359,7 +359,9 @@ def p_expresion(t):
         elif(t[2] == '>='): t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.MAYORIGUAL, t.lineno(2), t.lexpos(2))
         elif(t[2] == '<='): t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.MENORIGUAL, t.lineno(2), t.lexpos(2))
         elif(t[2] == '>'): t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.MAYORQUE, t.lineno(2), t.lexpos(2))
-        elif(t[2] == '<'): t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.MENORQUE, t.lineno(2), t.lexpos(2))
+        elif(t[2] == '<'): 
+            print("menor que")
+            t[0] = LogicAndRelational(t[1],t[3], LogicsRelational.MENORQUE, t.lineno(2), t.lexpos(2))
         #bits
         elif(t[2] == '|'): t[0] = RelationalBit(t[1],t[3], BitToBit.ORBIT, t.lineno(1), t.lexpos(1))
         elif(t[2] == '^'): t[0] = RelationalBit(t[1],t[3], BitToBit.XORBIT, t.lineno(1), t.lexpos(1))
@@ -376,6 +378,10 @@ def p_expresion(t):
         elif t[1] == '(int)': t[0] = Cast_(t[2], 'int', t.lineno(1), t.lexpos(1))
         elif t[1] == '(float)': t[0] = Cast_(t[2], 'float', t.lineno(1), t.lexpos(1))
         elif t[1] == '(char)': t[0] = Cast_(t[2], 'char', t.lineno(1), t.lexpos(1))
+
+def p_aux(t):
+    '''
+    '''
 
 def p_expresiones_numero(t):
     '''EXPRESION :    NUMERO'''
