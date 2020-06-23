@@ -341,7 +341,7 @@ def p_expresion(t):
                     | NOTBIT EXPRESION
                     | ANDBIT EXPRESION %prec UANDBIT
                     | LLAMADA_FUNCION'''
-        # | EXPRESION TERNARIO EXPRESION DOSPUNTOS EXPRESION'''
+        #       | EXPRESION TERNARIO EXPRESION DOSPUNTOS EXPRESION'''
 
 
     if len(t) == 4:
@@ -378,10 +378,6 @@ def p_expresion(t):
         elif t[1] == '(int)': t[0] = Cast_(t[2], 'int', t.lineno(1), t.lexpos(1))
         elif t[1] == '(float)': t[0] = Cast_(t[2], 'float', t.lineno(1), t.lexpos(1))
         elif t[1] == '(char)': t[0] = Cast_(t[2], 'char', t.lineno(1), t.lexpos(1))
-
-def p_aux(t):
-    '''
-    '''
 
 def p_expresiones_numero(t):
     '''EXPRESION :    NUMERO'''
