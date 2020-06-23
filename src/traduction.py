@@ -59,9 +59,15 @@ def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del pad
             Asignation_(a, tsLocal)
         elif isinstance(a, If):
             If_(a, tsLocal)
+        elif isinstance(a, PrintF_):
+            PrintF(a, tsLocal)
         i += 1
     
     print(f"tsLocal: {str(tsLocal)}")
+    arrayTables.pop()
+
+def PrintF(b, ts):
+    print("printf")
 
 def If_(b, tsPadre):
     global contadorT, augusTxt, contadorEtiquetas, contadorEtiquetasAux, arrayTables
@@ -146,6 +152,7 @@ def If_(b, tsPadre):
         augusTxt += f'L{str(len(b.ifElse) + contadorEtiquetasAux)}:\n'
     contadorEtiquetas += 1
     contadorEtiquetasAux = contadorEtiquetas
+    arrayTables.pop()      #eliminamos la ts
 
 def Asignation_(b, ts):
     try:
@@ -298,47 +305,52 @@ def valueExpression(instruction, ts):
     if isinstance(instruction, BinaryExpression):      
         num1 = valueExpression(instruction.op1, ts)
         num2 = valueExpression(instruction.op2, ts)
-        try:
-            if instruction.operator == Aritmetics.MAS:
-                
-                augusTxt += '$t'+ str(contadorT)
-                augusTxt += f' = {str(num1)} + {str(num2)} ;\n'
-                contadorT += 1
-                return f'$t{str(contadorT-1)}'
+        if num1 != None and num2 != None:
+            try:
+                if instruction.operator == Aritmetics.MAS:
+                    
+                    augusTxt += '$t'+ str(contadorT)
+                    augusTxt += f' = {str(num1)} + {str(num2)} ;\n'
+                    contadorT += 1
+                    return f'$t{str(contadorT-1)}'
 
-            elif instruction.operator == Aritmetics.MENOS: 
-                
-                augusTxt += '$t'+ str(contadorT)
-                augusTxt += f' = {str(num1)} - {str(num2)} ;\n'
-                contadorT += 1
-                return f'$t{str(contadorT-1)}'
+                elif instruction.operator == Aritmetics.MENOS: 
+                    
+                    augusTxt += '$t'+ str(contadorT)
+                    augusTxt += f' = {str(num1)} - {str(num2)} ;\n'
+                    contadorT += 1
+                    return f'$t{str(contadorT-1)}'
 
-            elif instruction.operator == Aritmetics.POR:
-                
-                augusTxt += '$t'+ str(contadorT)
-                augusTxt += f' = {str(num1)} * {str(num2)} ;\n'
-                contadorT += 1
-                return f'$t{str(contadorT-1)}'
+                elif instruction.operator == Aritmetics.POR:
+                    
+                    augusTxt += '$t'+ str(contadorT)
+                    augusTxt += f' = {str(num1)} * {str(num2)} ;\n'
+                    contadorT += 1
+                    return f'$t{str(contadorT-1)}'
 
-            elif instruction.operator == Aritmetics.DIV: 
-                
-                augusTxt += '$t'+ str(contadorT)
-                augusTxt += f' = {str(num1)} / {str(num2)} ;\n'
-                contadorT += 1
-                return f'$t{str(contadorT-1)}'
+                elif instruction.operator == Aritmetics.DIV: 
+                    
+                    augusTxt += '$t'+ str(contadorT)
+                    augusTxt += f' = {str(num1)} / {str(num2)} ;\n'
+                    contadorT += 1
+                    return f'$t{str(contadorT-1)}'
 
-            elif instruction.operator == Aritmetics.MODULO: 
-                
-                augusTxt += '$t'+ str(contadorT)
-                augusTxt += f' = {str(num1)} % {str(num2)} ;\n'
-                contadorT += 1
-                return f'$t{str(contadorT-1)}'
+                elif instruction.operator == Aritmetics.MODULO: 
+                    
+                    augusTxt += '$t'+ str(contadorT)
+                    augusTxt += f' = {str(num1)} % {str(num2)} ;\n'
+                    contadorT += 1
+                    return f'$t{str(contadorT-1)}'
 
-        except:
-            print("trono")
-            seob = seOb('Error Semantico: Tipos de datos en operacion aritmetica.', 0, 0)
-            semanticErrorList.append(seob)
-            return '#'
+            except:
+                print("trono")
+                seob = seOb('Error Semantico: Tipos de datos en operacion aritmetica.', 0, 0)
+                semanticErrorList.append(seob)
+                return '#'
+        else:
+            #retornar alfgo para que no traduzca mas 
+            print("Error semantico la varibale indicada no existe suma NONE")
+
     elif isinstance(instruction, LogicAndRelational):
         num1 = valueExpression(instruction.op1, ts)
         num2 = valueExpression(instruction.op2, ts)

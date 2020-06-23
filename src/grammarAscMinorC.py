@@ -515,7 +515,11 @@ def p_instrIn(t):
                     | GOTO ID PUNTOCOMA
                     | PUNTOCOMA'''
 
-    t[0] = t[1]
+    if t[1] == 'printf':
+        t[0] = PrintF_(t[3], t.lineno(1), t.lexpos(1))
+    else:
+        t[0] = t[1]
+
 
 def p_declaracionStructInterna_error(t):
     'DECLARACION_STRUCT_INTERNA : STRUCT ID ID IGUAL error PUNTOCOMA'

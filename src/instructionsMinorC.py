@@ -1,11 +1,11 @@
 class Instruction:
     '''this is an abstractab class'''
 
-class Print_(Instruction) :
+class PrintF_(Instruction) :
     '''print statment, recieve a string'''
     
-    def __init__(self, cadena, line, column):
-         self.cadena = cadena
+    def __init__(self, expressions, line, column):
+         self.expressions = expressions
          self.line = line
          self.column = column
 
