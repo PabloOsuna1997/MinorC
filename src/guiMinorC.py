@@ -580,7 +580,7 @@ class Ui_Augus(object):
         try:
             rg.export_to_pdf(data,1)
             data[:] = []
-            grammar.LexicalErrosList[:] = []           
+            grammarAscMinorC.LexicalErrosList[:] = []           
 
             self.msgBox = QtWidgets.QMessageBox()
             self.msgBox.setText("Despelgando reporte.")
@@ -746,6 +746,22 @@ class Ui_Augus(object):
             traduction.semanticErrorList = []
             traduction.ultimaPos = 0
 
+            #region initialization augus
+            global banderaDescAsc
+            banderaDescAsc = True
+            self.textEditConsole.setText("CONSOLE:\n")
+            execute.contador = 4  #for grapho   
+            execute.currentAmbit = 'main'   #current ambit
+            execute.currentParams = []  #list of parameters that the current function will have
+            execute.semanticErrorList = []
+            execute.tsGlobal = {}
+            execute.lecturasRead = []       #sera modificada desde gui
+            execute.la = 0
+            execute.co = 0 
+            execute.pasadas = 0
+            self.textDebug.setPlainText("")
+            #endregion
+
             content = self.tabWidget.currentWidget().findChild(QtWidgets.QTextEdit,"textEdit").toPlainText()
             content += '\n'        
             content.encode('utf-8')
@@ -779,6 +795,7 @@ class Ui_Augus(object):
                 self.textEditConsole.append(augus)
                 print(f"texto august:\n{augus}")
                 print("traduccion completa")
+                #VALIDACION DE ERRORES SEMANTICOS
             
         #except:
             #self.msgBox = QtWidgets.QMessageBox()

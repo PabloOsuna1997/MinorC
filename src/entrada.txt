@@ -26,6 +26,19 @@ int funcion(struct nodo nodo){
     if (5<6){
         char cadena[] = "hola";
     }
+
+    if(x>0<20){
+        int d = 3;
+    }
+    else if(x<4){
+        int d = 4;
+    }
+    else if (x>0){
+        int d = 5;
+    }
+    else{
+        int d = 6;
+    }
 }
 
 main: 
