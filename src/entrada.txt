@@ -1,1 +1,19 @@
-int a = 2*5+6*2, b = 3, c;
+int a ;
+
+int funcion(struct nodo nodo){
+    int a = 3, b = 1;
+
+    a  = a + 1;
+    b += 4;
+    b -= 4;
+    b *= 4;
+    b /= 4;
+    b %= 4;
+    b <<= 4;
+    b >>= 4;
+    b &= 4;
+    b ^= 4;
+    b |= 4;
+
+}
+

@@ -18,6 +18,18 @@ class Declaration(Instruction):
         self.line = line
         self.column = column
 
+class FunctionDeclaration(Instruction):
+    '''functions declarations'''
+
+    def __init__(self, type_, id, params, instructions, line, column):
+        self.type_ = type_
+        self.id = id
+        self.params = params
+        self.instructions = instructions
+        self.line = line
+        self.column = column
+
+
 class Unset(Instruction):
     '''variables destruction'''
 
@@ -58,5 +70,15 @@ class DeclacionFunction(Instruction):
         self.id = id
         self.params = params
         self.ret = ret
+        self.line = line
+        self.column = column
+
+
+class Asignation(Instruction):
+    'asignation'
+    def __init__(self, id, op, expresion, line, column):
+        self.id = id
+        self.op = op
+        self.expresion = expresion
         self.line = line
         self.column = column

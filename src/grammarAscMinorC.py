@@ -428,28 +428,46 @@ def p_parametros(t):
 def p_declaFuncion(t):
     'DECLA_FUNCIONES :    TIPO ID PARIZQ RECEPCION_PARAMETROS PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'
 
+    t[0] = FunctionDeclaration(t[1], t[2], t[4], t[7], t.lineno(2), t.lexpos(2))
+
 def p_recepcionParametros(t):
     '''RECEPCION_PARAMETROS :   RECEPCION_PARAMETROS COMA PARAM
                                 | PARAM'''
 
+    if len(t) == 4:
+        t[1].append(t[3])
+        t[0] = t[1]
+    else:
+        t[0] = [t[1]]
+
 def p_recepcionParametrosEmpty(t):
     'RECEPCION_PARAMETROS :  '
+    t[0] = []
 
 def p_param(t):
-    'PARAM :    TIPO_FUN ID'
+    'PARAM :    TIPO_FUN PUNT'
+
+    t[0] = Param(t[1], t[2], t.lineno(2), t.lexpos(2))
 
 def p_tipoFuncion(t):
     '''TIPO_FUN :   TIPO
                     | STRUCT
     '''
+    t[0] = t[1]
 
 def p_punt(t):
-    '''PUNT :     ID PUNTERO
+    '''PUNT :     ID ID
                 | ID '''
 
 def p_instruccionesInternas(t):
     '''INSTRUCCIONES_INTERNAS :     INSTRUCCIONES_INTERNAS INSTR_IN
                                     | INSTR_IN'''
+
+    if len(t) == 3:
+        t[1].append(t[2])
+        t[0] = t[1]
+    else:
+        t[0] = [t[1]]
 
 def p_instrIn(t):
     '''INSTR_IN :   DECLA_VARIABLES
@@ -469,10 +487,12 @@ def p_instrIn(t):
                     | GOTO ID PUNTOCOMA
                     | PUNTOCOMA'''
 
+    t[0] = t[1]
+
 def p_declaracionStructInterna(t):
-    '''DECLARACION_STRUCT_INTERNA : STRUCT ID PUNTERO IGUAL EXPRESION PUNTOCOMA
-                                    | STRUCT ID PUNTERO IGUAL PARIZQ STRUCT PUNTERO PARDER MALLOC PARIZQ SIZEOF PARIZQ STRUCT PUNTERO PARDER PARDER PUNTOCOMA
-                                    | STRUCT ID PUNTERO PUNTOCOMA
+    '''DECLARACION_STRUCT_INTERNA : STRUCT ID ID IGUAL EXPRESION PUNTOCOMA
+                                    | STRUCT ID ID IGUAL PARIZQ STRUCT ID PARDER MALLOC PARIZQ SIZEOF PARIZQ STRUCT ID PARDER PARDER PUNTOCOMA
+                                    | STRUCT ID ID PUNTOCOMA
                                     | ID ASISTRCUT PUNTOCOMA
     '''
 
@@ -488,15 +508,14 @@ def p_asignaciones(t):
                         | ID CORCHETES LISTA_PUNTOS OP_ASIGNACION EXPRESION PUNTOCOMA
                         | ID LISTA_PUNTOS OP_ASIGNACION EXPRESION PUNTOCOMA'''
 
-def p_listaPuntos(t):
-    '''LISTA_PUNTOS :   LISTA_PUNTOS ACCES ID
-                        | LISTA_PUNTOS ACCES ID CORCHETES
-                        | ACCES ID
-                        | ACCES ID CORCHETES'''
+    if len(t) == 5:  #ID OP_ASIGNACION EXPRESION PUNTOCOMA
+        t[0] = Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))
 
-def p_listaFlechas(t):
-    '''ACCES :   PUNTO
-                | FLECHA'''
+def p_listaPuntos(t):
+    '''LISTA_PUNTOS :   LISTA_PUNTOS PUNTO ID
+                        | LISTA_PUNTOS PUNTO ID CORCHETES
+                        | PUNTO ID
+                        | PUNTO ID CORCHETES'''
 
 def p_if(t):
     '''IF_ :  IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_
@@ -559,7 +578,7 @@ def p_opAsignacion(t):
                         | ANDIGUAL
                         | XORIGUAL
                         | ORIGUAL'''
-
+    t[0] = t[1]
    
 ##---------------------------DECLARACION DE STRUCTS------------------------
 def p_declaStructs(t):
@@ -571,35 +590,12 @@ def p_atributos(t):
 
 def p_atr(t):
     '''ATR :    DECLA_VARIABLES
-                | STRUCT ID PUNTERO ASIGNA_STRUCT PUNTOCOMA
-                | STRUCT ID PUNTERO CORCHETES ASIGNA_STRUCT PUNTOCOMA'''
+                | STRUCT ID ID ASIGNA_STRUCT PUNTOCOMA
+                | STRUCT ID ID CORCHETES ASIGNA_STRUCT PUNTOCOMA'''
 
 def p_asignaStruct(t):
     '''ASIGNA_STRUCT :    IGUAL EXPRESION
                         | '''
-
-def p_puntero(t):
-    '''PUNTERO :    LISTA_ASTERISCOS ID
-                    | ID LISTA_ASTERISCOS
-                    | ID '''
-    if len(t) == 3:
-        if isinstance(t[1], list):
-            t[1].append(t[2])
-            t[0] = t[1]
-        else:
-            t[2].append(t[1])
-            t[0] = t[1]
-    else:
-        t[0] = t[1]
-
-def p_listaAsteriscos(t):
-    '''LISTA_ASTERISCOS :   LISTA_ASTERISCOS POR
-                            | POR '''
-
-    if len(t) == 2: t[0] = [t[1]]
-    else: 
-        t[1].append(t[2])
-        t[0] = t[1]
 
 def p_error(t):
     print("Error sintactico en '%s'" % t.value + "line: "+ str(t.lineno))

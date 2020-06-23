@@ -15,16 +15,17 @@ import time
 augusTxt = 'main: \n'
 contadorT = 0
 semanticErrorList = []
-tableTmp = {}  #tabla en la que guardare el id y el $tn correspondiente
 ultimaPos = 0
+tableGlobal = {}  #tabla en la que guardare el id y el $tn correspondiente   
 
-def execute(input, textEdit):
-    tableTmp.clear()
-    process(input)
-    print(str(tableTmp))
+def execute(input, textEdit): 
+    global tableGlobal 
+    tableGlobal.clear()   
+    process(input, tableGlobal)
+    print(f"tsGlobal: {str(tableGlobal)}")
     return augusTxt
 
-def process(instructions):
+def process(instructions,ts):
     try:
         i = 0
         while i < len(instructions):
@@ -32,25 +33,108 @@ def process(instructions):
             b = instructions[i]
 
             if isinstance(b, Declaration):
-                Declaration_(b.listId)
+                Declaration_(b.listId, ts)
+            elif isinstance(b, FunctionDeclaration):
+                FunctionDeclaration_(b, ts)
             i += 1
     except:
         pass
 
-def Declaration_(b):
-    global augusTxt, contadorT, tableTmp
+def FunctionDeclaration_(b, ts):
+    global augusTxt
+    tsLocal = {}
+    tsLocal.clear()
+    augusTxt += f'{str(b.id)} :\n'
+    #recorrer las listas de instrucciones
+    i = 0
+    while i < len(b.instructions):
+        a = b.instructions[i]
+        if isinstance(a, Declaration):
+            Declaration_(a.listId, tsLocal)
+        elif isinstance(a, Asignation):
+            Asignation_(a, tsLocal)
+        i += 1
+    
+    print(f"tsLocal: {str(tsLocal)}")
+
+def Asignation_(b, ts):
+    try:
+        global contadorT, augusTxt
+        res = valueExpression(b.expresion,ts)
+        id = ts.get(b.id)
+        if b.op == '=':
+            #print(f"id: {id}")
+            augusTxt += id
+            augusTxt += ' = ' + str(res) + ' ;\n'
+            ts.setdefault(b.id, f'$t{str(contadorT)}')
+            contadorT += 1
+        elif b.op == '+=':
+            #print(f"id: {id}")
+            augusTxt += f'{id} = {id} + {str(res)};\n'
+            ts.setdefault(b.id, f'$t{str(contadorT)}')
+            contadorT += 1
+        elif b.op == '-=':
+            #print(f"id: {id}")
+            augusTxt += f'{id} = {id} - {str(res)};\n'
+            ts.setdefault(b.id, f'$t{str(contadorT)}')
+            contadorT += 1
+        elif b.op == '*=':
+            #print(f"id: {id}")
+            augusTxt += f'{id} = {id} * {str(res)};\n'
+            ts.setdefault(b.id, f'$t{str(contadorT)}')
+            contadorT += 1    
+        elif b.op == '/=':
+            #print(f"id: {id}")
+            augusTxt += f'{id} = {id} / {str(res)};\n'
+            ts.setdefault(b.id, f'$t{str(contadorT)}')
+            contadorT += 1  
+        elif b.op == '%=':
+            #print(f"id: {id}")
+            augusTxt += f'{id} = {id} % {str(res)};\n'
+            ts.setdefault(b.id, f'$t{str(contadorT)}')
+            contadorT += 1
+        elif b.op == '<<=':
+            #print(f"id: {id}")
+            augusTxt += f'{id} = {id} << {str(res)};\n'
+            ts.setdefault(b.id, f'$t{str(contadorT)}')
+            contadorT += 1
+        elif b.op == '>>=':
+            #print(f"id: {id}")
+            augusTxt += f'{id} = {id} >> {str(res)};\n'
+            ts.setdefault(b.id, f'$t{str(contadorT)}')
+            contadorT += 1
+        elif b.op == '&=':
+            #print(f"id: {id}")
+            augusTxt += f'{id} = {id} & {str(res)};\n'
+            ts.setdefault(b.id, f'$t{str(contadorT)}')
+            contadorT += 1
+        elif b.op == '^=':
+            #print(f"id: {id}")
+            augusTxt += f'{id} = {id} ^ {str(res)};\n'
+            ts.setdefault(b.id, f'$t{str(contadorT)}')
+            contadorT += 1
+        elif b.op == '|=':
+            #print(f"id: {id}")
+            augusTxt += f'{id} = {id} | {str(res)};\n'
+            ts.setdefault(b.id, f'$t{str(contadorT)}')
+            contadorT += 1
+    except:
+        print("Error semantico la varibale indicada no existe")
+
+def Declaration_(b, ts):
+    global augusTxt, contadorT
     for i in b:
         if isinstance(i, SingleDeclaration):
-            res = valueExpression(i.val)
+            res = valueExpression(i.val, ts)
             augusTxt += '$t'+ str(contadorT)
             augusTxt += ' = ' + str(res) + ' ;\n'
-            tableTmp.setdefault(i.id, f'$t{str(contadorT)}')
+            ts.setdefault(i.id, f'$t{str(contadorT)}')
             contadorT += 1
         elif isinstance(i, IdentifierArray):
             augusTxt += '$t' + str(contadorT)
             augusTxt += ' = array();\n'
             if len(i.expressions) == 1:
-                res = valueExpression(i.expressions[0])
+                res = valueExpression(i.expressions[0],ts)
                 if res != None:
                     if isinstance(res, int):
                         for z in range(0,res):
@@ -59,41 +143,38 @@ def Declaration_(b):
                     else:
                         augusTxt += '$t' + str(contadorT)
                         augusTxt += f'[{str(res)}] = 0;\n'
-            
-            tableTmp.setdefault(i.id, f'$t{str(contadorT)}')
+            ts.setdefault(i.id, f'$t{str(contadorT)}')
             contadorT += 1
         elif isinstance(i, DeclarationArrayInit):
-            dime = valueExpression(i.dimentions[0])
+            dime = valueExpression(i.dimentions[0], ts)
             if dime != None:
                 if dime > len(i.val.val)-1 :
                     augusTxt += '$t'+ str(contadorT)
                     augusTxt += ' = array();\n'
-                    res = valueExpression(i.val)
-
-                    if dime == None:
-                        for v in range(ultimaPos, dime):
-                            augusTxt += f'$t{str(contadorT)}[{str(v)}]'
-                            augusTxt += ' = 0 ;\n'            
-                    tableTmp.setdefault(i.id, f'$t{str(contadorT)}')
+                    res = valueExpression(i.val, ts)
+                    for v in range(ultimaPos, dime):
+                        augusTxt += f'$t{str(contadorT)}[{str(v)}]'
+                        augusTxt += ' = 0 ;\n'            
+                    ts.setdefault(i.id, f'$t{str(contadorT)}')
                     contadorT += 1
                 
                 else:
-                    print("error de dimensiones")
+                    print("Error semantico, dimensiones incorrectas")
             else:
                 augusTxt += '$t'+ str(contadorT)
                 augusTxt += ' = array();\n'
-                res = valueExpression(i.val)
+                res = valueExpression(i.val, ts)
                 if isinstance(res, str):
-                    tableTmp.setdefault(i.id, f'{str(res)}')
+                    ts.setdefault(i.id, f'{str(res)}')
                 else:
-                    tableTmp.setdefault(i.id, f'$t{str(contadorT)}')
+                    ts.setdefault(i.id, f'$t{str(contadorT)}')
                 contadorT += 1
 
-def valueExpression(instruction):
-    global contadorT, augusTxt, tableTmp
+def valueExpression(instruction, ts):
+    global contadorT, augusTxt
     if isinstance(instruction, BinaryExpression):      
-        num1 = valueExpression(instruction.op1)
-        num2 = valueExpression(instruction.op2)
+        num1 = valueExpression(instruction.op1, ts)
+        num2 = valueExpression(instruction.op2, ts)
         try:
             if instruction.operator == Aritmetics.MAS:
                 
@@ -136,8 +217,8 @@ def valueExpression(instruction):
             semanticErrorList.append(seob)
             return '#'
     elif isinstance(instruction, LogicAndRelational):
-        num1 = valueExpression(instruction.op1)
-        num2 = valueExpression(instruction.op2)
+        num1 = valueExpression(instruction.op1, ts)
+        num2 = valueExpression(instruction.op2, ts)
         try:
             if instruction.operator == LogicsRelational.MAYORQUE: 
                 augusTxt += '$t'+ str(contadorT)
@@ -200,21 +281,23 @@ def valueExpression(instruction):
             return '#'
     elif isinstance(instruction, Not):
         
-        num1 = valueExpression(instruction.expression)
+        num1 = valueExpression(instruction.expression, ts)
         augusTxt += '$t'+ str(contadorT)
         augusTxt += f' = !{str(num1)} ;\n'
         contadorT += 1
         return f'$t{str(contadorT-1)}'
     elif isinstance(instruction, NegativeNumber):        
-        num1 = valueExpression(instruction.expression)
+        num1 = valueExpression(instruction.expression, ts)
         augusTxt += '$t'+ str(contadorT)
         augusTxt += f' = {str(num1)} * -1 ;\n'
         contadorT += 1
         return f'$t{str(contadorT-1)}'
-    elif isinstance(instruction, Identifier): return tableTmp.get(instruction.id)
+    elif isinstance(instruction, Identifier): 
+        #buscar en tabla local y en tabla global de lo contrario reportar error
+        return ts.get(instruction.id)
     elif isinstance(instruction, Number): return instruction.val
     elif isinstance(instruction, Cast_):
-        num1 = valueExpression(instruction.expression)
+        num1 = valueExpression(instruction.expression, ts)
         if instruction.type == 'float':  
             augusTxt += '$t'+ str(contadorT)
             augusTxt += f' = (float){str(num1)};\n'
@@ -251,8 +334,8 @@ def valueExpression(instruction):
         return f'$t{str(contadorT-1)}'
     elif isinstance(instruction, ReadConsole): print("scanf")
     elif isinstance(instruction, RelationalBit):
-        num1 = valueExpression(instruction.op1)
-        num2 = valueExpression(instruction.op2)
+        num1 = valueExpression(instruction.op1, ts)
+        num2 = valueExpression(instruction.op2, ts)
         
         if instruction.operator == BitToBit.ANDBIT: 
             augusTxt += '$t'+ str(contadorT)
@@ -280,13 +363,13 @@ def valueExpression(instruction):
             contadorT += 1
             return f'$t{str(contadorT-1)}'
     elif isinstance(instruction, NotBit):
-        num1 = valueExpression(instruction.expression)
+        num1 = valueExpression(instruction.expression, ts)
         augusTxt += '$t'+ str(contadorT)
         augusTxt += f' = ~{str(num1)};\n'
         contadorT += 1
         return f'$t{str(contadorT-1)}'
     elif isinstance(instruction, ReferenceBit):
-        num1 = valueExpression(instruction.expression)
+        num1 = valueExpression(instruction.expression, ts)
         augusTxt += '$t'+ str(contadorT)
         augusTxt += f' = &{str(num1)};\n'
         contadorT += 1
@@ -298,4 +381,5 @@ def valueExpression(instruction):
         for i in range(0, len(instruction.val)):
             ultimaPos += 1
             augusTxt += f'$t{str(contadorT)}[{str(i)}]'
-            augusTxt += ' = ' + str(valueExpression(instruction.val[i])) + ' ;\n'
+            augusTxt += ' = ' + str(valueExpression(instruction.val[i], ts)) + ' ;\n'
+

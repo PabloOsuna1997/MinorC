@@ -205,3 +205,10 @@ class DeclarationArrayInit(Expretion):
         self.val = val
         self.line = line
         self.column = column
+
+class Param(Expretion):
+    def __init__(self, type_, id, line, column):
+        self.id = id
+        self.type_ = type_
+        self.line = line
+        self.column = column
