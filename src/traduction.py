@@ -67,7 +67,25 @@ def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del pad
     arrayTables.pop()
 
 def PrintF(b, ts):
-    print("printf")
+    print("estoy en print")
+    global contadorT, augusTxt
+    #en la pos [0] siempre vendra la cadena "hola %d" etc..
+    try:
+        cadena = b.expressions[0].string
+        cadena = cadena.split(' ')
+        i = 0
+        contadorValor = 1
+        while i < len(cadena):
+            if cadena[i] == '%d' or cadena[i] == '%s' or cadena[i] == '%f' or cadena[i] == '%c':
+                cadena[i] = valueExpression(b.expressions[contadorValor], ts)
+                contadorValor += 1
+            i += 1
+        #my_lst_str = ' '.join(map(str, cadena))        
+        #print(f"printf: {my_lst_str}")
+        for a in cadena:
+            augusTxt += f'print({str(a)});\n'
+    except:
+        print("Error semantico en el print.")
 
 def If_(b, tsPadre):
     global contadorT, augusTxt, contadorEtiquetas, contadorEtiquetasAux, arrayTables
@@ -350,7 +368,6 @@ def valueExpression(instruction, ts):
         else:
             #retornar alfgo para que no traduzca mas 
             print("Error semantico la varibale indicada no existe suma NONE")
-
     elif isinstance(instruction, LogicAndRelational):
         num1 = valueExpression(instruction.op1, ts)
         num2 = valueExpression(instruction.op2, ts)
@@ -460,7 +477,7 @@ def valueExpression(instruction, ts):
             return f'$t{str(contadorT-1)}'
     elif isinstance(instruction, String_):
         augusTxt += '$t'+ str(contadorT)
-        augusTxt += f' = {instruction.string} ;\n'
+        augusTxt += f' = \"{instruction.string}\" ;\n'
         contadorT += 1
         return f'$t{str(contadorT-1)}'
     elif isinstance(instruction, ExpressionsDeclarationArray): return 'array'
