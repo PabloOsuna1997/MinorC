@@ -406,7 +406,7 @@ def p_expresiones_listaCorchetesInit(t):
     t[0] = t[1]
 
 def p_listaInitCorchete(t):
-    '''LISTA_INIT_CORCHETE :    CORIZQ PARAMETROS CORDER 
+    '''LISTA_INIT_CORCHETE :    LLAVEIZQ PARAMETROS LLAVEDER 
     '''
     t[0] = InitializationArray(t.lineno(1), t.lexpos(1), t[2])
 
@@ -427,7 +427,6 @@ def p_parametros(t):
 ##----------------------DECLARACION DE FUNCIONES---------------------
 def p_declaFuncion(t):
     'DECLA_FUNCIONES :    TIPO ID PARIZQ RECEPCION_PARAMETROS PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'
-
 
 def p_recepcionParametros(t):
     '''RECEPCION_PARAMETROS :   RECEPCION_PARAMETROS COMA PARAM

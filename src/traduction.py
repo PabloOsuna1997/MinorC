@@ -64,20 +64,30 @@ def Declaration_(b):
             contadorT += 1
         elif isinstance(i, DeclarationArrayInit):
             dime = valueExpression(i.dimentions[0])
-            if dime > len(i.val.val)-1 :
+            if dime != None:
+                if dime > len(i.val.val)-1 :
+                    augusTxt += '$t'+ str(contadorT)
+                    augusTxt += ' = array();\n'
+                    res = valueExpression(i.val)
+
+                    if dime == None:
+                        for v in range(ultimaPos, dime):
+                            augusTxt += f'$t{str(contadorT)}[{str(v)}]'
+                            augusTxt += ' = 0 ;\n'            
+                    tableTmp.setdefault(i.id, f'$t{str(contadorT)}')
+                    contadorT += 1
+                
+                else:
+                    print("error de dimensiones")
+            else:
                 augusTxt += '$t'+ str(contadorT)
                 augusTxt += ' = array();\n'
                 res = valueExpression(i.val)
-
-                for v in range(ultimaPos, dime):
-                    augusTxt += f'$t{str(contadorT)}[{str(v)}]'
-                    augusTxt += ' = 0 ;\n'
-
-            
-                tableTmp.setdefault(i.id, f'$t{str(contadorT)}')
+                if isinstance(res, str):
+                    tableTmp.setdefault(i.id, f'{str(res)}')
+                else:
+                    tableTmp.setdefault(i.id, f'$t{str(contadorT)}')
                 contadorT += 1
-            else:
-                print("error de dimensiones")
 
 def valueExpression(instruction):
     global contadorT, augusTxt, tableTmp
@@ -225,7 +235,11 @@ def valueExpression(instruction):
             augusTxt += f' = (otro){str(num1)};\n'
             contadorT += 1
             return f'$t{str(contadorT-1)}'
-    elif isinstance(instruction, String_): return instruction.string
+    elif isinstance(instruction, String_):
+        augusTxt += '$t'+ str(contadorT)
+        augusTxt += f' = {instruction.string} ;\n'
+        contadorT += 1
+        return f'$t{str(contadorT-1)}'
     elif isinstance(instruction, ExpressionsDeclarationArray): return 'array'
     elif instruction == 'array': return 'array'
     elif isinstance(instruction, IdentifierArray):
