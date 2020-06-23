@@ -254,6 +254,8 @@ def p_declaracionGlobal(t):
     t[0] = t[1]
 
 ##----------------------------------DECLARACION DE VARIABLES ------------------
+def p_declaVariable_error(t):
+    'DECLA_VARIABLES :  TIPO error PUNTOCOMA'
 def p_declaVariable(t):
     'DECLA_VARIABLES :  TIPO LISTA_ID PUNTOCOMA'
     #print(f'tipo: {str(t[1])} valor: {str(t[2])}')
@@ -268,6 +270,8 @@ def p_tipo(t):
                 #| STRUCT  -> quite el tipo struct 
     t[0] = t[1]
 
+def p_listaId_error(t):
+    'LISTA_ID :   LISTA_ID error ASIGNA'
 def p_listaId(t):
     '''LISTA_ID :   LISTA_ID COMA ASIGNA
                     | ASIGNA'''
@@ -278,6 +282,8 @@ def p_listaId(t):
         t[1].append(t[3])
         t[0] = t[1]
 
+def p_asigna_error(t):
+    'ASIGNA :     ID error EXPRESION'
 def p_asigna(t):
     '''ASIGNA :     ID IGUAL EXPRESION
                     | ID CORCHETES
@@ -299,6 +305,10 @@ def p_corchetes(t):
     else:
         t[0] = [t[1]]
 
+def p_corchete1_error(t):
+    'CORCHETE :     CORIZQ VALOR error'
+def p_corchete2_error(t):
+    'CORCHETE :     error VALOR CORDER'
 def p_corchete(t):
     'CORCHETE :     CORIZQ VALOR CORDER'
     t[0] = t[2]
@@ -311,6 +321,8 @@ def p_valorEmpty(t):
     'VALOR : '
     t[0] = []
 
+def p_expresion_error(t):
+    'EXPRESION :  EXPRESION error EXPRESION'
 def p_expresion(t):
     '''EXPRESION :  EXPRESION MAS EXPRESION
                     | EXPRESION MENOS EXPRESION
@@ -391,6 +403,8 @@ def p_expresiones_char(t):
     '''EXPRESION :    CHAR_'''
     t[0] = String_(t[1], t.lineno(1), t.lexpos(1))
 
+def p_expresiones_id_error(t):
+    'EXPRESION :    error CORCHETES'
 def p_expresiones_id(t):
     '''EXPRESION :    ID CORCHETES
                         | ID CORCHETES LISTA_PUNTOS
@@ -416,6 +430,8 @@ def p_llamadaFuncion(t):
     '''LLAMADA_FUNCION :     ID PARIZQ PARAMETROS PARDER 
                             | ID PARIZQ PARDER'''
 
+def p_parametros_error(t):
+    'PARAMETROS :     PARAMETROS error EXPRESION'
 def p_parametros(t):
     '''PARAMETROS :     PARAMETROS COMA EXPRESION
                         | EXPRESION '''
@@ -427,11 +443,15 @@ def p_parametros(t):
         t[0] = [t[1]]
 
 ##----------------------DECLARACION DE FUNCIONES---------------------
+def p_declaFuncion_error(t):
+    'DECLA_FUNCIONES :    TIPO ID PARIZQ RECEPCION_PARAMETROS PARDER LLAVEIZQ error LLAVEDER'
 def p_declaFuncion(t):
     'DECLA_FUNCIONES :    TIPO ID PARIZQ RECEPCION_PARAMETROS PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'
 
     t[0] = FunctionDeclaration(t[1], t[2], t[4], t[7], t.lineno(2), t.lexpos(2))
 
+def p_recepcionParametros_error(t):
+    'RECEPCION_PARAMETROS :   RECEPCION_PARAMETROS COMA error'
 def p_recepcionParametros(t):
     '''RECEPCION_PARAMETROS :   RECEPCION_PARAMETROS COMA PARAM
                                 | PARAM'''
@@ -471,6 +491,8 @@ def p_instruccionesInternas(t):
     else:
         t[0] = [t[1]]
 
+def p_instrIn_error(t):
+    'INSTR_IN :   error'
 def p_instrIn(t):
     '''INSTR_IN :   DECLA_VARIABLES
                     | DECLARACION_STRUCT_INTERNA
@@ -491,6 +513,10 @@ def p_instrIn(t):
 
     t[0] = t[1]
 
+def p_declaracionStructInterna_error(t):
+    'DECLARACION_STRUCT_INTERNA : STRUCT ID ID IGUAL error PUNTOCOMA'
+def p_declaracionStructIntern2_error(t):
+    'DECLARACION_STRUCT_INTERNA : STRUCT ID error PUNTOCOMA'
 def p_declaracionStructInterna(t):
     '''DECLARACION_STRUCT_INTERNA : STRUCT ID ID IGUAL EXPRESION PUNTOCOMA
                                     | STRUCT ID ID IGUAL PARIZQ STRUCT ID PARDER MALLOC PARIZQ SIZEOF PARIZQ STRUCT ID PARDER PARDER PUNTOCOMA
@@ -519,6 +545,8 @@ def p_listaPuntos(t):
                         | PUNTO ID
                         | PUNTO ID CORCHETES'''
 
+def p_if_error(t):
+    '''IF_ :  IF error LLAVEDER ELSE_IF_'''
 def p_if(t):
     # Si -> if (condicion) instrucciones ( else if (condicion) instrucciones) * ( else instrucciones)?
 
@@ -562,16 +590,24 @@ def p_else(t):
     '''ELSE_ :  ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER 
     '''
     t[0] = Else(t[3], t.lineno(1), t.lexpos(1))
-                
+
+def p_for_error(t): 
+    'FOR_ :     FOR error LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'               
 def p_for(t):
     'FOR_ :     FOR PARIZQ DECLA_VARIABLES EXPRESION PUNTOCOMA INCRE_DECRE PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'
 
+def p_while_error(t):
+    'WHILE_ :   WHILE error LLAVEDER'
 def p_while(t):
     'WHILE_ :   WHILE PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'
 
+def p_doWhile_error(t):
+    'DO_ :  DO error PUNTOCOMA'
 def p_doWhile(t):
     'DO_ :  DO LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER WHILE PARIZQ EXPRESION PARDER PUNTOCOMA'
 
+def p_switch_error(t):
+    'SWITCH_ :  SWITCH error LLAVEDER'
 def p_switch(t):
     'SWITCH_ :  SWITCH PARIZQ EXPRESION PARDER LLAVEIZQ LISTA_CASES DEFAULT_ LLAVEDER'
 
@@ -579,6 +615,8 @@ def p_listaCases(t):
     '''LISTA_CASES :  LISTA_CASES CASE_
                     | CASE_'''
 
+def p_case_error(t):
+    'CASE_ :    CASE error BREAK_'
 def p_case(t):
     'CASE_ :    CASE EXPRESION DOSPUNTOS INSTRUCCIONES_INTERNAS BREAK_'
 
@@ -619,6 +657,8 @@ def p_opAsignacion(t):
     t[0] = t[1]
    
 ##---------------------------DECLARACION DE STRUCTS------------------------
+def p_declaStructs_error(t):
+    'DECLA_STRUCTS :  STRUCT ID LLAVEIZQ error LLAVEDER PUNTOCOMA'
 def p_declaStructs(t):
     'DECLA_STRUCTS :  STRUCT ID LLAVEIZQ ATRIBUTOS LLAVEDER PUNTOCOMA'
 

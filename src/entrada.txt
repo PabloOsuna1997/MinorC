@@ -41,6 +41,23 @@ int funcion(struct nodo nodo){
     }
 }
 
+
+
+int a ;
+
+int funcion(struct nodo nodo){
+    int a = 3, b = 1;
+
+    if (3>1){
+        a = a * 5;
+	if (1==1){
+		int z = 4;
+	}
+    }
+}
+
+
+
 main: 
 $t0 = 0 ;
 funcion :

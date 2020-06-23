@@ -84,6 +84,7 @@ def If_(b, tsPadre):
         elif isinstance(a, Asignation):
             Asignation_(a, tsLocal)
         elif isinstance(a, If):
+            contadorEtiquetas += 1
             If_(a, tsLocal)
         i += 1
     
@@ -115,6 +116,7 @@ def If_(b, tsPadre):
                     elif isinstance(z, Asignation):
                         Asignation_(z, tsLocal)
                     elif isinstance(z, If):
+                        contadorEtiquetas += 1
                         If_(a, tsLocal)
                     x += 1
                                                                         # termino de realizar etiquetas
