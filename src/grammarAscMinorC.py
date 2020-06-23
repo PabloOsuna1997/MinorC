@@ -509,7 +509,8 @@ def p_instrIn(t):
                     | CONTINUE PUNTOCOMA
                     | BREAK PUNTOCOMA
                     | GOTO ID PUNTOCOMA
-                    | PUNTOCOMA'''
+                    | PUNTOCOMA
+                    | SCANF PARIZQ PARDER PUNTOCOMA'''
 
     t[0] = t[1]
 

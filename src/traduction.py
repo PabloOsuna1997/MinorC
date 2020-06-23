@@ -99,8 +99,10 @@ def If_(b, tsPadre):
                                                                         #recorremos todos los ifelses
     if len(b.ifElse) > 0:                                               #hay if else's
         for a in b.ifElse:
+            if isinstance (a, list):                                    #aveces venia en lista 
+                a = a[0]
             if isinstance(a, IfElse):
-                condition  = valueExpression(a.condition, tsPadre)
+                condition  = valueExpression(a.condition, tsLocal)
                 augusTxt += f'if({str(condition)}) goto L{str(contadorEtiquetas + contadorEtiquetasAux )};\n'
                 augusAux += f'L{str(contadorEtiquetas + contadorEtiquetasAux)}:\n'
                 augusAuxAux = ''
