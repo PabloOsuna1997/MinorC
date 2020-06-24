@@ -507,7 +507,6 @@ def p_instrIn(t):
                     | DO_
                     | SWITCH_
                     | LLAMADA_FUNCION PUNTOCOMA
-                    | ID DOSPUNTOS
                     | PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA
                     | RETURN EXPRESION PUNTOCOMA
                     | CONTINUE PUNTOCOMA
@@ -516,10 +515,15 @@ def p_instrIn(t):
                     | PUNTOCOMA'''
 
     if t[1] == 'printf':
-        t[0] = PrintF_(t[3], t.lineno(1), t.lexpos(1))
+        t[0] = PrintF_(t[3], t.lineno(1), t.lexpos(1))    
+    elif t[1] == 'goto':
+        t[0] = Goto(t[2])
     else:
         t[0] = t[1]
 
+def p_instrInLabel(t):
+    '''INSTR_IN :   ID DOSPUNTOS'''
+    t[0] = Label(t[1], t.lineno(1), find_column(input_, t.slice[1]))
 
 def p_declaracionStructInterna_error(t):
     'DECLARACION_STRUCT_INTERNA : STRUCT ID ID IGUAL error PUNTOCOMA'

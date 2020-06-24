@@ -19,6 +19,7 @@ tableGlobal = {}            #tabla en la que guardare el id y el $tn correspondi
 arrayTables = []            #guardare todas las tablas de simbolos, servira como una pila con append y pop
 contadorEtiquetas = 0
 contadorEtiquetasAux = 0
+pasadas = 0
 
 def execute(input, textEdit): 
     global tableGlobal 
@@ -61,6 +62,10 @@ def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del pad
             If_(a, tsLocal)
         elif isinstance(a, PrintF_):
             PrintF(a, tsLocal)
+        elif isinstance(a, Label):
+            augusTxt += f'{str(a.label)}:\n'
+        elif isinstance(a, Goto):
+           augusTxt += f'goto {str(a.label)};\n'
         i += 1
     
     print(f"tsLocal: {str(tsLocal)}")
@@ -115,6 +120,10 @@ def If_(b, tsPadre):
             If_(a, tsLocal)
         elif isinstance(a, PrintF_):
             PrintF(a, tsLocal)
+        elif isinstance(a, Label):
+            augusTxt += f'{str(a.label)}:\n'
+        elif isinstance(a, Goto):
+           augusTxt += f'goto {str(a.label)};\n'
         i += 1
     
                                                                        # termino de realizar etiquetas
@@ -152,6 +161,11 @@ def If_(b, tsPadre):
                         If_(a, tsLocal)
                     elif isinstance(z, PrintF_):
                         PrintF(z, tsLocal)
+                    elif isinstance(z, Label):
+                        augusTxt += f'{str(z.label)}:\n'
+                    elif isinstance(z, Goto):
+                        augusTxt += f'goto {str(z.label)};\n'
+        
                     x += 1
                                                                         # termino de realizar etiquetas
                 
@@ -170,6 +184,11 @@ def If_(b, tsPadre):
                         If_(z, tsLocal)
                     elif isinstance(z, PrintF_):
                         PrintF(z, tsLocal)
+                    elif isinstance(z, Label):
+                        augusTxt += f'{str(z.label)}:\n'
+                    elif isinstance(z, Goto):
+                        augusTxt += f'goto {str(z.label)};\n'
+                    
                     x += 1
                 augusTxt += f'goto L{len(b.ifElse) + contadorEtiquetasAux};\n'
         augusTxt += augusAux
