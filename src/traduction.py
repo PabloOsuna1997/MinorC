@@ -83,7 +83,10 @@ def PrintF(b, ts):
         #my_lst_str = ' '.join(map(str, cadena))        
         #print(f"printf: {my_lst_str}")
         for a in cadena:
-            augusTxt += f'print({str(a)});\n'
+            if a[0] == '$':
+                augusTxt += f'print({str(a)});\n'       ## arreglar esto porque imprime ("$t8")
+            else:
+                augusTxt += f'print(\"{str(a)}\");\n'       ## arreglar esto porque imprime ("$t8")
     except:
         print("Error semantico en el print.")
 
@@ -110,6 +113,8 @@ def If_(b, tsPadre):
         elif isinstance(a, If):
             contadorEtiquetas += 1
             If_(a, tsLocal)
+        elif isinstance(a, PrintF_):
+            PrintF(a, tsLocal)
         i += 1
     
                                                                        # termino de realizar etiquetas
@@ -122,9 +127,10 @@ def If_(b, tsPadre):
     augusTxt = augusAuxAux                                              #le regresamos el contenido anterior
                                                                         #recorremos todos los ifelses
     if len(b.ifElse) > 0:                                               #hay if else's
+
         for a in b.ifElse:
-            if isinstance (a, list):                                    #aveces venia en lista 
-                a = a[0]
+            #if isinstance (a, list):                                    #aveces venia en lista dentro de listas
+                #a = a[0]
             if isinstance(a, IfElse):
                 condition  = valueExpression(a.condition, tsLocal)
                 augusTxt += f'if({str(condition)}) goto L{str(contadorEtiquetas + contadorEtiquetasAux )};\n'
@@ -144,6 +150,8 @@ def If_(b, tsPadre):
                     elif isinstance(z, If):
                         contadorEtiquetas += 1
                         If_(a, tsLocal)
+                    elif isinstance(z, PrintF_):
+                        PrintF(z, tsLocal)
                     x += 1
                                                                         # termino de realizar etiquetas
                 
@@ -160,6 +168,8 @@ def If_(b, tsPadre):
                         Asignation_(z, tsLocal)
                     elif isinstance(z, If):
                         If_(z, tsLocal)
+                    elif isinstance(z, PrintF_):
+                        PrintF(z, tsLocal)
                     x += 1
                 augusTxt += f'goto L{len(b.ifElse) + contadorEtiquetasAux};\n'
         augusTxt += augusAux

@@ -37,3 +37,63 @@ int funcion(struct nodo nodo){
 int main(){
     printf("%d %c %f %s",3,'c',4.2,'cadena');
 }
+
+
+
+
+CODIGO 3D:
+
+main :
+print("Ingrese");
+print("el");
+print("primer");
+print("numero:\n");
+$t0 = read();
+$t1 = $t0 ;
+print("\n");
+print("Ingrese");
+print("el");
+print("segundo");
+print("numero:\n");
+$t2 = read();
+$t3 = $t2 ;
+print("\n");
+print("Que");
+print("opcion");
+print("desea");
+print("realizar?\n");
+print("+,");
+print("-,");
+print("*,");
+print("/\n");
+$t4 = read();
+$t5 = $t4 ;
+print("\n");
+$t6 = "+" ;
+$t7 = $t5 == $t6 ;
+if($t7) goto L0;
+$t9 = "-" ;
+$t10 = $t5 == $t9 ;
+if($t10) goto L1;
+L0:
+$t8 = $t1 + $t3 ;
+print("$t8");
+goto L1;
+L1:
+goto L1;
+L1:
+print("¿Deseas");
+print("continuar?");
+print("Y/N\n");
+$t11 = read();
+$t12 = $t11 ;
+$t13 = "Y" ;
+$t14 = $t12 == $t13 ;
+$t15 = "y" ;
+$t16 = $t12 == $t15 ;
+$t17 = $t14 || $t16 ;
+if($t17) goto L3;
+goto L4;
+L3:
+goto L4;
+L4:

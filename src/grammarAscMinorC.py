@@ -570,7 +570,7 @@ def p_elseIf_(t):
                 | 
     '''
     if len(t) == 2:
-        t[0] = [t[1]]
+        t[0] = t[1]
     elif len(t) == 3:
         t[1].append(t[2])
         t[0] = t[1]
@@ -597,7 +597,7 @@ def p_elif(t):
 def p_else(t):
     '''ELSE_ :  ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER 
     '''
-    t[0] = Else(t[3], t.lineno(1), t.lexpos(1))
+    t[0] = [Else(t[3], t.lineno(1), t.lexpos(1))]
 
 def p_for_error(t): 
     'FOR_ :     FOR error LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'               
