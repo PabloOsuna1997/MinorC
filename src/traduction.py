@@ -67,7 +67,7 @@ def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del pad
         elif isinstance(a, Goto):
            augusTxt += f'goto {str(a.label)};\n'
         elif isinstance(a, IncreDecre_Pre):
-            print("incre_decre_pre")
+            increDecre(a, tsLocal, 1)
         elif isinstance(a, IncreDecre_Post):
             increDecre(a, tsLocal, 1)
         i += 1
@@ -77,25 +77,24 @@ def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del pad
 
 def increDecre(b, ts, type_):
     global augusTxt, contadorT
-    #type_ sera si es post o pre
-    if type_ == 1:  #post
-        if b.signo == '++':
-            id = valueExpression(Identifier(b.id, 0, 0), ts)
-            augusTxt += id
-            augusTxt += f' = {str(id)} + 1;\n'
-            arrayTables.pop()
-            ts.setdefault(b.id, f'$t{str(contadorT)}')
-            arrayTables.append(ts)
-            contadorT += 1
-        else:
-            id = valueExpression(Identifier(b.id, 0, 0), ts)
-            augusTxt += id
-            augusTxt += f' = {str(id)} - 1;\n'
-            arrayTables.pop()
-            ts.setdefault(b.id, f'$t{str(contadorT)}')
-            arrayTables.append(ts)
-            contadorT += 1
-
+    #type_ sera si es post o pre     
+    if b.signo == '++':
+        id = valueExpression(Identifier(b.id, 0, 0), ts)
+        augusTxt += id
+        augusTxt += f' = {str(id)} + 1;\n'
+        arrayTables.pop()
+        ts.setdefault(b.id, f'$t{str(id)}')
+        arrayTables.append(ts)
+        #contadorT += 1
+    else:
+        id = valueExpression(Identifier(b.id, 0, 0), ts)
+        augusTxt += id
+        augusTxt += f' = {str(id)} - 1;\n'
+        arrayTables.pop()
+        ts.setdefault(b.id, f'$t{str(id)}')
+        arrayTables.append(ts)
+        #contadorT += 1
+    
 def PrintF(b, ts):
     print("estoy en print")
     global contadorT, augusTxt
@@ -150,7 +149,7 @@ def If_(b, tsPadre):
         elif isinstance(a, Goto):
            augusTxt += f'goto {str(a.label)};\n'
         elif isinstance(a, IncreDecre_Pre):
-            print("incre_decre_pre")
+            increDecre(a, tsLocal, 1)
         elif isinstance(a, IncreDecre_Post):
             increDecre(a, tsLocal, 1)
         i += 1
@@ -196,7 +195,7 @@ def If_(b, tsPadre):
                     elif isinstance(z, Goto):
                         augusTxt += f'goto {str(z.label)};\n'
                     elif isinstance(z, IncreDecre_Pre):
-                        print("incre_decre_pre")
+                        increDecre(z, tsLocal, 1)
                     elif isinstance(z, IncreDecre_Post):
                         increDecre(z, tsLocal, 1)
         
@@ -223,7 +222,7 @@ def If_(b, tsPadre):
                     elif isinstance(z, Goto):
                         augusTxt += f'goto {str(z.label)};\n'
                     elif isinstance(z, IncreDecre_Pre):
-                        print("incre_decre_pre")
+                        increDecre(z, tsLocal, 1)
                     elif isinstance(z, IncreDecre_Post):
                         increDecre(z, tsLocal, 1)
         
