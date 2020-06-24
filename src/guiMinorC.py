@@ -49,7 +49,7 @@ class pintar(QtGui.QSyntaxHighlighter):
     expresiones.append((r"\d+(\.\d+)?", QtGui.QColor(198,209,101)))
     expresiones.append((r"[a-zA-Z_][a-zA-Z_0-9]*", QtGui.QColor(192,192,192)))     
     expresiones.append((r"(int |char |float |double )", QtGui.QColor(0,0,255))) 
-    expresiones.append((r"(printf|return|break|goto |if|for|while|do|switch|case|default)", QtGui.QColor(174,108,134)))       
+    expresiones.append((r"(printf|return|break|goto |if|for|while|do |switch|case|default)", QtGui.QColor(174,108,134)))       
     expresiones.append((r'\".+\"', QtGui.QColor(185,185,112)))
     expresiones.append((r'\'.+\'', QtGui.QColor(185,185,112)))
     expresiones.append((r"#.*", QtGui.QColor(68,146,92)))
@@ -390,6 +390,8 @@ class Ui_Augus(object):
                                             color: rgb(255, 255, 255);
                                             font: 12pt \"consolas\";''' )
         self.textEdit.setObjectName("textEdit")
+        self.textEdit.setLineWrapColumnOrWidth(750)
+        self.textEdit.setLineWrapMode(QtWidgets.QTextEdit.FixedPixelWidth)
         self.pintar = pintar(self.textEdit.document())
         self.tabWidget.addTab(
             self.tab,"Tab "+ str(contadorVentanas)
@@ -417,6 +419,8 @@ class Ui_Augus(object):
                                             color: rgb(255, 255, 255);
                                             font: 12pt \"consolas\";''' )
                 self.textEdit.setObjectName("textEdit")
+                self.textEdit.setLineWrapColumnOrWidth(750)
+                self.textEdit.setLineWrapMode(QtWidgets.QTextEdit.FixedPixelWidth)
                 self.pintar = pintar(self.textEdit.document())
                 self.textEdit.setPlainText(data)
                 self.tabWidget.addTab(
@@ -515,10 +519,10 @@ class Ui_Augus(object):
             
             global banderaDescAsc  #true = se analizo ascendente y 0 se analizao descendente
             if banderaDescAsc:
-                for i in grammar.grammarList:
+                for i in grammarAscMinorC.grammarList:
                     fgraph.write(f"<tr><td align=\"left\" port=\'port_one\'>{str(i.production.replace('<', '&lt;').replace('>', '&gt;').replace('|', '<BR/>|').replace('<<','&lt&lt;').replace('>>','&gt&gt;'))}</td><td align=\"left\" port=\'port_two\'>{str(i.rules)}</td></tr>\n")
             else:
-                for i in grammarDesc.grammarList:
+                for i in grammarAscMinorC.grammarList:
                     fgraph.write(f"<tr><td align=\"left\" port=\'port_one\'>{str(i.production.replace('<', '&lt;').replace('>', '&gt;').replace('|', '<BR/>|').replace('<<','&lt&lt;').replace('>>','&gt&gt;'))}</td><td align=\"left\" port=\'port_two\'>{str(i.rules)}</td></tr>\n")
             
             fgraph.write("</table> >]; \n}")

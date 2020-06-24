@@ -231,20 +231,28 @@ def p_init(t):
     'S : A'
     t[0] = t[1]
     print("Se ha reconocido la cadena.")
+    global grammarList
+    grammarList.append(g.nodeGramatical('S  -> A', f'S.val = A.val'))
+    grammarList.reverse()
 
 def p_instruccionesGlobal(t):
     'A  :    INSTRUCCIONES_GLOBALES'
     t[0] = t[1]
+    global grammarList
+    grammarList.append(g.nodeGramatical('A  -> INSTRUCCIONES_GLOBALES', f'A.val = INSTRUCCIONES_GLOBALES.val'))
 
 def p_listaInstrucciones(t):
     '''INSTRUCCIONES_GLOBALES : INSTRUCCIONES_GLOBALES DECLARACION_GLOBAL
                                 | DECLARACION_GLOBAL'''
-
+    
+    global grammarList
     if len(t) == 3:
         t[1].append(t[2])
         t[0] = t[1]
+        grammarList.append(g.nodeGramatical('INSTRUCCIONES_GLOBALES  -> INSTRUCCIONES_GLOBALES DECLARACION_GLOBAL', f'INSTRUCCIONES_GLOBALES_1.val.append(DECLARACION_GLOBAL) \n INSTRUCCIONES_GLOBALES.val = INSTRUCCIONES_GLOBALES_1.val'))
     else:
         t[0] = [t[1]]
+        grammarList.append(g.nodeGramatical('INSTRUCCIONES_GLOBALES  -> DECLARACION_GLOBAL', f'INSTRUCCIONES_GLOBALES.val = = DECLARACION_GLOBAL.val'))
 
 def p_declaracionGlobal(t):
     '''DECLARACION_GLOBAL :     DECLA_VARIABLES
@@ -252,6 +260,8 @@ def p_declaracionGlobal(t):
                                 | DECLA_STRUCTS'''
 
     t[0] = t[1]
+    global grammarList
+    grammarList.append(g.nodeGramatical('DECLARACION_GLOBAL  -> DECLA_VARIABLES \n |DECLA_FUNCIONES \n |DECLA_STRUCTS', f'DECLARACION_GLOBAL.val = = t[1].val'))
 
 ##----------------------------------DECLARACION DE VARIABLES ------------------
 def p_declaVariable_error(t):
@@ -260,6 +270,8 @@ def p_declaVariable(t):
     'DECLA_VARIABLES :  TIPO LISTA_ID PUNTOCOMA'
     #print(f'tipo: {str(t[1])} valor: {str(t[2])}')
     t[0] = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])
+    global grammarList
+    grammarList.append(g.nodeGramatical('DECLA_VARIABLES  ->TIPO LISTA_ID PUNTOCOMA', f'DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])'))
 
 def p_tipo(t):
     '''TIPO :   INT
@@ -269,18 +281,23 @@ def p_tipo(t):
                 | CHAR '''
                 #| STRUCT  -> quite el tipo struct 
     t[0] = t[1]
+    global grammarList
+    grammarList.append(g.nodeGramatical('TIPO  ->INT \n | FLOAT \n | DOUBLE \n | VOID \n | CHAR', f'TIPO.val = t[1]'))
 
 def p_listaId_error(t):
     'LISTA_ID :   LISTA_ID error ASIGNA'
 def p_listaId(t):
     '''LISTA_ID :   LISTA_ID COMA ASIGNA
                     | ASIGNA'''
-
+   
+    global grammarList
     if len(t) == 2:
         t[0] = [t[1]]
+        grammarList.append(g.nodeGramatical('LISTA_ID  -> ASIGNA', f'LISTA_ID.val = ASIGNA.val'))
     else: 
         t[1].append(t[3])
         t[0] = t[1]
+        grammarList.append(g.nodeGramatical('LISTA_ID  -> LISTA_ID COMA ASIGNA ', f' LISTA_ID_1.val.append(ASIGNA.val) \n LISTA_ID.val = LISTA_ID_1.val'))
 
 def p_asigna_error(t):
     'ASIGNA :     ID error EXPRESION'
@@ -289,21 +306,31 @@ def p_asigna(t):
                     | ID CORCHETES
                     | ID CORCHETES IGUAL EXPRESION
                     | ID'''
-
-    if len(t) == 4: t[0] = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))
-    elif len(t) == 3: t[0] = IdentifierArray(t[1], t[2], t.lineno(1), t.lexpos(1))
-    elif len(t) == 2: t[0] = SingleDeclaration(t[1], '#', t.lineno(1), t.lexpos(1)) #si mando numeral significa que no esta inicializada
-    else: t[0] = DeclarationArrayInit(t[1], t[2], t[4], t.lineno(3), t.lexpos(3))
+    global grammarList
+    if len(t) == 4: 
+        t[0] = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))
+        grammarList.append(g.nodeGramatical('ASIGNA  -> ID IGUAL EXPRESION ', f' ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))'))
+    elif len(t) == 3: 
+        t[0] = IdentifierArray(t[1], t[2], t.lineno(1), t.lexpos(1))
+        grammarList.append(g.nodeGramatical('ASIGNA  -> ID CORCHETES ', f' ASIGNA.val = IdentifierArray(t[1], t[2], t.lineno(1), t.lexpos(1))'))
+    elif len(t) == 2: 
+        t[0] = SingleDeclaration(t[1], '#', t.lineno(1), t.lexpos(1)) #si mando numeral significa que no esta inicializada
+        grammarList.append(g.nodeGramatical('ASIGNA  -> ID ', f' ASIGNA.val = SingleDeclaration(t[1], #, t.lineno(1), t.lexpos(1))'))
+    else: 
+        t[0] = DeclarationArrayInit(t[1], t[2], t[4], t.lineno(3), t.lexpos(3))
+        grammarList.append(g.nodeGramatical('ASIGNA  -> ID ', f' ASIGNA.val = DeclarationArrayInit(t[1], t[2], t[4], t.lineno(3), t.lexpos(3))'))
 
 def p_corchetes(t):
     '''CORCHETES :  CORCHETES CORCHETE
                     | CORCHETE '''
-
+    global grammarList
     if len(t) == 3:
         t[1].append(t[2])
         t[0] = t[1]
+        grammarList.append(g.nodeGramatical('CORCHETES  -> CORCHETES CORCHETE ', f' CORCHETES_1.val.append(CORCHETE.val) \n CORCHETES.val= CORCHETES_1.val'))
     else:
         t[0] = [t[1]]
+        grammarList.append(g.nodeGramatical('CORCHETES  ->  CORCHETE ', f' CORCHETES.val= CORCHETE.val'))
 
 def p_corchete1_error(t):
     'CORCHETE :     CORIZQ VALOR error'
@@ -312,14 +339,20 @@ def p_corchete2_error(t):
 def p_corchete(t):
     'CORCHETE :     CORIZQ VALOR CORDER'
     t[0] = t[2]
+    global grammarList
+    grammarList.append(g.nodeGramatical('CORCHETE  ->  CORIZQ VALOR CORDER ', f' CORCHETE.val= VALOR.val'))
 
 def p_valor(t):
     'VALOR :        EXPRESION'
     t[0] = t[1]
+    global grammarList
+    grammarList.append(g.nodeGramatical('VALOR  ->  EXPRESION ', f' VALOR.val= EXPRESION.val'))
 
 def p_valorEmpty(t):
     'VALOR : '
     t[0] = []
+    global grammarList
+    grammarList.append(g.nodeGramatical('VALOR  ->  empty ', f' VALOR.val= []'))
 
 def p_expresion_error(t):
     'EXPRESION :  EXPRESION error EXPRESION'
@@ -357,7 +390,7 @@ def p_expresion(t):
                     | INCRE_DECRE'''
             #       | EXPRESION TERNARIO EXPRESION DOSPUNTOS EXPRESION'''
 
-
+    global grammarList
     if len(t) == 4:
         #aritmetics
         if t[2] == '+': t[0] = BinaryExpression(t[1],t[3],Aritmetics.MAS, t.lineno(2), t.lexpos(2))        
@@ -382,6 +415,8 @@ def p_expresion(t):
         elif(t[2] == '<<'): t[0] = RelationalBit(t[1],t[3], BitToBit.SHIFTI, t.lineno(1), t.lexpos(1))
         elif(t[2] == '>>'): t[0] = RelationalBit(t[1],t[3], BitToBit.SHIFTD, t.lineno(1), t.lexpos(1))
         elif (t[2] == '&'): t[0] = RelationalBit(t[1], t[3], BitToBit.ANDBIT, t.lineno(1), t.lexpos(1))
+
+        #grammarList.append(g.nodeGramatical('EXPRESION  ->  empty ', f' EXPRESION.val= BinaryExpression(t[1],t[3],Aritmetics.MAS, t.lineno(2), t.lexpos(2))'))
         
         elif t[1] == 'scanf': t[0] = Scanf(t.lineno(1), t.lexpos(1))
         elif t[1] == '(': t[0] = t[2]
@@ -401,14 +436,20 @@ def p_expresion(t):
 def p_expresiones_numero(t):
     '''EXPRESION :    NUMERO'''
     t[0] = Number( t.lineno(1), t.lexpos(1), t[1])
+    global grammarList
+    grammarList.append(g.nodeGramatical('EXPRESION  ->  NUMERO ', f' EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])'))
 
 def p_expresiones_cadena(t):
     '''EXPRESION :    CADENA'''
     t[0] = String_(t[1], t.lineno(1), t.lexpos(1))
+    global grammarList
+    grammarList.append(g.nodeGramatical('EXPRESION  ->  CADENA ', f' EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))'))
 
 def p_expresiones_char(t):
     '''EXPRESION :    CHAR_'''
     t[0] = String_(t[1], t.lineno(1), t.lexpos(1))
+    global grammarList
+    grammarList.append(g.nodeGramatical('EXPRESION  ->  CHAR_ ', f' EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))'))
 
 def p_expresiones_id_error(t):
     'EXPRESION :    error CORCHETES'
@@ -417,37 +458,59 @@ def p_expresiones_id(t):
                         | ID CORCHETES LISTA_PUNTOS
                         | ID 
         '''
-    if len(t) == 3: t[0] = IdentifierArray(t[1], t[2], t.lineno(1), t.lexpos(1))
-    elif len(t) == 2: t[0] =  Identifier(t[1], t.lineno(1), t.lexpos(1))
-    else: print("lista id-> corchetes-> listaPuntos")
+        
+    global grammarList
+    if len(t) == 3: 
+        t[0] = IdentifierArray(t[1], t[2], t.lineno(1), t.lexpos(1))
+        grammarList.append(g.nodeGramatical('EXPRESION  ->  ID CORCHETES ', f' EXPRESION.val= IdentifierArray(t[1], t[2], t.lineno(1), t.lexpos(1))'))
+    elif len(t) == 2: 
+        t[0] =  Identifier(t[1], t.lineno(1), t.lexpos(1))
+        grammarList.append(g.nodeGramatical('EXPRESION  ->  ID ', f' EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))'))
+    else: 
+        print("lista id-> corchetes-> listaPuntos")
+        grammarList.append(g.nodeGramatical('EXPRESION  ->  ID CORCHETES LISTA_PUNTOS ', f' EXPRESION.val= Accesos(t[1],t[3])'))
 
 def p_expresiones_id_listapuntos(t):
     '''EXPRESION :     ID LISTA_PUNTOS '''
+    global grammarList
+    grammarList.append(g.nodeGramatical('EXPRESION  ->  ID LISTA_PUNTOS ', f' EXPRESION.val= Accesos(t[1],t[2])'))
    
 def p_expresiones_listaCorchetesInit(t):
     '''EXPRESION :   LISTA_INIT_CORCHETE'''
     t[0] = t[1]
+    global grammarList
+    grammarList.append(g.nodeGramatical('EXPRESION  -> LISTA_INIT_CORCHETE ', f' EXPRESION.val= LISTA_INIT_CORCHETE.val'))
 
 def p_listaInitCorchete(t):
     '''LISTA_INIT_CORCHETE :    LLAVEIZQ PARAMETROS LLAVEDER 
     '''
     t[0] = InitializationArray(t.lineno(1), t.lexpos(1), t[2])
+    global grammarList
+    grammarList.append(g.nodeGramatical('LISTA_INIT_CORCHETE  -> LLAVEIZQ PARAMETROS LLAVEDER  ', f' LISTA_INIT_CORCHETE.val= InitializationArray(t.lineno(1), t.lexpos(1), t[2])'))
 
 def p_llamadaFuncion(t):
     '''LLAMADA_FUNCION :     ID PARIZQ PARAMETROS PARDER 
                             | ID PARIZQ PARDER'''
+    global grammarList
+    if len(t) == 5:
+        grammarList.append(g.nodeGramatical('LLAMADA_FUNCION  -> LLAVEIZQ PARAMETROS LLAVEDER  ', f' LLAMADA_FUNCION.val= Call(t[1], t[3])'))
+    else:
+        grammarList.append(g.nodeGramatical('LLAMADA_FUNCION  -> ID PARIZQ PARDER  ', f' LLAMADA_FUNCION.val= Call(t[1], [])'))
 
 def p_parametros_error(t):
     'PARAMETROS :     PARAMETROS error EXPRESION'
 def p_parametros(t):
     '''PARAMETROS :     PARAMETROS COMA EXPRESION
                         | EXPRESION '''
-
+    global grammarList
     if len(t) == 4:
         t[1].append(t[3])
         t[0] = t[1]
+        grammarList.append(g.nodeGramatical('PARAMETROS  -> PARAMETROS COMA EXPRESION  ', f' PARAMETROS_1.val.append(EXPRESION.val) \n PARAMETROS.val= PARAMETROS_1.val'))
     else:
         t[0] = [t[1]]
+        grammarList.append(g.nodeGramatical('PARAMETROS  -> EXPRESION ', f' PARAMETROS.val= [EXPRESION.val]'))
+
 
 ##----------------------DECLARACION DE FUNCIONES---------------------
 def p_declaFuncion_error(t):
@@ -456,47 +519,64 @@ def p_declaFuncion(t):
     'DECLA_FUNCIONES :    TIPO ID PARIZQ RECEPCION_PARAMETROS PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'
 
     t[0] = FunctionDeclaration(t[1], t[2], t[4], t[7], t.lineno(2), t.lexpos(2))
+    global grammarList
+    grammarList.append(g.nodeGramatical('DECLA_FUNCIONES  ->  TIPO ID PARIZQ RECEPCION_PARAMETROS PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ', f' DECLA_FUNCIONES.val= FunctionDeclaration(t[1], t[2], t[4], t[7], t.lineno(2), t.lexpos(2))'))
 
 def p_recepcionParametros_error(t):
     'RECEPCION_PARAMETROS :   RECEPCION_PARAMETROS COMA error'
 def p_recepcionParametros(t):
     '''RECEPCION_PARAMETROS :   RECEPCION_PARAMETROS COMA PARAM
                                 | PARAM'''
-
+    global grammarList
     if len(t) == 4:
         t[1].append(t[3])
         t[0] = t[1]
+        grammarList.append(g.nodeGramatical('RECEPCION_PARAMETROS  ->  RECEPCION_PARAMETROS COMA PARAM ', f' RECEPCION_PARAMETROS_1.val.append(PARAM) \n RECEPCION_PARAMETROS.val= RECEPCION_PARAMETROS_1.val'))
     else:
         t[0] = [t[1]]
+        grammarList.append(g.nodeGramatical('RECEPCION_PARAMETROS  ->   PARAM ', f' RECEPCION_PARAMETROS.val= PARAM.val'))
 
 def p_recepcionParametrosEmpty(t):
     'RECEPCION_PARAMETROS :  '
     t[0] = []
+    global grammarList
+    grammarList.append(g.nodeGramatical('RECEPCION_PARAMETROS  ->   empty ', f' RECEPCION_PARAMETROS.val= []'))
 
 def p_param(t):
     'PARAM :    TIPO_FUN PUNT'
 
     t[0] = Param(t[1], t[2], t.lineno(2), t.lexpos(2))
+    global grammarList
+    grammarList.append(g.nodeGramatical('PARAM  ->   TIPO_FUN PUNT ', f' PARAM.val= Param(t[1], t[2], t.lineno(2), t.lexpos(2))'))
 
 def p_tipoFuncion(t):
     '''TIPO_FUN :   TIPO
                     | STRUCT
     '''
     t[0] = t[1]
+    global grammarList
+    grammarList.append(g.nodeGramatical('TIPO_FUN  -> TIPO \n | STRUCT ', f' TIPO_FUN.val= t[1]'))
 
 def p_punt(t):
     '''PUNT :     ID ID
                 | ID '''
+    global grammarList
+    if len(t) == 3:
+        grammarList.append(g.nodeGramatical('PUNT  -> ID ID ', f' PUNT.val= Ids(t[1],t[2])'))
+    else:
+        grammarList.append(g.nodeGramatical('PUNT  -> ID  ', f' PUNT.val= ID.value'))
 
 def p_instruccionesInternas(t):
     '''INSTRUCCIONES_INTERNAS :     INSTRUCCIONES_INTERNAS INSTR_IN
                                     | INSTR_IN'''
-
+    global grammarList
     if len(t) == 3:
         t[1].append(t[2])
         t[0] = t[1]
+        grammarList.append(g.nodeGramatical('INSTRUCCIONES_INTERNAS  -> INSTRUCCIONES_INTERNAS INSTR_IN ', f' INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) \n INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val'))
     else:
         t[0] = [t[1]]
+        grammarList.append(g.nodeGramatical('INSTRUCCIONES_INTERNAS  -> INSTR_IN ', f'INSTRUCCIONES_INTERNAS.val= INSTR_IN.val'))
 
 def p_instrIn_error(t):
     'INSTR_IN :   error'
@@ -516,17 +596,23 @@ def p_instrIn(t):
                     | BREAK PUNTOCOMA
                     | GOTO ID PUNTOCOMA
                     | PUNTOCOMA'''
-
+    global grammarList
     if t[1] == 'printf':
-        t[0] = PrintF_(t[3], t.lineno(1), t.lexpos(1))    
+        t[0] = PrintF_(t[3], t.lineno(1), t.lexpos(1))  
+        grammarList.append(g.nodeGramatical('INSTR_IN  -> PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA ', f'INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) ')) 
     elif t[1] == 'goto':
         t[0] = Goto(t[2])
+        grammarList.append(g.nodeGramatical('INSTR_IN  -> GOTO ID PUNTOCOMA ', f'INSTR_IN.val= Goto(t[2])')) 
+
     else:
         t[0] = t[1]
+        grammarList.append(g.nodeGramatical('INSTR_IN  -> ..... ', f'INSTR_IN.val= t[1]'))
 
 def p_instrInLabel(t):
     '''INSTR_IN :   ID DOSPUNTOS'''
     t[0] = Label(t[1], t.lineno(1), find_column(input_, t.slice[1]))
+    global grammarList
+    grammarList.append(g.nodeGramatical('INSTR_IN  -> ID DOSPUNTOS ', f'INSTR_IN.val= Label(t[1], t.lineno(1), find_column(input_, t.slice[1]))'))
 
 def p_declaracionStructInterna_error(t):
     'DECLARACION_STRUCT_INTERNA : STRUCT ID ID IGUAL error PUNTOCOMA'
@@ -543,6 +629,11 @@ def p_asignaStructInterna(t):
     '''ASISTRCUT :  ID CORCHETES
                     | ID
     '''
+    global grammarList
+    if len(t) == 3:
+        grammarList.append(g.nodeGramatical('ASISTRCUT  -> ID CORCHETES  ', f'ASISTRCUT.val= IdentifyArray(t[1],t[2])'))
+    else:
+        grammarList.append(g.nodeGramatical('ASISTRCUT  -> ID  ', f'ASISTRCUT.val= ID.value)'))
 
 def p_asignaciones(t):
     '''ASIGNACIONES :   INCRE_DECRE PUNTOCOMA
@@ -551,8 +642,10 @@ def p_asignaciones(t):
                         | ID CORCHETES LISTA_PUNTOS OP_ASIGNACION EXPRESION PUNTOCOMA
                         | ID LISTA_PUNTOS OP_ASIGNACION EXPRESION PUNTOCOMA'''
 
+    global grammarList
     if len(t) == 5:  #ID OP_ASIGNACION EXPRESION PUNTOCOMA
         t[0] = Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))
+        grammarList.append(g.nodeGramatical('ASIGNACIONES  -> ID OP_ASIGNACION EXPRESION PUNTOCOMA  ', f'ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))'))
     elif len(t) == 3: #incremento o decremento
         t[0] = t[1]
 
@@ -570,6 +663,8 @@ def p_if(t):
     '''IF_ :  IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_'''
 
     t[0] = If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))
+    global grammarList
+    grammarList.append(g.nodeGramatical('IF_  -> IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_', f'IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))'))
 
 def flatten(nested_list):
     try:
@@ -586,39 +681,50 @@ def p_elseIf_(t):
                 | ELSE_IF ELSE_
                 | 
     '''
+    global grammarList
     if len(t) == 2:
         t[1] = flatten(t[1])
         t[0] = t[1]
+        grammarList.append(g.nodeGramatical('ELSE_IF_  -> ELSE_IF \n | ELSE_', f't[1] = flatten(t[1]) \n ELSE_IF_.val = t[1]'))
     elif len(t) == 3:
         t[1].append(t[2])
         t[1] = flatten(t[1])
         t[0] = t[1]
+        grammarList.append(g.nodeGramatical('ELSE_IF_  -> ELSE_IF ELSE_', f't[1].append(t[2]) \n t[1] = flatten(t[1]) \n ELSE_IF_.val = t[1]'))
     else:
         t[0] = []
+        grammarList.append(g.nodeGramatical('ELSE_IF_  -> ', f'ELSE_IF_.val = []'))
 
 def p_elseIf(t):
     '''
     ELSE_IF :   ELSE_IF  ELIF
                 | ELIF
     '''
+    global grammarList
     if len(t) == 3:
         #t[1].append(t[2])
         t[1].extend(t[2])
         t[1] = flatten(t[1])
         t[0] = t[1]
+        grammarList.append(g.nodeGramatical('ELSE_IF  -> ELSE_IF  ELIF', f't[1].extend(t[2]) \n t[1] = flatten(t[1]) \n ELSE_IF.val = t[1]'))
     else:
         t[0] = [t[1]]
+        grammarList.append(g.nodeGramatical('ELSE_IF  -> ELIF', f'ELSE_IF.val = ELIF.val'))
 
 def p_elif(t):
     '''
     ELIF :  ELSE IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER
     '''
     t[0] = [IfElse(t[4], t[7], t.lineno(1), t.lexpos(1))]
+    global grammarList
+    grammarList.append(g.nodeGramatical('ELIF  -> ELSE IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER', f'ELIF.val = [IfElse(t[4], t[7], t.lineno(1), t.lexpos(1))]'))
 
 def p_else(t):
     '''ELSE_ :  ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER 
     '''
     t[0] = [Else(t[3], t.lineno(1), t.lexpos(1))]
+    global grammarList
+    grammarList.append(g.nodeGramatical('ELSE_  -> ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER', f'ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]'))
 
 def p_for_error(t): 
     'FOR_ :     FOR error LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'               
