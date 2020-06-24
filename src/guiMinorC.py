@@ -52,6 +52,7 @@ class pintar(QtGui.QSyntaxHighlighter):
     expresiones.append((r'\".+\"', QtGui.QColor(185,185,112)))
     expresiones.append((r'\'.+\'', QtGui.QColor(185,185,112)))
     expresiones.append((r"#.*", QtGui.QColor(68,146,92)))
+    expresiones.append((r"\/\/.*", QtGui.QColor(68,146,92)))
     expresiones.append((r"\$(t|a|v|ra|sp?)[0-9]*", QtGui.QColor(119,193,230)))
 
     def highlightBlock(self, text):
@@ -70,7 +71,7 @@ class Ui_Augus(object):
     
     def setupUi(self, Augus):        
         Augus.setObjectName("Augus")
-        Augus.resize(980, 616)
+        Augus.resize(980, 816)
         Augus.setStyleSheet('QMainWindow{background-color: yellow; border: 1px solid black;}')
         self.centralwidget = QtWidgets.QWidget(Augus)
         self.centralwidget.setObjectName("centralwidget")
@@ -78,6 +79,16 @@ class Ui_Augus(object):
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
         self.tabWidget.setGeometry(QtCore.QRect(20, 20, 471, 541))
         self.tabWidget.setObjectName("tabWidget")
+
+        self.textEditOuput = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEditOuput.setGeometry(QtCore.QRect(20, 570, 950, 200))
+        self.textEditOuput.setObjectName("textEditOuput")
+        self.textEditOuput.setStyleSheet('''background-color: rgb(33, 33, 33);
+                                            border-color: rgb(18, 18, 18);
+                                            color: rgb(223, 213, 213);
+                                            font: 12pt \"consolas\";''' )
+        self.textEditOuput.setPlainText("OUTPUT:\n")
+
         self.textEditConsole = QtWidgets.QTextEdit(self.centralwidget)
         self.textEditConsole.setGeometry(QtCore.QRect(510, 20, 461, 541))
         self.textEditConsole.setObjectName("textEditConsole")
@@ -85,7 +96,7 @@ class Ui_Augus(object):
                                             border-color: rgb(18, 18, 18);
                                             color: rgb(223, 213, 213);
                                             font: 12pt \"consolas\";''' )
-        self.textEditConsole.setPlainText("CONSOLE:\n")
+        self.textEditConsole.setPlainText("CODE AUGUS:\n")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(985, 10, 75, 23))
         self.pushButton.setObjectName("pushButton")
@@ -741,7 +752,8 @@ class Ui_Augus(object):
     def fn_Ejecutar_Ascendente(self):
         #try:
             #inicializacion
-            traduction.augusTxt = 'main: \n'
+            #traduction.augusTxt = 'main: \n'
+            traduction.augusTxt = ''
             traduction.contadorT = 0
             traduction.semanticErrorList = []
             traduction.ultimaPos = 0
@@ -749,7 +761,7 @@ class Ui_Augus(object):
             #region initialization augus
             global banderaDescAsc
             banderaDescAsc = True
-            self.textEditConsole.setText("CONSOLE:\n")
+            self.textEditOuput.setText("OUTPUT:\n")
             execute.contador = 4  #for grapho   
             execute.currentAmbit = 'main'   #current ambit
             execute.currentParams = []  #list of parameters that the current function will have
@@ -795,6 +807,11 @@ class Ui_Augus(object):
                 self.textEditConsole.append(augus)
                 print(f"texto august:\n{augus}")
                 print("traduccion completa")
+
+                #mando a ejecutar augus
+                result = grammar.parse(augus)
+                instructionsList = result[:]
+                execute.execute(result, self.textEditOuput)
                 #VALIDACION DE ERRORES SEMANTICOS
             
         #except:

@@ -2,15 +2,14 @@ int a ;
 
 int funcion(struct nodo nodo){
     int a = 3, b = 1, x;
-    goto et1;    
-    printf("no deberia imprimimr111");
 
-    et1:
-        printf("etiqueta 1");
-        goto et2;
-    printf("no deberia imprimimr222");
-
-    et2:
-        printf("etiqueta 2");
-
+    if (x>0<20){
+        a = a * 5;
+    }else if (2 == 2){
+        int c = 9;
+    }else if (2 == 2){
+        int c = 9;
+    }else{
+        b = 56;
+    }
 }
