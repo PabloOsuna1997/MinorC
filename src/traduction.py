@@ -66,10 +66,35 @@ def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del pad
             augusTxt += f'{str(a.label)}:\n'
         elif isinstance(a, Goto):
            augusTxt += f'goto {str(a.label)};\n'
+        elif isinstance(a, IncreDecre_Pre):
+            print("incre_decre_pre")
+        elif isinstance(a, IncreDecre_Post):
+            increDecre(a, tsLocal, 1)
         i += 1
     
     print(f"tsLocal: {str(tsLocal)}")
     arrayTables.pop()
+
+def increDecre(b, ts, type_):
+    global augusTxt, contadorT
+    #type_ sera si es post o pre
+    if type_ == 1:  #post
+        if b.signo == '++':
+            id = valueExpression(Identifier(b.id, 0, 0), ts)
+            augusTxt += id
+            augusTxt += f' = {str(id)} + 1;\n'
+            arrayTables.pop()
+            ts.setdefault(b.id, f'$t{str(contadorT)}')
+            arrayTables.append(ts)
+            contadorT += 1
+        else:
+            id = valueExpression(Identifier(b.id, 0, 0), ts)
+            augusTxt += id
+            augusTxt += f' = {str(id)} - 1;\n'
+            arrayTables.pop()
+            ts.setdefault(b.id, f'$t{str(contadorT)}')
+            arrayTables.append(ts)
+            contadorT += 1
 
 def PrintF(b, ts):
     print("estoy en print")
@@ -124,6 +149,10 @@ def If_(b, tsPadre):
             augusTxt += f'{str(a.label)}:\n'
         elif isinstance(a, Goto):
            augusTxt += f'goto {str(a.label)};\n'
+        elif isinstance(a, IncreDecre_Pre):
+            print("incre_decre_pre")
+        elif isinstance(a, IncreDecre_Post):
+            increDecre(a, tsLocal, 1)
         i += 1
     
                                                                        # termino de realizar etiquetas
@@ -166,6 +195,10 @@ def If_(b, tsPadre):
                         augusTxt += f'{str(z.label)}:\n'
                     elif isinstance(z, Goto):
                         augusTxt += f'goto {str(z.label)};\n'
+                    elif isinstance(z, IncreDecre_Pre):
+                        print("incre_decre_pre")
+                    elif isinstance(z, IncreDecre_Post):
+                        increDecre(z, tsLocal, 1)
         
                     x += 1
                                                                         # termino de realizar etiquetas
@@ -189,6 +222,11 @@ def If_(b, tsPadre):
                         augusTxt += f'{str(z.label)}:\n'
                     elif isinstance(z, Goto):
                         augusTxt += f'goto {str(z.label)};\n'
+                    elif isinstance(z, IncreDecre_Pre):
+                        print("incre_decre_pre")
+                    elif isinstance(z, IncreDecre_Post):
+                        increDecre(z, tsLocal, 1)
+        
                     
                     x += 1
                 augusTxt += f'goto L{len(b.ifElse) + contadorEtiquetasAux+1};\n'
@@ -205,90 +243,95 @@ def If_(b, tsPadre):
 
 def Asignation_(b, ts):
     try:
-        global contadorT, augusTxt, arrayTables
-        res = valueExpression(b.expresion,ts)
-        id = valueExpression(Identifier(b.id,0,0), ts)
-        if id != None:
-            if b.op == '=':
-                #print(f"id: {id}")
-                augusTxt += id
-                augusTxt += ' = ' + str(res) + ' ;\n'
-                arrayTables.pop()
-                ts.setdefault(b.id, f'$t{str(contadorT)}')
-                arrayTables.append(ts)
-                contadorT += 1
-            elif b.op == '+=':
-                #print(f"id: {id}")
-                augusTxt += f'{id} = {id} + {str(res)};\n'
-                arrayTables.pop()
-                ts.setdefault(b.id, f'$t{str(contadorT)}')
-                arrayTables.append(ts)
-                contadorT += 1
-            elif b.op == '-=':
-                #print(f"id: {id}")
-                augusTxt += f'{id} = {id} - {str(res)};\n'
-                arrayTables.pop()
-                ts.setdefault(b.id, f'$t{str(contadorT)}')
-                arrayTables.append(ts)
-                contadorT += 1
-            elif b.op == '*=':
-                #print(f"id: {id}")
-                augusTxt += f'{id} = {id} * {str(res)};\n'
-                arrayTables.pop()
-                ts.setdefault(b.id, f'$t{str(contadorT)}')
-                arrayTables.append(ts)
-                contadorT += 1    
-            elif b.op == '/=':
-                #print(f"id: {id}")
-                augusTxt += f'{id} = {id} / {str(res)};\n'
-                arrayTables.pop()
-                ts.setdefault(b.id, f'$t{str(contadorT)}')
-                arrayTables.append(ts)
-                contadorT += 1  
-            elif b.op == '%=':
-                #print(f"id: {id}")
-                augusTxt += f'{id} = {id} % {str(res)};\n'
-                arrayTables.pop()
-                ts.setdefault(b.id, f'$t{str(contadorT)}')
-                arrayTables.append(ts)
-                contadorT += 1
-            elif b.op == '<<=':
-                #print(f"id: {id}")
-                augusTxt += f'{id} = {id} << {str(res)};\n'
-                arrayTables.pop()
-                ts.setdefault(b.id, f'$t{str(contadorT)}')
-                arrayTables.append(ts)
-                contadorT += 1
-            elif b.op == '>>=':
-                #print(f"id: {id}")
-                augusTxt += f'{id} = {id} >> {str(res)};\n'
-                arrayTables.pop()
-                ts.setdefault(b.id, f'$t{str(contadorT)}')
-                arrayTables.append(ts)
-                contadorT += 1
-            elif b.op == '&=':
-                #print(f"id: {id}")
-                augusTxt += f'{id} = {id} & {str(res)};\n'
-                arrayTables.pop()
-                ts.setdefault(b.id, f'$t{str(contadorT)}')
-                arrayTables.append(ts)
-                contadorT += 1
-            elif b.op == '^=':
-                #print(f"id: {id}")
-                augusTxt += f'{id} = {id} ^ {str(res)};\n'
-                arrayTables.pop()
-                ts.setdefault(b.id, f'$t{str(contadorT)}')
-                arrayTables.append(ts)
-                contadorT += 1
-            elif b.op == '|=':
-                #print(f"id: {id}")
-                augusTxt += f'{id} = {id} | {str(res)};\n'
-                arrayTables.pop()
-                ts.setdefault(b.id, f'$t{str(contadorT)}')
-                arrayTables.append(ts)
-                contadorT += 1
+        if isinstance(b.expresion, IncreDecre_Post):
+            increDecreAsignation(b.expresion, ts, valueExpression(Identifier(b.id,0,0), ts), b.id)
+        elif isinstance(b.expresion, IncreDecre_Pre):
+            increDecreAsignation(b.expresion, ts, valueExpression(Identifier(b.id,0,0), ts), b.id)
         else:
-            print("Error semantico la varibale indicada no existe asignacion")
+            global contadorT, augusTxt, arrayTables
+            res = valueExpression(b.expresion,ts)
+            id = valueExpression(Identifier(b.id,0,0), ts)
+            if id != None:
+                if b.op == '=':
+                    #print(f"id: {id}")
+                    augusTxt += id
+                    augusTxt += ' = ' + str(res) + ' ;\n'
+                    arrayTables.pop()
+                    ts.setdefault(b.id, f'$t{str(contadorT)}')
+                    arrayTables.append(ts)
+                    contadorT += 1
+                elif b.op == '+=':
+                    #print(f"id: {id}")
+                    augusTxt += f'{id} = {id} + {str(res)};\n'
+                    arrayTables.pop()
+                    ts.setdefault(b.id, f'$t{str(contadorT)}')
+                    arrayTables.append(ts)
+                    contadorT += 1
+                elif b.op == '-=':
+                    #print(f"id: {id}")
+                    augusTxt += f'{id} = {id} - {str(res)};\n'
+                    arrayTables.pop()
+                    ts.setdefault(b.id, f'$t{str(contadorT)}')
+                    arrayTables.append(ts)
+                    contadorT += 1
+                elif b.op == '*=':
+                    #print(f"id: {id}")
+                    augusTxt += f'{id} = {id} * {str(res)};\n'
+                    arrayTables.pop()
+                    ts.setdefault(b.id, f'$t{str(contadorT)}')
+                    arrayTables.append(ts)
+                    contadorT += 1
+                elif b.op == '/=':
+                    #print(f"id: {id}")
+                    augusTxt += f'{id} = {id} / {str(res)};\n'
+                    arrayTables.pop()
+                    ts.setdefault(b.id, f'$t{str(contadorT)}')
+                    arrayTables.append(ts)
+                    contadorT += 1
+                elif b.op == '%=':
+                    #print(f"id: {id}")
+                    augusTxt += f'{id} = {id} % {str(res)};\n'
+                    arrayTables.pop()
+                    ts.setdefault(b.id, f'$t{str(contadorT)}')
+                    arrayTables.append(ts)
+                    contadorT += 1
+                elif b.op == '<<=':
+                    #print(f"id: {id}")
+                    augusTxt += f'{id} = {id} << {str(res)};\n'
+                    arrayTables.pop()
+                    ts.setdefault(b.id, f'$t{str(contadorT)}')
+                    arrayTables.append(ts)
+                    contadorT += 1
+                elif b.op == '>>=':
+                    #print(f"id: {id}")
+                    augusTxt += f'{id} = {id} >> {str(res)};\n'
+                    arrayTables.pop()
+                    ts.setdefault(b.id, f'$t{str(contadorT)}')
+                    arrayTables.append(ts)
+                    contadorT += 1
+                elif b.op == '&=':
+                    #print(f"id: {id}")
+                    augusTxt += f'{id} = {id} & {str(res)};\n'
+                    arrayTables.pop()
+                    ts.setdefault(b.id, f'$t{str(contadorT)}')
+                    arrayTables.append(ts)
+                    contadorT += 1
+                elif b.op == '^=':
+                    #print(f"id: {id}")
+                    augusTxt += f'{id} = {id} ^ {str(res)};\n'
+                    arrayTables.pop()
+                    ts.setdefault(b.id, f'$t{str(contadorT)}')
+                    arrayTables.append(ts)
+                    contadorT += 1
+                elif b.op == '|=':
+                    #print(f"id: {id}")
+                    augusTxt += f'{id} = {id} | {str(res)};\n'
+                    arrayTables.pop()
+                    ts.setdefault(b.id, f'$t{str(contadorT)}')
+                    arrayTables.append(ts)
+                    contadorT += 1
+            else:
+                print("Error semantico la varibale indicada no existe asignacion")
     except:
         print("Error semantico la varibale indicada no existe except asignacion")
 
@@ -296,13 +339,20 @@ def Declaration_(b, ts):
     global augusTxt, contadorT, arrayTables
     for i in b:
         if isinstance(i, SingleDeclaration):
-            res = valueExpression(i.val, ts)
-            augusTxt += '$t'+ str(contadorT)
-            augusTxt += ' = ' + str(res) + ' ;\n'
-            arrayTables.pop()
-            ts.setdefault(i.id, f'$t{str(contadorT)}')
-            arrayTables.append(ts)
-            contadorT += 1
+            if isinstance(i.val, IncreDecre_Post):
+                increDecreAsignation(i.val, ts, f'$t{str(contadorT)}', i.id)
+                contadorT+=1
+            elif isinstance(i.val, IncreDecre_Pre):
+                increDecreAsignation(i.val, ts, f'$t{str(contadorT)}', i.id)
+                contadorT += 1
+            else:
+                res = valueExpression(i.val, ts)
+                augusTxt += '$t'+ str(contadorT)
+                augusTxt += ' = ' + str(res) + ' ;\n'
+                arrayTables.pop()
+                ts.setdefault(i.id, f'$t{str(contadorT)}')
+                arrayTables.append(ts)
+                contadorT += 1
         elif isinstance(i, IdentifierArray):
             augusTxt += '$t' + str(contadorT)
             augusTxt += ' = array();\n'
@@ -574,3 +624,42 @@ def valueExpression(instruction, ts):
         augusTxt += f'$t{str(contadorT)} = read();\n'
         contadorT += 1
         return f'$t{str(contadorT-1)}'
+
+def increDecreAsignation(instruction, ts, idPadre, VariableAlto):
+    global augusTxt,arrayTables,contadorT
+    if isinstance(instruction, IncreDecre_Post):
+        #primero lo agrego
+        id = valueExpression(Identifier(instruction.id, 0, 0), ts)  ##id de variable afectada   -> a++;  -> $t0
+        augusTxt += f'{idPadre}'
+        augusTxt += f' = {str(id)};\n'
+        arrayTables.pop()
+        ts.setdefault(VariableAlto, f'{idPadre}')
+        arrayTables.append(ts)
+        #ahora incremento
+        augusTxt += id
+        if instruction.signo == '++':
+            augusTxt += f' = {str(id)} + 1;\n'
+        else:
+            augusTxt += f' = {str(id)} - 1;\n'
+        arrayTables.pop()
+        ts.setdefault(instruction.id, f'{id}')
+        arrayTables.append(ts)
+    else:
+        #primero incremento        
+        id = valueExpression(Identifier(instruction.id, 0, 0), ts)
+        augusTxt += id
+        if instruction.signo == '++':
+            augusTxt += f' = {str(id)} + 1;\n'
+        else:
+            augusTxt += f' = {str(id)} - 1;\n'
+        arrayTables.pop()
+        ts.setdefault(instruction.id, f'{id}')
+        arrayTables.append(ts)
+        #despues lo agrego
+        augusTxt += f'{idPadre}'
+        augusTxt += f' = {str(id)};\n'
+        arrayTables.pop()
+        ts.setdefault(VariableAlto, f'{idPadre}')
+        arrayTables.append(ts)
+
+        

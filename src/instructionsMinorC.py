@@ -89,6 +89,21 @@ class DeclacionFunction(Instruction):
         self.line = line
         self.column = column
 
+class IncreDecre_Pre(Instruction):
+    'increment or decrement'
+    def __init__(self, signo, id, line, column):
+        self.signo = signo
+        self.id = id
+        self.line = line
+        self.column = column
+
+class IncreDecre_Post(Instruction):
+    'increment or decrement'
+    def __init__(self, signo, id, line, column):
+        self.signo = signo
+        self.id = id
+        self.line = line
+        self.column = column
 
 class Asignation(Instruction):
     'asignation'

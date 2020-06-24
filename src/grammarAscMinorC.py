@@ -353,7 +353,8 @@ def p_expresion(t):
                     | NOTBIT EXPRESION
                     | ANDBIT EXPRESION %prec UANDBIT
                     | LLAMADA_FUNCION
-                    | SCANF PARIZQ PARDER'''
+                    | SCANF PARIZQ PARDER
+                    | INCRE_DECRE'''
             #       | EXPRESION TERNARIO EXPRESION DOSPUNTOS EXPRESION'''
 
 
@@ -384,6 +385,8 @@ def p_expresion(t):
         
         elif t[1] == 'scanf': t[0] = Scanf(t.lineno(1), t.lexpos(1))
         elif t[1] == '(': t[0] = t[2]
+    elif len(t) == 2:
+        t[0] = t[1]
     else:
         if t[1] == '-' : t[0] = NegativeNumber(t[2], t.lineno(2), t.lexpos(2))
         elif t[1] == '~' : t[0] = NotBit(t[2], t.lineno(1), t.lexpos(1))
@@ -550,6 +553,8 @@ def p_asignaciones(t):
 
     if len(t) == 5:  #ID OP_ASIGNACION EXPRESION PUNTOCOMA
         t[0] = Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))
+    elif len(t) == 3: #incremento o decremento
+        t[0] = t[1]
 
 def p_listaPuntos(t):
     '''LISTA_PUNTOS :   LISTA_PUNTOS PUNTO ID
@@ -655,16 +660,20 @@ def p_default(t):
 def p_increDecre(t):
     '''INCRE_DECRE :    INCRE_DECRE_POST
                         | INCRE_DECRE_PRE'''
+    t[0] = t[1]
 
 def p_increDecrePost(t):
     ' INCRE_DECRE_POST :    ID SIG'
+    t[0] = IncreDecre_Post(t[2], t[1], t.lineno(2), t.lexpos(2))
 
 def p_increDecrePre(t):
     ' INCRE_DECRE_PRE :    SIG ID'
+    t[0] = IncreDecre_Pre(t[1], t[2], t.lineno(2), t.lexpos(2))
 
 def p_pre(t):
     '''SIG :   INCREMENTO
                 | DECREMENTO'''
+    t[0] = t[1]
 
 def p_opAsignacion(t):
     '''OP_ASIGNACION :  IGUAL
