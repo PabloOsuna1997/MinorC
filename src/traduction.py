@@ -39,7 +39,8 @@ def process(instructions,ts):
             if isinstance(b, Declaration):
                 Declaration_(b.listId, ts)
             elif isinstance(b, FunctionDeclaration):
-                FunctionDeclaration_(b, ts)
+                if b.id == 'main':
+                    FunctionDeclaration_(b, ts)
             i += 1
     except:
         pass
