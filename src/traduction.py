@@ -116,7 +116,7 @@ def PrintF(b, ts):
             if a[0] == '$':
                 augusTxt += f'print({str(a)});\n'       ## arreglar esto porque imprime ("$t8")
             else:
-                augusTxt += f'print(\"{str(a)}\");\n'       ## arreglar esto porque imprime ("$t8")
+                augusTxt += f'print(\"{str(a)} \");\n'       ## arreglar esto porque imprime ("$t8")
     except:
         print("Error semantico en el print.")
 

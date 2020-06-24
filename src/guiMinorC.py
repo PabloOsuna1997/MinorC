@@ -47,12 +47,14 @@ class pintar(QtGui.QSyntaxHighlighter):
 
     expresiones = []
     expresiones.append((r"\d+(\.\d+)?", QtGui.QColor(198,209,101)))
-    expresiones.append((r"\bmain", QtGui.QColor(152,81,164)))
-    expresiones.append((r"[a-zA-Z_][a-zA-Z_0-9]*", QtGui.QColor(161,81,164)))        
+    expresiones.append((r"[a-zA-Z_][a-zA-Z_0-9]*", QtGui.QColor(192,192,192)))     
+    expresiones.append((r"(int |char |float |double )", QtGui.QColor(0,0,255))) 
+    expresiones.append((r"(printf|return|break|goto |if|for|while|do|switch|case|default)", QtGui.QColor(174,108,134)))       
     expresiones.append((r'\".+\"', QtGui.QColor(185,185,112)))
     expresiones.append((r'\'.+\'', QtGui.QColor(185,185,112)))
     expresiones.append((r"#.*", QtGui.QColor(68,146,92)))
     expresiones.append((r"\/\/.*", QtGui.QColor(68,146,92)))
+    expresiones.append((r"(\{|\}|\(|\)|\;|\:)", QtGui.QColor(255,0,0)))    
     expresiones.append((r"\$(t|a|v|ra|sp?)[0-9]*", QtGui.QColor(119,193,230)))
 
     def highlightBlock(self, text):
