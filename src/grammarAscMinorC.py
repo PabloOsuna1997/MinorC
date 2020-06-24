@@ -566,6 +566,14 @@ def p_if(t):
 
     t[0] = If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))
 
+def flatten(nested_list):
+    try:
+        head = nested_list[0]
+    except IndexError:
+        return []
+    return ((flatten(head) if isinstance(head, list) else [head]) +
+            flatten(nested_list[1:]))
+
 def p_elseIf_(t):
     '''
     ELSE_IF_ :   ELSE_IF
@@ -574,9 +582,11 @@ def p_elseIf_(t):
                 | 
     '''
     if len(t) == 2:
+        t[1] = flatten(t[1])
         t[0] = t[1]
     elif len(t) == 3:
         t[1].append(t[2])
+        t[1] = flatten(t[1])
         t[0] = t[1]
     else:
         t[0] = []
@@ -587,7 +597,9 @@ def p_elseIf(t):
                 | ELIF
     '''
     if len(t) == 3:
-        t[1].append(t[2])
+        #t[1].append(t[2])
+        t[1].extend(t[2])
+        t[1] = flatten(t[1])
         t[0] = t[1]
     else:
         t[0] = [t[1]]
@@ -596,7 +608,7 @@ def p_elif(t):
     '''
     ELIF :  ELSE IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER
     '''
-    t[0] = IfElse(t[4], t[7], t.lineno(1), t.lexpos(1))
+    t[0] = [IfElse(t[4], t[7], t.lineno(1), t.lexpos(1))]
 
 def p_else(t):
     '''ELSE_ :  ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER 

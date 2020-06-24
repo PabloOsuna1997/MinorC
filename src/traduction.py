@@ -131,7 +131,7 @@ def If_(b, tsPadre):
     if len(b.ifElse) <= 0:
         contadorEtiquetasAux += 1
 
-    augusTxt += f'goto L{len(b.ifElse) + contadorEtiquetasAux};\n'                             # termine de reconocer el FALSE Y INTERMACAMBIO LOS VALORES salto hasta la ultima etiquetas de if elses
+    augusTxt += f'goto L{len(b.ifElse) + contadorEtiquetasAux+1};\n'                             # termine de reconocer el FALSE Y INTERMACAMBIO LOS VALORES salto hasta la ultima etiquetas de if elses
     augusAux += augusTxt
     augusTxt = augusAuxAux                                              #le regresamos el contenido anterior
                                                                         #recorremos todos los ifelses
@@ -143,6 +143,7 @@ def If_(b, tsPadre):
             if isinstance(a, IfElse):
                 condition  = valueExpression(a.condition, tsLocal)
                 augusTxt += f'if({str(condition)}) goto L{str(contadorEtiquetas + contadorEtiquetasAux )};\n'
+                #captura sus instrucciones
                 augusAux += f'L{str(contadorEtiquetas + contadorEtiquetasAux)}:\n'
                 augusAuxAux = ''
                 augusAuxAux += augusTxt                                 #hacemos un backup de 
@@ -170,7 +171,7 @@ def If_(b, tsPadre):
                                                                         # termino de realizar etiquetas
                 
                 augusAux += augusTxt
-                augusAux += f'goto L{len(b.ifElse) + contadorEtiquetasAux};\n'                 #salto hasta la ultima etiquetas de if elses
+                augusAux += f'goto L{len(b.ifElse) + contadorEtiquetasAux+1};\n'                 #salto hasta la ultima etiquetas de if elses
                 augusTxt = augusAuxAux                                  #le regresamos el contenido anterior 
             else:
                 x = 0
@@ -190,13 +191,14 @@ def If_(b, tsPadre):
                         augusTxt += f'goto {str(z.label)};\n'
                     
                     x += 1
-                augusTxt += f'goto L{len(b.ifElse) + contadorEtiquetasAux};\n'
+                augusTxt += f'goto L{len(b.ifElse) + contadorEtiquetasAux+1};\n'
+        augusTxt += f'goto L{len(b.ifElse) + contadorEtiquetasAux + 1};\n'
         augusTxt += augusAux
-        augusTxt += f'L{str(len(b.ifElse) + contadorEtiquetasAux)}:\n'
+        augusTxt += f'L{str(len(b.ifElse) + contadorEtiquetasAux+1)}:\n'
     else:        
-        augusTxt += f'goto L{len(b.ifElse) + contadorEtiquetasAux};\n' 
+        augusTxt += f'goto L{len(b.ifElse) + contadorEtiquetasAux+1};\n'
         augusTxt += augusAux
-        augusTxt += f'L{str(len(b.ifElse) + contadorEtiquetasAux)}:\n'
+        augusTxt += f'L{str(len(b.ifElse) + contadorEtiquetasAux+1)}:\n'
     contadorEtiquetas += 1
     contadorEtiquetasAux = contadorEtiquetas
     arrayTables.pop()      #eliminamos la ts
