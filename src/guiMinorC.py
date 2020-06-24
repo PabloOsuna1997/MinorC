@@ -758,8 +758,8 @@ class Ui_Augus(object):
     def fn_Ejecutar_Ascendente(self):
         #try:
             #inicializacion
-            #traduction.augusTxt = 'main: \n'
-            traduction.augusTxt = ''
+            traduction.augusTxt = 'main: \n'
+            #traduction.augusTxt = ''
             traduction.contadorT = 0
             traduction.semanticErrorList = []
             traduction.ultimaPos = 0

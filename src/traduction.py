@@ -49,8 +49,9 @@ def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del pad
     global augusTxt
     tsLocal = {}
     tsLocal.clear()
-    arrayTables.append(tsLocal) 
-    augusTxt += f'{str(b.id)} :\n'
+    arrayTables.append(tsLocal)
+    if b.id != 'main':
+        augusTxt += f'{str(b.id)} :\n'
     #recorrer las listas de instrucciones
     i = 0
     while i < len(b.instructions):
