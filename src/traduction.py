@@ -135,7 +135,7 @@ def For_(b, ts):
     tsLocal = {}
     tsLocal.clear()
     arrayTables.append(tsLocal)
-    Declaration_(b.declaration.listId, ts)
+    Declaration_(b.declaration.listId, tsLocal)
     augusTxt += F'fL{str(contadorEtiquetas)}:\n'
     contaAuxAUx = contadorEtiquetas
     contadorEtiquetas += 1
@@ -245,138 +245,108 @@ def If_(b, tsPadre):
     arrayTables.append(tsLocal)
     condition  = valueExpression(b.condition, tsPadre)
     augusTxt += f'if({str(condition)}) goto iL{str(contadorEtiquetas)};\n'
-    augusAux += F'iL{str(contadorEtiquetas)}:\n'                         #debajo del salto debo poner las instrucciones si son falsas
-    augusAuxAux += augusTxt                                             #hacemos un backup de 
-    augusTxt = ''
-    contadorEtiquetas += 1
-    #contaAux = contadorEtiquetas+1 
-    i = 0                                                               #mandamos a hacer las instrucciones
-    while i < len(b.instructions):
-        a = b.instructions[i]
-        if isinstance(a, Declaration):
-            Declaration_(a.listId, tsLocal)
-        elif isinstance(a, Asignation):
-            Asignation_(a, tsLocal)
-        elif isinstance(a, If):
+    if len(b.ifElse) == 0:
+        #es solo un if
+        augusTxt += f'goto iL{str(contadorEtiquetas+1)};\n'
+        augusTxt += f'iL{str(contadorEtiquetas)}:\n'
+        contaAux = contadorEtiquetas+1 
+        contadorEtiquetas += 2 #aumentamos porque las demas instrucciones tambien crearan etiquetas si no sobre escribiran la que ya tenia
+        processInstructions(b.instructions, tsLocal)
+        augusTxt += f'iL{str(contaAux)}:\n'
+        contadorEtiquetas += 1
+        contadorEtiquetasAux = contadorEtiquetas
+        arrayTables.pop()
+    elif len(b.ifElse) == 1: 
+        if isinstance(b.ifElse[0],Else):
+            #else
+            augusTxt += f'goto iL{str(contadorEtiquetas+1)};\n'
+            augusTxt += f'iL{str(contadorEtiquetas)}:\n'
+            contaAux = contadorEtiquetas+1 
+            contadorEtiquetas += 2 #aumentamos porque las demas instrucciones tambien crearan etiquetas si no sobre escribiran la que ya tenia
+            processInstructions(b.instructions, tsLocal)
+            #########################################################
+            augusAuxAux = augusTxt          #guardo lo que llevo
+            augusTxt = ''
+            #empiezo a almacenar el else en  una tmp
+            augusAux += f'iL{str(contaAux)}:\n'
+            #etiquetas falsas 
+            contaAux = contadorEtiquetas
+            processInstructions(b.ifElse[0].instructions, tsLocal)
+            augusTxt += f'goto iL{str(contadorEtiquetas)};\n'
+            augusTxt += f'iL{str(contadorEtiquetas)}:\n'
+            augusAux += augusTxt
+            #########################################################
+            #cuando regreso de todas las instruccionies del else ya lo incorporo a mi texto original pero antes pongo goto del if verdadero
+            augusTxt = augusAuxAux
+            augusTxt += f'goto iL{str(contadorEtiquetas)};\n'
+            augusTxt += augusAux
             contadorEtiquetas += 1
-            If_(a, tsLocal)
-        elif isinstance(a, PrintF_):
-            PrintF(a, tsLocal)
-        elif isinstance(a, Label):
-            augusTxt += f'{str(a.label)}:\n'
-        elif isinstance(a, Goto):
-           augusTxt += f'goto {str(a.label)};\n'
-        elif isinstance(a, IncreDecre_Pre):
-            increDecre(a, tsLocal, 1)
-        elif isinstance(a, IncreDecre_Post):
-            increDecre(a, tsLocal, 1)
-        elif isinstance(a, For):
-            For_(a, tsLocal)
-        elif isinstance(a, While_):
-            While__(a, tsLocal)
-        elif isinstance(a, DoWhile_):
-            DoW(a, tsLocal)
-        i += 1
-    
-                                                                       # termino de realizar etiquetas
-    
-    if len(b.ifElse) <= 0:
-        contadorEtiquetasAux += 1
+            contadorEtiquetasAux = contadorEtiquetas
+            arrayTables.pop()
+        else:
+            # viene un unico else if
+            condition  = valueExpression(b.ifElse[0].condition, tsPadre)
+            augusTxt += f'if({str(condition)}) goto iL{str(contadorEtiquetas+1)};\n'
+            augusAuxAux = augusTxt                  #guardo contenido actual
+            contaAux = contadorEtiquetas+1          #etiqueta a donde debo saltar de ser falsa el segundo if
+            augusAuxIf = f'iL{str(contadorEtiquetas)}:\n'
+            augusTxt = ''            
+            contadorEtiquetas += 2 #aumentamos porque las demas instrucciones tambien crearan etiquetas si no sobre escribiran la que ya tenia
+            processInstructions(b.instructions, tsLocal)  #ejecutar instrucciones verdaderas
+            augusAuxIf += augusTxt
 
-    augusTxt += f'goto iL{len(b.ifElse) + contadorEtiquetasAux+1};\n'                             # termine de reconocer el FALSE Y INTERMACAMBIO LOS VALORES salto hasta la ultima etiquetas de if elses
-    augusAux += augusTxt
-    augusTxt = augusAuxAux                                              #le regresamos el contenido anterior
-                                                                        #recorremos todos los ifelses
-    if len(b.ifElse) > 0:                                               #hay if else's
+            augusAux_Else = f'iL{str(contaAux)}:\n'         #instrucciones del elseif 
+            augusTxt = ''
+            processInstructions(b.ifElse[0].instructions, tsLocal)  #ejecutar instrucciones verdaderas
+            augusAux_Else += augusTxt
+            augusAux_Else += f'goto iL{str(contadorEtiquetas)};\n'
+            augusTxt = augusAuxAux
+            
+            augusTxt += f'goto iL{str(contadorEtiquetas)};\n'   ### si ninguna se cumple se sale 
 
+            augusTxt += augusAuxIf
+            augusTxt += f'goto iL{str(contadorEtiquetas)};\n'
+            augusTxt += augusAux_Else
+            augusTxt += f'iL{str(contadorEtiquetas)}:\n'
+            contadorEtiquetas += 1
+            contadorEtiquetasAux = contadorEtiquetas
+            arrayTables.pop()
+    else:
+        #vienen if else a morir y else 
+        #1 traigo las instrucciones verdaderas del primer if 
+        augusAuxAux = augusTxt
+        augusTxt = ''  
+        augusTxt += f'iL{str(contadorEtiquetas)}:\n'
+        contaAux = contadorEtiquetas         
+        contadorEtiquetas += 1 #aumentamos porque las demas instrucciones tambien crearan etiquetas si no sobre escribiran la que ya tenia
+        processInstructions(b.instructions, tsLocal)  #ejecutar instrucciones verdaderas
+        augusAuxIf1 = augusTxt      #pendiente salto de fin
+        augusAuxIf1 += '##--##\n'     #posteriormente reemplazare eso por el ultimo salto
+        augusTxt = augusAuxAux
         for a in b.ifElse:
-            #if isinstance (a, list):                                    #aveces venia en lista dentro de listas
-                #a = a[0]
             if isinstance(a, IfElse):
-                condition  = valueExpression(a.condition, tsLocal)
-                augusTxt += f'if({str(condition)}) goto iL{str(contadorEtiquetas + contadorEtiquetasAux )};\n'
-                #captura sus instrucciones
-                augusAux += f'iL{str(contadorEtiquetas + contadorEtiquetasAux)}:\n'
-                augusAuxAux = ''
-                augusAuxAux += augusTxt                                 #hacemos un backup de 
+                condition  = valueExpression(a.condition, tsPadre)
+                augusTxt += f'if({str(condition)}) goto iL{str(contadorEtiquetas)};\n'
+                augusAuxIf1 += f'iL{str(contadorEtiquetas)}:\n'
+                augusAuxAux = augusTxt
                 augusTxt = ''
-                contadorEtiquetas += 1
-                                                                        #mandamos a hacer las instrucciones
-                x = 0
-                while x < len(a.instructions):
-                    z = a.instructions[x]
-                    if isinstance(z, Declaration):
-                        Declaration_(z.listId, tsLocal)
-                    elif isinstance(z, Asignation):
-                        Asignation_(z, tsLocal)
-                    elif isinstance(z, If):
-                        contadorEtiquetas += 1
-                        If_(a, tsLocal)
-                    elif isinstance(z, PrintF_):
-                        PrintF(z, tsLocal)
-                    elif isinstance(z, Label):
-                        augusTxt += f'{str(z.label)}:\n'
-                    elif isinstance(z, Goto):
-                        augusTxt += f'goto {str(z.label)};\n'
-                    elif isinstance(z, IncreDecre_Pre):
-                        increDecre(z, tsLocal, 1)
-                    elif isinstance(z, IncreDecre_Post):
-                        increDecre(z, tsLocal, 1)
-                    elif isinstance(z, For):
-                        For_(z, tsLocal)
-                    elif isinstance(z, While_):
-                        While__(z, tsLocal)
-                    elif isinstance(z, DoWhile_):
-                        DoW(z, tsLocal)
-        
-                    x += 1
-                                                                        # termino de realizar etiquetas
-                
-                augusAux += augusTxt
-                augusAux += f'goto iL{len(b.ifElse) + contadorEtiquetasAux+1};\n'                 #salto hasta la ultima etiquetas de if elses
-                augusTxt = augusAuxAux                                  #le regresamos el contenido anterior 
+                contadorEtiquetas += 1 #aumentamos porque las demas instrucciones tambien crearan etiquetas si no sobre escribiran la que ya tenia
+                processInstructions(a.instructions, tsLocal)
+                augusAuxIf1 += augusTxt      #pendiente salto de fin
+                augusAuxIf1 += '##--##'     #posteriormente reemplazare eso por el ultimo salto
+                augusTxt = augusAuxAux
             else:
-                x = 0
-                while x < len(a.instructions):
-                    z = a.instructions[x]
-                    if isinstance(z, Declaration):
-                        Declaration_(z.listId, tsLocal)
-                    elif isinstance(z, Asignation):
-                        Asignation_(z, tsLocal)
-                    elif isinstance(z, If):
-                        If_(z, tsLocal)
-                    elif isinstance(z, PrintF_):
-                        PrintF(z, tsLocal)
-                    elif isinstance(z, Label):
-                        augusTxt += f'{str(z.label)}:\n'
-                    elif isinstance(z, Goto):
-                        augusTxt += f'goto {str(z.label)};\n'
-                    elif isinstance(z, IncreDecre_Pre):
-                        increDecre(z, tsLocal, 1)
-                    elif isinstance(z, IncreDecre_Post):
-                        increDecre(z, tsLocal, 1)
-                    elif isinstance(z, For):
-                        For_(z, tsLocal)
-                    elif isinstance(z, While_):
-                        While__(z, tsLocal)
-                    elif isinstance(z, DoWhile_):
-                        DoW(z, tsLocal)
-        
-                    
-                    x += 1
-                augusTxt += f'goto iL{len(b.ifElse) + contadorEtiquetasAux+1};\n'
-        augusTxt += f'goto iL{len(b.ifElse) + contadorEtiquetasAux + 1};\n'
-        augusTxt += augusAux
-        augusTxt += f'iL{str(len(b.ifElse) + contadorEtiquetasAux+1)}:\n'
-    else:        
-        augusTxt += f'goto iL{len(b.ifElse) + contadorEtiquetasAux+1};\n'
-        augusTxt += augusAux
-        augusTxt += f'iL{str(len(b.ifElse) + contadorEtiquetasAux+1)}:\n'
-    contadorEtiquetas += 1
-    contadorEtiquetasAux = contadorEtiquetas
-    arrayTables.pop()      #eliminamos la ts
-    contadorEtiquetas +=1
+                augusTxt += f'goto iL{str(contadorEtiquetas)};\n'
+                augusTxt += f'iL{str(contadorEtiquetas)}:\n'
+                contadorEtiquetas += 1
+                processInstructions(a.instructions, tsLocal)
+                augusTxt += f'goto iL{str(contadorEtiquetas)};\n'
 
+        import re
+        augusAuxIf1 = re.sub('##--##', f'goto iL{str(contadorEtiquetas)};\n', augusAuxIf1, flags=re.IGNORECASE)
+        augusTxt += augusAuxIf1
+        augusTxt += f'iL{str(contadorEtiquetas)}:\n'
+                
 def Asignation_(b, ts):
     try:
         if isinstance(b.expresion, IncreDecre_Post):

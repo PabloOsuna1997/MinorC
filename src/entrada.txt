@@ -1,6 +1,6 @@
 int a ;
 
-int funcion(struct nodo nodo){
+int main(struct nodo nodo){
     int a = 3, b = 1, x;
 
     if (x>0<20){
@@ -15,36 +15,6 @@ int funcion(struct nodo nodo){
 }
 
 
-int main()
-{
-    int a,b;
-    if (b == 5){
-            printf("Al fin encontre el 5");
-            printf("\n");
-        }else{        
-            printf("%d", b);
-        }
-        for (int b = 0; b < 2; b++){
-            printf("a");
-        }
-}
-
-int main()
-{
-    int a;
-    for (int b = 0; b < 6; b++){
-        
-        if (b == 5){
-            printf("Al fin encontre el 5 \n");
-        }else{
-            for (int c = 0; c < 3; c++){
-                printf("b: %d c: %d \n", b, c);
-            }     
-            
-        }
-    }
-}
-
 int main(){
     printf("\nIngrese un numero para iniciar:\n");
     int contador = scanf();
@@ -56,54 +26,25 @@ int main(){
     printf("\nHemos contado desde %d hasta %d \n",contador,bandera);
 }
 
-int main (){
-    int a;
-    while(a < 2){
-        int b;
-        while(b < 3){
-            printf("%d %d \n",a,b);
-            b++;
-        }
-        a++;
-    }
-}
-
-int main()
-{
-int b = 0;
-    do{
-        if (b == 5){
-            printf("Al fin encontre el 5 \n");
-        }else{
-            int c = 0;
-            do{
-                printf("b: %d c: %d \n", b, c);
-                c++;
-            } while(c < 3);    
-        }
-        b++;
-    }while(b < 6);
-}
-
-
 
 int main()
 {
 int a;
+    printf("PROBANDO CICLO FOR \n");
     for (int b = 0; b < 6; b++){
         if (b == 5){
-            printf("Al fin encontre el 5 \n");
+            printf("Al fin encontre el 5 en el for \n");
         }else{
             for (int c = 0; c < 3; c++){
                 printf("b: %d c: %d \n", b, c);
             }     
         }
     }
-    printf("PROBANDO CICLO WHILE\n");
+    printf("PROBANDO CICLO WHILE \n");
     int b = 0;
     while(b < 6){
         if (b == 5){
-            printf("Al fin encontre el 5 \n");
+            printf("Al fin encontre el 5 en el while \n");
         }else{
             int c = 0;
             while(c < 3){
@@ -113,11 +54,11 @@ int a;
         }
         b++;
     }
-    printf("PROBANDO CICLO DO WHILE\n");
+    printf("PROBANDO CICLO DO WHILE \n");
     b = 0;
     do{
         if (b == 5){
-            printf("Al fin encontre el 5 \n");
+            printf("Al fin encontre el 5 en el do while \n");
         }else{
             int c = 0;
             do{
