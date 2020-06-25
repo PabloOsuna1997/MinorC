@@ -777,12 +777,9 @@ def p_listaCases(t):
 def p_case_error(t):
     'CASE_ :    CASE error BREAK_'
 def p_case(t):
-    'CASE_ :    CASE EXPRESION DOSPUNTOS INSTRUCCIONES_INTERNAS BREAK_'
-
-    if t[5] == 1:
-        t[0] = Case_(t[2], t[4], 1, t.lineno(1), t.lexpos(1))
-    else:
-        t[0] = Case_(t[2], t[4], 0, t.lineno(1), t.lexpos(1))
+    'CASE_ :    CASE EXPRESION DOSPUNTOS INSTRUCCIONES_INTERNAS'
+  
+    t[0] = Case_(t[2], t[4], 0, t.lineno(1), t.lexpos(1))
     global grammarList
     grammarList.append(g.nodeGramatical('CASE_ -> CASE EXPRESION DOSPUNTOS INSTRUCCIONES_INTERNAS BREAK_', f'CASE_.val = Case_(t[2], t[4], 0, t.lineno(1), t.lexpos(1))'))
 
@@ -790,6 +787,7 @@ def p_break(t):
     '''BREAK_ : BREAK
                 | '''
     
+    #print("estoy entrando en break")
     global grammarList
     if len(t) == 2:
         t[0] = 1
@@ -800,18 +798,13 @@ def p_break(t):
         grammarList.append(g.nodeGramatical('BREAK_ -> empty', f'BREAK_.val = []'))
 
 def p_default(t):
-    '''DEFAULT_ :   DEFAULT DOSPUNTOS INSTRUCCIONES_INTERNAS BREAK_
+    '''DEFAULT_ :   DEFAULT DOSPUNTOS INSTRUCCIONES_INTERNAS
                     | '''
     
     global grammarList
-    if len(t) == 5:
-        if t[4] == 1:
-            t[0] = Default_(t[3], 1, t.lineno(1), t.lexpos(1))
-            grammarList.append(g.nodeGramatical('DEFAULT_ -> DEFAULT DOSPUNTOS INSTRUCCIONES_INTERNAS BREAK_', f'DEFAULT_.val = Default_(t[3], 1, t.lineno(1), t.lexpos(1))'))
-
-        else:
-            t[0] = Default_(t[3], 0, t.lineno(1), t.lexpos(1))
-            grammarList.append(g.nodeGramatical('DEFAULT_ -> empty', f'DEFAULT_.val = []'))
+    if len(t) == 4:
+        t[0] = Default_(t[3], 0, t.lineno(1), t.lexpos(1))
+        grammarList.append(g.nodeGramatical('DEFAULT_ -> empty', f'DEFAULT_.val = []'))
     else:
         t[0] = []
         grammarList.append(g.nodeGramatical('DEFAULT_ -> empty', f'DEFAULT_.val = []'))
