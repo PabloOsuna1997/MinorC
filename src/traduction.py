@@ -95,15 +95,15 @@ def Switch(b, ts):
     contadorCase = 0
     caseAnt = None
     for i in b.listaCases:
-        #if contadorCase > 0:
+        if contadorCase > 0:
             #if caseAnt.break_ != 0:
-                #exp = valueExpression(LogicAndRelational(b.expresion, i.expresion, LogicsRelational.IGUALQUE, 0, 0), ts)
-                #augusTxt += f'if({str(exp)}) goto sL{str(contadorEtiquetas)};\n'
-                #augusTxt += f'goto sL{str(contadorEtiquetas + 1)};\n'
-        #else:
-        exp = valueExpression(LogicAndRelational(b.expresion, i.expresion, LogicsRelational.IGUALQUE, 0, 0), ts)
-        augusTxt += f'if({str(exp)}) goto sL{str(contadorEtiquetas)};\n'
-        augusTxt += f'goto sL{str(contadorEtiquetas + 1)};\n'
+            exp = valueExpression(LogicAndRelational(b.expresion, i.expresion, LogicsRelational.IGUALQUE, 0, 0), ts)
+            augusTxt += f'if({str(exp)}) goto sL{str(contadorEtiquetas)};\n'
+            augusTxt += f'goto sL{str(contadorEtiquetas + 1)};\n'
+        else:
+            exp = valueExpression(LogicAndRelational(b.expresion, i.expresion, LogicsRelational.IGUALQUE, 0, 0), ts)
+            augusTxt += f'if({str(exp)}) goto sL{str(contadorEtiquetas)};\n'
+            augusTxt += f'goto sL{str(contadorEtiquetas + 1)};\n'
 
         contaAux = contadorEtiquetas + 1
         augusTxt += F'sL{str(contadorEtiquetas)}:\n'
@@ -113,7 +113,7 @@ def Switch(b, ts):
         augusTxt += '##--##\n'        #salto hacia el final
         augusTxt += F'sL{str(contaAux)}:\n'
         contadorCase += 1
-        caseAnt = i
+        caseAnt = i                 #guardo en case anterior
 
     if isinstance(b.default, Default_):
         #existe default

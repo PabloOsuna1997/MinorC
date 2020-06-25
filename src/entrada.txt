@@ -20,14 +20,19 @@ int main(){
     switch(a){
         case 1:
             printf("a");
+            break;
         case 2:
             printf("b");
+            break;
         case 3:
             printf("c");
+            break;
         case 4:
             printf("d");
+            break;
         default:
             printf("no es ningina de las anteriores.");
+            break;
     }
 }
 
