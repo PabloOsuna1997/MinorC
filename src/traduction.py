@@ -74,10 +74,16 @@ def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del pad
             increDecre(a, tsLocal, 1)
         elif isinstance(a, For):
             For_(a, tsLocal)
+        elif isinstance(a, While_):
+            While__(a, tsLocal)
         i += 1
     
     print(f"tsLocal: {str(tsLocal)}")
     arrayTables.pop()
+
+def While__(b, ts):
+    global contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux
+    print("while")
 
 def For_(b, ts):
     global contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux
@@ -109,6 +115,8 @@ def For_(b, ts):
     contadorEtiquetasAux = contadorEtiquetas
     augusTxt += F'fL{str(contaAux)}:\n'
     contadorEtiquetas += 1
+    contadorEtiquetasAux = contadorEtiquetas
+    arrayTables.pop() 
 
 def processInstructions(b, tsLocal):
     i = 0

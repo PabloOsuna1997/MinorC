@@ -75,6 +75,13 @@ class For(Instruction):
         self.line = line
         self.column = column
 
+class While_(Instruction):
+    '''for statment'''
+    def __init__(self,condition,instructions, line, column):
+        self.condition = condition
+        self.instructions = instructions
+        self.line = line
+        self.column = column
 
 class Goto(Instruction):
     '''label jump'''

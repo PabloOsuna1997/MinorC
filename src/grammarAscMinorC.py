@@ -736,11 +736,13 @@ def p_for(t):
     global grammarList
     grammarList.append(g.nodeGramatical('FOR_  -> FOR PARIZQ DECLA_VARIABLES EXPRESION PUNTOCOMA INCRE_DECRE PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER', f'FOR_.val = For(t[3], t[4], t[6], t[9], t.lineno(1), t.lexpos(1))'))
 
-
 def p_while_error(t):
     'WHILE_ :   WHILE error LLAVEDER'
 def p_while(t):
     'WHILE_ :   WHILE PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'
+    t[0] = While_(t[3], t[6], t.lineno(1), t.lexpos(1))
+    global grammarList
+    grammarList.append(g.nodeGramatical('WHILE_  -> WHILE PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER', f'WHILE_.val = While_(t[3], t[6], t.lineno(1), t.lexpos(1))'))
 
 def p_doWhile_error(t):
     'DO_ :  DO error PUNTOCOMA'
