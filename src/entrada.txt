@@ -26,6 +26,8 @@ int main(){
             printf("c");
         case 4:
             printf("d");
+        default:
+            printf("no es ningina de las anteriores.");
     }
 }
 

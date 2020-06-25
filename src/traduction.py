@@ -20,6 +20,7 @@ arrayTables = []            #guardare todas las tablas de simbolos, servira como
 contadorEtiquetas = 0
 contadorEtiquetasAux = 0
 pasadas = 0
+caseAnt = None
 
 def execute(input, textEdit): 
     global tableGlobal 
@@ -86,25 +87,46 @@ def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del pad
     arrayTables.pop()
 
 def Switch(b, ts):
-    global contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux
+    global contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux, caseAnt
     tsLocal = {}
     tsLocal.clear()
     arrayTables.append(tsLocal)
     #valuar la expresion
-    for i in b.listaCases:        
+    contadorCase = 0
+    caseAnt = None
+    for i in b.listaCases:
+        #if contadorCase > 0:
+            #if caseAnt.break_ != 0:
+                #exp = valueExpression(LogicAndRelational(b.expresion, i.expresion, LogicsRelational.IGUALQUE, 0, 0), ts)
+                #augusTxt += f'if({str(exp)}) goto sL{str(contadorEtiquetas)};\n'
+                #augusTxt += f'goto sL{str(contadorEtiquetas + 1)};\n'
+        #else:
         exp = valueExpression(LogicAndRelational(b.expresion, i.expresion, LogicsRelational.IGUALQUE, 0, 0), ts)
         augusTxt += f'if({str(exp)}) goto sL{str(contadorEtiquetas)};\n'
         augusTxt += f'goto sL{str(contadorEtiquetas + 1)};\n'
+
         contaAux = contadorEtiquetas + 1
         augusTxt += F'sL{str(contadorEtiquetas)}:\n'
         contadorEtiquetas += 2
         processInstructions(i.instructions, tsLocal)
-        augusTxt += '##--##'        #salto hacia el final
+        #if i.break_ != 0:
+        augusTxt += '##--##\n'        #salto hacia el final
         augusTxt += F'sL{str(contaAux)}:\n'
+        contadorCase += 1
+        caseAnt = i
+
+    if isinstance(b.default, Default_):
+        #existe default
+        augusTxt += F'sLDefault:\n'
+        #contadorEtiquetas += 2
+        processInstructions(b.default.instructions, tsLocal)
+        augusTxt += '##--##\n'        #salto hacia el final
+        #augusTxt += F'sL{str(contaAux)}:\n'
+
 
     import re
-    augusTxt = re.sub('##--##', f'goto iL{str(contadorEtiquetas)};\n', augusTxt, flags=re.IGNORECASE)
-    augusTxt += f'iL{str(contadorEtiquetas)}:\n'
+    augusTxt = re.sub('##--##', f'goto sL{str(contadorEtiquetas)};\n', augusTxt, flags=re.IGNORECASE)
+    augusTxt += f'sL{str(contadorEtiquetas)}:\n'
     contadorEtiquetas += 1
     contadorEtiquetasAux = contadorEtiquetas
     arrayTables.pop()
@@ -240,7 +262,7 @@ def increDecre(b, ts, type_):
         #contadorT += 1
     
 def PrintF(b, ts):
-    print("estoy en print")
+    #print("estoy en print")
     global contadorT, augusTxt
     #en la pos [0] siempre vendra la cadena "hola %d" etc..
     try:
