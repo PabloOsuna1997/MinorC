@@ -17,21 +17,21 @@ int funcion(struct nodo nodo){
 
 int main()
 {
-int a,b;
-if (b == 5){
-        printf("Al fin encontre el 5");
-        printf("\n");
-    }else{        
-        printf("%d", b);
-    }
-for (int b = 0; b < 2; b++){
-    printf("a");
-}
+    int a,b;
+    if (b == 5){
+            printf("Al fin encontre el 5");
+            printf("\n");
+        }else{        
+            printf("%d", b);
+        }
+        for (int b = 0; b < 2; b++){
+            printf("a");
+        }
 }
 
 int main()
 {
-int a;
+    int a;
     for (int b = 0; b < 6; b++){
         
         if (b == 5){
@@ -44,37 +44,6 @@ int a;
         }
     }
 }
-
-main: 
-$t0 = 0 ;
-$t1 = 0 ;
-fL0:
-$t2 = $t1 < 2 ;
-if($t2) goto fL1;
-goto fL2;
-fL1:
-$t3 = $t1 == 5 ;
-if($t3) goto iL3;
-print($t1);
-goto iL2;
-goto iL2;
-iL3:
-print("Al ");
-print("fin ");
-print("encontre ");
-print("el ");
-print("5 ");
-print("\n ");
-goto iL2;
-iL2:
-$t1 = $t1;
-$t1 = $t1 + 1;
-goto fL0;
-fL2:
-
-
-
-
 
 int main(){
     printf("\nIngrese un numero para iniciar:\n");

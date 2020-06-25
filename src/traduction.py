@@ -175,7 +175,7 @@ def PrintF(b, ts):
                 augusTxt += f'print({str(a)});\n'       ## arreglar esto porque imprime ("$t8")
             else:
                 if a != '\\n':
-                    augusTxt += f'print(\"{str(a)} \");\n'       ## arreglar esto porque imprime ("$t8")
+                    augusTxt += f'print(\" {str(a)} \");\n'       ## arreglar esto porque imprime ("$t8")
                 else:
                     augusTxt += f'print(\"\\n\");\n'  ## para no sumarle el espacio en el \n
     except:
