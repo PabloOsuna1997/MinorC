@@ -76,7 +76,7 @@ class For(Instruction):
         self.column = column
 
 class While_(Instruction):
-    '''for statment'''
+    '''while statment'''
     def __init__(self,condition,instructions, line, column):
         self.condition = condition
         self.instructions = instructions

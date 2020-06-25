@@ -759,6 +759,7 @@ class Ui_Augus(object):
         #try:
             #inicializacion
             traduction.augusTxt = 'main: \n'
+            traduction.augusTxt += F'PL_:\n'
             #traduction.augusTxt = ''
             traduction.contadorT = 0
             traduction.semanticErrorList = []

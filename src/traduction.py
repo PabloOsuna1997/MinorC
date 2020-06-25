@@ -83,7 +83,27 @@ def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del pad
 
 def While__(b, ts):
     global contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux
-    print("while")
+
+    tsLocal = {}
+    tsLocal.clear()
+    arrayTables.append(tsLocal)
+    augusTxt += F'wL{str(contadorEtiquetas)}:\n'
+    contaAuxAUx = contadorEtiquetas
+    contadorEtiquetas += 1
+    condition = valueExpression(b.condition, tsLocal)
+    augusTxt += f'if({str(condition)}) goto wL{str(contadorEtiquetas)};\n'   #$Tn
+    augusTxt += f'goto wL{str(contadorEtiquetas+1)};\n'                      #$Tn+1
+    augusTxt += F'wL{str(contadorEtiquetas)}:\n'                             #Tn:
+    contaAux = contadorEtiquetas+1 
+    contadorEtiquetas += 2
+    processInstructions(b.instructions, tsLocal)
+    augusTxt += f'goto wL{str(contaAuxAUx)};\n'                  #contador del goto inicial
+    contadorEtiquetas = contadorEtiquetas + 1
+    contadorEtiquetasAux = contadorEtiquetas
+    augusTxt += F'wL{str(contaAux)}:\n'
+    contadorEtiquetas += 1
+    contadorEtiquetasAux = contadorEtiquetas
+    arrayTables.pop() 
 
 def For_(b, ts):
     global contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux
@@ -140,6 +160,8 @@ def processInstructions(b, tsLocal):
             increDecre(a, tsLocal, 1)
         elif isinstance(a, For):
             For_(a, tsLocal)
+        elif isinstance(a, While_):
+            While__(a, tsLocal)
         i += 1
 
 def increDecre(b, ts, type_):
