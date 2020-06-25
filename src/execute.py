@@ -92,6 +92,8 @@ def process(instructions, ts, printList, textEdit):
                     semanticErrorList.append(se)
             elif isinstance(b, Goto):
                 #seteamos la instruccion anterior como la llamada al goto
+                if b.label == 'fL2' or b.label == 'fL1':
+                    print("etiqueta fl2");
                 tmp = i
                 i = goto(i, instructions, b.label)
                 if i != 0:

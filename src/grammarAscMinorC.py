@@ -650,6 +650,7 @@ def p_asignaciones(t):
         grammarList.append(g.nodeGramatical('ASIGNACIONES  -> ID OP_ASIGNACION EXPRESION PUNTOCOMA  ', f'ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))'))
     elif len(t) == 3: #incremento o decremento
         t[0] = t[1]
+        t[0] = Asignation(t[1].id, '=', t[1], t.lineno(2), t.lexpos(2))
 
 def p_listaPuntos(t):
     '''LISTA_PUNTOS :   LISTA_PUNTOS PUNTO ID
@@ -748,6 +749,9 @@ def p_doWhile_error(t):
     'DO_ :  DO error PUNTOCOMA'
 def p_doWhile(t):
     'DO_ :  DO LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER WHILE PARIZQ EXPRESION PARDER PUNTOCOMA'
+    t[0] = DoWhile_(t[3], t[7], t.lineno(1), t.lexpos(1))
+    global grammarList
+    grammarList.append(g.nodeGramatical('DO_ -> DO LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER WHILE PARIZQ EXPRESION PARDER PUNTOCOMA', f'DO_.val = DoWhile_(t[3], t[7], t.lineno(1), t.lexpos(1))'))
 
 def p_switch_error(t):
     'SWITCH_ :  SWITCH error LLAVEDER'

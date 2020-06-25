@@ -76,9 +76,32 @@ def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del pad
             For_(a, tsLocal)
         elif isinstance(a, While_):
             While__(a, tsLocal)
+        elif isinstance(a, DoWhile_):
+            DoW(a, tsLocal)
         i += 1
     
     print(f"tsLocal: {str(tsLocal)}")
+    arrayTables.pop()
+
+def DoW(b, ts):
+    print("do while")
+    global contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux
+    tsLocal = {}
+    tsLocal.clear()
+    arrayTables.append(tsLocal)
+    augusTxt += F'dwL{str(contadorEtiquetas)}:\n' 
+    contaAuxAUx = contadorEtiquetas
+    contadorEtiquetas += 1
+    contadorEtiquetasAux = contadorEtiquetas
+    processInstructions(b.instructions, tsLocal)
+    condition = valueExpression(b.condition, tsLocal)
+    augusTxt += f'if({str(condition)}) goto dwL{str(contadorEtiquetas)};\n'   #$Tn
+    augusTxt += f'goto dwL{str(contadorEtiquetas + 1)};\n'  # $Tn+1
+    augusTxt += F'dwL{str(contadorEtiquetas)}:\n'
+    augusTxt += f'goto dwL{str(contaAuxAUx)};\n'
+    augusTxt += f'dwL{str(contadorEtiquetas + 1)}:\n'
+    contadorEtiquetas += 1
+    contadorEtiquetasAux = contadorEtiquetas
     arrayTables.pop()
 
 def While__(b, ts):
@@ -162,6 +185,8 @@ def processInstructions(b, tsLocal):
             For_(a, tsLocal)
         elif isinstance(a, While_):
             While__(a, tsLocal)
+        elif isinstance(a, DoWhile_):
+            DoW(a, tsLocal)
         i += 1
 
 def increDecre(b, ts, type_):
@@ -224,6 +249,7 @@ def If_(b, tsPadre):
     augusAuxAux += augusTxt                                             #hacemos un backup de 
     augusTxt = ''
     contadorEtiquetas += 1
+    #contaAux = contadorEtiquetas+1 
     i = 0                                                               #mandamos a hacer las instrucciones
     while i < len(b.instructions):
         a = b.instructions[i]
@@ -248,6 +274,8 @@ def If_(b, tsPadre):
             For_(a, tsLocal)
         elif isinstance(a, While_):
             While__(a, tsLocal)
+        elif isinstance(a, DoWhile_):
+            DoW(a, tsLocal)
         i += 1
     
                                                                        # termino de realizar etiquetas
@@ -298,6 +326,8 @@ def If_(b, tsPadre):
                         For_(z, tsLocal)
                     elif isinstance(z, While_):
                         While__(z, tsLocal)
+                    elif isinstance(z, DoWhile_):
+                        DoW(z, tsLocal)
         
                     x += 1
                                                                         # termino de realizar etiquetas
@@ -329,6 +359,8 @@ def If_(b, tsPadre):
                         For_(z, tsLocal)
                     elif isinstance(z, While_):
                         While__(z, tsLocal)
+                    elif isinstance(z, DoWhile_):
+                        DoW(z, tsLocal)
         
                     
                     x += 1

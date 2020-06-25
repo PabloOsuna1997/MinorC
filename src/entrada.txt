@@ -59,7 +59,72 @@ int main(){
 int main (){
     int a;
     while(a < 2){
-        printf("%d",a);
+        int b;
+        while(b < 3){
+            printf("%d %d \n",a,b);
+            b++;
+        }
         a++;
     }
+}
+
+int main()
+{
+int b = 0;
+    do{
+        if (b == 5){
+            printf("Al fin encontre el 5 \n");
+        }else{
+            int c = 0;
+            do{
+                printf("b: %d c: %d \n", b, c);
+                c++;
+            } while(c < 3);    
+        }
+        b++;
+    }while(b < 6);
+}
+
+
+
+int main()
+{
+int a;
+    for (int b = 0; b < 6; b++){
+        if (b == 5){
+            printf("Al fin encontre el 5 \n");
+        }else{
+            for (int c = 0; c < 3; c++){
+                printf("b: %d c: %d \n", b, c);
+            }     
+        }
+    }
+    printf("PROBANDO CICLO WHILE\n");
+    int b = 0;
+    while(b < 6){
+        if (b == 5){
+            printf("Al fin encontre el 5 \n");
+        }else{
+            int c = 0;
+            while(c < 3){
+                printf("b: %d c: %d \n", b, c);
+                c++;
+            }     
+        }
+        b++;
+    }
+    printf("PROBANDO CICLO DO WHILE\n");
+    b = 0;
+    do{
+        if (b == 5){
+            printf("Al fin encontre el 5 \n");
+        }else{
+            int c = 0;
+            do{
+                printf("b: %d c: %d \n", b, c);
+                c++;
+            } while(c < 3);    
+        }
+        b++;
+    }while(b < 6);
 }

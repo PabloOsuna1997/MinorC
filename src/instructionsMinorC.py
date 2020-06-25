@@ -83,6 +83,14 @@ class While_(Instruction):
         self.line = line
         self.column = column
 
+class DoWhile_(Instruction):
+    '''while statment'''
+    def __init__(self,instructions,condition, line, column):
+        self.condition = condition
+        self.instructions = instructions
+        self.line = line
+        self.column = column
+
 class Goto(Instruction):
     '''label jump'''
 
