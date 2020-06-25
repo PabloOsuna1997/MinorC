@@ -16,6 +16,23 @@ int main(struct nodo nodo){
 
 
 int main(){
+    int a;
+    switch(a){
+        case 1:
+            printf("a");
+        case 2:
+            printf("b");
+        case 3:
+            printf("c");
+        case 4:
+            printf("d");
+    }
+}
+
+
+
+
+int main(){
     printf("\nIngrese un numero para iniciar:\n");
     int contador = scanf();
     printf("\nIngrese un numero para terminar:\n");

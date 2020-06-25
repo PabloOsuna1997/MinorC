@@ -78,10 +78,37 @@ def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del pad
             While__(a, tsLocal)
         elif isinstance(a, DoWhile_):
             DoW(a, tsLocal)
+        elif isinstance(a, Switch_):
+            Switch(a, tsLocal)
         i += 1
     
     print(f"tsLocal: {str(tsLocal)}")
     arrayTables.pop()
+
+def Switch(b, ts):
+    global contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux
+    tsLocal = {}
+    tsLocal.clear()
+    arrayTables.append(tsLocal)
+    #valuar la expresion
+    for i in b.listaCases:        
+        exp = valueExpression(LogicAndRelational(b.expresion, i.expresion, LogicsRelational.IGUALQUE, 0, 0), ts)
+        augusTxt += f'if({str(exp)}) goto sL{str(contadorEtiquetas)};\n'
+        augusTxt += f'goto sL{str(contadorEtiquetas + 1)};\n'
+        contaAux = contadorEtiquetas + 1
+        augusTxt += F'sL{str(contadorEtiquetas)}:\n'
+        contadorEtiquetas += 2
+        processInstructions(i.instructions, tsLocal)
+        augusTxt += '##--##'        #salto hacia el final
+        augusTxt += F'sL{str(contaAux)}:\n'
+
+    import re
+    augusTxt = re.sub('##--##', f'goto iL{str(contadorEtiquetas)};\n', augusTxt, flags=re.IGNORECASE)
+    augusTxt += f'iL{str(contadorEtiquetas)}:\n'
+    contadorEtiquetas += 1
+    contadorEtiquetasAux = contadorEtiquetas
+    arrayTables.pop()
+
 
 def DoW(b, ts):
     print("do while")
@@ -188,6 +215,8 @@ def processInstructions(b, tsLocal):
             While__(a, tsLocal)
         elif isinstance(a, DoWhile_):
             DoW(a, tsLocal)
+        elif isinstance(a, Switch_):
+            Switch(a, tsLocal)
         i += 1
 
 def increDecre(b, ts, type_):
@@ -593,6 +622,7 @@ def valueExpression(instruction, ts):
                 contadorT += 1
 
                 return f'$t{str(contadorT-1)}'
+            
             elif instruction.operator == LogicsRelational.AND: 
                 augusTxt += '$t'+ str(contadorT)
                 augusTxt += f' = {str(num1)} && {str(num2)} ;\n'
