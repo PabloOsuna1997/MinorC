@@ -246,6 +246,8 @@ def If_(b, tsPadre):
             increDecre(a, tsLocal, 1)
         elif isinstance(a, For):
             For_(a, tsLocal)
+        elif isinstance(a, While_):
+            While__(a, tsLocal)
         i += 1
     
                                                                        # termino de realizar etiquetas
@@ -294,6 +296,8 @@ def If_(b, tsPadre):
                         increDecre(z, tsLocal, 1)
                     elif isinstance(z, For):
                         For_(z, tsLocal)
+                    elif isinstance(z, While_):
+                        While__(z, tsLocal)
         
                     x += 1
                                                                         # termino de realizar etiquetas
@@ -323,6 +327,8 @@ def If_(b, tsPadre):
                         increDecre(z, tsLocal, 1)
                     elif isinstance(z, For):
                         For_(z, tsLocal)
+                    elif isinstance(z, While_):
+                        While__(z, tsLocal)
         
                     
                     x += 1
