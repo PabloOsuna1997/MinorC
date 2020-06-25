@@ -72,10 +72,67 @@ def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del pad
             increDecre(a, tsLocal, 1)
         elif isinstance(a, IncreDecre_Post):
             increDecre(a, tsLocal, 1)
+        elif isinstance(a, For):
+            For_(a, tsLocal)
         i += 1
     
     print(f"tsLocal: {str(tsLocal)}")
     arrayTables.pop()
+
+def For_(b, ts):
+    global contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux
+
+    #creamos una nueva tabla de simbolos
+    tsLocal = {}
+    tsLocal.clear()
+    arrayTables.append(tsLocal)
+    Declaration_(b.declaration.listId, ts)
+    augusTxt += F'fL{str(contadorEtiquetas)}:\n'
+    contaAuxAUx = contadorEtiquetas
+    contadorEtiquetas += 1
+    condition = valueExpression(b.condition, tsLocal)
+    augusTxt += f'if({str(condition)}) goto fL{str(contadorEtiquetas)};\n'   #$Tn
+    augusTxt += f'goto fL{str(contadorEtiquetas+1)};\n'                      #$Tn+1
+    augusTxt += F'fL{str(contadorEtiquetas)}:\n'                             #Tn:
+    contaAux = contadorEtiquetas+1                                          #aux = Tn+1
+    #instrucciones verdaderas
+    #b.instructions
+    contadorEtiquetas += 2 #aumentamos porque las demas instrucciones tambien crearan etiquetas si no sobre escribiran la que ya tenia
+    processInstructions(b.instructions, tsLocal)
+    #incremento
+    if isinstance(b.increDecre, IncreDecre_Post):
+        increDecreAsignation(b.increDecre, tsLocal, valueExpression(Identifier(b.increDecre.id, 0, 0), ts), b.increDecre.id)
+    elif isinstance(b.increDecre, IncreDecre_Pre):
+        increDecreAsignation(b.expresion, tsLocal, valueExpression(Identifier(b.increDecre.id, 0, 0), ts), b.increDecre.id)
+    augusTxt += f'goto fL{str(contaAuxAUx)};\n'                  #contador del goto inicial
+    contadorEtiquetas = contadorEtiquetas + 1
+    contadorEtiquetasAux = contadorEtiquetas
+    augusTxt += F'fL{str(contaAux)}:\n'
+    contadorEtiquetas += 1
+
+def processInstructions(b, tsLocal):
+    i = 0
+    while i < len(b):
+        a = b[i]
+        if isinstance(a, Declaration):
+            Declaration_(a.listId, tsLocal)
+        elif isinstance(a, Asignation):
+            Asignation_(a, tsLocal)
+        elif isinstance(a, If):
+            If_(a, tsLocal)
+        elif isinstance(a, PrintF_):
+            PrintF(a, tsLocal)
+        elif isinstance(a, Label):
+            augusTxt += f'{str(a.label)}:\n'
+        elif isinstance(a, Goto):
+            augusTxt += f'goto {str(a.label)};\n'
+        elif isinstance(a, IncreDecre_Pre):
+            increDecre(a, tsLocal, 1)
+        elif isinstance(a, IncreDecre_Post):
+            increDecre(a, tsLocal, 1)
+        elif isinstance(a, For):
+            For_(a, tsLocal)
+        i += 1
 
 def increDecre(b, ts, type_):
     global augusTxt, contadorT
@@ -117,7 +174,10 @@ def PrintF(b, ts):
             if a[0] == '$':
                 augusTxt += f'print({str(a)});\n'       ## arreglar esto porque imprime ("$t8")
             else:
-                augusTxt += f'print(\"{str(a)} \");\n'       ## arreglar esto porque imprime ("$t8")
+                if a != '\\n':
+                    augusTxt += f'print(\"{str(a)} \");\n'       ## arreglar esto porque imprime ("$t8")
+                else:
+                    augusTxt += f'print(\"\\n\");\n'  ## para no sumarle el espacio en el \n
     except:
         print("Error semantico en el print.")
 
@@ -129,8 +189,8 @@ def If_(b, tsPadre):
     tsLocal.clear()
     arrayTables.append(tsLocal)
     condition  = valueExpression(b.condition, tsPadre)
-    augusTxt += f'if({str(condition)}) goto L{str(contadorEtiquetas)};\n'    
-    augusAux += F'L{str(contadorEtiquetas)}:\n'                         #debajo del salto debo poner las instrucciones si son falsas
+    augusTxt += f'if({str(condition)}) goto iL{str(contadorEtiquetas)};\n'
+    augusAux += F'iL{str(contadorEtiquetas)}:\n'                         #debajo del salto debo poner las instrucciones si son falsas
     augusAuxAux += augusTxt                                             #hacemos un backup de 
     augusTxt = ''
     contadorEtiquetas += 1
@@ -154,6 +214,8 @@ def If_(b, tsPadre):
             increDecre(a, tsLocal, 1)
         elif isinstance(a, IncreDecre_Post):
             increDecre(a, tsLocal, 1)
+        elif isinstance(a, For):
+            For_(a, tsLocal)
         i += 1
     
                                                                        # termino de realizar etiquetas
@@ -161,7 +223,7 @@ def If_(b, tsPadre):
     if len(b.ifElse) <= 0:
         contadorEtiquetasAux += 1
 
-    augusTxt += f'goto L{len(b.ifElse) + contadorEtiquetasAux+1};\n'                             # termine de reconocer el FALSE Y INTERMACAMBIO LOS VALORES salto hasta la ultima etiquetas de if elses
+    augusTxt += f'goto iL{len(b.ifElse) + contadorEtiquetasAux+1};\n'                             # termine de reconocer el FALSE Y INTERMACAMBIO LOS VALORES salto hasta la ultima etiquetas de if elses
     augusAux += augusTxt
     augusTxt = augusAuxAux                                              #le regresamos el contenido anterior
                                                                         #recorremos todos los ifelses
@@ -172,9 +234,9 @@ def If_(b, tsPadre):
                 #a = a[0]
             if isinstance(a, IfElse):
                 condition  = valueExpression(a.condition, tsLocal)
-                augusTxt += f'if({str(condition)}) goto L{str(contadorEtiquetas + contadorEtiquetasAux )};\n'
+                augusTxt += f'if({str(condition)}) goto iL{str(contadorEtiquetas + contadorEtiquetasAux )};\n'
                 #captura sus instrucciones
-                augusAux += f'L{str(contadorEtiquetas + contadorEtiquetasAux)}:\n'
+                augusAux += f'iL{str(contadorEtiquetas + contadorEtiquetasAux)}:\n'
                 augusAuxAux = ''
                 augusAuxAux += augusTxt                                 #hacemos un backup de 
                 augusTxt = ''
@@ -200,12 +262,14 @@ def If_(b, tsPadre):
                         increDecre(z, tsLocal, 1)
                     elif isinstance(z, IncreDecre_Post):
                         increDecre(z, tsLocal, 1)
+                    elif isinstance(z, For):
+                        For_(z, tsLocal)
         
                     x += 1
                                                                         # termino de realizar etiquetas
                 
                 augusAux += augusTxt
-                augusAux += f'goto L{len(b.ifElse) + contadorEtiquetasAux+1};\n'                 #salto hasta la ultima etiquetas de if elses
+                augusAux += f'goto iL{len(b.ifElse) + contadorEtiquetasAux+1};\n'                 #salto hasta la ultima etiquetas de if elses
                 augusTxt = augusAuxAux                                  #le regresamos el contenido anterior 
             else:
                 x = 0
@@ -227,20 +291,23 @@ def If_(b, tsPadre):
                         increDecre(z, tsLocal, 1)
                     elif isinstance(z, IncreDecre_Post):
                         increDecre(z, tsLocal, 1)
+                    elif isinstance(z, For):
+                        For_(z, tsLocal)
         
                     
                     x += 1
-                augusTxt += f'goto L{len(b.ifElse) + contadorEtiquetasAux+1};\n'
-        augusTxt += f'goto L{len(b.ifElse) + contadorEtiquetasAux + 1};\n'
+                augusTxt += f'goto iL{len(b.ifElse) + contadorEtiquetasAux+1};\n'
+        augusTxt += f'goto iL{len(b.ifElse) + contadorEtiquetasAux + 1};\n'
         augusTxt += augusAux
-        augusTxt += f'L{str(len(b.ifElse) + contadorEtiquetasAux+1)}:\n'
+        augusTxt += f'iL{str(len(b.ifElse) + contadorEtiquetasAux+1)}:\n'
     else:        
-        augusTxt += f'goto L{len(b.ifElse) + contadorEtiquetasAux+1};\n'
+        augusTxt += f'goto iL{len(b.ifElse) + contadorEtiquetasAux+1};\n'
         augusTxt += augusAux
-        augusTxt += f'L{str(len(b.ifElse) + contadorEtiquetasAux+1)}:\n'
+        augusTxt += f'iL{str(len(b.ifElse) + contadorEtiquetasAux+1)}:\n'
     contadorEtiquetas += 1
     contadorEtiquetasAux = contadorEtiquetas
     arrayTables.pop()      #eliminamos la ts
+    contadorEtiquetas +=1
 
 def Asignation_(b, ts):
     try:

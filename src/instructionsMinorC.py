@@ -29,7 +29,6 @@ class FunctionDeclaration(Instruction):
         self.line = line
         self.column = column
 
-
 class Unset(Instruction):
     '''variables destruction'''
 
@@ -65,6 +64,17 @@ class Else(Instruction):
         self.instructions = instructions
         self.line = line
         self.column = column
+
+class For(Instruction):
+    '''for statment'''
+    def __init__(self,declaration,condition,increDecre,instructions, line, column):
+        self.declaration = declaration
+        self.condition = condition
+        self.increDecre = increDecre
+        self.instructions = instructions
+        self.line = line
+        self.column = column
+
 
 class Goto(Instruction):
     '''label jump'''

@@ -602,8 +602,10 @@ def p_instrIn(t):
         grammarList.append(g.nodeGramatical('INSTR_IN  -> PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA ', f'INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) ')) 
     elif t[1] == 'goto':
         t[0] = Goto(t[2])
-        grammarList.append(g.nodeGramatical('INSTR_IN  -> GOTO ID PUNTOCOMA ', f'INSTR_IN.val= Goto(t[2])')) 
-
+        grammarList.append(g.nodeGramatical('INSTR_IN  -> GOTO ID PUNTOCOMA ', f'INSTR_IN.val= Goto(t[2])'))
+    elif t[1] == 'for':
+        t[0] = t[1]
+        grammarList.append(g.nodeGramatical('INSTR_IN  -> FOR_ ', f'INSTR_IN.val= FOR_.val'))
     else:
         t[0] = t[1]
         grammarList.append(g.nodeGramatical('INSTR_IN  -> ..... ', f'INSTR_IN.val= t[1]'))
@@ -730,6 +732,10 @@ def p_for_error(t):
     'FOR_ :     FOR error LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'               
 def p_for(t):
     'FOR_ :     FOR PARIZQ DECLA_VARIABLES EXPRESION PUNTOCOMA INCRE_DECRE PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'
+    t[0] = For(t[3], t[4], t[6], t[9], t.lineno(1), t.lexpos(1))
+    global grammarList
+    grammarList.append(g.nodeGramatical('FOR_  -> FOR PARIZQ DECLA_VARIABLES EXPRESION PUNTOCOMA INCRE_DECRE PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER', f'FOR_.val = For(t[3], t[4], t[6], t[9], t.lineno(1), t.lexpos(1))'))
+
 
 def p_while_error(t):
     'WHILE_ :   WHILE error LLAVEDER'
