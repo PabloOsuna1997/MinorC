@@ -346,6 +346,9 @@ def If_(b, tsPadre):
         augusAuxIf1 = re.sub('##--##', f'goto iL{str(contadorEtiquetas)};\n', augusAuxIf1, flags=re.IGNORECASE)
         augusTxt += augusAuxIf1
         augusTxt += f'iL{str(contadorEtiquetas)}:\n'
+        contadorEtiquetas += 1
+        contadorEtiquetasAux = contadorEtiquetas
+        arrayTables.pop()
                 
 def Asignation_(b, ts):
     try:
