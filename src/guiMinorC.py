@@ -760,6 +760,7 @@ class Ui_Augus(object):
             #inicializacion
             traduction.augusTxt = 'main: \n'
             traduction.augusTxt += F'PL_:\n'   #parche para augus cuando la etiqueta esta en la posicion 1 y busco el label retornaba i -1 = 0 marcaba como que no existiera esa etiqueta
+            traduction.augusTxt += F'PL_:\n'
             #traduction.augusTxt = ''
             traduction.contadorT = 0
             traduction.semanticErrorList = []

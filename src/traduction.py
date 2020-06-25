@@ -162,6 +162,7 @@ def For_(b, ts):
     arrayTables.pop() 
 
 def processInstructions(b, tsLocal):
+    global augusTxt
     i = 0
     while i < len(b):
         a = b[i]
