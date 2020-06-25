@@ -758,40 +758,89 @@ def p_switch_error(t):
 def p_switch(t):
     'SWITCH_ :  SWITCH PARIZQ EXPRESION PARDER LLAVEIZQ LISTA_CASES DEFAULT_ LLAVEDER'
 
+    t[0] = Switch_(t[3], t[6], t[7], t.lineno(1), t.lexpos(1))
+    global grammarList
+    grammarList.append(g.nodeGramatical('SWITCH_ -> SWITCH PARIZQ EXPRESION PARDER LLAVEIZQ LISTA_CASES DEFAULT_ LLAVEDER', f'SWITCH_.val = Switch_(t[3], t[6], t[7], t.lineno(1), t.lexpos(1))'))
+
 def p_listaCases(t):
     '''LISTA_CASES :  LISTA_CASES CASE_
                     | CASE_'''
+    global grammarList
+    if len(t) == 3:
+        t[1].append(t[2])
+        t[0] = t[1]
+        grammarList.append(g.nodeGramatical('LISTA_CASES -> LISTA_CASES CASE_', f'LISTA_CASES_1.val.append(CASE_.val) \n  LISTA_CASES_.val= LISTA_CASES_1.val'))
+    else:
+        t[0] = [t[1]]
+        grammarList.append(g.nodeGramatical('LISTA_CASES ->  CASE_', f'LISTA_CASES_.val= [CASE_.val]'))        
 
 def p_case_error(t):
     'CASE_ :    CASE error BREAK_'
 def p_case(t):
     'CASE_ :    CASE EXPRESION DOSPUNTOS INSTRUCCIONES_INTERNAS BREAK_'
 
+    if isinstance(t[5], list):
+        t[0] = Case_(t[2], t[4], 1, t.lineno(1), t.lexpos(1))
+    else:
+        t[0] = Case_(t[2], t[4], 0, t.lineno(1), t.lexpos(1))
+    global grammarList
+    grammarList.append(g.nodeGramatical('CASE_ -> CASE EXPRESION DOSPUNTOS INSTRUCCIONES_INTERNAS BREAK_', f'CASE_.val = Case_(t[2], t[4], 0, t.lineno(1), t.lexpos(1))'))
+
 def p_break(t):
     '''BREAK_ : BREAK
                 | '''
+    
+    global grammarList
+    if len(t) == 2:
+        t[0] = [t[1]]
+        grammarList.append(g.nodeGramatical('BREAK_ -> BREAK', f'BREAK_.val = [BREAK.val]'))
+
+    else:
+        t[0] = []
+        grammarList.append(g.nodeGramatical('BREAK_ -> empty', f'BREAK_.val = []'))
 
 def p_default(t):
     '''DEFAULT_ :   DEFAULT DOSPUNTOS INSTRUCCIONES_INTERNAS BREAK_
                     | '''
+    
+    global grammarList
+    if len(t) == 5:
+        if isinstance(t[4], list):
+            t[0] = Default_(t[3], 1, t.lineno(1), t.lexpos(1))
+            grammarList.append(g.nodeGramatical('DEFAULT_ -> DEFAULT DOSPUNTOS INSTRUCCIONES_INTERNAS BREAK_', f'DEFAULT_.val = Default_(t[3], 1, t.lineno(1), t.lexpos(1))'))
+
+        else:
+            t[0] = Default_(t[3], 0, t.lineno(1), t.lexpos(1))
+            grammarList.append(g.nodeGramatical('DEFAULT_ -> DEFAULT DOSPUNTOS INSTRUCCIONES_INTERNAS BREAK_', f'DEFAULT_.val = Default_(t[3], 0, t.lineno(1), t.lexpos(1))'))
+    else:
+        t[0] = []
+        grammarList.append(g.nodeGramatical('DEFAULT_ -> empty', f'DEFAULT_.val = []'))
 
 def p_increDecre(t):
     '''INCRE_DECRE :    INCRE_DECRE_POST
                         | INCRE_DECRE_PRE'''
     t[0] = t[1]
+    global grammarList
+    grammarList.append(g.nodeGramatical('INCRE_DECRE -> INCRE_DECRE_POST \n | INCRE_DECRE_PRE', f'INCRE_DECRE.val = t[1]'))
 
 def p_increDecrePost(t):
     ' INCRE_DECRE_POST :    ID SIG'
     t[0] = IncreDecre_Post(t[2], t[1], t.lineno(2), t.lexpos(2))
+    global grammarList
+    grammarList.append(g.nodeGramatical('INCRE_DECRE_POST -> ID SIG', f'INCRE_DECRE_POST.val = IncreDecre_Post(t[2], t[1], t.lineno(2), t.lexpos(2))'))
 
 def p_increDecrePre(t):
     ' INCRE_DECRE_PRE :    SIG ID'
     t[0] = IncreDecre_Pre(t[1], t[2], t.lineno(2), t.lexpos(2))
+    global grammarList
+    grammarList.append(g.nodeGramatical('INCRE_DECRE_PRE -> SIG ID', f'INCRE_DECRE_PRE.val = IncreDecre_Pre(t[1], t[2], t.lineno(2), t.lexpos(2))'))
 
 def p_pre(t):
     '''SIG :   INCREMENTO
                 | DECREMENTO'''
     t[0] = t[1]
+    global grammarList
+    grammarList.append(g.nodeGramatical('SIG -> INCREMENTO \n | DECREMENTO', f'SIG.val = t[1]'))
 
 def p_opAsignacion(t):
     '''OP_ASIGNACION :  IGUAL

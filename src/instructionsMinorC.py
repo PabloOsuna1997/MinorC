@@ -51,7 +51,7 @@ class If(Instruction):
         self.column = column
 
 class IfElse(Instruction):
-    '''else statment'''
+    '''else if statment'''
     def __init__(self,condition, instructions, line, column):
         self.condition = condition
         self.instructions = instructions
@@ -64,6 +64,33 @@ class Else(Instruction):
         self.instructions = instructions
         self.line = line
         self.column = column
+
+class Switch_(Instruction):
+    '''switch statment'''
+    def __init__(self,expresion, listaCases, default, line, column):
+        self.expresion = expresion
+        self.listaCases = listaCases
+        self.default = default
+        self.line = line
+        self.column = column
+
+class Case_(Instruction):
+    '''cases statment'''
+    def __init__(self,expresion, instructions, break_, line, column):
+        self.expresion = expresion
+        self.instructions = instructions
+        self.break_ = break_
+        self.line = line
+        self.column = column
+
+class Default_(Instruction):
+    '''default statment'''
+    def __init__(self,instructions, break_, line, column):
+        self.instructions = instructions
+        self.break_ = break_
+        self.line = line
+        self.column = column
+
 
 class For(Instruction):
     '''for statment'''
@@ -84,7 +111,7 @@ class While_(Instruction):
         self.column = column
 
 class DoWhile_(Instruction):
-    '''while statment'''
+    '''do while statment'''
     def __init__(self,instructions,condition, line, column):
         self.condition = condition
         self.instructions = instructions

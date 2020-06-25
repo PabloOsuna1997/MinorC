@@ -26,7 +26,6 @@ int main(){
     printf("\nHemos contado desde %d hasta %d \n",contador,bandera);
 }
 
-
 int main()
 {
 int a;
