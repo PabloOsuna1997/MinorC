@@ -1,3 +1,30 @@
+#llamadas
+
+int global, a, b;
+
+int suma(){
+    printf("la suma es %d \n", a+b);
+}
+int resta(){
+    printf("la resta es %d \n", a-b);
+}
+int multiplicacion(){
+    printf("la suma es %d \n", a*b);
+}
+int division(){
+    printf("la suma es %d \n", a/b);
+}
+
+int main(){
+   suma(a+2); 
+}
+
+
+
+
+
+
+
 int a ;
 
 int main(struct nodo nodo){
@@ -92,3 +119,53 @@ int a;
         b++;
     }while(b < 6);
 }
+
+
+
+main:
+$ra = -1; # 0 calls on stack
+$s0 = array(); # Stack return values
+$sp = -1;      # Null pointer
+$t3 = 23;
+$t4 = 17;
+$a0 = $t3;
+$a1 = $t4;
+$ra = 0;
+goto suma;
+ends5:
+$v6 = $s0[$sp];
+$sp--;$t6 = $v6;
+print("La ");
+print("respuesta ");
+print("es ");
+print($t6);
+print("\n ");
+print("\n");$t3 = 43;
+$t4 = 17;
+$a0 = $t3;
+$a1 = $t4;
+$ra = 1;
+goto suma;
+ends9:
+$v10 = $s0[$sp];
+$sp--;$t10 = $v10;
+print("La ");
+print("respuesta ");
+print("es ");
+print($t10);
+print("\n ");
+print("\n");
+goto finalaugus;
+
+suma:
+$t2 = $a0 + $a1;
+$sp++;
+$s0[$sp] = $t2;
+goto rmanager;
+
+rmanager:
+# Administrador de retorno de funciones
+if($ra == 0 ) goto ends5; 
+if($ra == 1 ) goto ends9; 
+
+finalaugus:

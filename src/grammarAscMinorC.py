@@ -493,8 +493,10 @@ def p_llamadaFuncion(t):
                             | ID PARIZQ PARDER'''
     global grammarList
     if len(t) == 5:
+        t[0] = CallFunction(t[1], t[3], t.lineno(2), t.lexpos(2))
         grammarList.append(g.nodeGramatical('LLAMADA_FUNCION  -> LLAVEIZQ PARAMETROS LLAVEDER  ', f' LLAMADA_FUNCION.val= Call(t[1], t[3])'))
     else:
+        t[0] = CallFunction(t[1], [] , t.lineno(2), t.lexpos(2))
         grammarList.append(g.nodeGramatical('LLAMADA_FUNCION  -> ID PARIZQ PARDER  ', f' LLAMADA_FUNCION.val= Call(t[1], [])'))
 
 def p_parametros_error(t):
@@ -607,6 +609,7 @@ def p_instrIn(t):
         t[0] = t[1]
         grammarList.append(g.nodeGramatical('INSTR_IN  -> FOR_ ', f'INSTR_IN.val= FOR_.val'))
     else:
+        print("llamadas desde instrucciones internas")
         t[0] = t[1]
         grammarList.append(g.nodeGramatical('INSTR_IN  -> ..... ', f'INSTR_IN.val= t[1]'))
 

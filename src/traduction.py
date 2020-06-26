@@ -12,6 +12,8 @@ from PyQt5.QtWidgets import *
 import time
 
 augusTxt = 'main: \n'
+augusTxtAuxVar = ''
+augusTxtAuxJUMPS  = 'manejador:\n'
 contadorT = 0
 semanticErrorList = []
 ultimaPos = 0
@@ -21,20 +23,27 @@ contadorEtiquetas = 0
 contadorEtiquetasAux = 0
 pasadas = 0
 caseAnt = None
+augusTxtCalls = ''      #texto auxiliar para las llamadas
+contadorCalls = 0       #para nombrar etiquetas de salto
+contadorParams = 0      #variables $a0
 
-def execute(input, textEdit): 
-    global tableGlobal 
-    tableGlobal.clear()  
-    arrayTables.append(tableGlobal) 
+def execute(input, textEdit):
+    global tableGlobal
+    tableGlobal.clear()
+    arrayTables.append(tableGlobal)
     process(input, tableGlobal)
     print(f"tsGlobal: {str(tableGlobal)}")
     return augusTxt
 
 def process(instructions,ts):
-    try:
+    #try:
+        global augusTxt, augusTxtCalls, augusTxtAuxVar
+        ################################################HACER UNA PASADA ANTES PARA TODAS LAS FUNCIONES######################################################################
+
+        augusTxt += '$ra = -1;  #inicializamos nuesto apuntador de saltos\n'
         i = 0
         while i < len(instructions):
-            #isinstance verificar tipos 
+            #isinstance verificar tipos
             b = instructions[i]
 
             if isinstance(b, Declaration):
@@ -42,9 +51,23 @@ def process(instructions,ts):
             elif isinstance(b, FunctionDeclaration):
                 if b.id == 'main':
                     FunctionDeclaration_(b, ts)
+                    augusTxt += 'goto FINAL_AUGUS;\n'
+                    #demas funciones
+                    augusTxt += augusTxtCalls
+                    augusTxt += '\n\n'
+                    augusTxt += augusTxtAuxJUMPS
+                    augusTxt += 'FINAL_AUGUS:'
+                else:
+                    augusTxtAuxVar = augusTxt
+                    augusTxt = ''
+                    FunctionDeclaration_(b, ts)
+                    augusTxt += 'goto manejador;\n'
+                    augusTxtCalls += augusTxt
+                    augusTxt = augusTxtAuxVar
+
             i += 1
-    except:
-        pass
+    #except:
+        #pass
 
 def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del padre
     global augusTxt
@@ -53,6 +76,8 @@ def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del pad
     arrayTables.append(tsLocal)
     if b.id != 'main':
         augusTxt += f'{str(b.id)} :\n'
+
+    #asignar valores a los parametros
     #recorrer las listas de instrucciones
     i = 0
     while i < len(b.instructions):
@@ -81,10 +106,34 @@ def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del pad
             DoW(a, tsLocal)
         elif isinstance(a, Switch_):
             Switch(a, tsLocal)
+        elif isinstance(a, CallFunction):
+            CallF(a, tsLocal)
         i += 1
-    
+
     print(f"tsLocal: {str(tsLocal)}")
     arrayTables.pop()
+
+def CallF(b, ts):
+    global augusTxtCalls, contadorCalls, augusTxt, contadorParams, arrayTables, augusTxtAuxJUMPS
+    if len(b.params) != 0:
+        #debemos crear las variable $an correspondientes
+        for i in b.params:      #cada elemento de la lista es una expresion
+            res = valueExpression(i, ts)
+            augusTxt += '$a'+ str(contadorParams)
+            augusTxt += ' = ' + str(res) + ' ;\n'
+            arrayTables.pop()
+            ts.setdefault(f'a_{str(contadorParams)}' f'$a{str(contadorParams)}')        #los guardare en la ta como a_n == $an
+            arrayTables.append(ts)
+            contadorParams += 1
+    #creo las instrucciones de la funcion
+    augusTxt += f'$ra = {str(contadorCalls)};\n'
+    augusTxt += f'goto {str(b.id)};\n'        #etiqueta al metodo para ejecutar ej: goto suma;
+    #declaro una etiqueta para que el metodo regrese
+    augusTxt += f'regreso{str(contadorCalls)}:\n'           #lacaionamos el ra con la etiqueta de regreso
+
+    #agregamos a nuestro manejador de saltos
+    #augusTxtAuxJUMPS += f'if ( $ra = {str(contadorCalls)}) goto regreso{str(contadorCalls)};\n'
+    #contadorCalls += 1
 
 def Switch(b, ts):
     global contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux, caseAnt
@@ -131,14 +180,13 @@ def Switch(b, ts):
     contadorEtiquetasAux = contadorEtiquetas
     arrayTables.pop()
 
-
 def DoW(b, ts):
     print("do while")
     global contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux
     tsLocal = {}
     tsLocal.clear()
     arrayTables.append(tsLocal)
-    augusTxt += F'dwL{str(contadorEtiquetas)}:\n' 
+    augusTxt += F'dwL{str(contadorEtiquetas)}:\n'
     contaAuxAUx = contadorEtiquetas
     contadorEtiquetas += 1
     contadorEtiquetasAux = contadorEtiquetas
@@ -166,7 +214,7 @@ def While__(b, ts):
     augusTxt += f'if({str(condition)}) goto wL{str(contadorEtiquetas)};\n'   #$Tn
     augusTxt += f'goto wL{str(contadorEtiquetas+1)};\n'                      #$Tn+1
     augusTxt += F'wL{str(contadorEtiquetas)}:\n'                             #Tn:
-    contaAux = contadorEtiquetas+1 
+    contaAux = contadorEtiquetas+1
     contadorEtiquetas += 2
     processInstructions(b.instructions, tsLocal)
     augusTxt += f'goto wL{str(contaAuxAUx)};\n'                  #contador del goto inicial
@@ -175,7 +223,7 @@ def While__(b, ts):
     augusTxt += F'wL{str(contaAux)}:\n'
     contadorEtiquetas += 1
     contadorEtiquetasAux = contadorEtiquetas
-    arrayTables.pop() 
+    arrayTables.pop()
 
 def For_(b, ts):
     global contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux
@@ -208,7 +256,7 @@ def For_(b, ts):
     augusTxt += F'fL{str(contaAux)}:\n'
     contadorEtiquetas += 1
     contadorEtiquetasAux = contadorEtiquetas
-    arrayTables.pop() 
+    arrayTables.pop()
 
 def processInstructions(b, tsLocal):
     global augusTxt
@@ -243,7 +291,7 @@ def processInstructions(b, tsLocal):
 
 def increDecre(b, ts, type_):
     global augusTxt, contadorT
-    #type_ sera si es post o pre     
+    #type_ sera si es post o pre
     if b.signo == '++':
         id = valueExpression(Identifier(b.id, 0, 0), ts)
         augusTxt += id
@@ -260,7 +308,7 @@ def increDecre(b, ts, type_):
         ts.setdefault(b.id, f'$t{str(id)}')
         arrayTables.append(ts)
         #contadorT += 1
-    
+
 def PrintF(b, ts):
     #print("estoy en print")
     global contadorT, augusTxt
@@ -275,7 +323,7 @@ def PrintF(b, ts):
                 cadena[i] = valueExpression(b.expressions[contadorValor], ts)
                 contadorValor += 1
             i += 1
-        #my_lst_str = ' '.join(map(str, cadena))        
+        #my_lst_str = ' '.join(map(str, cadena))
         #print(f"printf: {my_lst_str}")
         for a in cadena:
             if a[0] == '$':
@@ -301,19 +349,19 @@ def If_(b, tsPadre):
         #es solo un if
         augusTxt += f'goto iL{str(contadorEtiquetas+1)};\n'
         augusTxt += f'iL{str(contadorEtiquetas)}:\n'
-        contaAux = contadorEtiquetas+1 
+        contaAux = contadorEtiquetas+1
         contadorEtiquetas += 2 #aumentamos porque las demas instrucciones tambien crearan etiquetas si no sobre escribiran la que ya tenia
         processInstructions(b.instructions, tsLocal)
         augusTxt += f'iL{str(contaAux)}:\n'
         contadorEtiquetas += 1
         contadorEtiquetasAux = contadorEtiquetas
         arrayTables.pop()
-    elif len(b.ifElse) == 1: 
+    elif len(b.ifElse) == 1:
         if isinstance(b.ifElse[0],Else):
             #else
             augusTxt += f'goto iL{str(contadorEtiquetas+1)};\n'
             augusTxt += f'iL{str(contadorEtiquetas)}:\n'
-            contaAux = contadorEtiquetas+1 
+            contaAux = contadorEtiquetas+1
             contadorEtiquetas += 2 #aumentamos porque las demas instrucciones tambien crearan etiquetas si no sobre escribiran la que ya tenia
             processInstructions(b.instructions, tsLocal)
             #########################################################
@@ -321,7 +369,7 @@ def If_(b, tsPadre):
             augusTxt = ''
             #empiezo a almacenar el else en  una tmp
             augusAux += f'iL{str(contaAux)}:\n'
-            #etiquetas falsas 
+            #etiquetas falsas
             contaAux = contadorEtiquetas
             processInstructions(b.ifElse[0].instructions, tsLocal)
             augusTxt += f'goto iL{str(contadorEtiquetas)};\n'
@@ -342,19 +390,19 @@ def If_(b, tsPadre):
             augusAuxAux = augusTxt                  #guardo contenido actual
             contaAux = contadorEtiquetas+1          #etiqueta a donde debo saltar de ser falsa el segundo if
             augusAuxIf = f'iL{str(contadorEtiquetas)}:\n'
-            augusTxt = ''            
+            augusTxt = ''
             contadorEtiquetas += 2 #aumentamos porque las demas instrucciones tambien crearan etiquetas si no sobre escribiran la que ya tenia
             processInstructions(b.instructions, tsLocal)  #ejecutar instrucciones verdaderas
             augusAuxIf += augusTxt
 
-            augusAux_Else = f'iL{str(contaAux)}:\n'         #instrucciones del elseif 
+            augusAux_Else = f'iL{str(contaAux)}:\n'         #instrucciones del elseif
             augusTxt = ''
             processInstructions(b.ifElse[0].instructions, tsLocal)  #ejecutar instrucciones verdaderas
             augusAux_Else += augusTxt
             augusAux_Else += f'goto iL{str(contadorEtiquetas)};\n'
             augusTxt = augusAuxAux
-            
-            augusTxt += f'goto iL{str(contadorEtiquetas)};\n'   ### si ninguna se cumple se sale 
+
+            augusTxt += f'goto iL{str(contadorEtiquetas)};\n'   ### si ninguna se cumple se sale
 
             augusTxt += augusAuxIf
             augusTxt += f'goto iL{str(contadorEtiquetas)};\n'
@@ -364,12 +412,12 @@ def If_(b, tsPadre):
             contadorEtiquetasAux = contadorEtiquetas
             arrayTables.pop()
     else:
-        #vienen if else a morir y else 
-        #1 traigo las instrucciones verdaderas del primer if 
+        #vienen if else a morir y else
+        #1 traigo las instrucciones verdaderas del primer if
         augusAuxAux = augusTxt
-        augusTxt = ''  
+        augusTxt = ''
         augusTxt += f'iL{str(contadorEtiquetas)}:\n'
-        contaAux = contadorEtiquetas         
+        contaAux = contadorEtiquetas
         contadorEtiquetas += 1 #aumentamos porque las demas instrucciones tambien crearan etiquetas si no sobre escribiran la que ya tenia
         processInstructions(b.instructions, tsLocal)  #ejecutar instrucciones verdaderas
         augusAuxIf1 = augusTxt      #pendiente salto de fin
@@ -401,7 +449,7 @@ def If_(b, tsPadre):
         contadorEtiquetas += 1
         contadorEtiquetasAux = contadorEtiquetas
         arrayTables.pop()
-                
+
 def Asignation_(b, ts):
     try:
         if isinstance(b.expresion, IncreDecre_Post):
@@ -540,12 +588,12 @@ def Declaration_(b, ts):
                     res = valueExpression(i.val, ts)
                     for v in range(ultimaPos, dime):
                         augusTxt += f'$t{str(contadorT)}[{str(v)}]'
-                        augusTxt += ' = 0 ;\n'            
+                        augusTxt += ' = 0 ;\n'
                     arrayTables.pop()
                     ts.setdefault(i.id, f'$t{str(contadorT)}')
                     arrayTables.append(ts)
                     contadorT += 1
-                
+
                 else:
                     print("Error semantico, dimensiones incorrectas")
             else:
@@ -562,41 +610,41 @@ def Declaration_(b, ts):
 
 def valueExpression(instruction, ts):
     global contadorT, augusTxt, arrayTables
-    if isinstance(instruction, BinaryExpression):      
+    if isinstance(instruction, BinaryExpression):
         num1 = valueExpression(instruction.op1, ts)
         num2 = valueExpression(instruction.op2, ts)
         if num1 != None and num2 != None:
             try:
                 if instruction.operator == Aritmetics.MAS:
-                    
+
                     augusTxt += '$t'+ str(contadorT)
                     augusTxt += f' = {str(num1)} + {str(num2)} ;\n'
                     contadorT += 1
                     return f'$t{str(contadorT-1)}'
 
-                elif instruction.operator == Aritmetics.MENOS: 
-                    
+                elif instruction.operator == Aritmetics.MENOS:
+
                     augusTxt += '$t'+ str(contadorT)
                     augusTxt += f' = {str(num1)} - {str(num2)} ;\n'
                     contadorT += 1
                     return f'$t{str(contadorT-1)}'
 
                 elif instruction.operator == Aritmetics.POR:
-                    
+
                     augusTxt += '$t'+ str(contadorT)
                     augusTxt += f' = {str(num1)} * {str(num2)} ;\n'
                     contadorT += 1
                     return f'$t{str(contadorT-1)}'
 
-                elif instruction.operator == Aritmetics.DIV: 
-                    
+                elif instruction.operator == Aritmetics.DIV:
+
                     augusTxt += '$t'+ str(contadorT)
                     augusTxt += f' = {str(num1)} / {str(num2)} ;\n'
                     contadorT += 1
                     return f'$t{str(contadorT-1)}'
 
-                elif instruction.operator == Aritmetics.MODULO: 
-                    
+                elif instruction.operator == Aritmetics.MODULO:
+
                     augusTxt += '$t'+ str(contadorT)
                     augusTxt += f' = {str(num1)} % {str(num2)} ;\n'
                     contadorT += 1
@@ -608,86 +656,86 @@ def valueExpression(instruction, ts):
                 semanticErrorList.append(seob)
                 return '#'
         else:
-            #retornar alfgo para que no traduzca mas 
+            #retornar alfgo para que no traduzca mas
             print("Error semantico la varibale indicada no existe suma NONE")
     elif isinstance(instruction, LogicAndRelational):
         num1 = valueExpression(instruction.op1, ts)
         num2 = valueExpression(instruction.op2, ts)
         try:
-            if instruction.operator == LogicsRelational.MAYORQUE: 
+            if instruction.operator == LogicsRelational.MAYORQUE:
                 augusTxt += '$t'+ str(contadorT)
                 augusTxt += f' = {str(num1)} > {str(num2)} ;\n'
                 contadorT += 1
                 return f'$t{str(contadorT-1)}'
 
-            elif instruction.operator == LogicsRelational.MENORQUE: 
+            elif instruction.operator == LogicsRelational.MENORQUE:
                 augusTxt += '$t'+ str(contadorT)
                 augusTxt += f' = {str(num1)} < {str(num2)} ;\n'
                 contadorT += 1
                 return f'$t{str(contadorT-1)}'
 
-            elif instruction.operator == LogicsRelational.MAYORIGUAL: 
+            elif instruction.operator == LogicsRelational.MAYORIGUAL:
                 augusTxt += '$t'+ str(contadorT)
                 augusTxt += f' = {str(num1)} >= {str(num2)} ;\n'
                 contadorT += 1
                 return f'$t{str(contadorT-1)}'
 
-            elif instruction.operator == LogicsRelational.MENORIGUAL: 
+            elif instruction.operator == LogicsRelational.MENORIGUAL:
                 augusTxt += '$t'+ str(contadorT)
                 augusTxt += f' = {str(num1)} <= {str(num2)} ;\n'
                 contadorT += 1
                 return f'$t{str(contadorT-1)}'
 
-            elif instruction.operator == LogicsRelational.IGUALQUE: 
+            elif instruction.operator == LogicsRelational.IGUALQUE:
                 augusTxt += '$t'+ str(contadorT)
                 augusTxt += f' = {str(num1)} == {str(num2)} ;\n'
                 contadorT += 1
 
                 return f'$t{str(contadorT-1)}'
-            
-            elif instruction.operator == LogicsRelational.AND: 
+
+            elif instruction.operator == LogicsRelational.AND:
                 augusTxt += '$t'+ str(contadorT)
                 augusTxt += f' = {str(num1)} && {str(num2)} ;\n'
                 contadorT += 1
                 return f'$t{str(contadorT-1)}'
 
-            elif instruction.operator == LogicsRelational.OR: 
+            elif instruction.operator == LogicsRelational.OR:
                 augusTxt += '$t'+ str(contadorT)
                 augusTxt += f' = {str(num1)} || {str(num2)} ;\n'
                 contadorT += 1
                 return f'$t{str(contadorT-1)}'
 
-            elif instruction.operator == LogicsRelational.XOR: 
+            elif instruction.operator == LogicsRelational.XOR:
                 augusTxt += '$t'+ str(contadorT)
                 augusTxt += f' = {str(num1)} ^ {str(num2)} ;\n'
                 contadorT += 1
                 return f'$t{str(contadorT-1)}'
-                
+
             elif instruction.operator == LogicsRelational.DIFERENTE:
                 augusTxt += '$t'+ str(contadorT)
                 augusTxt += f' = {str(num1)} != {str(num2)} ;\n'
                 contadorT += 1
                 return f'$t{str(contadorT-1)}'
-        
+
             return 0
         except:
             se = seOb('Error : Tipos de datos en operacion relacional.', instruction.line, instruction.column)
             semanticErrorList.append(se)
             return '#'
     elif isinstance(instruction, Not):
-        
+
         num1 = valueExpression(instruction.expression, ts)
         augusTxt += '$t'+ str(contadorT)
         augusTxt += f' = !{str(num1)} ;\n'
         contadorT += 1
         return f'$t{str(contadorT-1)}'
-    elif isinstance(instruction, NegativeNumber):        
+    elif isinstance(instruction, NegativeNumber):
         num1 = valueExpression(instruction.expression, ts)
         augusTxt += '$t'+ str(contadorT)
         augusTxt += f' = {str(num1)} * -1 ;\n'
         contadorT += 1
         return f'$t{str(contadorT-1)}'
-    elif isinstance(instruction, Identifier): 
+    elif isinstance(instruction, Identifier):
         #si no encuentra la variable en la ts actual, buscarla en las demas ts que estan en la pila
         tablesAux = arrayTables[:]
         tablesAux.reverse()
@@ -698,7 +746,7 @@ def valueExpression(instruction, ts):
     elif isinstance(instruction, Number): return instruction.val
     elif isinstance(instruction, Cast_):
         num1 = valueExpression(instruction.expression, ts)
-        if instruction.type == 'float':  
+        if instruction.type == 'float':
             augusTxt += '$t'+ str(contadorT)
             augusTxt += f' = (float){str(num1)};\n'
             contadorT += 1
@@ -708,7 +756,7 @@ def valueExpression(instruction, ts):
             augusTxt += f' = (char){str(num1)};\n'
             contadorT += 1
             return f'$t{str(contadorT-1)}'
-        elif instruction.type == 'int': 
+        elif instruction.type == 'int':
             augusTxt += '$t'+ str(contadorT)
             augusTxt += f' = (int){str(num1)};\n'
             contadorT += 1
@@ -736,28 +784,28 @@ def valueExpression(instruction, ts):
     elif isinstance(instruction, RelationalBit):
         num1 = valueExpression(instruction.op1, ts)
         num2 = valueExpression(instruction.op2, ts)
-        
-        if instruction.operator == BitToBit.ANDBIT: 
+
+        if instruction.operator == BitToBit.ANDBIT:
             augusTxt += '$t'+ str(contadorT)
             augusTxt += f' = {str(num1)} & {str(num2)} ;\n'
             contadorT += 1
             return f'$t{str(contadorT-1)}'
-        elif instruction.operator == BitToBit.ORBIT: 
+        elif instruction.operator == BitToBit.ORBIT:
             augusTxt += '$t'+ str(contadorT)
             augusTxt += f' = {str(num1)} | {str(num2)} ;\n'
             contadorT += 1
             return f'$t{str(contadorT-1)}'
-        elif instruction.operator == BitToBit.XORBIT: 
+        elif instruction.operator == BitToBit.XORBIT:
             augusTxt += '$t'+ str(contadorT)
             augusTxt += f' = {str(num1)} ^ {str(num2)} ;\n'
             contadorT += 1
             return f'$t{str(contadorT-1)}'
-        elif instruction.operator == BitToBit.SHIFTI: 
+        elif instruction.operator == BitToBit.SHIFTI:
             augusTxt += '$t'+ str(contadorT)
             augusTxt += f' = {str(num1)} << {str(num2)} ;\n'
             contadorT += 1
             return f'$t{str(contadorT-1)}'
-        elif instruction.operator == BitToBit.SHIFTD: 
+        elif instruction.operator == BitToBit.SHIFTD:
             augusTxt += '$t'+ str(contadorT)
             augusTxt += f' = {str(num1)} >> {str(num2)} ;\n'
             contadorT += 1
@@ -807,7 +855,7 @@ def increDecreAsignation(instruction, ts, idPadre, VariableAlto):
         ts.setdefault(instruction.id, f'{id}')
         arrayTables.append(ts)
     else:
-        #primero incremento        
+        #primero incremento
         id = valueExpression(Identifier(instruction.id, 0, 0), ts)
         augusTxt += id
         if instruction.signo == '++':
@@ -824,4 +872,3 @@ def increDecreAsignation(instruction, ts, idPadre, VariableAlto):
         ts.setdefault(VariableAlto, f'{idPadre}')
         arrayTables.append(ts)
 
-        

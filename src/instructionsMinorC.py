@@ -91,6 +91,13 @@ class Default_(Instruction):
         self.line = line
         self.column = column
 
+class CallFunction(Instruction):
+    '''call function statment'''
+    def __init__(self,id, params, line, column):
+        self.id = id
+        self.params = params
+        self.line = line
+        self.column = column
 
 class For(Instruction):
     '''for statment'''
