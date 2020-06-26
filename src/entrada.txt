@@ -1,25 +1,33 @@
 #llamadas
+int global;
 
-int global, a, b;
-
-int suma(){
+int suma(int a, int b){
     printf("la suma es %d \n", a+b);
 }
-int resta(){
+int resta(int a, int b){
     printf("la resta es %d \n", a-b);
 }
-int multiplicacion(){
-    printf("la suma es %d \n", a*b);
+int multiplicacion(int a, int b){
+    printf("la multiplicacion es %d \n", a*b);
 }
-int division(){
-    printf("la suma es %d \n", a/b);
+int division(int a, int b){
+    printf("la division es %d \n", a/b);
 }
 
 int main(){
-   suma(a+2); 
+    int a = 10, b = 20;    
+    suma(5,3); 
+    resta(5,3);
+    multiplicacion(5,3);
+    division(5,3);
+    printf("a: %d b: %d \n", a, b);
 }
 
 
+
+augusTxtAuxVar
+augusTxtCalls
+augusTxtAuxJUMPS
 
 
 

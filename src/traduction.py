@@ -14,6 +14,7 @@ import time
 augusTxt = 'main: \n'
 augusTxtAuxVar = ''
 augusTxtAuxJUMPS  = 'manejador:\n'
+augusTxtCalls = ''      #texto auxiliar para las llamadas
 contadorT = 0
 semanticErrorList = []
 ultimaPos = 0
@@ -23,13 +24,17 @@ contadorEtiquetas = 0
 contadorEtiquetasAux = 0
 pasadas = 0
 caseAnt = None
-augusTxtCalls = ''      #texto auxiliar para las llamadas
 contadorCalls = 0       #para nombrar etiquetas de salto
 contadorParams = 0      #variables $a0
 
 def execute(input, textEdit):
-    global tableGlobal
+    global tableGlobal, contadorParams, contadorT, contadorEtiquetas, contadorEtiquetasAux, contadorCalls
     tableGlobal.clear()
+    contadorParams = 0
+    contadorT = 0
+    contadorEtiquetas = 0
+    contadorEtiquetasAux = 0
+    contadorCalls = 0
     arrayTables.append(tableGlobal)
     process(input, tableGlobal)
     print(f"tsGlobal: {str(tableGlobal)}")
@@ -37,9 +42,27 @@ def execute(input, textEdit):
 
 def process(instructions,ts):
     #try:
-        global augusTxt, augusTxtCalls, augusTxtAuxVar
+        global augusTxt, augusTxtCalls, augusTxtAuxVar, contadorParams
         ################################################HACER UNA PASADA ANTES PARA TODAS LAS FUNCIONES######################################################################
+        contadorParams = 0
+        i = 0
+        while i < len(instructions):
+            #isinstance verificar tipos
+            b = instructions[i]
 
+            if isinstance(b, Declaration):
+                Declaration_(b.listId, ts)
+            elif isinstance(b, FunctionDeclaration):
+                if b.id != 'main':                    
+                    augusTxtAuxVar = augusTxt       #back de augutxt
+                    augusTxt = ''
+                    getFunctions(b, ts)
+                    augusTxt += 'goto manejador;\n'
+                    augusTxtCalls += augusTxt
+                    augusTxt = augusTxtAuxVar
+
+            i += 1
+           
         augusTxt += '$ra = -1;  #inicializamos nuesto apuntador de saltos\n'
         i = 0
         while i < len(instructions):
@@ -50,6 +73,7 @@ def process(instructions,ts):
                 Declaration_(b.listId, ts)
             elif isinstance(b, FunctionDeclaration):
                 if b.id == 'main':
+                    contadorParams = 0
                     FunctionDeclaration_(b, ts)
                     augusTxt += 'goto FINAL_AUGUS;\n'
                     #demas funciones
@@ -57,27 +81,32 @@ def process(instructions,ts):
                     augusTxt += '\n\n'
                     augusTxt += augusTxtAuxJUMPS
                     augusTxt += 'FINAL_AUGUS:'
-                else:
-                    augusTxtAuxVar = augusTxt
-                    augusTxt = ''
-                    FunctionDeclaration_(b, ts)
-                    augusTxt += 'goto manejador;\n'
-                    augusTxtCalls += augusTxt
-                    augusTxt = augusTxtAuxVar
 
             i += 1
+            
     #except:
         #pass
 
-def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del padre
-    global augusTxt
+def getFunctions(b, ts):
+    global augusTxt, contadorParams, contadorT
     tsLocal = {}
     tsLocal.clear()
     arrayTables.append(tsLocal)
     if b.id != 'main':
         augusTxt += f'{str(b.id)} :\n'
 
-    #asignar valores a los parametros
+        #asignar valores a los parametros  
+        if isinstance(b.params, list):
+            for param in b.params:
+                #conforme el contador de parametros
+                augusTxt += '$t'+ str(contadorT)
+                augusTxt += ' = ' + str(f'$a{contadorParams}') + ' ;\n'
+                arrayTables.pop()
+                tsLocal.setdefault(param.id, f'$t{str(contadorT)}')         #agrego a mi tabla de simbolos local de cada metodo los parametros correspondientes
+                arrayTables.append(tsLocal)
+                contadorT += 1          #aumento contador de tmp
+                contadorParams += 1     #aumento contador de parametros     
+
     #recorrer las listas de instrucciones
     i = 0
     while i < len(b.instructions):
@@ -110,7 +139,56 @@ def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del pad
             CallF(a, tsLocal)
         i += 1
 
-    print(f"tsLocal: {str(tsLocal)}")
+    print(f"tsLocal funcion {b.id}: {str(tsLocal)}")
+    #antes de sacar la tabla inserto todo el demas texto de las funciones.
+    #capturar las instrucciones de los demas metodos
+    if (b.id == 'main'):
+        contadorParams = 0  #reestablezco el valor de los parametros
+    arrayTables.pop()
+
+def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del padre
+    global augusTxt, contadorParams, contadorT
+    tsLocal = {}
+    tsLocal.clear()
+    arrayTables.append(tsLocal)
+    if b.id != 'main':
+        augusTxt += f'{str(b.id)} :\n'     
+
+    #recorrer las listas de instrucciones
+    i = 0
+    while i < len(b.instructions):
+        a = b.instructions[i]
+        if isinstance(a, Declaration):
+            Declaration_(a.listId, tsLocal)
+        elif isinstance(a, Asignation):
+            Asignation_(a, tsLocal)
+        elif isinstance(a, If):
+            If_(a, tsLocal)
+        elif isinstance(a, PrintF_):
+            PrintF(a, tsLocal)
+        elif isinstance(a, Label):
+            augusTxt += f'{str(a.label)}:\n'
+        elif isinstance(a, Goto):
+           augusTxt += f'goto {str(a.label)};\n'
+        elif isinstance(a, IncreDecre_Pre):
+            increDecre(a, tsLocal, 1)
+        elif isinstance(a, IncreDecre_Post):
+            increDecre(a, tsLocal, 1)
+        elif isinstance(a, For):
+            For_(a, tsLocal)
+        elif isinstance(a, While_):
+            While__(a, tsLocal)
+        elif isinstance(a, DoWhile_):
+            DoW(a, tsLocal)
+        elif isinstance(a, Switch_):
+            Switch(a, tsLocal)
+        elif isinstance(a, CallFunction):
+            CallF(a, tsLocal)
+        i += 1
+
+    print(f"tsLocal funcion {b.id}: {str(tsLocal)}")
+    if (b.id == 'main'):
+        contadorParams = 0  #reestablezco el valor de los parametros
     arrayTables.pop()
 
 def CallF(b, ts):
@@ -122,7 +200,7 @@ def CallF(b, ts):
             augusTxt += '$a'+ str(contadorParams)
             augusTxt += ' = ' + str(res) + ' ;\n'
             arrayTables.pop()
-            ts.setdefault(f'a_{str(contadorParams)}' f'$a{str(contadorParams)}')        #los guardare en la ta como a_n == $an
+            ts.setdefault(f'a_{str(contadorParams)}',f'$a{str(contadorParams)}')        #los guardare en la ta como a_n == $an
             arrayTables.append(ts)
             contadorParams += 1
     #creo las instrucciones de la funcion
@@ -132,8 +210,8 @@ def CallF(b, ts):
     augusTxt += f'regreso{str(contadorCalls)}:\n'           #lacaionamos el ra con la etiqueta de regreso
 
     #agregamos a nuestro manejador de saltos
-    #augusTxtAuxJUMPS += f'if ( $ra = {str(contadorCalls)}) goto regreso{str(contadorCalls)};\n'
-    #contadorCalls += 1
+    augusTxtAuxJUMPS += f'if ( $ra == {str(contadorCalls)}) goto regreso{str(contadorCalls)};\n'
+    contadorCalls += 1
 
 def Switch(b, ts):
     global contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux, caseAnt

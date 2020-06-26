@@ -566,6 +566,7 @@ def p_punt(t):
     if len(t) == 3:
         grammarList.append(g.nodeGramatical('PUNT  -> ID ID ', f' PUNT.val= Ids(t[1],t[2])'))
     else:
+        t[0] = t[1]
         grammarList.append(g.nodeGramatical('PUNT  -> ID  ', f' PUNT.val= ID.value'))
 
 def p_instruccionesInternas(t):
