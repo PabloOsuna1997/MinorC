@@ -47,7 +47,7 @@ int main()
 
 
 ##################################### FACTORIAL RECURSIVA
-int resultado;
+int resultado = 1;
 int main(){
    int n;
    printf("FACTORIAL : Escribe un numero : ");
@@ -57,9 +57,10 @@ int main(){
 }
 
 int factorial(int n) {
-   if(n < 0) return 0;
-   else if(n > 1) return n*factorial(n-1); // Recursividad: n>1
-   return 1; // Condici�n para n == 1 y n == 0 
+    if(n > 1){
+        return n*factorial(n-1); // Recursividad: n>1
+    }
+    //return 1; // Condici�n para n == 1 y n == 0 
 }
 
 

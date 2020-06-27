@@ -92,7 +92,7 @@ def process(instructions,ts):
     #except:
         #pass
 
-def getFunctions(b, ts):
+def getFunctions(b, ts):            #seteo los parametros dentro de la funcion y capturo sus instrucciones
     global augusTxt, contadorParams, contadorT
     tsLocal = {}
     tsLocal.clear()
@@ -170,7 +170,7 @@ def getFunctions(b, ts):
         contadorParams = 0  #reestablezco el valor de los parametros
     arrayTables.pop()
 
-def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del padre
+def FunctionDeclaration_(b, ts):    #ts siempre sera la tabla de simbolos del padre
     global augusTxt, contadorParams, contadorT
     tsLocal = {}
     tsLocal.clear()
@@ -215,7 +215,7 @@ def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del pad
         contadorParams = 0  #reestablezco el valor de los parametros
     arrayTables.pop()
 
-def CallF(b, ts):
+def CallF(b, ts):                   #consulto los parametros de cada funcion y los asigno
     global augusTxtCalls, contadorCalls, augusTxt, contadorParams, arrayTables, augusTxtAuxJUMPS
     if len(b.params) != 0:  #parametros del metodo a llamar
         #debemos crear las variable $an correspondientes
