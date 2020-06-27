@@ -1,4 +1,4 @@
-#llamadas
+########################  MULTIPLES LLAMADAS 
 int global = 10;
 
 int suma(int a, int b){
@@ -31,8 +31,24 @@ int main(){
 }
 
 
+##################################### FACTORIAL SIN LLAMADA
+int main()
+{
+    int Resultado=0;
+    int Factorial = 5;
+    Resultado = 1;
+    while(Factorial > 1) {
+       Resultado *= Factorial;
+       printf("%d x ",Factorial);
+       Factorial--;
+    }
+    printf("1 = %d \n",Resultado);
+}
 
 
+
+
+#############################################   suma recursivaa ######################################
 int global = 10;
 
 int suma(int a, int b){
@@ -56,6 +72,8 @@ int main(){
 }
 
 
+
+############################################## FIBONACCI SIN RETURN
 int actual;
 int fibonacci(int posicion) {
     int siguiente = 1, temporal = 0;
@@ -75,218 +93,7 @@ int main(){
 
 
 
-#include <stdio.h>
-int main(int serie, char** fibonacci)
-{ 
-    int n, cont, a = 0, b = 1, c; 
-    printf("Cuantos numeros quieres crear: ");
-    scanf("%d", &n);  
-    printf("0,1,"); 
-    for(cont=0; cont<n-2; cont++){ 
-        c = a + b; i 
-        printf("%d,", c); 
-        a = b; 
-        b = c; 
-    } 
-    printf("n"); 
-    return 5; 
-}
-
-
-CODIGO 3D:
-
-main: 
-PL_:
-PL_:
-$ra = -1;  #inicializamos nuesto apuntador de saltos
-$a0 = 5 ;
-$ra = 0;
-goto fibonacci;
-regreso0:
-$ra = $ra + 1;
-goto FINAL_AUGUS;
-fibonacci :
-$t0 = $a0 ;
-$t1 = 0 ;
-$t2 = 1 ;
-$t3 = 0 ;
-print(" 0,1, ");
-$t4 = 0 ;
-fL0:
-$t5 = $t0 - 2 ;
-$t6 = $t4 < $t5 ;
-if($t6) goto fL1;
-goto fL2;
-fL1:
-$t7 = $t1 + $t2 ;
-$t3 = $t7 ;
-print($t8);
-print(" , ");
-$t1 = $t2 ;
-$t2 = $t8 ;
-$t4 = $t4;
-$t4 = $t4 + 1;
-goto fL0;
-fL2:
-print(" n ");
-goto manejador;
-
-
-manejador:
-if ( $ra == 0) goto regreso0;
-FINAL_AUGUS:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-CODIGO 3D:
-
-main: 
-PL_:
-PL_:
-$t0 = 0 ;
-$ra = -1;  #inicializamos nuesto apuntador de saltos
-$t11 = 0 ;
-$a0 = 5 ;
-$a1 = 15 ;
-$ra = 0;
-goto fibonacci;
-regreso0:
-$ra = $ra + 1;
-print(" fibonacci. ");
-print("\n");
-print($t0);
-goto FINAL_AUGUS;
-fibonacci :
-$t1 = $a0 ;
-$t2 = $a1 ;
-$t3 = 1 ;
-$t4 = 0 ;
-$t5 = 1 ;
-fL0:
-$t6 = $t5 <= $t1 ;
-if($t6) goto fL1;
-goto fL2;
-fL1:
-if($t2) goto iL3;
-goto iL4;
-iL3:
-print($t0);
-print("\n");
-iL4:
-$t4 = $t0 ;
-$t0 = $t3 ;
-$t9 = $t3 + $t7 ;
-$t3 = $t9 ;
-$t5 = $t5;
-$t5 = $t5 + 1;
-goto fL0;
-fL2:
-if($t2) goto iL8;
-goto iL9;
-iL8:
-print($t0);
-iL9:
-print(" actual: ");
-print($t0);
-goto manejador;
-
-
-manejador:
-if ( $ra == 0) goto regreso0;
-FINAL_AUGUS:
-
-
-manejador:
-if ( $ra == 0) goto regreso0;
-FINAL_AUGUS:
-
-
-CODIGO 3D:
-
-main: 
-PL_:
-PL_:
-$t0 = 0 ;
-$ra = -1;  #inicializamos nuesto apuntador de saltos
-$t11 = 0 ;
-$a0 = 5 ;
-$a1 = 15 ;
-$ra = 0;
-goto fibonacci;
-regreso0:
-$ra = $ra + 1;
-print(" fibonacci. ");
-print("\n");
-print($t0);
-goto FINAL_AUGUS;
-fibonacci :
-$t1 = $a0 ;
-$t2 = $a1 ;
-$t3 = 1 ;
-$t4 = 0 ;
-$t5 = 1 ;
-fL0:
-$t6 = $t5 <= $t1 ;
-if($t6) goto fL1;
-goto fL2;
-fL1:
-if($t2) goto iL3;
-goto iL4;
-iL3:
-print($t0);
-print("\n");
-iL4:
-$t4 = $t0 ;
-$t0 = $t3 ;
-$t9 = $t3 + $t7 ;
-$t3 = $t9 ;
-$t5 = $t5;
-$t5 = $t5 + 1;
-goto fL0;
-fL2:
-if($t2) goto iL8;
-goto iL9;
-iL8:
-print($t0);
-iL9:
-print(" actual: ");
-print($t0);
-goto manejador;
-
-
-manejador:
-if ( $ra == 0) goto regreso0;
-FINAL_AUGUS:
-
-
-
-
-
-
-
-
-
-
-
-
+######################################## IF ELSE
 int a ;
 
 int main(struct nodo nodo){
@@ -304,6 +111,7 @@ int main(struct nodo nodo){
 }
 
 
+############################################# SWITCH
 int main(){
     int a;
     switch(a){
@@ -327,7 +135,7 @@ int main(){
 
 
 
-
+########################################## SCANF 
 int main(){
     printf("\nIngrese un numero para iniciar:\n");
     int contador = scanf();
@@ -339,6 +147,9 @@ int main(){
     printf("\nHemos contado desde %d hasta %d \n",contador,bandera);
 }
 
+
+
+################################################ CICLOS
 int main()
 {
 int a;
@@ -382,18 +193,3 @@ int a;
     }while(b < 6);
 }
 
-
-
-int fibonacci(int n){
-     int a = 0, b = 1, c; 
-    for(int cont=0; cont < n-2; cont++){
-    c = a+b;
-        printf("%d \n", c); 
-    } 
-    
-}
-
-int main()
-{ 
-    fibonacci(5);
-}

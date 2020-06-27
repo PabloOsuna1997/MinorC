@@ -436,13 +436,14 @@ def PrintF(b, ts):
         #my_lst_str = ' '.join(map(str, cadena))
         #print(f"printf: {my_lst_str}")
         for a in cadena:
-            if a[0] == '$':
-                augusTxt += f'print({str(a)});\n'       ## arreglar esto porque imprime ("$t8")
-            else:
-                if a != '\\n':
-                    augusTxt += f'print(\" {str(a)} \");\n'       ## arreglar esto porque imprime ("$t8")
+            if a != '':
+                if a[0] == '$':
+                    augusTxt += f'print({str(a)});\n'       ## arreglar esto porque imprime ("$t8")
                 else:
-                    augusTxt += f'print(\"\\n\");\n'  ## para no sumarle el espacio en el \n
+                    if a != '\\n':
+                        augusTxt += f'print(\" {str(a)} \");\n'       ## arreglar esto porque imprime ("$t8")
+                    else:
+                        augusTxt += f'print(\"\\n\");\n'  ## para no sumarle el espacio en el \n
     except:
         print("Error semantico en el print.")
 
