@@ -1,8 +1,15 @@
 #llamadas
-int global;
+int global = 10;
 
 int suma(int a, int b){
     printf("la suma es %d \n", a+b);
+
+    if (a == 6){    
+        printf("exito la funcion recursiva sin return. \n"); 
+    }else{       
+    printf("es 5 \n");        
+        ;
+    }
 }
 int resta(int a, int b){
     printf("la resta es %d \n", a-b);
@@ -25,9 +32,256 @@ int main(){
 
 
 
-augusTxtAuxVar
-augusTxtCalls
-augusTxtAuxJUMPS
+
+int global = 10;
+
+int suma(int a, int b){
+    printf("la suma es %d \n", a+b);
+
+    if (a == 6){    
+        printf("SIMMM es 6 \n");
+        suma(a+1,b); 
+    }else if(a == 7){    
+        printf("fin recursividad \n"); 
+    } else{       
+        printf("es 5 \n");        
+        suma(a+1,b);
+    }
+}
+int main(){
+    int a = 10, b = 20;    
+    suma(5,3); 
+
+   printf("si funca");
+}
+
+
+int actual;
+int fibonacci(int posicion) {
+    int siguiente = 1, temporal = 0;
+    for (int x = 1; x <= posicion; x++) {
+        printf("%d \n", actual);
+        temporal = actual;
+        actual = siguiente;
+        siguiente = siguiente + temporal;
+    }
+    printf("%d", actual);
+    printf("actual: %d", actual);
+}
+
+int main(){
+    fibonacci(5);
+}
+
+
+
+#include <stdio.h>
+int main(int serie, char** fibonacci)
+{ 
+    int n, cont, a = 0, b = 1, c; 
+    printf("Cuantos numeros quieres crear: ");
+    scanf("%d", &n);  
+    printf("0,1,"); 
+    for(cont=0; cont<n-2; cont++){ 
+        c = a + b; i 
+        printf("%d,", c); 
+        a = b; 
+        b = c; 
+    } 
+    printf("n"); 
+    return 5; 
+}
+
+
+CODIGO 3D:
+
+main: 
+PL_:
+PL_:
+$ra = -1;  #inicializamos nuesto apuntador de saltos
+$a0 = 5 ;
+$ra = 0;
+goto fibonacci;
+regreso0:
+$ra = $ra + 1;
+goto FINAL_AUGUS;
+fibonacci :
+$t0 = $a0 ;
+$t1 = 0 ;
+$t2 = 1 ;
+$t3 = 0 ;
+print(" 0,1, ");
+$t4 = 0 ;
+fL0:
+$t5 = $t0 - 2 ;
+$t6 = $t4 < $t5 ;
+if($t6) goto fL1;
+goto fL2;
+fL1:
+$t7 = $t1 + $t2 ;
+$t3 = $t7 ;
+print($t8);
+print(" , ");
+$t1 = $t2 ;
+$t2 = $t8 ;
+$t4 = $t4;
+$t4 = $t4 + 1;
+goto fL0;
+fL2:
+print(" n ");
+goto manejador;
+
+
+manejador:
+if ( $ra == 0) goto regreso0;
+FINAL_AUGUS:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CODIGO 3D:
+
+main: 
+PL_:
+PL_:
+$t0 = 0 ;
+$ra = -1;  #inicializamos nuesto apuntador de saltos
+$t11 = 0 ;
+$a0 = 5 ;
+$a1 = 15 ;
+$ra = 0;
+goto fibonacci;
+regreso0:
+$ra = $ra + 1;
+print(" fibonacci. ");
+print("\n");
+print($t0);
+goto FINAL_AUGUS;
+fibonacci :
+$t1 = $a0 ;
+$t2 = $a1 ;
+$t3 = 1 ;
+$t4 = 0 ;
+$t5 = 1 ;
+fL0:
+$t6 = $t5 <= $t1 ;
+if($t6) goto fL1;
+goto fL2;
+fL1:
+if($t2) goto iL3;
+goto iL4;
+iL3:
+print($t0);
+print("\n");
+iL4:
+$t4 = $t0 ;
+$t0 = $t3 ;
+$t9 = $t3 + $t7 ;
+$t3 = $t9 ;
+$t5 = $t5;
+$t5 = $t5 + 1;
+goto fL0;
+fL2:
+if($t2) goto iL8;
+goto iL9;
+iL8:
+print($t0);
+iL9:
+print(" actual: ");
+print($t0);
+goto manejador;
+
+
+manejador:
+if ( $ra == 0) goto regreso0;
+FINAL_AUGUS:
+
+
+manejador:
+if ( $ra == 0) goto regreso0;
+FINAL_AUGUS:
+
+
+CODIGO 3D:
+
+main: 
+PL_:
+PL_:
+$t0 = 0 ;
+$ra = -1;  #inicializamos nuesto apuntador de saltos
+$t11 = 0 ;
+$a0 = 5 ;
+$a1 = 15 ;
+$ra = 0;
+goto fibonacci;
+regreso0:
+$ra = $ra + 1;
+print(" fibonacci. ");
+print("\n");
+print($t0);
+goto FINAL_AUGUS;
+fibonacci :
+$t1 = $a0 ;
+$t2 = $a1 ;
+$t3 = 1 ;
+$t4 = 0 ;
+$t5 = 1 ;
+fL0:
+$t6 = $t5 <= $t1 ;
+if($t6) goto fL1;
+goto fL2;
+fL1:
+if($t2) goto iL3;
+goto iL4;
+iL3:
+print($t0);
+print("\n");
+iL4:
+$t4 = $t0 ;
+$t0 = $t3 ;
+$t9 = $t3 + $t7 ;
+$t3 = $t9 ;
+$t5 = $t5;
+$t5 = $t5 + 1;
+goto fL0;
+fL2:
+if($t2) goto iL8;
+goto iL9;
+iL8:
+print($t0);
+iL9:
+print(" actual: ");
+print($t0);
+goto manejador;
+
+
+manejador:
+if ( $ra == 0) goto regreso0;
+FINAL_AUGUS:
+
+
+
+
+
+
+
 
 
 
@@ -130,50 +384,16 @@ int a;
 
 
 
-main:
-$ra = -1; # 0 calls on stack
-$s0 = array(); # Stack return values
-$sp = -1;      # Null pointer
-$t3 = 23;
-$t4 = 17;
-$a0 = $t3;
-$a1 = $t4;
-$ra = 0;
-goto suma;
-ends5:
-$v6 = $s0[$sp];
-$sp--;$t6 = $v6;
-print("La ");
-print("respuesta ");
-print("es ");
-print($t6);
-print("\n ");
-print("\n");$t3 = 43;
-$t4 = 17;
-$a0 = $t3;
-$a1 = $t4;
-$ra = 1;
-goto suma;
-ends9:
-$v10 = $s0[$sp];
-$sp--;$t10 = $v10;
-print("La ");
-print("respuesta ");
-print("es ");
-print($t10);
-print("\n ");
-print("\n");
-goto finalaugus;
+int fibonacci(int n){
+     int a = 0, b = 1, c; 
+    for(int cont=0; cont < n-2; cont++){
+    c = a+b;
+        printf("%d \n", c); 
+    } 
+    
+}
 
-suma:
-$t2 = $a0 + $a1;
-$sp++;
-$s0[$sp] = $t2;
-goto rmanager;
-
-rmanager:
-# Administrador de retorno de funciones
-if($ra == 0 ) goto ends5; 
-if($ra == 1 ) goto ends9; 
-
-finalaugus:
+int main()
+{ 
+    fibonacci(5);
+}

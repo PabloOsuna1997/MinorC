@@ -248,7 +248,7 @@ class Ui_Augus(object):
 
     def retranslateUi(self, Augus):
         _translate = QtCore.QCoreApplication.translate
-        Augus.setWindowTitle(_translate("Augus", "Augus"))
+        Augus.setWindowTitle(_translate("Augus", "MinorC"))
         self.menuArchivo.setTitle(_translate("Augus", "Archivo"))
         self.menuEditar.setTitle(_translate("Augus", "Editar"))
         self.menuEjecutar.setTitle(_translate("Augus", "Ejecutar"))

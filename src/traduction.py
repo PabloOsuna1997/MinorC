@@ -1,5 +1,6 @@
 import grammar as g
 import SymbolTable as TS
+import functionTable as fTS
 from semanticObject import *
 from expresionsMinorC import *
 from instructionsMinorC import *
@@ -11,6 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 import time
 
+tsFunciones = {}
 augusTxt = 'main: \n'
 augusTxtAuxVar = ''
 augusTxtAuxJUMPS  = 'manejador:\n'
@@ -28,8 +30,10 @@ contadorCalls = 0       #para nombrar etiquetas de salto
 contadorParams = 0      #variables $a0
 
 def execute(input, textEdit):
-    global tableGlobal, contadorParams, contadorT, contadorEtiquetas, contadorEtiquetasAux, contadorCalls
+    global tableGlobal, contadorParams, contadorT, contadorEtiquetas, contadorEtiquetasAux, contadorCalls, tsFunciones
     tableGlobal.clear()
+    tsFunciones = {}
+    tsFunciones = fTS.functionsTable()
     contadorParams = 0
     contadorT = 0
     contadorEtiquetas = 0
@@ -43,7 +47,7 @@ def execute(input, textEdit):
 def process(instructions,ts):
     #try:
         global augusTxt, augusTxtCalls, augusTxtAuxVar, contadorParams
-        ################################################HACER UNA PASADA ANTES PARA TODAS LAS FUNCIONES######################################################################
+        #primera pasada capturando las funciones, metodos y variables globales
         contadorParams = 0
         i = 0
         while i < len(instructions):
@@ -62,7 +66,8 @@ def process(instructions,ts):
                     augusTxt = augusTxtAuxVar
 
             i += 1
-           
+
+        #capturo instrucciones del main  
         augusTxt += '$ra = -1;  #inicializamos nuesto apuntador de saltos\n'
         i = 0
         while i < len(instructions):
@@ -92,22 +97,41 @@ def getFunctions(b, ts):
     tsLocal = {}
     tsLocal.clear()
     arrayTables.append(tsLocal)
-    if b.id != 'main':
-        augusTxt += f'{str(b.id)} :\n'
+    parametros = []
+    #debo guardar la funcion en la tabla de simbolos asi cada vez que la llame le asigno el valor a la misva variable
+    # guardar en ts mi funcion
+    if isinstance(b.params, list):
+        parametros[:] = []
+        for param in b.params:
+            parametros.append((f'$a{str(contadorParams)}', param.id))
+            contadorParams += 1
 
-        #asignar valores a los parametros  
+        #insertar en mi tabla de simbolos de funciones
+        funcion = fTS.Symbol(b.id, b.type_, parametros)
+        tsFunciones.add(funcion)
+    #recorrer las listas de instrucciones
+    else:
+        parametros[:] = []
+        #insertar en mi tabla de simbolos de funciones
+        funcion = fTS.Symbol(b.id, b.type_, parametros)
+        tsFunciones.add(funcion)
+
+    #asignacion del valor a mi parametro
+    if b.id != 'main':
+        augusTxt += f'{str(b.id)} :\n'              #etiqueta de nombre de mi funcion
         if isinstance(b.params, list):
-            for param in b.params:
+            i = 0
+            while i < len(b.params):
                 #conforme el contador de parametros
                 augusTxt += '$t'+ str(contadorT)
-                augusTxt += ' = ' + str(f'$a{contadorParams}') + ' ;\n'
+                augusTxt += ' = ' + str(f'{parametros[i][0]}') + ' ;\n'
                 arrayTables.pop()
-                tsLocal.setdefault(param.id, f'$t{str(contadorT)}')         #agrego a mi tabla de simbolos local de cada metodo los parametros correspondientes
+                tsLocal.setdefault(parametros[i][1], f'$t{str(contadorT)}')         #agrego a mi tabla de simbolos local de cada metodo los parametros correspondientes
                 arrayTables.append(tsLocal)
-                contadorT += 1          #aumento contador de tmp
-                contadorParams += 1     #aumento contador de parametros     
+                contadorT += 1          #aumento contador de tmp   
+                i += 1
 
-    #recorrer las listas de instrucciones
+    #recorrer las listas de instrucciones   
     i = 0
     while i < len(b.instructions):
         a = b.instructions[i]
@@ -193,21 +217,27 @@ def FunctionDeclaration_(b, ts):   #ts siempre sera la tabla de simbolos del pad
 
 def CallF(b, ts):
     global augusTxtCalls, contadorCalls, augusTxt, contadorParams, arrayTables, augusTxtAuxJUMPS
-    if len(b.params) != 0:
+    if len(b.params) != 0:  #parametros del metodo a llamar
         #debemos crear las variable $an correspondientes
-        for i in b.params:      #cada elemento de la lista es una expresion
-            res = valueExpression(i, ts)
-            augusTxt += '$a'+ str(contadorParams)
+        #mando a traer sus parametros a mi tabla de simbolos 
+        parametros = tsFunciones.get(b.id).parametros
+        i = 0
+        while i < len(b.params): 
+            a = b.params[i]
+            res = valueExpression(a, ts)
+            augusTxt += f'{parametros[i][0]}'
             augusTxt += ' = ' + str(res) + ' ;\n'
-            arrayTables.pop()
-            ts.setdefault(f'a_{str(contadorParams)}',f'$a{str(contadorParams)}')        #los guardare en la ta como a_n == $an
-            arrayTables.append(ts)
-            contadorParams += 1
+            i += 1
+
     #creo las instrucciones de la funcion
     augusTxt += f'$ra = {str(contadorCalls)};\n'
     augusTxt += f'goto {str(b.id)};\n'        #etiqueta al metodo para ejecutar ej: goto suma;
     #declaro una etiqueta para que el metodo regrese
     augusTxt += f'regreso{str(contadorCalls)}:\n'           #lacaionamos el ra con la etiqueta de regreso
+    if contadorCalls > 0:
+        augusTxt += f'$ra = $ra + {str(contadorCalls)};\n'
+    else:
+        augusTxt += f'$ra = $ra + {str(contadorCalls+1)};\n'
 
     #agregamos a nuestro manejador de saltos
     augusTxtAuxJUMPS += f'if ( $ra == {str(contadorCalls)}) goto regreso{str(contadorCalls)};\n'
@@ -365,6 +395,8 @@ def processInstructions(b, tsLocal):
             DoW(a, tsLocal)
         elif isinstance(a, Switch_):
             Switch(a, tsLocal)
+        elif isinstance(a, CallFunction):
+            CallF(a, tsLocal)
         i += 1
 
 def increDecre(b, ts, type_):
@@ -544,7 +576,7 @@ def Asignation_(b, ts):
                     augusTxt += id
                     augusTxt += ' = ' + str(res) + ' ;\n'
                     arrayTables.pop()
-                    ts.setdefault(b.id, f'$t{str(contadorT)}')
+                    ts.setdefault(b.id, f'{str(id)}')
                     arrayTables.append(ts)
                     contadorT += 1
                 elif b.op == '+=':
