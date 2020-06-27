@@ -434,31 +434,31 @@ class Ui_Augus(object):
             print("closing file dialog.")
 
     def fn_repASTGeneral(self):
-        try:  
-            fgraph = open('../reports/astG.dot','w+') #creamos el archivo
+        #try:  
+            fgraph = open('../reports/astMinorC.dot','w+') #creamos el archivo
             fgraph.write("graph \"\" { node [shape=box];")
             fgraph.close()
 
             #llamar a metodo de dibujo en execute
             global instructionsList
-            execute.grafo(instructionsList,self.textEditConsole)
+            traduction.grafo(instructionsList)
 
-            fgraph = open('../reports/astG.dot','a') #agregamos al archivo '}'
+            fgraph = open('../reports/astMinorC.dot','a') #agregamos al archivo '}'
             fgraph.write("}")
             fgraph.flush()
             fgraph.close()
             os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
-            #os.system('dot -Tpng  ../reports/ast.dot  -o  ../reports/ast.png')
-            os.system('dot -Tsvg  ../reports/astG.dot  -o  ../reports/astG.svg')
-            os.startfile('..\\reports\\astG.svg')
+            #os.system('dot -Tpng  ../reports/astMinorC.dot  -o  ../reports/astMinorC.png')
+            os.system('dot -Tsvg  ../reports/astMinorC.dot  -o  ../reports/astMinorC.svg')
+            os.startfile('..\\reports\\astMinorC.svg')
             #ruta = ("../reports/ast.png")
             #im = Image.open(ruta)
             #im.show()
-        except:
-            self.msgBox = QtWidgets.QMessageBox()
-            self.msgBox.setText("Error al crear reporte.")
-            self.msgBox.setIcon(QtWidgets.QMessageBox.Critical)
-            self.msgBox.exec()
+        #except:
+            #self.msgBox = QtWidgets.QMessageBox()
+            #self.msgBox.setText("Error al crear reporte.")
+            #self.msgBox.setIcon(QtWidgets.QMessageBox.Critical)
+            #self.msgBox.exec()
 
     def fn_repAST(self):
         try:
@@ -821,7 +821,7 @@ class Ui_Augus(object):
 
                 #mando a ejecutar augus
                 result = grammar.parse(augus)
-                instructionsList = result[:]
+                #instructionsList = result[:]
                 execute.execute(result, self.textEditOuput)
                 #VALIDACION DE ERRORES SEMANTICOS
             
