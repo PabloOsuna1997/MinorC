@@ -1516,7 +1516,7 @@ def drawExpresiones(instruction, ge, padre):
         ge.add(node)
         contador +=1
     elif isinstance(instruction, Cast_):
-        num1 = drawValueExpression(instruction.op2)
+        num1 = drawValueExpression(instruction.expression)
 
         node = g.node(padre, contador+1, str(instruction.type))
         ge.add(node)
@@ -1531,7 +1531,7 @@ def drawExpresiones(instruction, ge, padre):
     elif isinstance(instruction, ExpressionsDeclarationArray):
         #print(f'ahshas: {str(instruction.expressionDer)}') 
         for i in instruction.expressionIzq:
-            node = g.node(padre, contador+1, f'[{str(drawValueExpression(instruction.op2))}]')
+            node = g.node(padre, contador+1, f'[{str(drawValueExpression(i))}]')
             ge.add(node)
             contador +=1
         node = g.node(padre, contador+1, f'=')
@@ -1621,7 +1621,7 @@ def drawExpresiones(instruction, ge, padre):
         except:
             pass
     elif isinstance(instruction, NotBit):
-        num1 = drawValueExpression(instruction.op2)
+        num1 = drawValueExpression(instruction.expression)
         node = g.node(padre, contador+1, '~')
         ge.add(node)
         contador +=1
@@ -1629,7 +1629,7 @@ def drawExpresiones(instruction, ge, padre):
         ge.add(node)
         contador +=1
     elif isinstance(instruction, ReferenceBit):
-        val = drawValueExpression(instruction.op2)
+        num1 = drawValueExpression(instruction.expression)
         node = g.node(padre, contador+1, '&')
         ge.add(node)
         contador +=1
