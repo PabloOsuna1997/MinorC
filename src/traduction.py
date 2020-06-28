@@ -1058,13 +1058,22 @@ def instruccionesGlobales(instructions, ge, padre):
             ge.add(node)
             node = g.node(contador+2, contador+6, f'(')
             ge.add(node)
-            node = g.node(contador+2, contador+7, f'INSTRUCCIONES_INTERNAS')
+            node = g.node(contador+2, contador + 7, 'PARAMETROS')
             ge.add(node)
-            padreLocal = contador+2
+            auxPadre_ = contador+2
             contador += 7
+            auxPadre = contador
+            for z in b.params:
+                drawExpresiones(z, ge, auxPadre)
+                node = g.node(auxPadre, contador + 1, ',')
+                ge.add(node)
+                contador += 1
+            node = g.node(auxPadre_, contador+1, f'INSTRUCCIONES_INTERNAS')
+            ge.add(node)
+            contador += 1
             #llamo a las instrucciones internas
             drawInstruccionesInternas(b.instructions, ge, contador)
-            node = g.node(padreLocal, contador+1, f')')
+            node = g.node(auxPadre_, contador+1, f')')
             ge.add(node)
             contador += 1
             a = 3
@@ -1215,23 +1224,100 @@ def drawInstruccionesInternas(instrucciones, ge, padre):
             drawInstruccionesInternas([a.declaration], ge, contador)
             node = g.node(auxPadre, contador +1, f'CONDICION')
             ge.add(node)
-            auxPadre = contador + 1
             contador += 1
             drawExpresiones(a.condition, ge, contador)
+            node = g.node(auxPadre, contador +1, f'INSTRUCCIONES_INTERNAS')
+            ge.add(node)
+            contador += 1
+            drawInstruccionesInternas(a.instructions, ge, contador)
             node = g.node(auxPadre, contador + 1, f'INCREMENTO_DECREMENTO')
             ge.add(node)
-            auxPadre = contador + 1
             contador += 1
             drawInstruccionesInternas([a.increDecre], ge, contador)
-            #instrucciones internas
         elif isinstance(a, While_):
-            While__(a, tsLocal)
+            node = g.node(padre, contador + 1, 'WHILE')
+            ge.add(node)
+            padreTmp = contador + 1
+            node = g.node(padreTmp, contador + 1, 'while')
+            ge.add(node)
+            node = g.node(padreTmp, contador + 2, '(')
+            ge.add(node)
+            node = g.node(padreTmp, contador + 3, 'CONDICION')
+            ge.add(node)
+            contador += 3
+            drawExpresiones(a.condition, ge, contador)
+            node = g.node(padreTmp, contador + 1, ')')
+            ge.add(node)
+            contador += 1
+            #instrucciones internas
+            drawInstruccionesInternas(a.instructions, ge, contador)
         elif isinstance(a, DoWhile_):
-            DoW(a, tsLocal)
+            node = g.node(padre, contador + 1, 'DO_WHILE')
+            ge.add(node)
+            contador +=1 
+            auxPadre = contador
+            node = g.node(auxPadre, contador + 1, 'do')
+            ge.add(node)
+            contador += 1            
+            #instrucciones internas
+            drawInstruccionesInternas(a.instructions, ge, contador)
+            node = g.node(auxPadre, contador + 1, 'while')
+            ge.add(node)
+            node = g.node(auxPadre, contador + 2, 'CONDICION')
+            ge.add(node)
+            contador += 2
+            drawExpresiones(a.condition, ge, contador)
         elif isinstance(a, Switch_):
-            Switch(a, tsLocal)
+            node = g.node(padre, contador + 1, 'SWITCH')
+            ge.add(node)
+            contador +=1
+            auxPadre = contador
+            node = g.node(auxPadre, contador + 1, 'switch')
+            ge.add(node)
+            node = g.node(auxPadre, contador + 2, 'EXPRESION')
+            ge.add(node)
+            contador += 2
+            drawExpresiones(a.expresion, ge, contador)
+            #lista de cases
+            node = g.node(auxPadre, contador + 1, 'LISTA_CASES')
+            ge.add(node)
+            contador += 1 
+            padreList = contador
+            for z in a.listaCases:
+                node = g.node(padreList, contador + 1, 'CASE')
+                ge.add(node)
+                contador += 1
+                auxPa = contador
+                node = g.node(auxPa, contador + 1, 'case')
+                ge.add(node)
+                node = g.node(auxPa, contador + 2, 'EXPRESION')
+                ge.add(node)
+                contador += 2
+                drawExpresiones(z.expresion, ge, contador)
+                node = g.node(auxPa, contador + 1, 'INSTRUCCIONES_INTERNAS')
+                ge.add(node)
+                contador += 1
+                drawInstruccionesInternas(z.instructions, ge, contador)
         elif isinstance(a, CallFunction):
-            CallF(a, tsLocal)
+            node = g.node(padre, contador + 1, 'CALL_FUNCTION')
+            ge.add(node)
+            pa = contador+1
+            node = g.node(contador + 1, contador + 2, f'{str(a.id)}')
+            ge.add(node)
+            node = g.node(contador + 1, contador+3 , '(')
+            ge.add(node)
+            node = g.node(contador + 1, contador + 4, 'PARAMETROS')
+            ge.add(node)
+            contador += 4
+            auxPadre = contador
+            for z in a.params:
+                drawExpresiones(z, ge, auxPadre)
+                node = g.node(auxPadre, contador + 1, ',')
+                ge.add(node)
+                contador += 1
+            node = g.node(pa, contador + 1, ')')
+            ge.add(node)
+            contador += 1
         
         i += 1
 
