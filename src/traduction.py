@@ -1060,7 +1060,7 @@ def drawInstrucciones(instrucciones, ge, padre):
             node = g.node(contador, contador+2, 'EXPRESIONES')
             ge.add(node)
             contador+=2
-            drawExpresiones(b.cadena, ge, contador, tsGlobal, textEdit)
+            drawExpresiones(b.cadena, ge, contador)
         elif isinstance(b, Declaration):
             node = g.node(padre, contador+1, 'DECLARACIONES')
             ge.add(node)
@@ -1074,7 +1074,7 @@ def drawInstrucciones(instrucciones, ge, padre):
             node = g.node(contador-2, contador+1, 'EXPRESION')
             ge.add(node)
             contador += 1
-            drawExpresiones(b.val, ge, contador, tsGlobal, textEdit)
+            drawExpresiones(b.val, ge, contador)
         elif isinstance(b, If):
             node = g.node(padre, contador+1, 'INSTRUCIONES')
             ge.add(node)
@@ -1140,8 +1140,8 @@ def drawExpresiones(instruction, ge, padre):
     global contador
     #print(f'ahshas: {str(instruction)}') 
     if isinstance(instruction, BinaryExpression):
-        num1 = valueExpression(instruction.op1, ts,textEdit)
-        num2 = valueExpression(instruction.op2, ts,textEdit)
+        num1 = drawValueExpression(instruction.op1)
+        num2 = drawValueExpression(instruction.op2)
         try:
             if instruction.operator == Aritmetics.MAS: 
                node = g.node(padre, contador+1, str(num1))
@@ -1194,8 +1194,8 @@ def drawExpresiones(instruction, ge, padre):
         except:
             pass
     elif isinstance(instruction, LogicAndRelational):
-        val1 = valueExpression(instruction.op1, ts,textEdit)
-        val2 = valueExpression(instruction.op2, ts,textEdit)
+        val1 = drawValueExpression(instruction.op2)
+        val2 = drawValueExpression(instruction.op2)
         try:
             if instruction.operator == LogicsRelational.MAYORQUE: 
                 node = g.node(padre, contador+1, str(val1))
@@ -1292,7 +1292,7 @@ def drawExpresiones(instruction, ge, padre):
             pass
     elif isinstance(instruction, Not):
         try:
-            num1 = valueExpression(instruction.expression, ts,textEdit)
+            num1 = drawValueExpression(instruction.op2)
             node = g.node(padre, contador+1, str(val1))
             ge.add(node)
             contador +=1
@@ -1306,14 +1306,14 @@ def drawExpresiones(instruction, ge, padre):
             node = g.node(padre, contador+1, 'abs')
             ge.add(node)
             contador +=1
-            node = g.node(padre, contador+1, str(valueExpression(instruction.expression,ts,textEdit)))
+            node = g.node(padre, contador+1, str(drawValueExpression(instruction.op2)))
             ge.add(node)
             contador +=1
         except:
             pass
     elif isinstance(instruction, NegativeNumber):
         try:
-            num1 = valueExpression(instruction.expression, ts,textEdit)
+            num1 = drawValueExpression(instruction.op2)
             node = g.node(padre, contador+1, '-')
             ge.add(node)
             contador +=1
@@ -1331,7 +1331,7 @@ def drawExpresiones(instruction, ge, padre):
         ge.add(node)
         contador +=1
     elif isinstance(instruction, Cast_):
-        num1 = valueExpression(instruction.expression,ts,textEdit)
+        num1 = drawValueExpression(instruction.op2)
 
         node = g.node(padre, contador+1, str(instruction.type))
         ge.add(node)
@@ -1346,14 +1346,14 @@ def drawExpresiones(instruction, ge, padre):
     elif isinstance(instruction, ExpressionsDeclarationArray):
         #print(f'ahshas: {str(instruction.expressionDer)}') 
         for i in instruction.expressionIzq:
-            node = g.node(padre, contador+1, f'[{str(valueExpression(i, ts,textEdit))}]')
+            node = g.node(padre, contador+1, f'[{str(drawValueExpression(instruction.op2))}]')
             ge.add(node)
             contador +=1
         node = g.node(padre, contador+1, f'=')
         ge.add(node)
         contador +=1
 
-        drawExpresiones(instruction.expressionDer, ge, padre, tsGlobal, textEdit)
+        drawExpresiones(instruction.expressionDer, ge, padre)
     elif instruction == 'array': 
         node = g.node(padre, contador+1, f'array ( )')
         ge.add(node)
@@ -1367,7 +1367,7 @@ def drawExpresiones(instruction, ge, padre):
             sym = ts.get(instruction.id).valor            
             i = 0
             while i < len(instruction.expressions):
-                node = g.node(padre, contador+1, f'[{str(valueExpression(instruction.expressions[i], ts,textEdit))}]')
+                node = g.node(padre, contador+1, f'[{str(drawValueExpression(instruction.op2))}]')
                 ge.add(node)
                 contador +=1
                 i += 1
@@ -1380,8 +1380,8 @@ def drawExpresiones(instruction, ge, padre):
         ge.add(node)
         contador +=1
     elif isinstance(instruction, RelationalBit):
-        val1 = valueExpression(instruction.op1, ts,textEdit)
-        val2 = valueExpression(instruction.op2, ts,textEdit)        
+        val1 = drawValueExpression(instruction.op2)
+        val2 = drawValueExpression(instruction.op2)       
         try:
             if instruction.operator == BitToBit.ANDBIT: 
                 node = g.node(padre, contador+1, str(val1))
@@ -1436,7 +1436,7 @@ def drawExpresiones(instruction, ge, padre):
         except:
             pass
     elif isinstance(instruction, NotBit):
-        num1 = valueExpression(instruction.expression, ts,textEdit)
+        num1 = drawValueExpression(instruction.op2)
         node = g.node(padre, contador+1, '~')
         ge.add(node)
         contador +=1
@@ -1444,7 +1444,7 @@ def drawExpresiones(instruction, ge, padre):
         ge.add(node)
         contador +=1
     elif isinstance(instruction, ReferenceBit):
-        val = valueExpression(instruction.expression, ts,textEdit)
+        val = drawValueExpression(instruction.op2)
         node = g.node(padre, contador+1, '&')
         ge.add(node)
         contador +=1
@@ -1452,7 +1452,7 @@ def drawExpresiones(instruction, ge, padre):
         ge.add(node)
         contador +=1
 
-def drawValueExpression(instruction, ts,textEdit):
+def drawValueExpression(instruction):
     if isinstance(instruction, BinaryExpression):
         
         global la, co
@@ -1536,12 +1536,7 @@ def drawValueExpression(instruction, ts,textEdit):
             semanticErrorList.append(se)
             return '#'
     elif isinstance(instruction, Identifier):
-        if ts.exist(instruction.id) == 1:
-            return ts.get(instruction.id).valor
-        else:
-            se = seOb(f'Error Semantico: Variable  {instruction.id} no existe.', instruction.line, instruction.column)
-            semanticErrorList.append(se)
-            return '#'
+        return instruction.id
     elif isinstance(instruction, Number):
         return instruction.val
     elif isinstance(instruction, Cast_):
