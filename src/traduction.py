@@ -74,9 +74,7 @@ def process(instructions,ts):
             #isinstance verificar tipos
             b = instructions[i]
 
-            if isinstance(b, Declaration):
-                Declaration_(b.listId, ts)
-            elif isinstance(b, FunctionDeclaration):
+            if isinstance(b, FunctionDeclaration):
                 if b.id == 'main':
                     contadorParams = 0
                     FunctionDeclaration_(b, ts)
@@ -1002,7 +1000,6 @@ def instruccionesGlobales(instructions, ge, padre):
     while i < len(instructions):
         #isinstance verificar tipos
         b = instructions[i]
-
         if isinstance(b, Declaration):
             node = g.node(padre, contador+1, 'INSTRUCCIONES GLOBALES')
             ge.add(node)
@@ -1031,109 +1028,211 @@ def instruccionesGlobales(instructions, ge, padre):
                         padretmp = contador                        
                         #graficar esxpresion
                         drawExpresiones(a.val, ge, padretmp)
+                    else:
+                        node = g.node(padreLocal, contador + 2, f'ASIGN')
+                        ge.add(node)
+                        node = g.node(contador + 2, contador + 3, f'=')
+                        ge.add(node)
+                        node = g.node(contador + 2, contador + 4, f'EXPRESION')
+                        ge.add(node)
+                        contador += 4
+                        padretmp = contador
+                        # graficar esxpresion
+                        node = g.node(contador, contador + 1, f'0')
+                        ge.add(node)
+                        contador += 1
 
                 node = g.node(padreLocal, contador+1, ',')
                 ge.add(node)
                 contador += 1
-
         elif isinstance(b, FunctionDeclaration):
+            node = g.node(padre, contador+1, 'INSTRUCCIONES GLOBALES')
+            ge.add(node)
+            node = g.node(contador+1, contador+2, 'DECLA_FUNCIONES')
+            ge.add(node)
+            node = g.node(contador+2, contador+3, 'TIPO')
+            ge.add(node)
+            node = g.node(contador+3, contador+4, f'{str(b.type_)}')
+            ge.add(node)
+            node = g.node(contador+2, contador+5, f'{str(b.id)}')
+            ge.add(node)
+            node = g.node(contador+2, contador+6, f'(')
+            ge.add(node)
+            node = g.node(contador+2, contador+7, f'INSTRUCCIONES_INTERNAS')
+            ge.add(node)
+            padreLocal = contador+2
+            contador += 7
+            #llamo a las instrucciones internas
+            drawInstruccionesInternas(b.instructions, ge, contador)
+            node = g.node(padreLocal, contador+1, f')')
+            ge.add(node)
+            contador += 1
             a = 3
-
         i += 1
 
-def drawInstrucciones(instrucciones, ge, padre):
-    print("dibujar instrucciones")
+def drawInstruccionesInternas(instrucciones, ge, padre):
     global contador
     i = 0
     while i < len(instrucciones):
         #isinstance verificar tipos 
-        b = instrucciones[i]      
-        if isinstance(b, PrintF_):                
-            node = g.node(padre, contador+1, 'INSTRUCIONES')
-            ge.add(node)
-            contador+=1
-            node = g.node(contador, contador+1, 'PRINT')
-            ge.add(node)
-            contador+=1
-            node = g.node(contador, contador+1, 'print')
-            ge.add(node)
-            node = g.node(contador, contador+2, 'EXPRESIONES')
-            ge.add(node)
-            contador+=2
-            drawExpresiones(b.cadena, ge, contador)
-        elif isinstance(b, Declaration):
-            node = g.node(padre, contador+1, 'DECLARACIONES')
-            ge.add(node)
-            contador+=1
-            node = g.node(contador, contador+1, 'ID')
-            ge.add(node)
-            contador+=1
-            node = g.node(contador, contador+1, str(b.id))
-            ge.add(node)
-            contador+=1
-            node = g.node(contador-2, contador+1, 'EXPRESION')
+        a = instrucciones[i]      
+        if isinstance(a, Declaration):
+            node = g.node(padre, contador+1, 'DECLA_VARIABLES')
             ge.add(node)
             contador += 1
-            drawExpresiones(b.val, ge, contador)
-        elif isinstance(b, If):
-            node = g.node(padre, contador+1, 'INSTRUCIONES')
+            padreLocal = contador
+            node = g.node(contador, contador+1, 'TIPO')
             ge.add(node)
-            contador+=1
-            node = g.node(contador, contador+1, 'if')
+            node = g.node(contador+1, contador+2, f'{str(a.type_)}')
             ge.add(node)
-            node = g.node(contador, contador+2, ' (  EXPRESION  )')
+            contador += 2       #despues restar 2 cuando termine
+            #lista de id separador por coma
+            for b in a.listId:
+                if isinstance(b, SingleDeclaration):    #a es de tipo singleDeclaration
+                    node = g.node(padreLocal, contador+1, f'{str(b.id)}')   
+                    ge.add(node)
+                    if b.val != '#':    #significa que si trae valor
+                        node = g.node(padreLocal, contador+2, f'ASIGN')   
+                        ge.add(node)
+                        node = g.node(contador+2, contador+3, f'=')   
+                        ge.add(node)
+                        node = g.node(contador+2, contador+4, f'EXPRESION')   
+                        ge.add(node)
+                        contador += 4
+                        padretmp = contador                        
+                        #graficar esxpresion
+                        drawExpresiones(b.val, ge, padretmp)
+                    else:
+                        node = g.node(padreLocal, contador + 2, f'ASIGN')
+                        ge.add(node)
+                        node = g.node(contador + 2, contador + 3, f'=')
+                        ge.add(node)
+                        node = g.node(contador + 2, contador + 4, f'EXPRESION')
+                        ge.add(node)
+                        contador += 4
+                        padretmp = contador
+                        # graficar esxpresion
+                        node = g.node(contador, contador + 1, f'0')
+                        ge.add(node)
+                        contador += 1
+                node = g.node(padreLocal, contador+1, ',')
+                ge.add(node)
+                contador += 1
+        elif isinstance(a, Asignation):
+            node = g.node(padre, contador + 1, 'ASIGNACIONES')
             ge.add(node)
-            contador += 2
-            drawExpresiones(b.expression, ge, contador, tsGlobal,textEdit)
-            #mandar el node goto osea saltar entre las instrucciones
-            '''result = valueExpression(b.expression, tsGlobal, textEdit)
-            if result == 1:
-                tmp = i
-                i = goto(i+1, instructions, b.label)
-                if i != 0:
-                    pasadas = 0
-                else:
-                    i = tmp
-            else:
-                i = tmp'''
-        elif isinstance(b, Goto):
-            node = g.node(padre, contador+1, 'INSTRUCIONES')
+            contador += 1
+            node = g.node(contador, contador+1, a.id)
             ge.add(node)
-            contador+=1
-            node = g.node(contador, contador+1, 'goto')
+            node = g.node(contador, contador + 2, a.op)
             ge.add(node)
-            node = g.node(contador, contador+2, str(b.label))
+            node = g.node(contador, contador + 3, f'EXPRESION')
             ge.add(node)
-            contador += 2
-            #saltar entre las instrucciones
-            '''result = valueExpression(b.expression, tsGlobal, textEdit)
-            if result == 1:
-                tmp = i
-                i = goto(i + 1, instructions, b.label)
-                if i != 0:
-                    pasadas = 0
-                else:
-                    i = tmp
-            else:
-                i = tmp'''
-        elif isinstance(b, Exit):
-            node = g.node(padre, contador+1, 'INSTRUCIONES')
+            contador += 3
+            padretmp = contador
+            # graficar esxpresion
+            drawExpresiones(a.expresion, ge, padretmp)
+        elif isinstance(a, If):
+            node = g.node(padre, contador + 1, 'IF')
             ge.add(node)
-            contador+=1
-            node = g.node(contador, contador+1, 'exit ( )')
+            contador += 1
+            node = g.node(contador, contador + 1, 'if')
             ge.add(node)
-            contador+=1
-            break
-        elif isinstance(b, Unset):
-            node = g.node(padre, contador+1, 'INSTRUCIONES')
+            node = g.node(contador, contador + 2, '(')
             ge.add(node)
-            contador+=1
-            node = g.node(contador, contador+1, 'unset ')
+            node = g.node(contador, contador + 3, f'EXPRESION')
             ge.add(node)
-            node = g.node(contador, contador+2, str(b.id))
+            padretmp = contador
+            contador += 3
+            # graficar esxpresion
+            drawExpresiones(a.condition, ge, contador)
+            node = g.node(padretmp, contador + 1, ')')
             ge.add(node)
-            contador+=2
+            contador += 1
+        elif isinstance(a, PrintF_):
+            node = g.node(padre, contador + 1, 'PRINTF_')
+            ge.add(node)
+            contador += 1
+            node = g.node(contador, contador + 1, 'print')
+            ge.add(node)
+            node = g.node(contador, contador + 2, '(')
+            ge.add(node)
+            node = g.node(contador, contador + 3, 'LISTA_PRINT')
+            ge.add(node)
+            padretmp = contador
+            contador += 3
+            paAuX = contador
+            #grafica de lista de prints
+            for b in a.expressions:
+                node = g.node(paAuX, contador + 1, f'{str(drawValueExpression(b))}')
+                ge.add(node)
+                node = g.node(paAuX, contador + 2, f',')
+                ge.add(node)
+                contador += 2
 
+            node = g.node(padretmp, contador + 1, ')')
+            ge.add(node)
+            contador += 1
+        elif isinstance(a, Label):
+            node = g.node(padre, contador + 1, 'LABEL')
+            ge.add(node)
+            node = g.node(contador+1, contador + 2, f'str{a.label}')
+            ge.add(node)
+            contador += 2
+        elif isinstance(a, Goto):
+            node = g.node(padre, contador + 1, 'GOTO')
+            ge.add(node)
+            node = g.node(contador+1, contador+2, 'goto')
+            ge.add(node)
+            node = g.node(contador+1, contador+3, f'{str(a.label)}')
+            ge.add(node)
+            contador += 3
+        elif isinstance(a, IncreDecre_Pre):
+            node = g.node(padre, contador + 1, 'INCREMENTO_DECREMENTO')
+            ge.add(node)
+            node = g.node(contador + 1, contador + 2, f'{str(a.signo)}')
+            ge.add(node)
+            node = g.node(contador + 1, contador + 3, f'{str(a.id)}')
+            ge.add(node)
+            contador += 3
+        elif isinstance(a, IncreDecre_Post):
+            node = g.node(padre, contador + 1, 'INCREMENTO_DECREMENTO')
+            ge.add(node)
+            node = g.node(contador + 1, contador + 2, f'{str(a.id)}')
+            ge.add(node)
+            node = g.node(contador + 1, contador + 3, f'{str(a.signo)}')
+            ge.add(node)
+            contador += 3
+        elif isinstance(a, For):
+            node = g.node(padre, contador + 1, 'FOR')
+            ge.add(node)
+            node = g.node(contador + 1, contador + 2, f'for')
+            ge.add(node)
+            node = g.node(contador + 1, contador + 3, f'DECLARACION')
+            ge.add(node)
+            auxPadre = contador+1
+            contador += 3
+            drawInstruccionesInternas([a.declaration], ge, contador)
+            node = g.node(auxPadre, contador +1, f'CONDICION')
+            ge.add(node)
+            auxPadre = contador + 1
+            contador += 1
+            drawExpresiones(a.condition, ge, contador)
+            node = g.node(auxPadre, contador + 1, f'INCREMENTO_DECREMENTO')
+            ge.add(node)
+            auxPadre = contador + 1
+            contador += 1
+            drawInstruccionesInternas([a.increDecre], ge, contador)
+            #instrucciones internas
+        elif isinstance(a, While_):
+            While__(a, tsLocal)
+        elif isinstance(a, DoWhile_):
+            DoW(a, tsLocal)
+        elif isinstance(a, Switch_):
+            Switch(a, tsLocal)
+        elif isinstance(a, CallFunction):
+            CallF(a, tsLocal)
+        
         i += 1
 
 def drawExpresiones(instruction, ge, padre):
@@ -1194,7 +1293,7 @@ def drawExpresiones(instruction, ge, padre):
         except:
             pass
     elif isinstance(instruction, LogicAndRelational):
-        val1 = drawValueExpression(instruction.op2)
+        val1 = drawValueExpression(instruction.op1)
         val2 = drawValueExpression(instruction.op2)
         try:
             if instruction.operator == LogicsRelational.MAYORQUE: 
@@ -1292,8 +1391,8 @@ def drawExpresiones(instruction, ge, padre):
             pass
     elif isinstance(instruction, Not):
         try:
-            num1 = drawValueExpression(instruction.op2)
-            node = g.node(padre, contador+1, str(val1))
+            num1 = drawValueExpression(instruction.expression)
+            node = g.node(padre, contador+1, str(num1))
             ge.add(node)
             contador +=1
             node = g.node(padre, contador+1, '!')
@@ -1306,14 +1405,14 @@ def drawExpresiones(instruction, ge, padre):
             node = g.node(padre, contador+1, 'abs')
             ge.add(node)
             contador +=1
-            node = g.node(padre, contador+1, str(drawValueExpression(instruction.op2)))
+            node = g.node(padre, contador+1, str(drawValueExpression(instruction.expression)))
             ge.add(node)
             contador +=1
         except:
             pass
     elif isinstance(instruction, NegativeNumber):
         try:
-            num1 = drawValueExpression(instruction.op2)
+            num1 = drawValueExpression(instruction.expression)
             node = g.node(padre, contador+1, '-')
             ge.add(node)
             contador +=1
@@ -1454,7 +1553,6 @@ def drawExpresiones(instruction, ge, padre):
 
 def drawValueExpression(instruction):
     if isinstance(instruction, BinaryExpression):
-        
         global la, co
         num1 = valueExpression(instruction.op1, ts,textEdit)
         num2 = valueExpression(instruction.op2, ts,textEdit)
@@ -1673,8 +1771,4 @@ def drawValueExpression(instruction):
             se = seOb(f'Error Referencia: variable {instruction.expression.id} no existe.', instruction.line, instruction.column)
             semanticErrorList.append(se)
             return '#'
-
-
-
-
 
