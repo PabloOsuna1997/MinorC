@@ -77,11 +77,18 @@ int actReferencia (int a ){
 }
 
 
+
 int main(){
-    int ref = 5;   
+
+    int c = 9, ref = 5; 
+    int b = &c,a,f,d,e,f;
+    c = 20;
+    printf("b: %d \n", b);  
     actReferencia(&ref);
     printf("si funca paso por referencia %d \n", ref);
 }
+
+t0 0
 
 
 

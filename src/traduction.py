@@ -90,7 +90,7 @@ def process(instructions,ts):
     #except:
         #pass
 
-def getFunctions(b, ts):            #seteo los parametros dentro de la funcion y capturo sus instrucciones
+def getFunctions(b, ts):    #POSEE INSTRUCCIONES INTERNAS ACTUALIZAR CON TODAS           #seteo los parametros dentro de la funcion y capturo sus instrucciones
     global augusTxt, contadorParams, contadorT
     tsLocal = {}
     tsLocal.clear()
@@ -168,7 +168,7 @@ def getFunctions(b, ts):            #seteo los parametros dentro de la funcion y
         contadorParams = 0  #reestablezco el valor de los parametros
     arrayTables.pop()
 
-def FunctionDeclaration_(b, ts):    #ts siempre sera la tabla de simbolos del padre
+def FunctionDeclaration_(b, ts): #POSEE INSTRUCCIONES INTERNAS ACTUALIZAR CON TODAS    #ts siempre sera la tabla de simbolos del padre
     global augusTxt, contadorParams, contadorT
     tsLocal = {}
     tsLocal.clear()
@@ -370,7 +370,7 @@ def For_(b, ts):
     contadorEtiquetasAux = contadorEtiquetas
     arrayTables.pop()
 
-def processInstructions(b, tsLocal):
+def processInstructions(b, tsLocal):    #POSEE INSTRUCCIONES INTERNAS ACTUALIZAR CON TODAS 
     global augusTxt
     i = 0
     while i < len(b):
@@ -670,12 +670,20 @@ def Declaration_(b, ts):
                 increDecreAsignation(i.val, ts, f'$t{str(contadorT)}', i.id)
                 contadorT += 1
             else:
-                res = valueExpression(i.val, ts)
-                augusTxt += '$t'+ str(contadorT)
-                augusTxt += ' = ' + str(res) + ' ;\n'
-                arrayTables.pop()
-                ts.setdefault(i.id, f'$t{str(contadorT)}')
-                arrayTables.append(ts)
+                if isinstance(i.val, ReferenceBit):
+                    res = valueExpression(i.val, ts)
+                    augusTxt += '$t'+ str(contadorT)
+                    augusTxt += f' = &{str(res)};\n'
+                    arrayTables.pop()
+                    ts.setdefault(i.id, f'$t{str(contadorT)}')
+                    arrayTables.append(ts)
+                else:
+                    res = valueExpression(i.val, ts)
+                    augusTxt += '$t' + str(contadorT)
+                    augusTxt += f' = {str(res)};\n'
+                    arrayTables.pop()
+                    ts.setdefault(i.id, f'$t{str(contadorT)}')
+                    arrayTables.append(ts)
                 contadorT += 1
         elif isinstance(i, IdentifierArray):
             augusTxt += '$t' + str(contadorT)
@@ -933,10 +941,10 @@ def valueExpression(instruction, ts):
         return f'$t{str(contadorT-1)}'
     elif isinstance(instruction, ReferenceBit):
         num1 = valueExpression(instruction.expression, ts)
-        augusTxt += '$t'+ str(contadorT)
-        augusTxt += f' = &{str(num1)};\n'
-        contadorT += 1
-        return f'$t{str(contadorT-2)}'
+        #augusTxt += '$t'+ str(contadorT)
+        #augusTxt += f' = &{str(num1)};\n'
+        #contadorT += 1
+        return f'{str(num1)}'
     elif instruction == '#': return 0   #ssirve para las declaraciones globales que no son inicializadas
     elif isinstance(instruction, InitializationArray):
         print("recorrer la inicializacion")
