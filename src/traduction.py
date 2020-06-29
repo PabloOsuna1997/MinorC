@@ -15,7 +15,7 @@ import time
 tsFunciones = {}
 augusTxt = 'main: \n'
 augusTxtAuxVar = ''
-augusTxtAuxJUMPS  = 'manejador:\n'
+augusTxtAuxJUMPS  = '\n'
 augusTxtCalls = ''      #texto auxiliar para las llamadas
 contadorT = 0
 semanticErrorList = []
@@ -30,7 +30,7 @@ contadorCalls = 0       #para nombrar etiquetas de salto
 contadorParams = 0      #variables $a0
 
 def execute(input, textEdit):
-    global tableGlobal, contadorParams, contadorT, contadorEtiquetas, contadorEtiquetasAux, contadorCalls, tsFunciones
+    global tableGlobal, contadorParams, contadorT, contadorEtiquetas, contadorEtiquetasAux, contadorCalls, tsFunciones, augusTxtAuxJUMPS
     tableGlobal.clear()
     tsFunciones = {}
     tsFunciones = fTS.functionsTable()
@@ -40,13 +40,18 @@ def execute(input, textEdit):
     contadorEtiquetasAux = 0
     contadorCalls = 0
     arrayTables.append(tableGlobal)
+
+    augusTxtAuxJUMPS = ''
+    augusTxtAuxJUMPS += 'manejador:\n'
+    augusTxtAuxJUMPS += '$s5 = $s0[$ra];\n'
+    augusTxtAuxJUMPS += '$ra = $ra - 1;\n'
     process(input, tableGlobal)
     print(f"tsGlobal: {str(tableGlobal)}")
     return augusTxt
 
 def process(instructions,ts):
     #try:
-        global augusTxt, augusTxtCalls, augusTxtAuxVar, contadorParams
+        global augusTxt, augusTxtCalls, augusTxtAuxVar, contadorParams, augusTxtAuxJUMPS
         #primera pasada capturando las funciones, metodos y variables globales
         contadorParams = 0
         i = 0
@@ -68,7 +73,9 @@ def process(instructions,ts):
             i += 1
 
         #capturo instrucciones del main  
-        augusTxt += '$ra = -1;  #inicializamos nuesto apuntador de saltos\n'
+        augusTxt += '$ra = -1;  #apuntador de pila de llamadas\n'
+        augusTxt += '$s0 = array(); #pila de llamadas\n'
+        #en mi etiqueta manejoador siempre restara tope de pila
         i = 0
         while i < len(instructions):
             #isinstance verificar tipos
@@ -236,17 +243,18 @@ def CallF(b, ts):                   #consulto los parametros de cada funcion y l
                 i += 1
 
         #creo las instrucciones de la funcion
-        augusTxt += f'$ra = {str(contadorCalls)};\n'
+        augusTxt += f'$ra = $ra + 1;\n'
+        augusTxt += f'$s0[$ra] = {contadorCalls};\n'
         augusTxt += f'goto {str(b.id)};\n'        #etiqueta al metodo para ejecutar ej: goto suma;
         #declaro una etiqueta para que el metodo regrese
         augusTxt += f'regreso{str(contadorCalls)}:\n'           #lacaionamos el ra con la etiqueta de regreso
-        if contadorCalls > 0:
-            augusTxt += f'$ra = $ra + {str(contadorCalls)};\n'
-        else:
-            augusTxt += f'$ra = $ra + {str(contadorCalls+1)};\n'
+        #if contadorCalls > 0:
+            #augusTxt += f'$ra = $ra + {str(contadorCalls)};\n'
+        #else:
+            #augusTxt += f'$ra = $ra + {str(contadorCalls+1)};\n'
 
         #agregamos a nuestro manejador de saltos
-        augusTxtAuxJUMPS += f'if ( $ra == {str(contadorCalls)}) goto regreso{str(contadorCalls)};\n'
+        augusTxtAuxJUMPS += f'if ( $s5 == {str(contadorCalls)}) goto regreso{str(contadorCalls)};\n'
         contadorCalls += 1
     except:
         print("Error Semantico: No existe el metodo indicado.")
