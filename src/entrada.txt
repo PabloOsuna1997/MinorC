@@ -65,27 +65,22 @@ int factorial(int n) {
 
 
 
-#############################################   suma recursivaa ######################################
+#############################################   referencia recursivaa ######################################
 int global = 10;
 
-int suma(int a, int b){
-    printf("la suma es %d \n", a+b);
-
-    if (a == 6){    
-        printf("SIMMM es 6 \n");
-        suma(a+1,b); 
-    }else if(a == 7){    
-        printf("fin recursividad \n"); 
+int actReferencia (int a ){
+    if (a == 10){    
+        printf("actualizando referencia a 10. \n");
     } else{       
-        printf("es 5 \n");        
-        suma(a+1,b);
+        actReferencia(a+1);
     }
 }
-int main(){
-    int a = 10, b = 20;    
-    suma(5,3); 
 
-   printf("si funca");
+
+int main(){
+    int ref = 5;   
+    actReferencia(&ref);
+    printf("si funca paso por referencia %d \n", ref);
 }
 
 

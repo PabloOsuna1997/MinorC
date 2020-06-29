@@ -215,31 +215,37 @@ def FunctionDeclaration_(b, ts):    #ts siempre sera la tabla de simbolos del pa
 
 def CallF(b, ts):                   #consulto los parametros de cada funcion y los asigno
     global augusTxtCalls, contadorCalls, augusTxt, contadorParams, arrayTables, augusTxtAuxJUMPS
-    if len(b.params) != 0:  #parametros del metodo a llamar
-        #debemos crear las variable $an correspondientes
-        #mando a traer sus parametros a mi tabla de simbolos 
-        parametros = tsFunciones.get(b.id).parametros
-        i = 0
-        while i < len(b.params): 
-            a = b.params[i]
-            res = valueExpression(a, ts)
-            augusTxt += f'{parametros[i][0]}'
-            augusTxt += ' = ' + str(res) + ' ;\n'
-            i += 1
+    try:
+        if len(b.params) != 0:  #parametros del metodo a llamar
+            #debemos crear las variable $an correspondientes
+            #mando a traer sus parametros a mi tabla de simbolos
+            parametros = tsFunciones.get(b.id).parametros
+            i = 0
+            while i < len(b.params):
+                a = b.params[i]
+                res = valueExpression(a, ts)
+                augusTxt += f'{parametros[i][0]}'
+                augusTxt += ' = ' + str(res) + ' ;\n'
+                # paso por referencia
+                if isinstance(a, ReferenceBit):
+                    augusTxt += f'{str(res)} = &{str(parametros[i][0])};\n'
+                i += 1
 
-    #creo las instrucciones de la funcion
-    augusTxt += f'$ra = {str(contadorCalls)};\n'
-    augusTxt += f'goto {str(b.id)};\n'        #etiqueta al metodo para ejecutar ej: goto suma;
-    #declaro una etiqueta para que el metodo regrese
-    augusTxt += f'regreso{str(contadorCalls)}:\n'           #lacaionamos el ra con la etiqueta de regreso
-    if contadorCalls > 0:
-        augusTxt += f'$ra = $ra + {str(contadorCalls)};\n'
-    else:
-        augusTxt += f'$ra = $ra + {str(contadorCalls+1)};\n'
+        #creo las instrucciones de la funcion
+        augusTxt += f'$ra = {str(contadorCalls)};\n'
+        augusTxt += f'goto {str(b.id)};\n'        #etiqueta al metodo para ejecutar ej: goto suma;
+        #declaro una etiqueta para que el metodo regrese
+        augusTxt += f'regreso{str(contadorCalls)}:\n'           #lacaionamos el ra con la etiqueta de regreso
+        if contadorCalls > 0:
+            augusTxt += f'$ra = $ra + {str(contadorCalls)};\n'
+        else:
+            augusTxt += f'$ra = $ra + {str(contadorCalls+1)};\n'
 
-    #agregamos a nuestro manejador de saltos
-    augusTxtAuxJUMPS += f'if ( $ra == {str(contadorCalls)}) goto regreso{str(contadorCalls)};\n'
-    contadorCalls += 1
+        #agregamos a nuestro manejador de saltos
+        augusTxtAuxJUMPS += f'if ( $ra == {str(contadorCalls)}) goto regreso{str(contadorCalls)};\n'
+        contadorCalls += 1
+    except:
+        print("Error Semantico: No existe el metodo indicado.")
 
 def Switch(b, ts):
     global contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux, caseAnt
@@ -930,7 +936,7 @@ def valueExpression(instruction, ts):
         augusTxt += '$t'+ str(contadorT)
         augusTxt += f' = &{str(num1)};\n'
         contadorT += 1
-        return f'$t{str(contadorT-1)}'
+        return f'$t{str(contadorT-2)}'
     elif instruction == '#': return 0   #ssirve para las declaraciones globales que no son inicializadas
     elif isinstance(instruction, InitializationArray):
         print("recorrer la inicializacion")
