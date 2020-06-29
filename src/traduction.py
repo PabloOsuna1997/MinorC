@@ -439,7 +439,7 @@ def PrintF(b, ts):
         i = 0
         contadorValor = 1
         while i < len(cadena):
-            if cadena[i] == '%d' or cadena[i] == '%s' or cadena[i] == '%f' or cadena[i] == '%c':
+            if cadena[i] == '%d' or cadena[i] == '%s' or cadena[i] == '%f' or cadena[i] == '%c'  or cadena[i] == '%i'  :
                 cadena[i] = valueExpression(b.expressions[contadorValor], ts)
                 contadorValor += 1
             i += 1
@@ -1363,7 +1363,8 @@ def drawInstruccionesInternas(instrucciones, ge, padre):
             node = g.node(pa, contador + 1, ')')
             ge.add(node)
             contador += 1
-        
+        elif isinstance(a, AsignationArray):
+            print("graficando asignacion de arreglos");
         i += 1
 
 def drawExpresiones(instruction, ge, padre):
