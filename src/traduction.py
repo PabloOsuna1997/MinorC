@@ -885,8 +885,11 @@ def valueExpression(instruction, ts):
     elif isinstance(instruction, NegativeNumber):
         num1 = valueExpression(instruction.expression, ts)
         augusTxt += '$t'+ str(contadorT)
-        augusTxt += f' = {str(num1)} * -1 ;\n'
-        contadorT += 1
+        augusTxt += f' = -1 ;\n'
+        #contadorT += 1
+        augusTxt += '$t'+ str(contadorT+1)
+        augusTxt += f' = {str(num1)} * $t{str(contadorT)} ;\n'
+        contadorT += 2
         return f'$t{str(contadorT-1)}'
     elif isinstance(instruction, Identifier):
         #si no encuentra la variable en la ts actual, buscarla en las demas ts que estan en la pila
