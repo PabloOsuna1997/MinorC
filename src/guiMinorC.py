@@ -434,7 +434,7 @@ class Ui_Augus(object):
             print("closing file dialog.")
 
     def fn_repASTGeneral(self):
-        try:  
+        #try:  
             fgraph = open('../reports/astMinorC.dot','w+') #creamos el archivo
             fgraph.write("graph \"\" { node [shape=box];")
             fgraph.close()
@@ -454,11 +454,11 @@ class Ui_Augus(object):
             #ruta = ("../reports/ast.png")
             #im = Image.open(ruta)
             #im.show()
-        except:
-            self.msgBox = QtWidgets.QMessageBox()
-            self.msgBox.setText("Error al crear reporte.")
-            self.msgBox.setIcon(QtWidgets.QMessageBox.Critical)
-            self.msgBox.exec()
+        #except:
+            #self.msgBox = QtWidgets.QMessageBox()
+            #self.msgBox.setText("Error al crear reporte.")
+            #self.msgBox.setIcon(QtWidgets.QMessageBox.Critical)
+            #self.msgBox.exec()
 
     def fn_repAST(self):
         try:
