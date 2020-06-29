@@ -88,9 +88,14 @@ int main(){
     printf("si funca paso por referencia %d \n", ref);
 }
 
-t0 0
+###########################################ARREGLOS
+int arreglo[10] = { 658, 245, 654, 956, 5, 754, 100, 89, 98, 120};
 
+int main(){
+    int a = arreglo[5];
+    print("valor: %d \n", a)
 
+}
 
 ############################################## FIBONACCI SIN RETURN
 int actual;

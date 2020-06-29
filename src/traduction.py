@@ -669,6 +669,14 @@ def Declaration_(b, ts):
             elif isinstance(i.val, IncreDecre_Pre):
                 increDecreAsignation(i.val, ts, f'$t{str(contadorT)}', i.id)
                 contadorT += 1
+            elif isinstance(i.val, IdentifierArray):
+                res = valueExpression(i.val, ts)
+                augusTxt += '$t' + str(contadorT)
+                augusTxt += f' = {str(res)};\n'
+                arrayTables.pop()
+                ts.setdefault(i.id, f'$t{str(contadorT)}')
+                arrayTables.append(ts)
+                contadorT += 1
             else:
                 if isinstance(i.val, ReferenceBit):
                     res = valueExpression(i.val, ts)
@@ -898,11 +906,12 @@ def valueExpression(instruction, ts):
     elif instruction == 'array': return 'array'
     elif isinstance(instruction, IdentifierArray):
         #hacer un for para recorrer las expresiones -> entiendase los arreglos
-        print(f'{str(instruction.id)}')
-        augusTxt += '$t'+ str(contadorT)
-        augusTxt += f' = array();\n'
-        contadorT += 1
-        return f'$t{str(contadorT-1)}'
+        id = valueExpression(Identifier(instruction.id, 0, 0), ts)
+        aux = ''
+        aux += str(id)         #$t0
+        for i in instruction.expressions:
+            aux += f'[{str(valueExpression(i,ts))}]'
+        return aux
     elif isinstance(instruction, ReadConsole): print("scanf")
     elif isinstance(instruction, RelationalBit):
         num1 = valueExpression(instruction.op1, ts)

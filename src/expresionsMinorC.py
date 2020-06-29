@@ -40,6 +40,13 @@ class SingleDeclaration(DeclarationExp):
             self.column = column
 
 
+class Declaration_Array(DeclarationExp):
+    def __init__(self, id, expresion, line, column):
+            self.id = id
+            self.expresion = expresion            
+            self.line = line
+            self.column = column
+
 ########--------------- Numeric Section
 class NumericExpression:
     ''' this class represent an numeric expresion'''
