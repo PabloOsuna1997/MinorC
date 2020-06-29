@@ -159,6 +159,8 @@ def getFunctions(b, ts):    #POSEE INSTRUCCIONES INTERNAS ACTUALIZAR CON TODAS  
             Switch(a, tsLocal)
         elif isinstance(a, CallFunction):
             CallF(a, tsLocal)
+        elif isinstance(a, AsignationArray):
+            AsignationArray_(a, tsLocal)
         i += 1
 
     print(f"tsLocal funcion {b.id}: {str(tsLocal)}")
@@ -206,6 +208,8 @@ def FunctionDeclaration_(b, ts): #POSEE INSTRUCCIONES INTERNAS ACTUALIZAR CON TO
             Switch(a, tsLocal)
         elif isinstance(a, CallFunction):
             CallF(a, tsLocal)
+        elif isinstance(a, AsignationArray):
+            AsignationArray_(a, tsLocal)
         i += 1
 
     print(f"tsLocal funcion {b.id}: {str(tsLocal)}")
@@ -401,6 +405,8 @@ def processInstructions(b, tsLocal):    #POSEE INSTRUCCIONES INTERNAS ACTUALIZAR
             Switch(a, tsLocal)
         elif isinstance(a, CallFunction):
             CallF(a, tsLocal)
+        elif isinstance(a, AsignationArray):
+            AsignationArray_(a, tsLocal)
         i += 1
 
 def increDecre(b, ts, type_):
@@ -564,6 +570,22 @@ def If_(b, tsPadre):
         contadorEtiquetas += 1
         contadorEtiquetasAux = contadorEtiquetas
         arrayTables.pop()
+
+def AsignationArray_(b, ts):
+    global contadorT, augusTxt
+    print("asignacion de valor a array")
+    id = valueExpression(Identifier(b.id, 0, 0), ts)
+    #contateno los corchetes
+    aux = ''
+    aux += id
+    for i in b.corchetes:
+        aux += f'[{str(valueExpression(i,ts))}]'
+    aux += f' = {str(valueExpression(b.expresion, ts))};\n'
+    augusTxt += aux
+    arrayTables.pop()
+    ts.setdefault(b.id, f'{str(id)}')
+    arrayTables.append(ts)
+    contadorT += 1
 
 def Asignation_(b, ts):
     try:

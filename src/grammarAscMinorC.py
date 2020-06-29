@@ -649,7 +649,13 @@ def p_asignaciones(t):
                         | ID LISTA_PUNTOS OP_ASIGNACION EXPRESION PUNTOCOMA'''
 
     global grammarList
-    if len(t) == 5:  #ID OP_ASIGNACION EXPRESION PUNTOCOMA
+    if len(t) == 6:
+        #asignacion de valor a arreglo;
+        a = 3
+        t[0] = AsignationArray(t[1], t[2], t[4], t.lineno(1), t.lexpos(1))
+        grammarList.append(g.nodeGramatical('ASIGNACIONES  -> ID CORCHETES OP_ASIGNACION EXPRESION PUNTOCOMA', f'ASIGNACIONES.val= AsignationArray(t[1], t[2], t[4], t.lineno(1), t.lexpos(1))'))
+
+    elif len(t) == 5:  #ID OP_ASIGNACION EXPRESION PUNTOCOMA
         t[0] = Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))
         grammarList.append(g.nodeGramatical('ASIGNACIONES  -> ID OP_ASIGNACION EXPRESION PUNTOCOMA  ', f'ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))'))
     elif len(t) == 3: #incremento o decremento

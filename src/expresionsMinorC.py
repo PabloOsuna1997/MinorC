@@ -102,6 +102,13 @@ class Parentesis(NumericExpression):
         self.line = line
         self.column = column
 
+class AsignationArray(Expretion):
+    def __init__(self, id, corchetes, expresion, line, column):
+        self.expresion = expresion
+        self.id = id
+        self.corchetes = corchetes
+        self.line = line
+        self.column = column
 
 ######----------------Strings section
 class StringExpression:

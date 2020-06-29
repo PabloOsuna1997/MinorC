@@ -91,11 +91,45 @@ int main(){
 ###########################################ARREGLOS
 int arreglo[10] = { 658, 245, 654, 956, 5, 754, 100, 89, 98, 120};
 
-int main(){
-    int a = arreglo[5];
-    print("valor: %d \n", a)
+int arregloLength = 10;
 
+void burbuja10()
+{
+    int aux;
+    for( int i = 0; i < arregloLength - 1; i++ )
+    {
+        for( int j = 0; j < arregloLength - i - 1; j++ )
+        {
+            if(arreglo[ j + 1 ] < arreglo[ j ] )
+            {
+                aux = arreglo[ j + 1 ];
+                arreglo[ j + 1 ] = arreglo[ j ];
+                                    arreglo[ j ] = aux;
+            }
+        }
+    }
 }
+
+void imprimirBurbuja10()
+{
+    for( int i  = 0; i < arregloLength; i++)
+    {
+        printf("posicion %d : %d \n", i, arreglo[i]);
+    }
+}
+
+int main()
+{
+    printf("Arreglo Desordenado \n");
+    imprimirBurbuja10();
+    printf("---------------------------\n");
+    burbuja10();
+    printf("Arreglo Desordenado \n");
+    imprimirBurbuja10();
+}
+
+
+
 
 ############################################## FIBONACCI SIN RETURN
 int actual;
