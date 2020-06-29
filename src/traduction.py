@@ -435,6 +435,13 @@ def PrintF(b, ts):
     #en la pos [0] siempre vendra la cadena "hola %d" etc..
     try:
         cadena = b.expressions[0].string
+        cadena = cadena.replace('%d', '%d ')
+        cadena = cadena.replace('%c', '%c ')
+        cadena = cadena.replace('%f', '%f ')
+        cadena = cadena.replace('%s', '%s ')
+        cadena = cadena.replace('%i', '%i ')
+        cadena = cadena.replace('\n', ' \n ')
+
         cadena = cadena.split(' ')
         i = 0
         contadorValor = 1
