@@ -1364,7 +1364,33 @@ def drawInstruccionesInternas(instrucciones, ge, padre):
             ge.add(node)
             contador += 1
         elif isinstance(a, AsignationArray):
-            print("graficando asignacion de arreglos");
+            node = g.node(padre, contador + 1, 'ASIGNATION_ARRAY')
+            ge.add(node)
+            padreAux = contador+1
+            contador += 1
+            node = g.node(padreAux, contador + 1, f'{a.id}')
+            ge.add(node)
+            contador += 1
+            #recorrer los corchetes
+            for z in a.corchetes:
+                node = g.node(padreAux, contador + 1, f'[  EXPRESION  ]')
+                ge.add(node)
+                contador += 1
+                node = g.node(contador, contador + 1, f'EXPRESION')
+                ge.add(node)
+                contador += 1
+                drawExpresiones(z, ge, contador)
+                contador += 1
+            node = g.node(padreAux, contador + 1, f'=')
+            ge.add(node)
+            contador += 1
+            node = g.node(contador, contador + 1, f'EXPRESION')
+            ge.add(node)
+            contador += 1
+            drawExpresiones(z, ge, contador)
+            contador += 1
+
+
         i += 1
 
 def drawExpresiones(instruction, ge, padre):
