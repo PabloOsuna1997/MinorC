@@ -448,7 +448,7 @@ def PrintF(b, ts):
         cadena = cadena.replace('%f', '%f ')
         cadena = cadena.replace('%s', '%s ')
         cadena = cadena.replace('%i', '%i ')
-        cadena = cadena.replace('\n', ' \n ')
+        cadena = cadena.replace('\\n', ' \\n ')
 
         cadena = cadena.split(' ')
         i = 0
