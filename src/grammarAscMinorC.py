@@ -668,6 +668,8 @@ def p_listaPuntos(t):
                         | PUNTO ID
                         | PUNTO ID CORCHETES'''
 
+def p_if_error1(t):
+    '''IF_ :  IF PARIZQ EXPRESION PARDER LLAVEIZQ error LLAVEDER ELSE_IF_'''
 def p_if_error(t):
     '''IF_ :  IF error LLAVEDER ELSE_IF_'''
 def p_if(t):
@@ -891,10 +893,22 @@ def p_atr(t):
 
 
 def p_error(t):
-    print("Error sintactico en '%s'" % t.value + "line: "+ str(t.lineno))
     global sintacticErroList
-    so = sinOb(t.value, t.lineno, find_column(input_, t))
-    sintacticErroList.append(so)
+    try:
+        print("Error sintactico en '%s'" % t.value + "line: "+ str(t.lineno))
+        so = sinOb(t.value, t.lineno, find_column(input_, t))
+        sintacticErroList.append(so)
+    except:
+        if p:
+          print("Syntax error at token", p.type)
+          # Just discard the token and tell the parser it's okay.
+          parser.errok()
+        else:
+            print("Syntax error at EOF")
+            print("Error sintactico Irrecuperable")
+        
+        so = sinOb('Error sintactico: Irrecuperable', 0, 0)
+        sintacticErroList.append(so)
 
 def parse(input):
     global input_, sintacticErroList, LexicalErrosList

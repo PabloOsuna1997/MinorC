@@ -1,6 +1,7 @@
 import grammar as g
 import SymbolTable as TS
 import functionTable as fTS
+import structTable as sTS
 from semanticObject import *
 from expresionsMinorC import *
 from instructionsMinorC import *
@@ -13,6 +14,7 @@ from PyQt5.QtWidgets import *
 import time
 
 tsFunciones = {}
+tsStruct = {}
 augusTxt = 'main: \n'
 augusTxtAuxVar = ''
 augusTxtAuxJUMPS  = '\n'
@@ -30,10 +32,12 @@ contadorCalls = 0       #para nombrar etiquetas de salto
 contadorParams = 0      #variables $a0
 
 def execute(input, textEdit):
-    global tableGlobal, contadorParams, contadorT, contadorEtiquetas, contadorEtiquetasAux, contadorCalls, tsFunciones, augusTxtAuxJUMPS
+    global tableGlobal, contadorParams, contadorT, contadorEtiquetas, contadorEtiquetasAux, contadorCalls, tsFunciones, augusTxtAuxJUMPS, tsStruct
     tableGlobal.clear()
     tsFunciones = {}
-    tsFunciones = fTS.functionsTable()
+    tsStruct = {}
+    tsFunciones = fTS.functionsTable()      #tabla de funciones
+    tsStruct = sTS.structTable()            #tabla de struct
     contadorParams = 0
     contadorT = 0
     contadorEtiquetas = 0
@@ -52,7 +56,8 @@ def execute(input, textEdit):
 def process(instructions,ts):
     #try:
         global augusTxt, augusTxtCalls, augusTxtAuxVar, contadorParams, augusTxtAuxJUMPS
-        #primera pasada capturando las funciones, metodos y variables globales
+        #PRIMERA PASADA
+        #capturando las funciones, metodos y variables globales y struct
         contadorParams = 0
         i = 0
         while i < len(instructions):
@@ -99,8 +104,15 @@ def process(instructions,ts):
         #pass
 
 def DeclarationStruct_(b, ts):
-    id = valueExpression(Identifier(b.id, 0, 0), ts)
-    print("declaracion de structs")
+    global contadorT, augusTxt
+    #agregamos a la tabla global
+    augusTxt += f'$t{str(contador)} = array(); \n   #declaracion de struct {b.id}'
+    arrayTables.pop()
+    ts.setdefault(b.id, f'$t{str(contadorT)}')
+    arrayTables.append(ts)
+    #guardamos el struct para futuras validaciones
+    struct_ = fTS.Symbol(b.id, 'struct', b.atributos)
+    tsFunciones.add(struct_)
 
 def getFunctions(b, ts):    #POSEE INSTRUCCIONES INTERNAS ACTUALIZAR CON TODAS           #seteo los parametros dentro de la funcion y capturo sus instrucciones
     global augusTxt, contadorParams, contadorT
