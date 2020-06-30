@@ -131,18 +131,27 @@ def AsignationStruct__(b, ts):          #delcaracion de un struct localmente
         AUX = ''
         if isinstance(b.expresionIzq, IdentifierArray):
             #node[0]
-            print("node[0]")
             id = valueExpression(Identifier(b.expresionIzq.id, 0, 0), ts) #capturo el id de mi objeto
             AUX += f'{id}'
             for i in b.expresionIzq.expressions:
                 AUX += f'[{valueExpression(i, ts)}]'
             if isinstance(b.punto, puntoSimple):
                 AUX += f'[\'{b.punto.id}\']'
+            else:
+                AUX += f'[\'{b.punto.id}\'][{valueExpression(b.punto.expresion, ts)}]'
             AUX += f'= {valueExpression(b.expresion, ts)};\n'
             augusTxt += AUX
-        else:
+        else:   #tipo Identifier
             #node.
-            print("node.")
+            #node[0]
+            id = valueExpression(b.expresionIzq, ts) #capturo el id de mi objeto
+            AUX += f'{id}'
+            if isinstance(b.punto, puntoSimple):
+                AUX += f'[\'{b.punto.id}\']'
+            else:
+                AUX += f'[\'{b.punto.id}\'][{valueExpression(b.punto.expresion, ts)}]'
+            AUX += f'= {valueExpression(b.expresion, ts)};\n'
+            augusTxt += AUX
 
 def getFunctions(b, ts):    #PARA PRIMERA PASADA POSEE INSTRUCCIONES INTERNAS ACTUALIZAR CON TODAS           #seteo los parametros dentro de la funcion y capturo sus instrucciones
     global augusTxt, contadorParams, contadorT
