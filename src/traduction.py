@@ -509,6 +509,7 @@ def PrintF(b, ts):
         cadena = cadena.replace('%s', '%s ')
         cadena = cadena.replace('%i', '%i ')
         cadena = cadena.replace('\\n', ' \\n ')
+        cadena = cadena.replace('\\t', ' \\t ')
 
         cadena = cadena.split(' ')
         i = 0
@@ -1067,6 +1068,23 @@ def valueExpression(instruction, ts):
         augusTxt += f'$t{str(contadorT)} = read();\n'
         contadorT += 1
         return f'$t{str(contadorT-1)}'
+    elif isinstance(instruction, AccesStruct):
+        print("acceso a un struct")
+        if isinstance(instruction.id, IdentifierArray):
+            #acceso de arreglo
+            aux = ''
+            id = valueExpression(Identifier(instruction.id.id, 0, 0), ts)
+            aux += f'$t{str(contadorT)} = {id}'
+            for x in instruction.id.expressions:
+                aux += f'[{valueExpression(x, ts)}]'
+            #punto
+            if isinstance(instruction.punto, puntoSimple):
+                aux += f'[\'{instruction.punto.id}\'];\n'
+            else:
+                aux += f'[\'{instruction.punto.id}\'][{valueExpression(instruction.punto.expresion, ts)}];\n'
+            augusTxt += aux
+            contadorT += 1
+            return f'$t{str(contadorT-1)}'
 
 def increDecreAsignation(instruction, ts, idPadre, VariableAlto):
     global augusTxt,arrayTables,contadorT

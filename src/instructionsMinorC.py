@@ -189,5 +189,8 @@ class AsignationStructExpre(Instruction):
         self.line = line
         self.column = column
 
-
+class AccesStruct(Instruction):
+    def __init__(self, id, punto):
+        self.id = id
+        self.punto = punto
 

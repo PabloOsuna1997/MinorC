@@ -432,6 +432,7 @@ def p_expresion(t):
         elif t[1] == '(int)': t[0] = Cast_(t[2], 'int', t.lineno(1), t.lexpos(1))
         elif t[1] == '(float)': t[0] = Cast_(t[2], 'float', t.lineno(1), t.lexpos(1))
         elif t[1] == '(char)': t[0] = Cast_(t[2], 'char', t.lineno(1), t.lexpos(1))
+        #print("aqui estoy");
 
 def p_expresiones_numero(t):
     '''EXPRESION :    NUMERO'''
@@ -455,7 +456,6 @@ def p_expresiones_id_error(t):
     'EXPRESION :    error CORCHETES'
 def p_expresiones_id(t):
     '''EXPRESION :    ID CORCHETES
-                        | ID CORCHETES LISTA_PUNTOS
                         | ID 
         '''
         
@@ -466,14 +466,15 @@ def p_expresiones_id(t):
     elif len(t) == 2: 
         t[0] =  Identifier(t[1], t.lineno(1), t.lexpos(1))
         grammarList.append(g.nodeGramatical('EXPRESION  ->  ID ', f' EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))'))
-    else: 
-        print("lista id-> corchetes-> listaPuntos")
-        grammarList.append(g.nodeGramatical('EXPRESION  ->  ID CORCHETES LISTA_PUNTOS ', f' EXPRESION.val= Accesos(t[1],t[3])'))
 
-def p_expresiones_id_listapuntos(t):
-    '''EXPRESION :     ID LISTA_PUNTOS '''
+def p_expresiones_id_listapuntos(t):    #EXPRESION GET STRUCT
+    '''EXPRESION :     ASISTRCUT LISTA_PUNTOS '''
+    #ASISTRCUT me devuelve identiArray o identiofy
+    #puntos me devuelve simple o compuesto
+    print("aquiiiiiiiiii")
+    t[0] = AccesStruct(t[1], t[2])
     global grammarList
-    grammarList.append(g.nodeGramatical('EXPRESION  ->  ID LISTA_PUNTOS ', f' EXPRESION.val= Accesos(t[1],t[2])'))
+    grammarList.append(g.nodeGramatical('EXPRESION  ->  ASISTRCUT LISTA_PUNTOS ', f' EXPRESION.val= Accesos(t[1],t[2])'))
    
 def p_expresiones_listaCorchetesInit(t):
     '''EXPRESION :   LISTA_INIT_CORCHETE'''
@@ -641,7 +642,6 @@ def p_declaracionStructInterna(t):
         t[0] = AsignationStructExpre(t[1], t[2], t[4], t.lineno(5), t.lexpos(5))
         grammarList.append(g.nodeGramatical('DECLARACION_STRUCT_INTERNA  -> ASISTRCUT LISTA_PUNTOS OP_ASIGNACION EXPRESION PUNTOCOMA ', f'DECLARACION_STRUCT_INTERNA.val= AsignationStructExpre(t[1], t[2], t[4], t.lineno(6), t.lexpos(6))'))
 
-
 def p_asignaStructInterna(t):
     '''ASISTRCUT :  ID CORCHETES
                     | ID
@@ -682,7 +682,6 @@ def p_listaPuntos(t):
     else:
         t[0] = puntoArreglo(t[2], t[3], t.lineno(1), t.lexpos(1))
         grammarList.append(g.nodeGramatical('LISTA_PUNTOS  -> PUNTO ID  ', f'LISTA_PUNTOS.val = puntoArreglo(t[2], t[3], t.lineno(1), t.lexpos(1))'))
-
 
 def p_if_error1(t):
     '''IF_ :  IF PARIZQ EXPRESION PARDER LLAVEIZQ error LLAVEDER ELSE_IF_'''
