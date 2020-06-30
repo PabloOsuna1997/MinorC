@@ -69,7 +69,8 @@ def process(instructions,ts):
                     augusTxt += 'goto manejador;\n'
                     augusTxtCalls += augusTxt
                     augusTxt = augusTxtAuxVar
-
+            elif isinstance(b, DeclarationStruct):
+                DeclarationStruct_(b, ts)
             i += 1
 
         #capturo instrucciones del main  
@@ -96,6 +97,10 @@ def process(instructions,ts):
             
     #except:
         #pass
+
+def DeclarationStruct_(b, ts):
+    id = valueExpression(Identifier(b.id, 0, 0), ts)
+    print("declaracion de structs")
 
 def getFunctions(b, ts):    #POSEE INSTRUCCIONES INTERNAS ACTUALIZAR CON TODAS           #seteo los parametros dentro de la funcion y capturo sus instrucciones
     global augusTxt, contadorParams, contadorT

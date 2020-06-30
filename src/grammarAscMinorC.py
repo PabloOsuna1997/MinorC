@@ -858,6 +858,8 @@ def p_opAsignacion(t):
                         | XORIGUAL
                         | ORIGUAL'''
     t[0] = t[1]
+    global grammarList
+    grammarList.append(g.nodeGramatical('OP_ASIGNACION -> ', f'OP_ASIGNACION.val = t[1]'))
    
 ##---------------------------DECLARACION DE STRUCTS------------------------
 def p_declaStructs_error(t):
@@ -865,18 +867,28 @@ def p_declaStructs_error(t):
 def p_declaStructs(t):
     'DECLA_STRUCTS :  STRUCT ID LLAVEIZQ ATRIBUTOS LLAVEDER PUNTOCOMA'
 
+    t[0] = DeclarationStruct(t[2], t[4], t.lineno(1), t.lexpos(1))
+    global grammarList
+    grammarList.append(g.nodeGramatical('DECLA_STRUCTS -> STRUCT ID LLAVEIZQ ATRIBUTOS LLAVEDER PUNTOCOMA', f'DECLA_STRUCTS.val = DeclarationStruct(t[2], t[4], t.lineno(1), t.lexpos(1))'))
+
 def p_atributos(t):
     '''ATRIBUTOS :  ATRIBUTOS ATR
                     | ATR'''
+    global grammarList
+    if len(t) == 3:
+        t[1].append(t[2])
+        t[0] = t[1]
+        grammarList.append(g.nodeGramatical('ATRIBUTOS -> ATRIBUTOS ATR', f' ATRIBUTOS_1.val.append(ATR); \n   ATRIBUTOS.val = ATRIBUTOS_1.val'))
+    else:
+        t[0] = [t[1]]
+        grammarList.append(g.nodeGramatical('ATRIBUTOS -> ATR', f' ATRIBUTOS_1.val = ATR.val'))
 
 def p_atr(t):
-    '''ATR :    DECLA_VARIABLES
-                | STRUCT ID ID ASIGNA_STRUCT PUNTOCOMA
-                | STRUCT ID ID CORCHETES ASIGNA_STRUCT PUNTOCOMA'''
+    '''ATR :    DECLA_VARIABLES'''
+    t[0] = t[1]
+    global grammarList
+    grammarList.append(g.nodeGramatical('ATR -> DECLA_VARIABLES', f'ATR.val = DECLA_VARIABLES.val'))
 
-def p_asignaStruct(t):
-    '''ASIGNA_STRUCT :    IGUAL EXPRESION
-                        | '''
 
 def p_error(t):
     print("Error sintactico en '%s'" % t.value + "line: "+ str(t.lineno))

@@ -233,3 +233,15 @@ class Param(Expretion):
         self.type_ = type_
         self.line = line
         self.column = column
+
+
+##----------------------------struct sections
+class Struct:
+    'this class represent an structs'
+
+class DeclarationStruct(Struct):
+    def __init__(self, id, atributos, line, column):
+        self.id = id
+        self.atributos = atributos
+        self.line = line
+        self.column = column
