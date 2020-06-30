@@ -151,7 +151,7 @@ def AsignationStruct__(b, ts):          #delcaracion de un struct localmente
         else:   #tipo Identifier
             #node.
             #node[0]
-            id = valueExpression(Identifier(b.expresionIzq.id, 0, 0), ts) #capturo el id de mi objeto
+            id = valueExpression(b.expresionIzq, ts) #capturo el id de mi objeto
             AUX += f'{id}'
             if isinstance(b.punto, puntoSimple):
                 AUX += f'[\'{b.punto.id}\']'
