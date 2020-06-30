@@ -245,3 +245,16 @@ class DeclarationStruct(Struct):
         self.atributos = atributos
         self.line = line
         self.column = column
+
+class puntoSimple():
+    def __init__(self, id, line, column):
+        self.id = id
+        self.line = line
+        self.column = column
+
+class puntoArreglo():
+    def __init__(self, id, expresion, line, column):
+        self.id = id
+        self.expresion = expresion
+        self.line = line
+        self.column = column

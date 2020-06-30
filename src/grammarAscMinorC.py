@@ -625,10 +625,22 @@ def p_declaracionStructInterna_error(t):
 def p_declaracionStructIntern2_error(t):
     'DECLARACION_STRUCT_INTERNA : STRUCT ID error PUNTOCOMA'
 def p_declaracionStructInterna(t):
-    '''DECLARACION_STRUCT_INTERNA : STRUCT ID ID IGUAL EXPRESION PUNTOCOMA
-                                    | STRUCT ID ASISTRCUT PUNTOCOMA
+    '''DECLARACION_STRUCT_INTERNA : STRUCT ID ASISTRCUT PUNTOCOMA
                                     | ID ASISTRCUT PUNTOCOMA
+                                    | ASISTRCUT IGUAL EXPRESION PUNTOCOMA                                                
+                                    | ASISTRCUT LISTA_PUNTOS OP_ASIGNACION EXPRESION PUNTOCOMA
     '''
+    global grammarList
+    if len(t) == 5 and t[1] == 'struct':
+        #STRUCT ID ASISTRCUT PUNTOCOMA
+        t[0] = DeclaStructIntr(t[2], t[3], t.lineno(1), t.lexpos(1))
+        grammarList.append(g.nodeGramatical('DECLARACION_STRUCT_INTERNA  -> STRUCT ID ASISTRCUT PUNTOCOMA ', f'DECLARACION_STRUCT_INTERNA.val= AsignationStruct(t[2], t[3], t.lineno(1), t.lexpos(1))'))
+    elif len(t) == 6:
+        #ASISTRCUT ID IGUAL EXPRESION PUNTOCOMA
+        a = 3
+        t[0] = AsignationStructExpre(t[1], t[2], t[4], t.lineno(5), t.lexpos(5))
+        grammarList.append(g.nodeGramatical('DECLARACION_STRUCT_INTERNA  -> ASISTRCUT LISTA_PUNTOS OP_ASIGNACION EXPRESION PUNTOCOMA ', f'DECLARACION_STRUCT_INTERNA.val= AsignationStructExpre(t[1], t[2], t[4], t.lineno(6), t.lexpos(6))'))
+
 
 def p_asignaStructInterna(t):
     '''ASISTRCUT :  ID CORCHETES
@@ -636,16 +648,16 @@ def p_asignaStructInterna(t):
     '''
     global grammarList
     if len(t) == 3:
+        t[0] = IdentifierArray(t[1], t[2], t.lineno(1), t.lexpos(1))
         grammarList.append(g.nodeGramatical('ASISTRCUT  -> ID CORCHETES  ', f'ASISTRCUT.val= IdentifyArray(t[1],t[2])'))
     else:
+        t[0] = Identifier(t[1], t.lineno(1), t.lexpos(1))
         grammarList.append(g.nodeGramatical('ASISTRCUT  -> ID  ', f'ASISTRCUT.val= ID.value)'))
 
 def p_asignaciones(t):
     '''ASIGNACIONES :   INCRE_DECRE PUNTOCOMA
                         | ID OP_ASIGNACION EXPRESION PUNTOCOMA
-                        | ID CORCHETES OP_ASIGNACION EXPRESION PUNTOCOMA
-                        | ID CORCHETES LISTA_PUNTOS OP_ASIGNACION EXPRESION PUNTOCOMA
-                        | ID LISTA_PUNTOS OP_ASIGNACION EXPRESION PUNTOCOMA'''
+                        | ID CORCHETES OP_ASIGNACION EXPRESION PUNTOCOMA'''
 
     global grammarList
     if len(t) == 6:
@@ -653,7 +665,6 @@ def p_asignaciones(t):
         a = 3
         t[0] = AsignationArray(t[1], t[2], t[4], t.lineno(1), t.lexpos(1))
         grammarList.append(g.nodeGramatical('ASIGNACIONES  -> ID CORCHETES OP_ASIGNACION EXPRESION PUNTOCOMA', f'ASIGNACIONES.val= AsignationArray(t[1], t[2], t[4], t.lineno(1), t.lexpos(1))'))
-
     elif len(t) == 5:  #ID OP_ASIGNACION EXPRESION PUNTOCOMA
         t[0] = Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))
         grammarList.append(g.nodeGramatical('ASIGNACIONES  -> ID OP_ASIGNACION EXPRESION PUNTOCOMA  ', f'ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))'))
@@ -662,10 +673,16 @@ def p_asignaciones(t):
         t[0] = Asignation(t[1].id, '=', t[1], t.lineno(2), t.lexpos(2))
 
 def p_listaPuntos(t):
-    '''LISTA_PUNTOS :   LISTA_PUNTOS PUNTO ID
-                        | LISTA_PUNTOS PUNTO ID CORCHETES
-                        | PUNTO ID
+    '''LISTA_PUNTOS :   PUNTO ID
                         | PUNTO ID CORCHETES'''
+    global grammarList
+    if len(t) == 3:
+        t[0] = puntoSimple(t[2], t.lineno(1), t.lexpos(1))
+        grammarList.append(g.nodeGramatical('LISTA_PUNTOS  -> PUNTO ID  ', f'LISTA_PUNTOS.val = puntoSimple(t[2], t.lineno(1), t.lexpos(1))'))
+    else:
+        t[0] = puntoArreglo(t[2], t[3], t.lineno(1), t.lexpos(1))
+        grammarList.append(g.nodeGramatical('LISTA_PUNTOS  -> PUNTO ID  ', f'LISTA_PUNTOS.val = puntoArreglo(t[2], t[3], t.lineno(1), t.lexpos(1))'))
+
 
 def p_if_error1(t):
     '''IF_ :  IF PARIZQ EXPRESION PARDER LLAVEIZQ error LLAVEDER ELSE_IF_'''

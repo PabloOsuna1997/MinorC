@@ -103,7 +103,7 @@ def process(instructions,ts):
     #except:
         #pass
 
-def DeclarationStruct_(b, ts):
+def DeclarationStruct_(b, ts):      #declaracion de struct global
     global contadorT, augusTxt
     #agregamos a la tabla global
     augusTxt += f'$t{str(contador)} = array();  #struct {b.id}\n'
@@ -113,8 +113,38 @@ def DeclarationStruct_(b, ts):
     #guardamos el struct para futuras validaciones
     struct_ = fTS.Symbol(b.id, 'struct', b.atributos)
     tsFunciones.add(struct_)
+    contadorT += 1
 
-def getFunctions(b, ts):    #POSEE INSTRUCCIONES INTERNAS ACTUALIZAR CON TODAS           #seteo los parametros dentro de la funcion y capturo sus instrucciones
+def AsignationStruct__(b, ts):          #delcaracion de un struct localmente
+    global contadorT, augusTxt
+    if isinstance(b, DeclaStructIntr):
+        tipo = b.type_
+        if isinstance(b.id, IdentifierArray):
+            #struct contacto directorio[5];   <- este caso
+            augusTxt += f'$t{str(contadorT)} = array(); #struct {tipo} {b.id.id}\n'
+            arrayTables.pop()   #agregamos el struct a la tabla de simbolos
+            ts.setdefault(b.id.id, f'$t{str(contadorT)}')
+            arrayTables.append(ts)
+            contadorT += 1
+    elif isinstance(b, AsignationStructExpre):
+        print("asignacioin de struct")
+        AUX = ''
+        if isinstance(b.expresionIzq, IdentifierArray):
+            #node[0]
+            print("node[0]")
+            id = valueExpression(Identifier(b.expresionIzq.id, 0, 0), ts) #capturo el id de mi objeto
+            AUX += f'{id}'
+            for i in b.expresionIzq.expressions:
+                AUX += f'[{valueExpression(i, ts)}]'
+            if isinstance(b.punto, puntoSimple):
+                AUX += f'[\'{b.punto.id}\']'
+            AUX += f'= {valueExpression(b.expresion, ts)};\n'
+            augusTxt += AUX
+        else:
+            #node.
+            print("node.")
+
+def getFunctions(b, ts):    #PARA PRIMERA PASADA POSEE INSTRUCCIONES INTERNAS ACTUALIZAR CON TODAS           #seteo los parametros dentro de la funcion y capturo sus instrucciones
     global augusTxt, contadorParams, contadorT
     tsLocal = {}
     tsLocal.clear()
@@ -194,7 +224,7 @@ def getFunctions(b, ts):    #POSEE INSTRUCCIONES INTERNAS ACTUALIZAR CON TODAS  
         contadorParams = 0  #reestablezco el valor de los parametros
     arrayTables.pop()
 
-def FunctionDeclaration_(b, ts): #POSEE INSTRUCCIONES INTERNAS ACTUALIZAR CON TODAS    #ts siempre sera la tabla de simbolos del padre
+def FunctionDeclaration_(b, ts): #PASADA DEL MAIN POSEE INSTRUCCIONES INTERNAS ACTUALIZAR CON TODAS    #ts siempre sera la tabla de simbolos del padre
     global augusTxt, contadorParams, contadorT
     tsLocal = {}
     tsLocal.clear()
@@ -234,6 +264,10 @@ def FunctionDeclaration_(b, ts): #POSEE INSTRUCCIONES INTERNAS ACTUALIZAR CON TO
             CallF(a, tsLocal)
         elif isinstance(a, AsignationArray):
             AsignationArray_(a, tsLocal)
+        elif isinstance(a, DeclaStructIntr):
+            AsignationStruct__(a, tsLocal)
+        elif isinstance(a, AsignationStructExpre):
+            AsignationStruct__(a, tsLocal)
         i += 1
 
     print(f"tsLocal funcion {b.id}: {str(tsLocal)}")
@@ -767,7 +801,7 @@ def Declaration_(b, ts):
         elif isinstance(i, DeclarationArrayInit):
             dime = valueExpression(i.dimentions[0], ts)
             if dime != None:
-                if dime > len(i.val.val)-1 :
+                if dime > len(i.val.val)-1 :        #si truena aca es porque es char a[] = "hola"
                     augusTxt += '$t'+ str(contadorT)
                     augusTxt += ' = array();\n'
                     res = valueExpression(i.val, ts)
@@ -784,6 +818,7 @@ def Declaration_(b, ts):
             else:
                 augusTxt += '$t'+ str(contadorT)
                 augusTxt += ' = array();\n'
+                augusTxt += '#asignacion de string a arreglo\n'
                 res = valueExpression(i.val, ts)
                 if isinstance(res, str):
                     ts.setdefault(i.id, f'{str(res)}')

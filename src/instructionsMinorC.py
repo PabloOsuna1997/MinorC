@@ -172,3 +172,22 @@ class Asignation(Instruction):
         self.expresion = expresion
         self.line = line
         self.column = column
+
+class DeclaStructIntr(Instruction):
+    def __init__(self, type_, id, line, column):
+        self.id = id
+        self.type_ = type_
+        self.line = line
+        self.column = column
+
+class AsignationStructExpre(Instruction):
+    def __init__(self, expresionIzq, punto, expresion, line, column):
+        self.id = id
+        self.expresionIzq = expresionIzq
+        self.punto = punto
+        self.expresion = expresion
+        self.line = line
+        self.column = column
+
+
+
