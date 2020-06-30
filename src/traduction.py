@@ -126,6 +126,13 @@ def AsignationStruct__(b, ts):          #delcaracion de un struct localmente
             ts.setdefault(b.id.id, f'$t{str(contadorT)}')
             arrayTables.append(ts)
             contadorT += 1
+        else:   #identifier
+            # struct contacto prueba;   <- este caso
+            augusTxt += f'$t{str(contadorT)} = array(); #struct {tipo} {b.id.id}\n'
+            arrayTables.pop()  # agregamos el struct a la tabla de simbolos
+            ts.setdefault(b.id.id, f'$t{str(contadorT)}')
+            arrayTables.append(ts)
+            contadorT += 1
     elif isinstance(b, AsignationStructExpre):
         print("asignacioin de struct")
         AUX = ''
@@ -144,7 +151,7 @@ def AsignationStruct__(b, ts):          #delcaracion de un struct localmente
         else:   #tipo Identifier
             #node.
             #node[0]
-            id = valueExpression(b.expresionIzq, ts) #capturo el id de mi objeto
+            id = valueExpression(Identifier(b.expresionIzq.id, 0, 0), ts) #capturo el id de mi objeto
             AUX += f'{id}'
             if isinstance(b.punto, puntoSimple):
                 AUX += f'[\'{b.punto.id}\']'
@@ -1077,6 +1084,19 @@ def valueExpression(instruction, ts):
             aux += f'$t{str(contadorT)} = {id}'
             for x in instruction.id.expressions:
                 aux += f'[{valueExpression(x, ts)}]'
+            #punto
+            if isinstance(instruction.punto, puntoSimple):
+                aux += f'[\'{instruction.punto.id}\'];\n'
+            else:
+                aux += f'[\'{instruction.punto.id}\'][{valueExpression(instruction.punto.expresion, ts)}];\n'
+            augusTxt += aux
+            contadorT += 1
+            return f'$t{str(contadorT-1)}'
+        else: #identifier
+            #acceso de arreglo
+            aux = ''
+            id = valueExpression(instruction.id, ts)
+            aux += f'$t{str(contadorT)} = {id}'
             #punto
             if isinstance(instruction.punto, puntoSimple):
                 aux += f'[\'{instruction.punto.id}\'];\n'
