@@ -626,8 +626,7 @@ def p_declaracionStructIntern2_error(t):
     'DECLARACION_STRUCT_INTERNA : STRUCT ID error PUNTOCOMA'
 def p_declaracionStructInterna(t):
     '''DECLARACION_STRUCT_INTERNA : STRUCT ID ID IGUAL EXPRESION PUNTOCOMA
-                                    | STRUCT ID ID IGUAL PARIZQ STRUCT ID PARDER MALLOC PARIZQ SIZEOF PARIZQ STRUCT ID PARDER PARDER PUNTOCOMA
-                                    | STRUCT ID ID PUNTOCOMA
+                                    | STRUCT ID ASISTRCUT PUNTOCOMA
                                     | ID ASISTRCUT PUNTOCOMA
     '''
 
@@ -899,13 +898,7 @@ def p_error(t):
         so = sinOb(t.value, t.lineno, find_column(input_, t))
         sintacticErroList.append(so)
     except:
-        if p:
-          print("Syntax error at token", p.type)
-          # Just discard the token and tell the parser it's okay.
-          parser.errok()
-        else:
-            print("Syntax error at EOF")
-            print("Error sintactico Irrecuperable")
+        print("Error sintactico Irrecuperable")
         
         so = sinOb('Error sintactico: Irrecuperable', 0, 0)
         sintacticErroList.append(so)

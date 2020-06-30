@@ -106,7 +106,7 @@ def process(instructions,ts):
 def DeclarationStruct_(b, ts):
     global contadorT, augusTxt
     #agregamos a la tabla global
-    augusTxt += f'$t{str(contador)} = array(); \n   #declaracion de struct {b.id}'
+    augusTxt += f'$t{str(contador)} = array();  #struct {b.id}\n'
     arrayTables.pop()
     ts.setdefault(b.id, f'$t{str(contadorT)}')
     arrayTables.append(ts)
