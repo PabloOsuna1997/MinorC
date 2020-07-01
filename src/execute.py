@@ -628,7 +628,7 @@ def valueExpression(instruction, ts,textEdit):
         val2 = valueExpression(instruction.op2, ts,textEdit)
         
         try:
-            
+
             if instruction.operator == BitToBit.ANDBIT: 
                 return (val1 & val2)
             elif instruction.operator == BitToBit.ORBIT: 

@@ -510,11 +510,11 @@ def PrintF(b, ts):
     #en la pos [0] siempre vendra la cadena "hola %d" etc..
     try:
         cadena = b.expressions[0].string
-        cadena = cadena.replace('%d', '%d ')
-        cadena = cadena.replace('%c', '%c ')
-        cadena = cadena.replace('%f', '%f ')
-        cadena = cadena.replace('%s', '%s ')
-        cadena = cadena.replace('%i', '%i ')
+        cadena = cadena.replace('%d', ' %d ')
+        cadena = cadena.replace('%c', ' %c ')
+        cadena = cadena.replace('%f', ' %f ')
+        cadena = cadena.replace('%s', ' %s ')
+        cadena = cadena.replace('%i', ' %i ')
         cadena = cadena.replace('\\n', ' \\n ')
         cadena = cadena.replace('\\t', ' \\t ')
 
@@ -819,34 +819,72 @@ def Declaration_(b, ts):
             arrayTables.append(ts)
             contadorT += 1
         elif isinstance(i, DeclarationArrayInit):
-            dime = valueExpression(i.dimentions[0], ts)
-            if dime != None:
-                if dime > len(i.val.val)-1 :        #si truena aca es porque es char a[] = "hola"
+            if len(i.dimentions) == 1:
+                dime = valueExpression(i.dimentions[0], ts)
+                if dime != None:
+                    if dime > len(i.val.val)-1 :        #si truena aca es porque es char a[] = "hola"
+                        augusTxt += '$t'+ str(contadorT)
+                        augusTxt += ' = array();\n'
+                        res = valueExpression(i.val, ts)
+                        for v in range(ultimaPos, dime):
+                            augusTxt += f'$t{str(contadorT)}[{str(v)}]'
+                            augusTxt += ' = 0 ;\n'
+                        arrayTables.pop()
+                        ts.setdefault(i.id, f'$t{str(contadorT)}')
+                        arrayTables.append(ts)
+                        contadorT += 1
+                    else:
+                        print("Error semantico, dimensiones incorrectas")
+                else:
+                    # no se definio la dimension
                     augusTxt += '$t'+ str(contadorT)
                     augusTxt += ' = array();\n'
+                    augusTxt += '#asignacion de string a arreglo\n'
                     res = valueExpression(i.val, ts)
-                    for v in range(ultimaPos, dime):
-                        augusTxt += f'$t{str(contadorT)}[{str(v)}]'
-                        augusTxt += ' = 0 ;\n'
+                    if isinstance(res, str):
+                        arrayTables.pop()
+                        ts.setdefault(i.id, f'{str(res)}')
+                        arrayTables.append(ts)
+                    else:
+                        arrayTables.pop()
+                        ts.setdefault(i.id, f'$t{str(contadorT)}')
+                        arrayTables.append(ts)
+                    contadorT += 1
+            else:
+                dime1 = valueExpression(i.dimentions[0], ts)
+                dime2 = valueExpression(i.dimentions[1], ts)
+                print(f"DIMENSION 1 : {str(dime1)}, DIMENSION 2: {str(dime2)}")
+                if dime1 != None and dime2 != None:
+                    augusTxt += '$t' + str(contadorT)
+                    augusTxt += ' = array();\n'
+
+                    #la inicializacion esta en i.val
+                    contDime1 = 0
+                    while contDime1 < dime1:
+                        print(str(i.val.val[contDime1]))
+                        dimension = i.val.val[contDime1]
+                        contDime2 = 0
+                        while contDime2 < dime2:
+                            print(str(dimension.val[contDime2]))
+                            augusTxt += f'$t{str(contadorT)}'
+                            augusTxt += f'[{str(contDime1)}][{str(contDime2)}] = {str(valueExpression(dimension.val[contDime2], ts))};\n'
+                            contDime2 += 1
+                        contDime1 += 1
+
+                    #agregamos a la tabla de simbolos
                     arrayTables.pop()
                     ts.setdefault(i.id, f'$t{str(contadorT)}')
                     arrayTables.append(ts)
                     contadorT += 1
+                else:
+                    augusTxt += '$t' + str(contadorT)
+                    augusTxt += ' = array();\n'
 
-                else:
-                    print("Error semantico, dimensiones incorrectas")
-            else:
-                augusTxt += '$t'+ str(contadorT)
-                augusTxt += ' = array();\n'
-                augusTxt += '#asignacion de string a arreglo\n'
-                res = valueExpression(i.val, ts)
-                if isinstance(res, str):
-                    ts.setdefault(i.id, f'{str(res)}')
-                else:
+                    #agregamos a la tabla de simbolos
                     arrayTables.pop()
                     ts.setdefault(i.id, f'$t{str(contadorT)}')
                     arrayTables.append(ts)
-                contadorT += 1
+                    contadorT += 1
 
 def valueExpression(instruction, ts):
     global contadorT, augusTxt, arrayTables
@@ -1068,6 +1106,7 @@ def valueExpression(instruction, ts):
         return f'{str(num1)}'
     elif instruction == '#': return 0   #ssirve para las declaraciones globales que no son inicializadas
     elif isinstance(instruction, InitializationArray):
+        #ARREGLAR SI VIENEN MAS {{},{},{}} DE MOMENTO SOLO ACEPTO {1,2,3,4,5}
         print("recorrer la inicializacion")
         global ultimaPos
         for i in range(0, len(instruction.val)):
