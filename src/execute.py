@@ -628,6 +628,7 @@ def valueExpression(instruction, ts,textEdit):
         val2 = valueExpression(instruction.op2, ts,textEdit)
         
         try:
+            
             if instruction.operator == BitToBit.ANDBIT: 
                 return (val1 & val2)
             elif instruction.operator == BitToBit.ORBIT: 
@@ -642,6 +643,7 @@ def valueExpression(instruction, ts,textEdit):
             return 0
         except:
             se = seOb('Error : Tipos de datos en operacion bit a bit.', instruction.line, instruction.column)
+            print("Error : Tipos de datos en operacion bit a bit.")
             semanticErrorList.append(se)
             return '#'
     elif isinstance(instruction, NotBit):
