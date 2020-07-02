@@ -505,8 +505,8 @@
 </g>
 <!-- n0035 -->
 <g id="node36" class="node"><title>n0035</title>
-<polygon fill="none" stroke="black" points="642.5,-67 355.5,-67 355.5,-31 642.5,-31 642.5,-67"/>
-<text text-anchor="middle" x="499" y="-45.3" font-family="Times New Roman,serif" font-size="14.00">========= Metodo Declaracion =========</text>
+<polygon fill="none" stroke="black" points="650,-67 348,-67 348,-31 650,-31 650,-67"/>
+<text text-anchor="middle" x="499" y="-45.3" font-family="Times New Roman,serif" font-size="14.00">========= METODO Declaracion =========</text>
 </g>
 <!-- n0034&#45;&#45;n0035 -->
 <g id="edge36" class="edge"><title>n0034&#45;&#45;n0035</title>

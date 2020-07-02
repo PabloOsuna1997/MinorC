@@ -550,7 +550,8 @@ class Ui_Augus(object):
             fgraph.close()
 
             os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
-            os.system('dot -Tpng ../reports/gramaticalReport.dot -o ../reports/gramaticalReport.png')    
+            os.system('dot -Tsvg ../reports/gramaticalReport.dot -o ../reports/gramaticalReport.svg')
+            os.startfile('..\\reports\\gramaticalReport.svg')   
 
             self.msgBox = QtWidgets.QMessageBox()
             self.msgBox.setText("Reporte creado.")
@@ -559,9 +560,9 @@ class Ui_Augus(object):
 
             grammar.grammarList[:] = []
 
-            ruta = ("../reports/gramaticalReport.png")
-            im = Image.open(ruta)
-            im.show()
+            #ruta = ("../reports/gramaticalReport.png")
+            #im = Image.open(ruta)
+            #im.show()
 
         except:
             print("error")
