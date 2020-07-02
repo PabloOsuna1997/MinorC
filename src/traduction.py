@@ -1,5 +1,6 @@
 import grammar as g
 import SymbolTable as TS
+import symbolTableMC as mcTS
 import functionTable as fTS
 import structTable as sTS
 from semanticObject import *
@@ -13,6 +14,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 import time
 
+tsGeneral = {}
+ambitoGeneral = 'Global'
+contadorGenereal = 0
 tsFunciones = {}
 tsStruct = {}
 augusTxt = 'main: \n'
@@ -32,7 +36,8 @@ contadorCalls = 0       #para nombrar etiquetas de salto
 contadorParams = 0      #variables $a0
 
 def execute(input, textEdit):
-    global tableGlobal, contadorParams, contadorT, contadorEtiquetas, contadorEtiquetasAux, contadorCalls, tsFunciones, augusTxtAuxJUMPS, tsStruct
+    global tsGeneral, ambitoGeneral, ambitoGeneral, tableGlobal, contadorParams, contadorT, contadorEtiquetas, contadorEtiquetasAux, contadorCalls, tsFunciones, augusTxtAuxJUMPS, tsStruct
+    tsGeneral = mcTS.SymbolTable()
     tableGlobal.clear()
     tsFunciones = {}
     tsStruct = {}
@@ -51,6 +56,10 @@ def execute(input, textEdit):
     augusTxtAuxJUMPS += '$ra = $ra - 1;\n'
     process(input, tableGlobal)
     print(f"tsGlobal: {str(tableGlobal)}")
+    print("ts General: ")
+    for i in tsGeneral.symbols:
+        print(str(i) + ", "+ str(tsGeneral.get(i).valor) + ", "+ str(tsGeneral.get(i).tipo)+ ", "+ str(tsGeneral.get(i).declarada) + ", " + str(tsGeneral.get(i).id))
+
     return augusTxt
 
 def process(instructions,ts):
@@ -65,7 +74,7 @@ def process(instructions,ts):
             b = instructions[i]
 
             if isinstance(b, Declaration):
-                Declaration_(b.listId, ts)
+                Declaration_(b.listId, ts, b.type_)
             elif isinstance(b, FunctionDeclaration):
                 if b.id != 'main':                    
                     augusTxtAuxVar = augusTxt       #back de augutxt
@@ -89,6 +98,7 @@ def process(instructions,ts):
 
             if isinstance(b, FunctionDeclaration):
                 if b.id == 'main':
+                    ambitoGeneral = 'main'
                     contadorParams = 0
                     FunctionDeclaration_(b, ts)
                     augusTxt += 'goto FINAL_AUGUS;\n'
@@ -104,7 +114,8 @@ def process(instructions,ts):
         #pass
 
 def DeclarationStruct_(b, ts):      #declaracion de struct global
-    global contadorT, augusTxt
+    global contadorT, augusTxt, ambitoGeneral
+    ambitoGeneral = b.id
     #agregamos a la tabla global
     augusTxt += f'$t{str(contador)} = array();  #struct {b.id}\n'
     arrayTables.pop()
@@ -161,7 +172,8 @@ def AsignationStruct__(b, ts):          #delcaracion de un struct localmente
             augusTxt += AUX
 
 def getFunctions(b, ts):    #PARA PRIMERA PASADA POSEE INSTRUCCIONES INTERNAS ACTUALIZAR CON TODAS           #seteo los parametros dentro de la funcion y capturo sus instrucciones
-    global augusTxt, contadorParams, contadorT
+    global ambitoGeneral, tsGeneral, augusTxt, contadorParams, contadorT
+    ambitoGeneral = b.id
     tsLocal = {}
     tsLocal.clear()
     arrayTables.append(tsLocal)
@@ -177,12 +189,19 @@ def getFunctions(b, ts):    #PARA PRIMERA PASADA POSEE INSTRUCCIONES INTERNAS AC
         #insertar en mi tabla de simbolos de funciones
         funcion = fTS.Symbol(b.id, b.type_, parametros)
         tsFunciones.add(funcion)
+        #tabla general
+        sym = mcTS.Symbol(b.id, b.type_, 'Global', 0, parametros, 'metodo')
+        tsGeneral.add(sym)
+
     #recorrer las listas de instrucciones
     else:
         parametros[:] = []
         #insertar en mi tabla de simbolos de funciones
         funcion = fTS.Symbol(b.id, b.type_, parametros)
         tsFunciones.add(funcion)
+        #tabla general
+        sym = mcTS.Symbol(b.id, b.type_, 'Global', 0, [], 'metodo')
+        tsGeneral.add(sym)        
 
     #asignacion del valor a mi parametro
     if b.id != 'main':
@@ -202,9 +221,10 @@ def getFunctions(b, ts):    #PARA PRIMERA PASADA POSEE INSTRUCCIONES INTERNAS AC
     #recorrer las listas de instrucciones   
     i = 0
     while i < len(b.instructions):
+        ambitoGeneral = b.id
         a = b.instructions[i]
         if isinstance(a, Declaration):
-            Declaration_(a.listId, tsLocal)
+            Declaration_(a.listId, tsLocal, a.type_)
         elif isinstance(a, Asignation):
             Asignation_(a, tsLocal)
         elif isinstance(a, If):
@@ -246,7 +266,8 @@ def getFunctions(b, ts):    #PARA PRIMERA PASADA POSEE INSTRUCCIONES INTERNAS AC
     arrayTables.pop()
 
 def FunctionDeclaration_(b, ts): #PASADA DEL MAIN POSEE INSTRUCCIONES INTERNAS ACTUALIZAR CON TODAS    #ts siempre sera la tabla de simbolos del padre
-    global augusTxt, contadorParams, contadorT
+    global augusTxt, contadorParams, contadorT, ambitoGeneral
+    ambitoGeneral = b.id
     tsLocal = {}
     tsLocal.clear()
     arrayTables.append(tsLocal)
@@ -256,9 +277,10 @@ def FunctionDeclaration_(b, ts): #PASADA DEL MAIN POSEE INSTRUCCIONES INTERNAS A
     #recorrer las listas de instrucciones
     i = 0
     while i < len(b.instructions):
+        ambitoGeneral = b.id
         a = b.instructions[i]
         if isinstance(a, Declaration):
-            Declaration_(a.listId, tsLocal)
+            Declaration_(a.listId, tsLocal, a.type_)
         elif isinstance(a, Asignation):
             Asignation_(a, tsLocal)
         elif isinstance(a, If):
@@ -332,7 +354,8 @@ def CallF(b, ts):                   #consulto los parametros de cada funcion y l
         print("Error Semantico: No existe el metodo indicado.")
 
 def Switch(b, ts):
-    global contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux, caseAnt
+    global ambitoGeneral, contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux, caseAnt
+    ambitoGeneral = 'switch'
     tsLocal = {}
     tsLocal.clear()
     arrayTables.append(tsLocal)
@@ -377,8 +400,8 @@ def Switch(b, ts):
     arrayTables.pop()
 
 def DoW(b, ts):
-    print("do while")
-    global contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux
+    global ambitoGeneral, contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux
+    ambitoGeneral = 'Do-While'
     tsLocal = {}
     tsLocal.clear()
     arrayTables.append(tsLocal)
@@ -398,8 +421,8 @@ def DoW(b, ts):
     arrayTables.pop()
 
 def While__(b, ts):
-    global contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux
-
+    global ambitoGeneral, contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux
+    ambitoGeneral = 'While'
     tsLocal = {}
     tsLocal.clear()
     arrayTables.append(tsLocal)
@@ -422,13 +445,13 @@ def While__(b, ts):
     arrayTables.pop()
 
 def For_(b, ts):
-    global contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux
-
+    global ambitoGeneral, contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux
+    ambitoGeneral = 'For'
     #creamos una nueva tabla de simbolos
     tsLocal = {}
     tsLocal.clear()
     arrayTables.append(tsLocal)
-    Declaration_(b.declaration.listId, tsLocal)
+    Declaration_(b.declaration.listId, tsLocal, b.declaration.type_)
     augusTxt += F'fL{str(contadorEtiquetas)}:\n'
     contaAuxAUx = contadorEtiquetas
     contadorEtiquetas += 1
@@ -460,7 +483,7 @@ def processInstructions(b, tsLocal):    #POSEE INSTRUCCIONES INTERNAS ACTUALIZAR
     while i < len(b):
         a = b[i]
         if isinstance(a, Declaration):
-            Declaration_(a.listId, tsLocal)
+            Declaration_(a.listId, tsLocal, a.type_)
         elif isinstance(a, Asignation):
             Asignation_(a, tsLocal)
         elif isinstance(a, If):
@@ -554,7 +577,8 @@ def PrintF(b, ts):
         print("Error semantico en el print.")
 
 def If_(b, tsPadre):
-    global contadorT, augusTxt, contadorEtiquetas, contadorEtiquetasAux, arrayTables
+    global ambitoGeneral, contadorT, augusTxt, contadorEtiquetas, contadorEtiquetasAux, arrayTables
+    ambitoGeneral = 'If'
     augusAuxAux = ''
     augusAux = ''
     tsLocal = {}
@@ -575,6 +599,7 @@ def If_(b, tsPadre):
         arrayTables.pop()
     elif len(b.ifElse) == 1:
         if isinstance(b.ifElse[0],Else):
+            ambitoGeneral = 'Else'
             #else
             augusTxt += f'goto iL{str(contadorEtiquetas+1)};\n'
             augusTxt += f'iL{str(contadorEtiquetas)}:\n'
@@ -601,6 +626,7 @@ def If_(b, tsPadre):
             contadorEtiquetasAux = contadorEtiquetas
             arrayTables.pop()
         else:
+            ambitoGeneral = 'Else If'
             # viene un unico else if
             condition  = valueExpression(b.ifElse[0].condition, tsPadre)
             augusTxt += f'if({str(condition)}) goto iL{str(contadorEtiquetas+1)};\n'
@@ -642,6 +668,7 @@ def If_(b, tsPadre):
         augusTxt = augusAuxAux
         for a in b.ifElse:
             if isinstance(a, IfElse):
+                ambitoGeneral = 'Else If'
                 condition  = valueExpression(a.condition, tsPadre)
                 augusTxt += f'if({str(condition)}) goto iL{str(contadorEtiquetas)};\n'
                 augusAuxIf1 += f'iL{str(contadorEtiquetas)}:\n'
@@ -653,6 +680,7 @@ def If_(b, tsPadre):
                 augusAuxIf1 += '##--##'     #posteriormente reemplazare eso por el ultimo salto
                 augusTxt = augusAuxAux
             else:
+                ambitoGeneral = 'Else'
                 augusTxt += f'goto iL{str(contadorEtiquetas)};\n'
                 augusTxt += f'iL{str(contadorEtiquetas)}:\n'
                 contadorEtiquetas += 1
@@ -777,8 +805,8 @@ def Asignation_(b, ts):
     except:
         print("Error semantico la varibale indicada no existe except asignacion")
 
-def Declaration_(b, ts):
-    global augusTxt, contadorT, arrayTables
+def Declaration_(b, ts, type_):
+    global augusTxt, contadorT, arrayTables, tsGeneral, ambitoGeneral, contadorGenereal
     for i in b:
         if isinstance(i, SingleDeclaration):
             if isinstance(i.val, IncreDecre_Post):
@@ -794,6 +822,10 @@ def Declaration_(b, ts):
                 arrayTables.pop()
                 ts.setdefault(i.id, f'$t{str(contadorT)}')
                 arrayTables.append(ts)
+                #tabla de simbolos mc
+                sym = mcTS.Symbol(f'{i.id}_{contadorGenereal}', 'array', ambitoGeneral, res)
+                contadorGenereal += 1
+                tsGeneral.add(sym)
                 contadorT += 1
             else:
                 if isinstance(i.val, ReferenceBit):
@@ -803,6 +835,10 @@ def Declaration_(b, ts):
                     arrayTables.pop()
                     ts.setdefault(i.id, f'$t{str(contadorT)}')
                     arrayTables.append(ts)
+                    #tabla de simbolos mc
+                    sym = mcTS.Symbol(f'{i.id}_{contadorGenereal}', type_, ambitoGeneral, f'&{str(res)}')
+                    contadorGenereal += 1
+                    tsGeneral.add(sym)
                 else:
                     res = valueExpression(i.val, ts)
                     augusTxt += '$t' + str(contadorT)
@@ -810,6 +846,11 @@ def Declaration_(b, ts):
                     arrayTables.pop()
                     ts.setdefault(i.id, f'$t{str(contadorT)}')
                     arrayTables.append(ts)
+                    #tabla de simbolos mc
+                    sym = mcTS.Symbol(f'{i.id}_{contadorGenereal}', type_, ambitoGeneral, res)
+                    contadorGenereal += 1
+                    tsGeneral.add(sym)
+
                 contadorT += 1
         elif isinstance(i, IdentifierArray):
             augusTxt += '$t' + str(contadorT)
@@ -827,9 +868,17 @@ def Declaration_(b, ts):
             arrayTables.pop()
             ts.setdefault(i.id, f'$t{str(contadorT)}')
             arrayTables.append(ts)
+             #tabla de simbolos mc
+            sym = mcTS.Symbol(f'{i.id}_{contadorGenereal}', 'array', ambitoGeneral, res)
+            contador += 1
+            tsGeneral.add(sym)
             contadorT += 1
         elif isinstance(i, DeclarationArrayInit):
             if len(i.dimentions) == 1:
+                #tabla de simbolos mc
+                sym = mcTS.Symbol(f'{i.id}_{contadorGenereal}', 'array', ambitoGeneral, str(i.dimentions[0]))
+                contadorGenereal += 1
+                tsGeneral.add(sym)
                 dime = valueExpression(i.dimentions[0], ts)
                 if dime != None:
                     if dime > len(i.val.val)-1 :        #si truena aca es porque es char a[] = "hola"
@@ -861,6 +910,10 @@ def Declaration_(b, ts):
                         arrayTables.append(ts)
                     contadorT += 1
             else:
+                #tabla de simbolos mc
+                sym = mcTS.Symbol(f'{i.id}_{contadorGenereal}', 'array', ambitoGeneral, {})
+                contador += 1
+                tsGeneral.add(sym)
                 dime1 = valueExpression(i.dimentions[0], ts)
                 dime2 = valueExpression(i.dimentions[1], ts)
                 print(f"DIMENSION 1 : {str(dime1)}, DIMENSION 2: {str(dime2)}")

@@ -478,30 +478,44 @@ class Ui_Augus(object):
     def fn_repTS(self):
         print("reporte de tabla de simbolos")
         try:
-            fgraph = open('../reports/tsReport.dot','w+') #creamos el archivo
-            fgraph.write("digraph H { parent [ shape=plaintext label=< <table border=\'1\' cellborder=\'1\'>")                    
-            fgraph.write("<tr><td colspan=\"3\">REPORTE DE TABLA DE SIMBOLOS</td></tr>")
-            fgraph.write("<tr><td port=\'port_one\'>ID</td><td port=\'port_two\'>TIPO</td><td port=\'port_three\'>VALOR</td><td port=\'port_four\'>DECLARADA EN</td><td port=\'port_five\'>DIMENSION</td><td port=\'port_six\'>REFERENCIA</td><td port=\'port_seven\'>PARAMETROS</td></tr>")
+            fgraph = open('../reports/tsReportMC.dot','w+') #creamos el archivo
+            fgraph.write("digraph H { parent [ shape=plaintext label=< <table border=\'1\' cellborder=\'1\'>") 
+            fgraph.write("<tr><td colspan=\"4\">                                TABLA DE SIMBOLOS DE MINOR C</td></tr>")                   
+            fgraph.write("<tr><td colspan=\"4\">        *****************************************</td></tr>")
+            fgraph.write("<tr><td colspan=\"4\">                                VARIABLES</td></tr>")
+            fgraph.write("<tr><td colspan=\"4\">        *****************************************</td></tr>")
+            fgraph.write("<tr><td port=\'port_one\'>ID</td><td port=\'port_two\'>TIPO</td><td port=\'port_three\'>VALOR</td><td port=\'port_four\'>DECLARADA EN</td></tr>")
             
-            for key, val in execute.tsGlobal.symbols.items():
-                fgraph.write(f"<tr><td port=\'port_one\'>{str(key)}</td><td port=\'port_two\'>{str(val.tipo)}</td><td port=\'port_three\'>{str(val.valor)}</td><td port=\'port_four\'>{str(val.declarada)}</td><td port=\'port_five\'>{str(val.dimension)}</td><td port=\'port_six\'>{str(val.referencia)}</td><td port=\'port_seven\'>{str(val.parametros)}</td></tr>")
+            for key, val in traduction.tsGeneral.symbols.items():
+                if val.tip == 'var':
+                    fgraph.write(f"<tr><td port=\'port_one\'>{str(key)}</td><td port=\'port_two\'>{str(val.tipo)}</td><td port=\'port_three\'>{str(val.valor)}</td><td port=\'port_four\'>{str(val.declarada)}</td></tr>")
+                        
+            
+            fgraph.write("<tr><td colspan=\"5\">        *****************************************</td></tr>")
+            fgraph.write("<tr><td colspan=\"5\">                     FUNCIONES</td></tr>")
+            fgraph.write("<tr><td colspan=\"5\">        *****************************************</td></tr>")
+            fgraph.write("<tr><td port=\'port_one\'>ID</td><td port=\'port_two\'>TIPO</td><td port=\'port_three\'>VALOR</td><td port=\'port_four\'>DECLARADA EN</td><td port=\'port_five\'>PARAMETROS</td></tr>")
+
+            for key, val in traduction.tsGeneral.symbols.items():
+                if val.tip == 'metodo':
+                    fgraph.write(f"<tr><td port=\'port_one\'>{str(key)}</td><td port=\'port_two\'>{str(val.tipo)}</td><td port=\'port_three\'>{str(val.valor)}</td><td port=\'port_four\'>{str(val.declarada)}</td><td port=\'port_five\'>{str(val.parametros)}</td></tr>")
                         
             fgraph.write("</table> >]; }")
             fgraph.close()
 
             os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
-            os.system('dot -Tpng ../reports/tsReport.dot -o ../reports/tsReport.png')    
+            os.system('dot -Tpng ../reports/tsReportMC.dot -o ../reports/tsReportMC.png')    
 
             self.msgBox = QtWidgets.QMessageBox()
             self.msgBox.setText("Reporte creado.")
             self.msgBox.setIcon(QtWidgets.QMessageBox.Information)
             self.msgBox.exec()
 
-            ruta = ("../reports/tsReport.png")
+            ruta = ("../reports/tsReportMC.png")
             im = Image.open(ruta)
             im.show()
 
-            execute.tsGlobal = {}
+            traduction.tsGlobal = {}
         except:
             print("error")
             self.msgBox = QtWidgets.QMessageBox()
