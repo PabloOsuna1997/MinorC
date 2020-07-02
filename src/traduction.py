@@ -63,7 +63,7 @@ def execute(input, textEdit):
     return augusTxt
 
 def process(instructions,ts):
-    #try:
+    try:
         global augusTxt, augusTxtCalls, augusTxtAuxVar, contadorParams, augusTxtAuxJUMPS
         #PRIMERA PASADA
         #capturando las funciones, metodos y variables globales y struct
@@ -110,8 +110,9 @@ def process(instructions,ts):
 
             i += 1
             
-    #except:
-        #pass
+    except:
+        printf("******************OCURRIO UN ERROR EN PROCESSS TRADUCTION *******************")
+        pass
 
 def DeclarationStruct_(b, ts):      #declaracion de struct global
     global contadorT, augusTxt, ambitoGeneral

@@ -273,7 +273,7 @@ class Ui_Augus(object):
         self.actionCortar.setText(_translate("Augus", "Cortar"))
         self.actionBuscar.setText(_translate("Augus", "Buscar y Reemplazar"))
         self.actionAscendente.setText(_translate("Augus", "Ascendente"))
-        self.actionDescendente.setText(_translate("Augus","Descendente"))
+        self.actionDescendente.setText(_translate("Augus","Optimizar"))
         self.actionDebuguer.setText(_translate("Augus","Debuguer"))
         self.actionCambiar_color_de_fondo.setText(_translate("Augus", "Tema Dark"))
         self.actionLigth.setText(_translate("Augus", "Tema Light"))
@@ -781,7 +781,7 @@ class Ui_Augus(object):
             self.msgBox.exec()
 
     def fn_Ejecutar_Ascendente(self):
-        #try:
+        try:
             #inicializacion
             traduction.augusTxt = 'main: \n'
             traduction.augusTxt += F'PL_:\n'   #parche para augus cuando la etiqueta esta en la posicion 1 y busco el label retornaba i -1 = 0 marcaba como que no existiera esa etiqueta
@@ -841,7 +841,7 @@ class Ui_Augus(object):
                 augus = traduction.execute(result, self.textEditConsole)
                 self.textEditConsole.setPlainText("CODIGO 3D:\n")
                 self.textEditConsole.append(augus)
-                print(f"texto august:\n{augus}")
+                #print(f"texto august:\n{augus}")
                 print("traduccion completa")
 
                 #mando a ejecutar augus
@@ -850,11 +850,11 @@ class Ui_Augus(object):
                 execute.execute(result, self.textEditOuput)
                 #VALIDACION DE ERRORES SEMANTICOS
             
-        #except:
-            #self.msgBox = QtWidgets.QMessageBox()
-            #self.msgBox.setIcon(QtWidgets.QMessageBox.Critical)
-            #self.msgBox.setText("Area Vacia.")
-            #self.msgBox.exec()
+        except:
+            self.msgBox = QtWidgets.QMessageBox()
+            self.msgBox.setIcon(QtWidgets.QMessageBox.Critical)
+            self.msgBox.setText("Ocurrio un problema en la ejecucion")
+            self.msgBox.exec()
     
     def fn_Ejecutar_Descendente(self):
         try:

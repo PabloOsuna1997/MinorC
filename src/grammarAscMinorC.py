@@ -615,7 +615,7 @@ def p_instrIn(t):
         t[0] = t[1]
         grammarList.append(g.nodeGramatical('INSTR_IN  -> FOR_ ', f'INSTR_IN.val= FOR_.val'))
     else:
-        print("llamadas desde instrucciones internas")
+        #print("llamadas desde instrucciones internas")
         t[0] = t[1]
         grammarList.append(g.nodeGramatical('INSTR_IN  -> ..... ', f'INSTR_IN.val= t[1]'))
 
