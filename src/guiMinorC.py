@@ -486,20 +486,27 @@ class Ui_Augus(object):
             fgraph.write("<tr><td colspan=\"4\">        *****************************************</td></tr>")
             fgraph.write("<tr><td port=\'port_one\'>ID</td><td port=\'port_two\'>TIPO</td><td port=\'port_three\'>VALOR</td><td port=\'port_four\'>DECLARADA EN</td></tr>")
             
+            funciones = False
+            struct = False 
+
             for key, val in traduction.tsGeneral.symbols.items():
                 if val.tip == 'var':
                     fgraph.write(f"<tr><td port=\'port_one\'>{str(key)}</td><td port=\'port_two\'>{str(val.tipo)}</td><td port=\'port_three\'>{str(val.valor)}</td><td port=\'port_four\'>{str(val.declarada)}</td></tr>")
-                        
-            
-            fgraph.write("<tr><td colspan=\"5\">        *****************************************</td></tr>")
-            fgraph.write("<tr><td colspan=\"5\">                     FUNCIONES</td></tr>")
-            fgraph.write("<tr><td colspan=\"5\">        *****************************************</td></tr>")
-            fgraph.write("<tr><td port=\'port_one\'>ID</td><td port=\'port_two\'>TIPO</td><td port=\'port_three\'>VALOR</td><td port=\'port_four\'>DECLARADA EN</td><td port=\'port_five\'>PARAMETROS</td></tr>")
+                elif val.tip == 'metodo':
+                    funciones = True
+                elif val.tipo == 'struct':
+                    struct = True  
 
-            for key, val in traduction.tsGeneral.symbols.items():
-                if val.tip == 'metodo':
-                    fgraph.write(f"<tr><td port=\'port_one\'>{str(key)}</td><td port=\'port_two\'>{str(val.tipo)}</td><td port=\'port_three\'>{str(val.valor)}</td><td port=\'port_four\'>{str(val.declarada)}</td><td port=\'port_five\'>{str(val.parametros)}</td></tr>")
-                        
+            if funciones:
+                fgraph.write("<tr><td colspan=\"5\">        *****************************************</td></tr>")
+                fgraph.write("<tr><td colspan=\"5\">                     FUNCIONES</td></tr>")
+                fgraph.write("<tr><td colspan=\"5\">        *****************************************</td></tr>")
+                fgraph.write("<tr><td port=\'port_one\'>ID</td><td port=\'port_two\'>TIPO</td><td port=\'port_three\'>VALOR</td><td port=\'port_four\'>DECLARADA EN</td><td port=\'port_five\'>PARAMETROS</td></tr>")
+
+                for key, val in traduction.tsGeneral.symbols.items():
+                    if val.tip == 'metodo':
+                        fgraph.write(f"<tr><td port=\'port_one\'>{str(key)}</td><td port=\'port_two\'>{str(val.tipo)}</td><td port=\'port_three\'>{str(val.valor)}</td><td port=\'port_four\'>{str(val.declarada)}</td><td port=\'port_five\'>{str(val.parametros)}</td></tr>")
+                            
             fgraph.write("</table> >]; }")
             fgraph.close()
 

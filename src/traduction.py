@@ -870,7 +870,7 @@ def Declaration_(b, ts, type_):
             arrayTables.append(ts)
              #tabla de simbolos mc
             sym = mcTS.Symbol(f'{i.id}_{contadorGenereal}', 'array', ambitoGeneral, res)
-            contador += 1
+            contadorGenereal += 1
             tsGeneral.add(sym)
             contadorT += 1
         elif isinstance(i, DeclarationArrayInit):
@@ -912,7 +912,7 @@ def Declaration_(b, ts, type_):
             else:
                 #tabla de simbolos mc
                 sym = mcTS.Symbol(f'{i.id}_{contadorGenereal}', 'array', ambitoGeneral, {})
-                contador += 1
+                contadorGenereal += 1
                 tsGeneral.add(sym)
                 dime1 = valueExpression(i.dimentions[0], ts)
                 dime2 = valueExpression(i.dimentions[1], ts)
