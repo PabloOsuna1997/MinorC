@@ -489,6 +489,8 @@ def p_listaInitCorchete(t):
     global grammarList
     grammarList.append(g.nodeGramatical('LISTA_INIT_CORCHETE  -> LLAVEIZQ PARAMETROS LLAVEDER  ', f' LISTA_INIT_CORCHETE.val= InitializationArray(t.lineno(1), t.lexpos(1), t[2])'))
 
+def p_llamadaFuncion_error(t):
+    '''LLAMADA_FUNCION :     ID PARIZQ error PARDER '''
 def p_llamadaFuncion(t):
     '''LLAMADA_FUNCION :     ID PARIZQ PARAMETROS PARDER 
                             | ID PARIZQ PARDER'''
@@ -516,6 +518,8 @@ def p_parametros(t):
 
 
 ##----------------------DECLARACION DE FUNCIONES---------------------
+def p_declaFuncion_error_2(t):
+    'DECLA_FUNCIONES :    TIPO ID PARIZQ error PARDER LLAVEIZQ error LLAVEDER'
 def p_declaFuncion_error(t):
     'DECLA_FUNCIONES :    TIPO ID PARIZQ RECEPCION_PARAMETROS PARDER LLAVEIZQ error LLAVEDER'
 def p_declaFuncion(t):
@@ -654,6 +658,10 @@ def p_asignaStructInterna(t):
         t[0] = Identifier(t[1], t.lineno(1), t.lexpos(1))
         grammarList.append(g.nodeGramatical('ASISTRCUT  -> ID  ', f'ASISTRCUT.val= ID.value)'))
 
+def p_asignaciones_error(t):
+    '''ASIGNACIONES :   error PUNTOCOMA
+                        | ID error EXPRESION PUNTOCOMA
+                        | ID CORCHETES error EXPRESION PUNTOCOMA'''
 def p_asignaciones(t):
     '''ASIGNACIONES :   INCRE_DECRE PUNTOCOMA
                         | ID OP_ASIGNACION EXPRESION PUNTOCOMA
@@ -756,8 +764,12 @@ def p_else(t):
     global grammarList
     grammarList.append(g.nodeGramatical('ELSE_  -> ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER', f'ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]'))
 
-def p_for_error(t): 
-    'FOR_ :     FOR error LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'               
+def p_for_error2(t): 
+    'FOR_ :     FOR PARIZQ error EXPRESION PUNTOCOMA INCRE_DECRE PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER' 
+def p_for_error1(t): 
+    'FOR_ :     FOR PARIZQ DECLA_VARIABLES error PUNTOCOMA INCRE_DECRE PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER' 
+def p_for_error0(t): 
+    'FOR_ :     FOR PARIZQ DECLA_VARIABLES EXPRESION PUNTOCOMA error PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'              
 def p_for(t):
     'FOR_ :     FOR PARIZQ DECLA_VARIABLES EXPRESION PUNTOCOMA INCRE_DECRE PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER'
     t[0] = For(t[3], t[4], t[6], t[9], t.lineno(1), t.lexpos(1))
