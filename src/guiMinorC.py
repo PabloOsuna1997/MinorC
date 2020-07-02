@@ -637,7 +637,7 @@ class Ui_Augus(object):
         global tsDebug, printListDebug, instructionsDebug, conttadorIns, printPases
         if conttadorIns < len(instructionsDebug):
             if isinstance(instructionsDebug[conttadorIns], If):
-                result = execute.valueExpression(instructionsDebug[conttadorIns].expression, execute.tsGlobal, self.textEditConsole)                
+                result = execute.valueExpression(instructionsDebug[conttadorIns].expression, execute.tsGlobal, self.textEditOuput)                
                 self.textDebug.append(f'if: {result} ->')                
                 if result == 1:
                     self.textDebug.append('true')
@@ -669,7 +669,7 @@ class Ui_Augus(object):
                     se = seOb(f"Error: etiqueta {instructionsDebug[conttadorIns].label} no existe", instructionsDebug[conttadorIns].line, instructionsDebug[conttadorIns].column)
                     execute.semanticErrorList.append(se)
             else:
-                execute.executeDebug(instructionsDebug[conttadorIns],self.textEditConsole)
+                execute.executeDebug(instructionsDebug[conttadorIns],self.textEditOuput)
             conttadorIns += 1
 
         self.textDebug.setText("")
@@ -682,7 +682,7 @@ class Ui_Augus(object):
             self.msgBox.setText("Analisis correcto.")
             self.msgBox.setIcon(QtWidgets.QMessageBox.Information)
             self.msgBox.exec()
-            Augus.resize(980, 616)
+            Augus.resize(980, 816)
 
         elif len(execute.semanticErrorList) != 0:                              
             dataSema = [("DESCRIPCION", "COLUMNA", "LINEA")]
@@ -697,7 +697,7 @@ class Ui_Augus(object):
     def fn_Ejecutar_Debuguer(self):
         print("ejecutando debuguer")
         global tsDebug, printListDebug, instructionsDebug, conttadorIns, printPases
-        Augus.resize(1500, 616)        
+        Augus.resize(1500, 816)    
         #print(str(execute.tsGlobal.symbols))
         ts = TS.SymbolTableDebug()
         ts.symbols.clear()
@@ -718,7 +718,8 @@ class Ui_Augus(object):
             instructionsDebug[:] = []
             conttadorIns = 0
             printPases[:] = []
-            self.textEditConsole.setText("CONSOLE:\n")
+            #self.textEditConsole.setText("CONSOLE:\n")             #limpia la consola de salida pero no debemos porque ahi estara nuesto c3d
+            self.textEditOuput.setText("OUPUT: \n")
 
             #region creations of reports
             fgraph = open('../reports/ast.dot','w+') #creamos el archivo
@@ -730,7 +731,9 @@ class Ui_Augus(object):
             fgraph.close()
             #endregion
 
-            content = self.tabWidget.currentWidget().findChild(QtWidgets.QTextEdit,"textEdit").toPlainText()
+            #content = self.tabWidget.currentWidget().findChild(QtWidgets.QTextEdit,"textEdit").toPlainText()
+            content = self.textEditConsole.toPlainText()
+            content = content.replace('CODIGO 3D:', '\n')
             content += '\n'
             content.encode('utf-8')  #validation utf8
             result = grammar.parse(content)
