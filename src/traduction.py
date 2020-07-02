@@ -231,6 +231,11 @@ def getFunctions(b, ts):    #PARA PRIMERA PASADA POSEE INSTRUCCIONES INTERNAS AC
             CallF(a, tsLocal)
         elif isinstance(a, AsignationArray):
             AsignationArray_(a, tsLocal)
+        elif isinstance(a, DeclaStructIntr):
+            AsignationStruct__(a, tsLocal)
+        elif isinstance(a, AsignationStructExpre):
+            AsignationStruct__(a, tsLocal)
+        
         i += 1
 
     print(f"tsLocal funcion {b.id}: {str(tsLocal)}")
@@ -482,6 +487,11 @@ def processInstructions(b, tsLocal):    #POSEE INSTRUCCIONES INTERNAS ACTUALIZAR
             CallF(a, tsLocal)
         elif isinstance(a, AsignationArray):
             AsignationArray_(a, tsLocal)
+        elif isinstance(a, DeclaStructIntr):
+            AsignationStruct__(a, tsLocal)
+        elif isinstance(a, AsignationStructExpre):
+            AsignationStruct__(a, tsLocal)
+        
         i += 1
 
 def increDecre(b, ts, type_):
@@ -1281,6 +1291,21 @@ def instruccionesGlobales(instructions, ge, padre):
             ge.add(node)
             contador += 1
             a = 3
+        elif isinstance(b, DeclarationStruct):
+            node = g.node(padre, contador+1, 'INSTRUCCIONES GLOBALES')
+            ge.add(node)
+            node = g.node(contador+1, contador+2, 'DECLA_STRUTC')
+            ge.add(node)
+            contador += 2
+            padreAux = contador
+            node = g.node(padreAux, contador+1, 'struct')
+            ge.add(node)
+            node = g.node(padreAux, contador+2, f'{b.id}')
+            ge.add(node)
+            node = g.node(padreAux, contador+3, 'ATRIBUTOS')
+            ge.add(node)
+            contador += 3
+            drawInstruccionesInternas(b.atributos, ge, contador)
         i += 1
 
 def drawInstruccionesInternas(instrucciones, ge, padre):
@@ -1548,8 +1573,61 @@ def drawInstruccionesInternas(instrucciones, ge, padre):
             contador += 1
             drawExpresiones(z, ge, contador)
             contador += 1
+        elif isinstance(a, DeclaStructIntr):
+            #STRUCT ID ASISTRCUT PUNTOCOMA
+            node = g.node(padre, contador + 1, 'DeclaStructIntr')
+            ge.add(node)
+            contador += 1
+            padreAux = contador
+            if isinstance(a.id, IdentifierArray):
+                #struct contacto directorio[5];   <- este caso
+                node = g.node(padreAux, contador + 1, f'struct')
+                ge.add(node)
+                node = g.node(padreAux, contador + 2, f'{a.type_}')
+                ge.add(node)
+                node = g.node(padreAux, contador + 3, f'{a.id.id}')
+                ge.add(node)
+                contador += 3
+                for m in a.id.expressions:
+                    node = g.node(padreAux, contador + 1, f'[ EXPRESION ]')
+                    ge.add(node)
+                    contador += 1
+                    drawExpresiones(m, ge, contador)
 
-
+            else:   #identifier
+                # struct contacto prueba;   <- este caso
+                node = g.node(padreAux, contador + 1, f'struct')
+                ge.add(node)
+                node = g.node(padreAux, contador + 2, f'{a.type_}')
+                ge.add(node)
+                node = g.node(padreAux, contador + 3, f'{a.id}')
+                ge.add(node)
+                contador += 3
+        elif isinstance(a, AsignationStructExpre):
+            node = g.node(padre, contador + 1, 'AsignationStructExpre')
+            ge.add(node)
+            node = g.node(contador + 1, contador + 2, 'expresionIzq')
+            ge.add(node)
+            contador += 2
+            padreAux = contador
+            if isinstance(a.expresionIzq, IdentifierArray):
+                #acceso de arreglo
+                drawExpresiones(a.expresionIzq, ge, contador)
+            else: #identifier
+                #acceso de arreglo
+                print("asignacion de struct id normal")
+            #punto
+            if isinstance(a.punto, puntoSimple):
+                node = g.node(padreAux, contador + 1, f'.{a.punto.id}')
+                ge.add(node)
+                contador += 1
+            else:
+                node = g.node(padreAux, contador + 1, f'.{a.punto.id}')
+                ge.add(node)
+                node = g.node(padreAux, contador + 2, f'.{a.punto.expresion}')
+                ge.add(node)
+                contador += 2
+        
         i += 1
 
 def drawExpresiones(instruction, ge, padre):
@@ -1779,11 +1857,10 @@ def drawExpresiones(instruction, ge, padre):
             #print(str(instruction))
             node = g.node(padre, contador+1, str(instruction.id))
             ge.add(node)
-            contador +=1
-            sym = ts.get(instruction.id).valor            
+            contador +=1           
             i = 0
             while i < len(instruction.expressions):
-                node = g.node(padre, contador+1, f'[{str(drawValueExpression(instruction.op2))}]')
+                node = g.node(padre, contador+1, f'[{str(drawValueExpression(instruction.expressions[i]))}]')
                 ge.add(node)
                 contador +=1
                 i += 1
@@ -1867,6 +1944,14 @@ def drawExpresiones(instruction, ge, padre):
         node = g.node(padre, contador+1, str(num1))
         ge.add(node)
         contador +=1
+    elif instruction == '#': print("cero")   #ssirve para las declaraciones globales que no son inicializadas
+    elif isinstance(instruction, InitializationArray):
+        #ARREGLAR SI VIENEN MAS {{},{},{}} DE MOMENTO SOLO ACEPTO {1,2,3,4,5}
+        print("recorrer la inicializacion grafo")        
+    elif isinstance(instruction, Scanf):
+        print("scnaf f grafo")
+    elif isinstance(instruction, AccesStruct):
+        print("acceso a un struct grafo")
 
 def drawValueExpression(instruction):
     if isinstance(instruction, Identifier):
