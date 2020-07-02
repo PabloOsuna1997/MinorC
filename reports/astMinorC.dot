@@ -69,7 +69,7 @@ n0033 [label="LISTA_PRINT"] ;
 n0033 -- n0034;
 n0034 [label="EXPRESION"] ;
 n0034 -- n0035;
-n0035 [label="========= METODO Declaracion =========\n"] ;
+n0035 [label="========= Metodo Declaracion =========\n"] ;
 n0033 -- n0036;
 n0036 [label=","] ;
 n0030 -- n0037;

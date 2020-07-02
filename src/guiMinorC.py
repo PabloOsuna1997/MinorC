@@ -577,7 +577,7 @@ class Ui_Augus(object):
         try:
             rg.export_to_pdf(dataSema,3)
             dataSema[:] = []
-            execute.semanticErrorList[:] = []         
+            traduction.semanticErrorList[:] = []         
 
             self.msgBox = QtWidgets.QMessageBox()
             self.msgBox.setText("Despelgando reporte.")
@@ -782,6 +782,7 @@ class Ui_Augus(object):
 
     def fn_Ejecutar_Ascendente(self):
         try:
+            Augus.resize(980, 816)
             #inicializacion
             traduction.augusTxt = 'main: \n'
             traduction.augusTxt += F'PL_:\n'   #parche para augus cuando la etiqueta esta en la posicion 1 y busco el label retornaba i -1 = 0 marcaba como que no existiera esa etiqueta
@@ -849,6 +850,23 @@ class Ui_Augus(object):
                 #instructionsList = result[:]
                 execute.execute(result, self.textEditOuput)
                 #VALIDACION DE ERRORES SEMANTICOS
+                if len(traduction.semanticErrorList) == 0:
+                    
+                    self.msgBox = QtWidgets.QMessageBox()
+                    self.msgBox.setText("Analisis correcto.")
+                    self.msgBox.setIcon(QtWidgets.QMessageBox.Information)
+                    self.msgBox.exec()
+                
+                else:   
+                    Augus.setStyleSheet('QMainWindow{background-color: red; border: 1px solid black;}')                
+                    dataSema = [("DESCRIPCION", "COLUMNA", "LINEA")]
+                    for i in traduction.semanticErrorList:
+                        dataSema.append((str(i.description), str(i.column), str(i.line)))
+                    
+                    self.msgBox = QtWidgets.QMessageBox()
+                    self.msgBox.setText("Existen errores semanticos.")
+                    self.msgBox.setIcon(QtWidgets.QMessageBox.Information)
+                    self.msgBox.exec()
             
         except:
             self.msgBox = QtWidgets.QMessageBox()

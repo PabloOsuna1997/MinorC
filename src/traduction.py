@@ -111,7 +111,7 @@ def process(instructions,ts):
             i += 1
             
     except:
-        printf("******************OCURRIO UN ERROR EN PROCESSS TRADUCTION *******************")
+        print("******************OCURRIO UN ERROR EN PROCESSS TRADUCTION *******************")
         pass
 
 def DeclarationStruct_(b, ts):      #declaracion de struct global
@@ -353,6 +353,8 @@ def CallF(b, ts):                   #consulto los parametros de cada funcion y l
         contadorCalls += 1
     except:
         print("Error Semantico: No existe el metodo indicado.")
+        seob = seOb('Error Semantico: No existe el metodo indicado.', b.line, b.column)
+        semanticErrorList.append(seob)
 
 def Switch(b, ts):
     global ambitoGeneral, contadorT, augusTxt, arrayTables, contadorEtiquetas, contadorEtiquetasAux, caseAnt
@@ -576,6 +578,8 @@ def PrintF(b, ts):
                     augusTxt += f'print(\" {str(a)} \");\n'  ## arreglar esto porque imprime ("$t8")
     except:
         print("Error semantico en el print.")
+        seob = seOb('Error Semantico: printf parametros no validos.', b.line, b.column)
+        semanticErrorList.append(seob)
 
 def If_(b, tsPadre):
     global ambitoGeneral, contadorT, augusTxt, contadorEtiquetas, contadorEtiquetasAux, arrayTables
@@ -805,6 +809,8 @@ def Asignation_(b, ts):
                 print("Error semantico la varibale indicada no existe asignacion")
     except:
         print("Error semantico la varibale indicada no existe except asignacion")
+        seob = seOb('Error Semantico: variable indicada no existe.', b.line, b.column)
+        semanticErrorList.append(seob)
 
 def Declaration_(b, ts, type_):
     global augusTxt, contadorT, arrayTables, tsGeneral, ambitoGeneral, contadorGenereal
