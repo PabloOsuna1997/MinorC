@@ -1704,165 +1704,166 @@ def drawExpresiones(instruction, ge, padre):
     global contador
     #print(f'ahshas: {str(instruction)}') 
     if isinstance(instruction, BinaryExpression):
-        num1 = drawValueExpression(instruction.op1)
-        num2 = drawValueExpression(instruction.op2)
+        drawExpresiones(instruction.op1, ge, padre)
+        drawExpresiones(instruction.op2, ge , padre)
         try:
             if instruction.operator == Aritmetics.MAS: 
-               node = g.node(padre, contador+1, str(num1))
+               #node = g.node(padre, contador+1, str(num1))
+               #ge.add(node)
+               node = g.node(padre, contador+1, '+')
                ge.add(node)
-               node = g.node(padre, contador+2, '+')
-               ge.add(node)
-               node = g.node(padre, contador+3, str(num2))
-               ge.add(node)
-               contador +=3
+               contador += 1
+               #node = g.node(padre, contador+3, str(num2))
+               #ge.add(node)
+               #contador +=3
             elif instruction.operator == Aritmetics.MENOS:
-                node = g.node(padre, contador+1, str(num1))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(num1))
+                #ge.add(node)
+                #contador +=1
                 node = g.node(padre, contador+1, '-')
                 ge.add(node)
                 contador +=1
-                node = g.node(padre, contador+1, str(num2))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(num2))
+                #ge.add(node)
+                #contador +=1
             elif instruction.operator == Aritmetics.POR:
-                node = g.node(padre, contador+1, str(num1))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(num1))
+                #ge.add(node)
+                #contador +=1
                 node = g.node(padre, contador+1, '*')
                 ge.add(node)
                 contador +=1
-                node = g.node(padre, contador+1, str(num2))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(num2))
+                #ge.add(node)
+                #contador +=1
             elif instruction.operator == Aritmetics.DIV: 
-                node = g.node(padre, contador+1, str(num1))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(num1))
+                #ge.add(node)
+                #contador +=1
                 node = g.node(padre, contador+1, '/')
                 ge.add(node)
                 contador +=1
-                node = g.node(padre, contador+1, str(num2))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(num2))
+                #ge.add(node)
+                #contador +=1
             elif instruction.operator == Aritmetics.MODULO:
-                node = g.node(padre, contador+1, str(num1))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(num1))
+                #ge.add(node)
+                #contador +=1
                 node = g.node(padre, contador+1, '%')
                 ge.add(node)
                 contador +=1
-                node = g.node(padre, contador+1, str(num2))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(num2))
+                #ge.add(node)
+                #contador +=1
         except:
             pass
     elif isinstance(instruction, LogicAndRelational):
-        val1 = drawValueExpression(instruction.op1)
-        val2 = drawValueExpression(instruction.op2)
+        drawExpresiones(instruction.op1, ge, padre)
+        drawExpresiones(instruction.op2, ge, padre)
         try:
             if instruction.operator == LogicsRelational.MAYORQUE: 
-                node = g.node(padre, contador+1, str(val1))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(val1))
+                #ge.add(node)
+                #contador +=1
                 node = g.node(padre, contador+1, '>')
                 ge.add(node)
                 contador +=1
-                node = g.node(padre, contador+1, str(val2))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(val2))
+                #ge.add(node)
+                #contador +=1
             elif instruction.operator == LogicsRelational.MENORQUE: 
-                node = g.node(padre, contador+1, str(val1))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(val1))
+                #ge.add(node)
+                #contador +=1
                 node = g.node(padre, contador+1, '<')
                 ge.add(node)
                 contador +=1
-                node = g.node(padre, contador+1, str(val2))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(val2))
+                #ge.add(node)
+                #contador +=1
             elif instruction.operator == LogicsRelational.MAYORIGUAL: 
-                node = g.node(padre, contador+1, str(val1))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(val1))
+                #ge.add(node)
+                #contador +=1
                 node = g.node(padre, contador+1, '>=')
                 ge.add(node)
                 contador +=1
-                node = g.node(padre, contador+1, str(val2))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(val2))
+                #ge.add(node)
+                #contador +=1
             elif instruction.operator == LogicsRelational.MENORIGUAL: 
-                node = g.node(padre, contador+1, str(val1))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(val1))
+                #ge.add(node)
+                #contador +=1
                 node = g.node(padre, contador+1, '<=')
                 ge.add(node)
                 contador +=1
-                node = g.node(padre, contador+1, str(val2))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(val2))
+                #ge.add(node)
+                #contador +=1
             elif instruction.operator == LogicsRelational.IGUALQUE: 
-                node = g.node(padre, contador+1, str(val1))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(val1))
+                #ge.add(node)
+                #contador +=1
                 node = g.node(padre, contador+1, '==')
                 ge.add(node)
                 contador +=1
-                node = g.node(padre, contador+1, str(val2))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(val2))
+                #ge.add(node)
+                #contador +=1
             elif instruction.operator == LogicsRelational.AND: 
-                node = g.node(padre, contador+1, str(val1))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(val1))
+                #ge.add(node)
+                #contador +=1
                 node = g.node(padre, contador+1, '&&')
                 ge.add(node)
                 contador +=1
-                node = g.node(padre, contador+1, str(val2))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(val2))
+                #ge.add(node)
+                #contador +=1
             elif instruction.operator == LogicsRelational.OR: 
-                node = g.node(padre, contador+1, str(val1))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(val1))
+                #ge.add(node)
+                #contador +=1
                 node = g.node(padre, contador+1, '||')
                 ge.add(node)
                 contador +=1
-                node = g.node(padre, contador+1, str(val2))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(val2))
+                #ge.add(node)
+                #contador +=1
             elif instruction.operator == LogicsRelational.XOR: 
-                node = g.node(padre, contador+1, str(val1))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(val1))
+                #ge.add(node)
+                #contador +=1
                 node = g.node(padre, contador+1, '^')
                 ge.add(node)
                 contador +=1
-                node = g.node(padre, contador+1, str(val2))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(val2))
+                #ge.add(node)
+                #contador +=1
             elif instruction.operator == LogicsRelational.DIFERENTE:
-                node = g.node(padre, contador+1, str(val1))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(val1))
+                #ge.add(node)
+                #contador +=1
                 node = g.node(padre, contador+1, '!=')
                 ge.add(node)
                 contador +=1
-                node = g.node(padre, contador+1, str(val2))
-                ge.add(node)
-                contador +=1
+                #node = g.node(padre, contador+1, str(val2))
+                #ge.add(node)
+                #contador +=1
         
         except:
             pass
     elif isinstance(instruction, Not):
-        try:
-            num1 = drawValueExpression(instruction.expression)
-            node = g.node(padre, contador+1, str(num1))
-            ge.add(node)
-            contador +=1
+        try: 
+            #node = g.node(padre, contador+1, str(num1))
+            #ge.add(node)
+            #contador +=1
             node = g.node(padre, contador+1, '!')
             ge.add(node)
             contador +=1
+            drawExpresiones(instruction.expression, ge, padre)
         except:
             pass
     elif isinstance(instruction, Abs):
@@ -1870,20 +1871,20 @@ def drawExpresiones(instruction, ge, padre):
             node = g.node(padre, contador+1, 'abs')
             ge.add(node)
             contador +=1
-            node = g.node(padre, contador+1, str(drawValueExpression(instruction.expression)))
-            ge.add(node)
-            contador +=1
+            drawExpresiones(instruction.expression, ge, padre)
+            #ge.add(node)
+            #contador +=1
         except:
             pass
     elif isinstance(instruction, NegativeNumber):
         try:
-            num1 = drawValueExpression(instruction.expression)
+            #num1 = drawValueExpression(instruction.expression)
             node = g.node(padre, contador+1, '-')
             ge.add(node)
             contador +=1
-            node = g.node(padre, contador+1, str(num1))
-            ge.add(node)
-            contador +=1
+            drawExpresiones(instruction.expression, ge, padre)
+            #ge.add(node)
+            #contador +=1
         except:
             pass
     elif isinstance(instruction, Identifier):
@@ -1895,14 +1896,15 @@ def drawExpresiones(instruction, ge, padre):
         ge.add(node)
         contador +=1
     elif isinstance(instruction, Cast_):
-        num1 = drawValueExpression(instruction.expression)
+        #num1 = drawValueExpression(instruction.expression)
 
         node = g.node(padre, contador+1, str(instruction.type))
         ge.add(node)
         contador +=1
-        node = g.node(padre, contador+1, str(num1))
-        ge.add(node)
-        contador +=1
+        drawExpresiones(instruction.expression, ge, padre)
+        #node = g.node(padre, contador+1, str(num1))
+        #ge.add(node)
+        #contador +=1
     elif isinstance(instruction, String_):
         node = g.node(padre, contador+1, str(instruction.string))
         ge.add(node)
@@ -1999,21 +2001,23 @@ def drawExpresiones(instruction, ge, padre):
         except:
             pass
     elif isinstance(instruction, NotBit):
-        num1 = drawValueExpression(instruction.expression)
+        #num1 = drawValueExpression(instruction.expression)
         node = g.node(padre, contador+1, '~')
         ge.add(node)
         contador +=1
-        node = g.node(padre, contador+1, str(num1))
-        ge.add(node)
-        contador +=1
+        drawExpresiones(instruction.expression, ge, padre)
+        #node = g.node(padre, contador+1, str(num1))
+        #ge.add(node)
+        #contador +=1
     elif isinstance(instruction, ReferenceBit):
-        num1 = drawValueExpression(instruction.expression)
+        #num1 = drawValueExpression(instruction.expression)
         node = g.node(padre, contador+1, '&')
         ge.add(node)
         contador +=1
-        node = g.node(padre, contador+1, str(num1))
-        ge.add(node)
-        contador +=1
+        drawExpresiones(instruction.expression, ge, padre)
+        #node = g.node(padre, contador+1, str(num1))
+        #ge.add(node)
+        #contador +=1
     elif instruction == '#':                   #ssirve para las declaraciones globales que no son inicializadas
         node = g.node(padre, contador+1, '0')
         ge.add(node)
