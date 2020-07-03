@@ -491,7 +491,8 @@ class Ui_Augus(object):
 
             for key, val in traduction.tsGeneral.symbols.items():
                 if val.tip == 'var':
-                    fgraph.write(f"<tr><td port=\'port_one\'>{str(key)}</td><td port=\'port_two\'>{str(val.tipo)}</td><td port=\'port_three\'>{str(val.valor)}</td><td port=\'port_four\'>{str(val.declarada)}</td></tr>")
+                    aux = key.split('_')
+                    fgraph.write(f"<tr><td port=\'port_one\'>{str(aux[0])}</td><td port=\'port_two\'>{str(val.tipo)}</td><td port=\'port_three\'>{str(val.valor)}</td><td port=\'port_four\'>{str(val.declarada)}</td></tr>")
                 elif val.tip == 'metodo':
                     funciones = True
                 elif val.tipo == 'struct':
