@@ -2041,12 +2041,7 @@ def drawExpresiones(instruction, ge, padre):
         padreAux = contador
         if isinstance(instruction.id, IdentifierArray):
             #acceso de arreglo
-            node = g.node(padreAux, contador+1, f'{instruction.id.id}')
-            ge.add(node)
-            for x in instruction.id.expressions:
-                contador += 1
-                node = g.node(padreAux, contador, f'{str(drawExpresiones(x, ge, contador))}')
-                ge.add(node)
+            drawExpresiones(instruction.id, ge, padreAux)
             #punto
             if isinstance(instruction.punto, puntoSimple):
                 node = g.node(padreAux, contador+1, f'. {instruction.punto.id}')
