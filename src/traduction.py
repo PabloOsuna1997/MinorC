@@ -1447,6 +1447,10 @@ def drawInstruccionesInternas(instrucciones, ge, padre):
             node = g.node(padretmp, contador + 1, ')')
             ge.add(node)
             contador += 1
+            node = g.node(padretmp, contador + 1, 'LIST_ELSE_IF')
+            ge.add(node)
+            contador += 1
+
         elif isinstance(a, PrintF_):
             node = g.node(padre, contador + 1, 'PRINTF_')
             ge.add(node)
