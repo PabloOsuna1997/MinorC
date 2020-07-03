@@ -1,0 +1,28 @@
+main:
+    $t1 = array();
+    $t1[0] = 0;
+    $t1[1] = 1;
+    #print($t1); #error (no se puede imprimir un arreglo)
+    print($t1[0]);
+    print("\n");
+    print($t1[1]);
+    print("\n");
+    #$t1[1][0]= 10; #error (esta ocupado el indice)
+    $t1[2][0]= 20;
+    print($t1[2][0]);
+    print("\n");
+    #print($t1[1][3]); #error (esta vacio el indice)
+    $t1["nombre"]="Carla";
+    print($t1["nombre"]);
+    print("\n");
+    $t1["nombre"][4]="o"; #modifica un char de la cadena "Carla"
+    print($t1["nombre"]);
+    print("\n");
+    $t1["nombre"][5]="s"; #agrega un char en la cadena "Carlo"
+    print($t1["nombre"]);
+    print("\n");
+    $t1["nombre"][7]="s"; #agrega dos char en la cadena "Carlo"
+    print($t1["nombre"]);
+    print("\n");
+    #$t1["nombre"]["apellido"]="last"; #error
+    

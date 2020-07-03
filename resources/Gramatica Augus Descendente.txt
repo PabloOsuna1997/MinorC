@@ -1,0 +1,92 @@
+Gramatica Augus
+
+
+S = A
+A = main : SENTENCIAS
+
+SENTENCIAS = SENTENCIA SENTENCIAS'
+
+SENTENCIAS' = SENTENCIA SENTENCIAS'
+			| e
+
+SENTENCIA = DECLARACIONES
+			|INSTRUCCIONES
+    		|ETIQUETA
+
+ETIQUETA = LABEL : 
+
+INSTRUCCIONES = print ( EXPRESION ) ;
+				| if ( EXPRESION ) goto cadena ;
+				| unset( ID );
+				| exit;
+				| goto cadena ;
+
+DECLARACIONES = ID ARRAY 
+
+ARRAY = CORCHETES igual EXPRESION ;
+		| igual EXPRESION ;
+
+
+CORCHETES = CORCHETE CORCHETES'
+
+CONSTCHETES' = CONRCHETE CORCHETES'
+				|e
+
+CORCHETE = [ F ]
+
+EXPRESION = OPERACION
+			|ATOMICO
+			|FUNCION
+
+
+OPERACION = F OPERADOR F 			#expresion
+			| -F 					#menos f
+			| !F 					#notlogica f
+			| ~F 					#notbit f
+			| &F 					#andbit f	
+
+ATOMICO = F
+
+FUNCION =  abs( EXPRESION ) 		#valor absoluto
+			| ( TIPO ) ID ;			#casteo
+			| read();
+			| array();  			#para casos como print($t1[0]);
+
+
+TIPO = 	int
+		| float
+		| char
+
+F = numero
+	| ID
+	| ID CORCHETES
+	| 'cadena'
+
+ID = $ letra numero
+
+OPERADOR = 	#aritmeticas
+			+
+			|-
+			|/
+			|*
+			|%
+
+			# logicas
+			|&&
+			|||
+			|xor
+
+			# relacionales
+			|==
+			|!=
+			|>=
+			|<=
+			|>
+			|<
+			
+			# bit a bit
+			|&
+			||
+			|^
+			|<<
+			|>>

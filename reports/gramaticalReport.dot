@@ -1,0 +1,1284 @@
+digraph H { parent [ shape=plaintext label=< <table border='1' cellborder='1'>
+<tr><td colspan="3">REPORTE GRAMATICAL</td></tr>
+<tr><td port='port_one'>PRODUCCION</td><td port='port_two'>REGLAS SEMANTICAS</td></tr>
+<tr><td align="left" port='port_one'>S  -&gt; A</td><td align="left" port='port_two'>S.val = A.val</td></tr>
+<tr><td align="left" port='port_one'>A  -&gt; INSTRUCCIONES_GLOBALES</td><td align="left" port='port_two'>A.val = INSTRUCCIONES_GLOBALES.val</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_GLOBALES  -&gt; INSTRUCCIONES_GLOBALES DECLARACION_GLOBAL</td><td align="left" port='port_two'>INSTRUCCIONES_GLOBALES_1.val.append(DECLARACION_GLOBAL) 
+ INSTRUCCIONES_GLOBALES.val = INSTRUCCIONES_GLOBALES_1.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACION_GLOBAL  -&gt; DECLA_VARIABLES 
+ <BR/>|DECLA_FUNCIONES 
+ <BR/>|DECLA_STRUCTS</td><td align="left" port='port_two'>DECLARACION_GLOBAL.val = = t[1].val</td></tr>
+<tr><td align="left" port='port_one'>DECLA_FUNCIONES  -&gt;  TIPO ID PARIZQ RECEPCION_PARAMETROS PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER </td><td align="left" port='port_two'> DECLA_FUNCIONES.val= FunctionDeclaration(t[1], t[2], t[4], t[7], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; PARAMETROS COMA EXPRESION  </td><td align="left" port='port_two'> PARAMETROS_1.val.append(EXPRESION.val) 
+ PARAMETROS.val= PARAMETROS_1.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>LLAMADA_FUNCION  -&gt; ID PARIZQ PARDER  </td><td align="left" port='port_two'> LLAMADA_FUNCION.val= Call(t[1], [])</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>LLAMADA_FUNCION  -&gt; ID PARIZQ PARDER  </td><td align="left" port='port_two'> LLAMADA_FUNCION.val= Call(t[1], [])</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>LLAMADA_FUNCION  -&gt; ID PARIZQ PARDER  </td><td align="left" port='port_two'> LLAMADA_FUNCION.val= Call(t[1], [])</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>LLAMADA_FUNCION  -&gt; ID PARIZQ PARDER  </td><td align="left" port='port_two'> LLAMADA_FUNCION.val= Call(t[1], [])</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; ELSE_IF 
+ <BR/>| ELSE_</td><td align="left" port='port_two'>t[1] = flatten(t[1]) 
+ ELSE_IF_.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>ELSE_  -&gt; ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER</td><td align="left" port='port_two'>ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>ASIGNACIONES  -&gt; ID OP_ASIGNACION EXPRESION PUNTOCOMA  </td><td align="left" port='port_two'>ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>OP_ASIGNACION -&gt; </td><td align="left" port='port_two'>OP_ASIGNACION.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>RECEPCION_PARAMETROS  -&gt;   empty </td><td align="left" port='port_two'> RECEPCION_PARAMETROS.val= []</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_GLOBALES  -&gt; INSTRUCCIONES_GLOBALES DECLARACION_GLOBAL</td><td align="left" port='port_two'>INSTRUCCIONES_GLOBALES_1.val.append(DECLARACION_GLOBAL) 
+ INSTRUCCIONES_GLOBALES.val = INSTRUCCIONES_GLOBALES_1.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACION_GLOBAL  -&gt; DECLA_VARIABLES 
+ <BR/>|DECLA_FUNCIONES 
+ <BR/>|DECLA_STRUCTS</td><td align="left" port='port_two'>DECLARACION_GLOBAL.val = = t[1].val</td></tr>
+<tr><td align="left" port='port_one'>DECLA_FUNCIONES  -&gt;  TIPO ID PARIZQ RECEPCION_PARAMETROS PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER </td><td align="left" port='port_two'> DECLA_FUNCIONES.val= FunctionDeclaration(t[1], t[2], t[4], t[7], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; ELSE_IF 
+ <BR/>| ELSE_</td><td align="left" port='port_two'>t[1] = flatten(t[1]) 
+ ELSE_IF_.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>ELSE_  -&gt; ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER</td><td align="left" port='port_two'>ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; ELSE_IF 
+ <BR/>| ELSE_</td><td align="left" port='port_two'>t[1] = flatten(t[1]) 
+ ELSE_IF_.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>ELSE_  -&gt; ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER</td><td align="left" port='port_two'>ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; ELSE_IF 
+ <BR/>| ELSE_</td><td align="left" port='port_two'>t[1] = flatten(t[1]) 
+ ELSE_IF_.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>ELSE_  -&gt; ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER</td><td align="left" port='port_two'>ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; ELSE_IF 
+ <BR/>| ELSE_</td><td align="left" port='port_two'>t[1] = flatten(t[1]) 
+ ELSE_IF_.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>ELSE_  -&gt; ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER</td><td align="left" port='port_two'>ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>ASIGNACIONES  -&gt; ID OP_ASIGNACION EXPRESION PUNTOCOMA  </td><td align="left" port='port_two'>ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>OP_ASIGNACION -&gt; </td><td align="left" port='port_two'>OP_ASIGNACION.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>RECEPCION_PARAMETROS  -&gt;   PARAM </td><td align="left" port='port_two'> RECEPCION_PARAMETROS.val= PARAM.val</td></tr>
+<tr><td align="left" port='port_one'>PARAM  -&gt;   TIPO_FUN PUNT </td><td align="left" port='port_two'> PARAM.val= Param(t[1], t[2], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>PUNT  -&gt; ID  </td><td align="left" port='port_two'> PUNT.val= ID.value</td></tr>
+<tr><td align="left" port='port_one'>TIPO_FUN  -&gt; TIPO 
+ <BR/>| STRUCT </td><td align="left" port='port_two'> TIPO_FUN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_GLOBALES  -&gt; INSTRUCCIONES_GLOBALES DECLARACION_GLOBAL</td><td align="left" port='port_two'>INSTRUCCIONES_GLOBALES_1.val.append(DECLARACION_GLOBAL) 
+ INSTRUCCIONES_GLOBALES.val = INSTRUCCIONES_GLOBALES_1.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACION_GLOBAL  -&gt; DECLA_VARIABLES 
+ <BR/>|DECLA_FUNCIONES 
+ <BR/>|DECLA_STRUCTS</td><td align="left" port='port_two'>DECLARACION_GLOBAL.val = = t[1].val</td></tr>
+<tr><td align="left" port='port_one'>DECLA_FUNCIONES  -&gt;  TIPO ID PARIZQ RECEPCION_PARAMETROS PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER </td><td align="left" port='port_two'> DECLA_FUNCIONES.val= FunctionDeclaration(t[1], t[2], t[4], t[7], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; ELSE_IF 
+ <BR/>| ELSE_</td><td align="left" port='port_two'>t[1] = flatten(t[1]) 
+ ELSE_IF_.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>ELSE_  -&gt; ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER</td><td align="left" port='port_two'>ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; ELSE_IF 
+ <BR/>| ELSE_</td><td align="left" port='port_two'>t[1] = flatten(t[1]) 
+ ELSE_IF_.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>ELSE_  -&gt; ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER</td><td align="left" port='port_two'>ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>ASIGNACIONES  -&gt; ID OP_ASIGNACION EXPRESION PUNTOCOMA  </td><td align="left" port='port_two'>ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>OP_ASIGNACION -&gt; </td><td align="left" port='port_two'>OP_ASIGNACION.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; ELSE_IF 
+ <BR/>| ELSE_</td><td align="left" port='port_two'>t[1] = flatten(t[1]) 
+ ELSE_IF_.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>ELSE_  -&gt; ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER</td><td align="left" port='port_two'>ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>ASIGNACIONES  -&gt; ID OP_ASIGNACION EXPRESION PUNTOCOMA  </td><td align="left" port='port_two'>ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>OP_ASIGNACION -&gt; </td><td align="left" port='port_two'>OP_ASIGNACION.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; </td><td align="left" port='port_two'>ELSE_IF_.val = []</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>ASIGNACIONES  -&gt; ID OP_ASIGNACION EXPRESION PUNTOCOMA  </td><td align="left" port='port_two'>ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>OP_ASIGNACION -&gt; </td><td align="left" port='port_two'>OP_ASIGNACION.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>ASIGNACIONES  -&gt; ID OP_ASIGNACION EXPRESION PUNTOCOMA  </td><td align="left" port='port_two'>ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>OP_ASIGNACION -&gt; </td><td align="left" port='port_two'>OP_ASIGNACION.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>RECEPCION_PARAMETROS  -&gt;   PARAM </td><td align="left" port='port_two'> RECEPCION_PARAMETROS.val= PARAM.val</td></tr>
+<tr><td align="left" port='port_one'>PARAM  -&gt;   TIPO_FUN PUNT </td><td align="left" port='port_two'> PARAM.val= Param(t[1], t[2], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>PUNT  -&gt; ID  </td><td align="left" port='port_two'> PUNT.val= ID.value</td></tr>
+<tr><td align="left" port='port_one'>TIPO_FUN  -&gt; TIPO 
+ <BR/>| STRUCT </td><td align="left" port='port_two'> TIPO_FUN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_GLOBALES  -&gt; INSTRUCCIONES_GLOBALES DECLARACION_GLOBAL</td><td align="left" port='port_two'>INSTRUCCIONES_GLOBALES_1.val.append(DECLARACION_GLOBAL) 
+ INSTRUCCIONES_GLOBALES.val = INSTRUCCIONES_GLOBALES_1.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACION_GLOBAL  -&gt; DECLA_VARIABLES 
+ <BR/>|DECLA_FUNCIONES 
+ <BR/>|DECLA_STRUCTS</td><td align="left" port='port_two'>DECLARACION_GLOBAL.val = = t[1].val</td></tr>
+<tr><td align="left" port='port_one'>DECLA_FUNCIONES  -&gt;  TIPO ID PARIZQ RECEPCION_PARAMETROS PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER </td><td align="left" port='port_two'> DECLA_FUNCIONES.val= FunctionDeclaration(t[1], t[2], t[4], t[7], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>LLAMADA_FUNCION  -&gt; LLAVEIZQ PARAMETROS LLAVEDER  </td><td align="left" port='port_two'> LLAMADA_FUNCION.val= Call(t[1], t[3])</td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>LLAMADA_FUNCION  -&gt; LLAVEIZQ PARAMETROS LLAVEDER  </td><td align="left" port='port_two'> LLAMADA_FUNCION.val= Call(t[1], t[3])</td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>RECEPCION_PARAMETROS  -&gt;   empty </td><td align="left" port='port_two'> RECEPCION_PARAMETROS.val= []</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_GLOBALES  -&gt; INSTRUCCIONES_GLOBALES DECLARACION_GLOBAL</td><td align="left" port='port_two'>INSTRUCCIONES_GLOBALES_1.val.append(DECLARACION_GLOBAL) 
+ INSTRUCCIONES_GLOBALES.val = INSTRUCCIONES_GLOBALES_1.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACION_GLOBAL  -&gt; DECLA_VARIABLES 
+ <BR/>|DECLA_FUNCIONES 
+ <BR/>|DECLA_STRUCTS</td><td align="left" port='port_two'>DECLARACION_GLOBAL.val = = t[1].val</td></tr>
+<tr><td align="left" port='port_one'>DECLA_FUNCIONES  -&gt;  TIPO ID PARIZQ RECEPCION_PARAMETROS PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER </td><td align="left" port='port_two'> DECLA_FUNCIONES.val= FunctionDeclaration(t[1], t[2], t[4], t[7], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; ELSE_IF 
+ <BR/>| ELSE_</td><td align="left" port='port_two'>t[1] = flatten(t[1]) 
+ ELSE_IF_.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>ELSE_  -&gt; ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER</td><td align="left" port='port_two'>ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>ASIGNACIONES  -&gt; ID OP_ASIGNACION EXPRESION PUNTOCOMA  </td><td align="left" port='port_two'>ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>OP_ASIGNACION -&gt; </td><td align="left" port='port_two'>OP_ASIGNACION.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>ASIGNACIONES  -&gt; ID OP_ASIGNACION EXPRESION PUNTOCOMA  </td><td align="left" port='port_two'>ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>OP_ASIGNACION -&gt; </td><td align="left" port='port_two'>OP_ASIGNACION.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; ELSE_IF 
+ <BR/>| ELSE_</td><td align="left" port='port_two'>t[1] = flatten(t[1]) 
+ ELSE_IF_.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>ELSE_  -&gt; ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER</td><td align="left" port='port_two'>ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>ASIGNACIONES  -&gt; ID OP_ASIGNACION EXPRESION PUNTOCOMA  </td><td align="left" port='port_two'>ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>OP_ASIGNACION -&gt; </td><td align="left" port='port_two'>OP_ASIGNACION.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>RECEPCION_PARAMETROS  -&gt;   empty </td><td align="left" port='port_two'> RECEPCION_PARAMETROS.val= []</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_GLOBALES  -&gt; INSTRUCCIONES_GLOBALES DECLARACION_GLOBAL</td><td align="left" port='port_two'>INSTRUCCIONES_GLOBALES_1.val.append(DECLARACION_GLOBAL) 
+ INSTRUCCIONES_GLOBALES.val = INSTRUCCIONES_GLOBALES_1.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACION_GLOBAL  -&gt; DECLA_VARIABLES 
+ <BR/>|DECLA_FUNCIONES 
+ <BR/>|DECLA_STRUCTS</td><td align="left" port='port_two'>DECLARACION_GLOBAL.val = = t[1].val</td></tr>
+<tr><td align="left" port='port_one'>DECLA_FUNCIONES  -&gt;  TIPO ID PARIZQ RECEPCION_PARAMETROS PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER </td><td align="left" port='port_two'> DECLA_FUNCIONES.val= FunctionDeclaration(t[1], t[2], t[4], t[7], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; ELSE_IF 
+ <BR/>| ELSE_</td><td align="left" port='port_two'>t[1] = flatten(t[1]) 
+ ELSE_IF_.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>ELSE_  -&gt; ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER</td><td align="left" port='port_two'>ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>ASIGNACIONES  -&gt; ID OP_ASIGNACION EXPRESION PUNTOCOMA  </td><td align="left" port='port_two'>ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>OP_ASIGNACION -&gt; </td><td align="left" port='port_two'>OP_ASIGNACION.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>ASIGNACIONES  -&gt; ID OP_ASIGNACION EXPRESION PUNTOCOMA  </td><td align="left" port='port_two'>ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>OP_ASIGNACION -&gt; </td><td align="left" port='port_two'>OP_ASIGNACION.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; ELSE_IF 
+ <BR/>| ELSE_</td><td align="left" port='port_two'>t[1] = flatten(t[1]) 
+ ELSE_IF_.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>ELSE_  -&gt; ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER</td><td align="left" port='port_two'>ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>ASIGNACIONES  -&gt; ID OP_ASIGNACION EXPRESION PUNTOCOMA  </td><td align="left" port='port_two'>ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>OP_ASIGNACION -&gt; </td><td align="left" port='port_two'>OP_ASIGNACION.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>RECEPCION_PARAMETROS  -&gt;   empty </td><td align="left" port='port_two'> RECEPCION_PARAMETROS.val= []</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_GLOBALES  -&gt; INSTRUCCIONES_GLOBALES DECLARACION_GLOBAL</td><td align="left" port='port_two'>INSTRUCCIONES_GLOBALES_1.val.append(DECLARACION_GLOBAL) 
+ INSTRUCCIONES_GLOBALES.val = INSTRUCCIONES_GLOBALES_1.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACION_GLOBAL  -&gt; DECLA_VARIABLES 
+ <BR/>|DECLA_FUNCIONES 
+ <BR/>|DECLA_STRUCTS</td><td align="left" port='port_two'>DECLARACION_GLOBAL.val = = t[1].val</td></tr>
+<tr><td align="left" port='port_one'>DECLA_FUNCIONES  -&gt;  TIPO ID PARIZQ RECEPCION_PARAMETROS PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER </td><td align="left" port='port_two'> DECLA_FUNCIONES.val= FunctionDeclaration(t[1], t[2], t[4], t[7], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>LLAMADA_FUNCION  -&gt; ID PARIZQ PARDER  </td><td align="left" port='port_two'> LLAMADA_FUNCION.val= Call(t[1], [])</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>LLAMADA_FUNCION  -&gt; ID PARIZQ PARDER  </td><td align="left" port='port_two'> LLAMADA_FUNCION.val= Call(t[1], [])</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; ELSE_IF 
+ <BR/>| ELSE_</td><td align="left" port='port_two'>t[1] = flatten(t[1]) 
+ ELSE_IF_.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>ELSE_  -&gt; ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER</td><td align="left" port='port_two'>ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>ASIGNACIONES  -&gt; ID OP_ASIGNACION EXPRESION PUNTOCOMA  </td><td align="left" port='port_two'>ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>OP_ASIGNACION -&gt; </td><td align="left" port='port_two'>OP_ASIGNACION.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; ELSE_IF 
+ <BR/>| ELSE_</td><td align="left" port='port_two'>t[1] = flatten(t[1]) 
+ ELSE_IF_.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>ELSE_  -&gt; ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER</td><td align="left" port='port_two'>ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>ASIGNACIONES  -&gt; ID OP_ASIGNACION EXPRESION PUNTOCOMA  </td><td align="left" port='port_two'>ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>OP_ASIGNACION -&gt; </td><td align="left" port='port_two'>OP_ASIGNACION.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>RECEPCION_PARAMETROS  -&gt;   empty </td><td align="left" port='port_two'> RECEPCION_PARAMETROS.val= []</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_GLOBALES  -&gt; INSTRUCCIONES_GLOBALES DECLARACION_GLOBAL</td><td align="left" port='port_two'>INSTRUCCIONES_GLOBALES_1.val.append(DECLARACION_GLOBAL) 
+ INSTRUCCIONES_GLOBALES.val = INSTRUCCIONES_GLOBALES_1.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACION_GLOBAL  -&gt; DECLA_VARIABLES 
+ <BR/>|DECLA_FUNCIONES 
+ <BR/>|DECLA_STRUCTS</td><td align="left" port='port_two'>DECLARACION_GLOBAL.val = = t[1].val</td></tr>
+<tr><td align="left" port='port_one'>DECLA_FUNCIONES  -&gt;  TIPO ID PARIZQ RECEPCION_PARAMETROS PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER </td><td align="left" port='port_two'> DECLA_FUNCIONES.val= FunctionDeclaration(t[1], t[2], t[4], t[7], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; ELSE_IF 
+ <BR/>| ELSE_</td><td align="left" port='port_two'>t[1] = flatten(t[1]) 
+ ELSE_IF_.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>ELSE_  -&gt; ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER</td><td align="left" port='port_two'>ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>ASIGNACIONES  -&gt; ID OP_ASIGNACION EXPRESION PUNTOCOMA  </td><td align="left" port='port_two'>ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>OP_ASIGNACION -&gt; </td><td align="left" port='port_two'>OP_ASIGNACION.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; PARAMETROS COMA EXPRESION  </td><td align="left" port='port_two'> PARAMETROS_1.val.append(EXPRESION.val) 
+ PARAMETROS.val= PARAMETROS_1.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; PARAMETROS COMA EXPRESION  </td><td align="left" port='port_two'> PARAMETROS_1.val.append(EXPRESION.val) 
+ PARAMETROS.val= PARAMETROS_1.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>RECEPCION_PARAMETROS  -&gt;   empty </td><td align="left" port='port_two'> RECEPCION_PARAMETROS.val= []</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_GLOBALES  -&gt; INSTRUCCIONES_GLOBALES DECLARACION_GLOBAL</td><td align="left" port='port_two'>INSTRUCCIONES_GLOBALES_1.val.append(DECLARACION_GLOBAL) 
+ INSTRUCCIONES_GLOBALES.val = INSTRUCCIONES_GLOBALES_1.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACION_GLOBAL  -&gt; DECLA_VARIABLES 
+ <BR/>|DECLA_FUNCIONES 
+ <BR/>|DECLA_STRUCTS</td><td align="left" port='port_two'>DECLARACION_GLOBAL.val = = t[1].val</td></tr>
+<tr><td align="left" port='port_one'>DECLA_FUNCIONES  -&gt;  TIPO ID PARIZQ RECEPCION_PARAMETROS PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER </td><td align="left" port='port_two'> DECLA_FUNCIONES.val= FunctionDeclaration(t[1], t[2], t[4], t[7], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; ELSE_IF 
+ <BR/>| ELSE_</td><td align="left" port='port_two'>t[1] = flatten(t[1]) 
+ ELSE_IF_.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>ELSE_  -&gt; ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER</td><td align="left" port='port_two'>ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>ASIGNACIONES  -&gt; ID OP_ASIGNACION EXPRESION PUNTOCOMA  </td><td align="left" port='port_two'>ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>OP_ASIGNACION -&gt; </td><td align="left" port='port_two'>OP_ASIGNACION.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; PARAMETROS COMA EXPRESION  </td><td align="left" port='port_two'> PARAMETROS_1.val.append(EXPRESION.val) 
+ PARAMETROS.val= PARAMETROS_1.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; PARAMETROS COMA EXPRESION  </td><td align="left" port='port_two'> PARAMETROS_1.val.append(EXPRESION.val) 
+ PARAMETROS.val= PARAMETROS_1.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; PARAMETROS COMA EXPRESION  </td><td align="left" port='port_two'> PARAMETROS_1.val.append(EXPRESION.val) 
+ PARAMETROS.val= PARAMETROS_1.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>RECEPCION_PARAMETROS  -&gt;   empty </td><td align="left" port='port_two'> RECEPCION_PARAMETROS.val= []</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_GLOBALES  -&gt; INSTRUCCIONES_GLOBALES DECLARACION_GLOBAL</td><td align="left" port='port_two'>INSTRUCCIONES_GLOBALES_1.val.append(DECLARACION_GLOBAL) 
+ INSTRUCCIONES_GLOBALES.val = INSTRUCCIONES_GLOBALES_1.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACION_GLOBAL  -&gt; DECLA_VARIABLES 
+ <BR/>|DECLA_FUNCIONES 
+ <BR/>|DECLA_STRUCTS</td><td align="left" port='port_two'>DECLARACION_GLOBAL.val = = t[1].val</td></tr>
+<tr><td align="left" port='port_one'>DECLA_FUNCIONES  -&gt;  TIPO ID PARIZQ RECEPCION_PARAMETROS PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER </td><td align="left" port='port_two'> DECLA_FUNCIONES.val= FunctionDeclaration(t[1], t[2], t[4], t[7], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>LLAMADA_FUNCION  -&gt; ID PARIZQ PARDER  </td><td align="left" port='port_two'> LLAMADA_FUNCION.val= Call(t[1], [])</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>LLAMADA_FUNCION  -&gt; ID PARIZQ PARDER  </td><td align="left" port='port_two'> LLAMADA_FUNCION.val= Call(t[1], [])</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; ELSE_IF 
+ <BR/>| ELSE_</td><td align="left" port='port_two'>t[1] = flatten(t[1]) 
+ ELSE_IF_.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>ELSE_  -&gt; ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER</td><td align="left" port='port_two'>ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>ASIGNACIONES  -&gt; ID OP_ASIGNACION EXPRESION PUNTOCOMA  </td><td align="left" port='port_two'>ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>OP_ASIGNACION -&gt; </td><td align="left" port='port_two'>OP_ASIGNACION.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; PARAMETROS COMA EXPRESION  </td><td align="left" port='port_two'> PARAMETROS_1.val.append(EXPRESION.val) 
+ PARAMETROS.val= PARAMETROS_1.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; ELSE_IF 
+ <BR/>| ELSE_</td><td align="left" port='port_two'>t[1] = flatten(t[1]) 
+ ELSE_IF_.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>ELSE_  -&gt; ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER</td><td align="left" port='port_two'>ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>ASIGNACIONES  -&gt; ID OP_ASIGNACION EXPRESION PUNTOCOMA  </td><td align="left" port='port_two'>ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>OP_ASIGNACION -&gt; </td><td align="left" port='port_two'>OP_ASIGNACION.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; PARAMETROS COMA EXPRESION  </td><td align="left" port='port_two'> PARAMETROS_1.val.append(EXPRESION.val) 
+ PARAMETROS.val= PARAMETROS_1.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>RECEPCION_PARAMETROS  -&gt;   empty </td><td align="left" port='port_two'> RECEPCION_PARAMETROS.val= []</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_GLOBALES  -&gt; INSTRUCCIONES_GLOBALES DECLARACION_GLOBAL</td><td align="left" port='port_two'>INSTRUCCIONES_GLOBALES_1.val.append(DECLARACION_GLOBAL) 
+ INSTRUCCIONES_GLOBALES.val = INSTRUCCIONES_GLOBALES_1.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACION_GLOBAL  -&gt; DECLA_VARIABLES 
+ <BR/>|DECLA_FUNCIONES 
+ <BR/>|DECLA_STRUCTS</td><td align="left" port='port_two'>DECLARACION_GLOBAL.val = = t[1].val</td></tr>
+<tr><td align="left" port='port_one'>DECLA_FUNCIONES  -&gt;  TIPO ID PARIZQ RECEPCION_PARAMETROS PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER </td><td align="left" port='port_two'> DECLA_FUNCIONES.val= FunctionDeclaration(t[1], t[2], t[4], t[7], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>IF_  -&gt; IF PARIZQ EXPRESION PARDER LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER ELSE_IF_</td><td align="left" port='port_two'>IF_.val= If(t[3], t[6], t[8], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>ELSE_IF_  -&gt; ELSE_IF 
+ <BR/>| ELSE_</td><td align="left" port='port_two'>t[1] = flatten(t[1]) 
+ ELSE_IF_.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>ELSE_  -&gt; ELSE LLAVEIZQ INSTRUCCIONES_INTERNAS LLAVEDER</td><td align="left" port='port_two'>ELSE_.val = [Else(t[3], t.lineno(1), t.lexpos(1))]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>ASIGNACIONES  -&gt; ID OP_ASIGNACION EXPRESION PUNTOCOMA  </td><td align="left" port='port_two'>ASIGNACIONES.val= Asignation(t[1], t[2], t[3], t.lineno(1), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>OP_ASIGNACION -&gt; </td><td align="left" port='port_two'>OP_ASIGNACION.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; PARAMETROS COMA EXPRESION  </td><td align="left" port='port_two'> PARAMETROS_1.val.append(EXPRESION.val) 
+ PARAMETROS.val= PARAMETROS_1.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; PARAMETROS COMA EXPRESION  </td><td align="left" port='port_two'> PARAMETROS_1.val.append(EXPRESION.val) 
+ PARAMETROS.val= PARAMETROS_1.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; PARAMETROS COMA EXPRESION  </td><td align="left" port='port_two'> PARAMETROS_1.val.append(EXPRESION.val) 
+ PARAMETROS.val= PARAMETROS_1.val</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CHAR_ </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  ID </td><td align="left" port='port_two'> EXPRESION.val= Identifier(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID </td><td align="left" port='port_two'> ASIGNA.val = DeclarationArrayInit(t[1], t[2], t[4], t.lineno(3), t.lexpos(3))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>CORCHETES  -&gt;  CORCHETE </td><td align="left" port='port_two'> CORCHETES.val= CORCHETE.val</td></tr>
+<tr><td align="left" port='port_one'>CORCHETE  -&gt;  CORIZQ VALOR CORDER </td><td align="left" port='port_two'> CORCHETE.val= VALOR.val</td></tr>
+<tr><td align="left" port='port_one'>VALOR  -&gt;  empty </td><td align="left" port='port_two'> VALOR.val= []</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTRUCCIONES_INTERNAS INSTR_IN </td><td align="left" port='port_two'> INSTRUCCIONES_INTERNAS_1.val.append(INSTR_IN.val) 
+ INSTRUCCIONES_INTERNAS.val= INSTRUCCIONES_INTERNAS_1.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; ..... </td><td align="left" port='port_two'>INSTR_IN.val= t[1]</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_INTERNAS  -&gt; INSTR_IN </td><td align="left" port='port_two'>INSTRUCCIONES_INTERNAS.val= INSTR_IN.val</td></tr>
+<tr><td align="left" port='port_one'>INSTR_IN  -&gt; PRINTF PARIZQ PARAMETROS PARDER PUNTOCOMA </td><td align="left" port='port_two'>INSTR_IN.val= PrintF_(t[3], t.lineno(1), t.lexpos(1)) </td></tr>
+<tr><td align="left" port='port_one'>PARAMETROS  -&gt; EXPRESION </td><td align="left" port='port_two'> PARAMETROS.val= [EXPRESION.val]</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  CADENA </td><td align="left" port='port_two'> EXPRESION.val= String_(t[1], t.lineno(1), t.lexpos(1))</td></tr>
+<tr><td align="left" port='port_one'>RECEPCION_PARAMETROS  -&gt;   empty </td><td align="left" port='port_two'> RECEPCION_PARAMETROS.val= []</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_GLOBALES  -&gt; INSTRUCCIONES_GLOBALES DECLARACION_GLOBAL</td><td align="left" port='port_two'>INSTRUCCIONES_GLOBALES_1.val.append(DECLARACION_GLOBAL) 
+ INSTRUCCIONES_GLOBALES.val = INSTRUCCIONES_GLOBALES_1.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACION_GLOBAL  -&gt; DECLA_VARIABLES 
+ <BR/>|DECLA_FUNCIONES 
+ <BR/>|DECLA_STRUCTS</td><td align="left" port='port_two'>DECLARACION_GLOBAL.val = = t[1].val</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+<tr><td align="left" port='port_one'>INSTRUCCIONES_GLOBALES  -&gt; DECLARACION_GLOBAL</td><td align="left" port='port_two'>INSTRUCCIONES_GLOBALES.val = = DECLARACION_GLOBAL.val</td></tr>
+<tr><td align="left" port='port_one'>DECLARACION_GLOBAL  -&gt; DECLA_VARIABLES 
+ <BR/>|DECLA_FUNCIONES 
+ <BR/>|DECLA_STRUCTS</td><td align="left" port='port_two'>DECLARACION_GLOBAL.val = = t[1].val</td></tr>
+<tr><td align="left" port='port_one'>DECLA_VARIABLES  -&gt;TIPO LISTA_ID PUNTOCOMA</td><td align="left" port='port_two'>DECLA_VARIABLES.val = Declaration(t[1], t.lineno(1), t.lexpos(1), t[2])</td></tr>
+<tr><td align="left" port='port_one'>LISTA_ID  -&gt; ASIGNA</td><td align="left" port='port_two'>LISTA_ID.val = ASIGNA.val</td></tr>
+<tr><td align="left" port='port_one'>ASIGNA  -&gt; ID IGUAL EXPRESION </td><td align="left" port='port_two'> ASIGNA.val = SingleDeclaration(t[1], t[3], t.lineno(2), t.lexpos(2))</td></tr>
+<tr><td align="left" port='port_one'>EXPRESION  -&gt;  NUMERO </td><td align="left" port='port_two'> EXPRESION.val= Number( t.lineno(1), t.lexpos(1), t[1])</td></tr>
+<tr><td align="left" port='port_one'>TIPO  -&gt;INT 
+ <BR/>| FLOAT 
+ <BR/>| DOUBLE 
+ <BR/>| VOID 
+ <BR/>| CHAR</td><td align="left" port='port_two'>TIPO.val = t[1]</td></tr>
+</table> >]; 
+}

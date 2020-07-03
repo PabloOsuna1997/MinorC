@@ -1,0 +1,19 @@
+main:
+	$t1=10;
+	$t2 = 0;
+	$t3 = 1;
+	$t4 = 1;
+	$t5 = 1;
+
+    fibonacci:
+	if($t5>$t1) goto fin;
+	$t4 = $t2 + $t3;
+	$t2 = $t3;
+	$t3 = $t4;
+	$t5 = $t5+1;
+	print($t4);
+	print("\n");
+	goto fibonacci;
+	
+fin:
+exit;

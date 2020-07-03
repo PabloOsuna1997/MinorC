@@ -1,0 +1,1984 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    DOLAR
+    LLAVEDER
+    LLAVEIZQ
+    NUMERAL
+
+Grammar
+
+Rule 0     S' -> S
+Rule 1     S -> A
+Rule 2     A -> MAIN DOSPUNTOS SENTENCIAS
+Rule 3     SENTENCIAS -> SENTENCIAS SENTENCIA
+Rule 4     SENTENCIAS -> SENTENCIA
+Rule 5     SENTENCIA -> ETIQUETA
+Rule 6     SENTENCIA -> INSTRUCCIONES
+Rule 7     SENTENCIA -> DECLARACIONES
+Rule 8     ETIQUETA -> LABEL error DOSPUNTOS
+Rule 9     ETIQUETA -> LABEL DOSPUNTOS
+Rule 10    INSTRUCCIONES -> PRINT PARIZQ error PARDER PUNTOCOMA
+Rule 11    INSTRUCCIONES -> IF PARIZQ error PARDER GOTO LABEL PUNTOCOMA
+Rule 12    INSTRUCCIONES -> UNSET PARIZQ error PARDER PUNTOCOMA
+Rule 13    INSTRUCCIONES -> EXIT error PUNTOCOMA
+Rule 14    INSTRUCCIONES -> GOTO error PUNTOCOMA
+Rule 15    INSTRUCCIONES -> PRINT PARIZQ EXPRESION PARDER PUNTOCOMA
+Rule 16    INSTRUCCIONES -> IF PARIZQ EXPRESION PARDER GOTO LABEL PUNTOCOMA
+Rule 17    INSTRUCCIONES -> UNSET PARIZQ ID PARDER PUNTOCOMA
+Rule 18    INSTRUCCIONES -> EXIT PUNTOCOMA
+Rule 19    INSTRUCCIONES -> GOTO LABEL PUNTOCOMA
+Rule 20    DECLARACIONES -> ID ARRAY_
+Rule 21    ARRAY_ -> error IGUAL EXPRESION PUNTOCOMA
+Rule 22    ARRAY_ -> CORCHETES IGUAL error PUNTOCOMA
+Rule 23    ARRAY_ -> IGUAL error PUNTOCOMA
+Rule 24    ARRAY_ -> CORCHETES IGUAL EXPRESION PUNTOCOMA
+Rule 25    ARRAY_ -> IGUAL EXPRESION PUNTOCOMA
+Rule 26    CORCHETES -> CORCHETES CORCHETE
+Rule 27    CORCHETES -> CORCHETE
+Rule 28    CORCHETE -> CORIZQ F CORDER
+Rule 29    EXPRESION -> ATOMICO
+Rule 30    EXPRESION -> FUNCION
+Rule 31    EXPRESION -> OPERACION
+Rule 32    OPERACION -> F error F
+Rule 33    OPERACION -> MENOS error
+Rule 34    OPERACION -> NOTLOGICA error
+Rule 35    OPERACION -> NOTBIT error
+Rule 36    OPERACION -> ANDBIT error
+Rule 37    OPERACION -> F OPERADOR F
+Rule 38    OPERACION -> MENOS F
+Rule 39    OPERACION -> NOTLOGICA F
+Rule 40    OPERACION -> NOTBIT F
+Rule 41    OPERACION -> ANDBIT F
+Rule 42    ATOMICO -> F
+Rule 43    FUNCION -> ABS PARIZQ EXPRESION PARDER
+Rule 44    FUNCION -> READ PARIZQ PARDER
+Rule 45    FUNCION -> PARIZQ TIPO PARDER ID
+Rule 46    FUNCION -> ARRAY PARIZQ PARDER
+Rule 47    OPERADOR -> MAS
+Rule 48    OPERADOR -> MENOS
+Rule 49    OPERADOR -> DIV
+Rule 50    OPERADOR -> POR
+Rule 51    OPERADOR -> MODULO
+Rule 52    OPERADOR -> AND
+Rule 53    OPERADOR -> OR
+Rule 54    OPERADOR -> XOR
+Rule 55    OPERADOR -> IGUALQUE
+Rule 56    OPERADOR -> DIFERENTE
+Rule 57    OPERADOR -> MAYORIGUAL
+Rule 58    OPERADOR -> MENORIGUAL
+Rule 59    OPERADOR -> MAYORQUE
+Rule 60    OPERADOR -> MENORQUE
+Rule 61    OPERADOR -> ANDBIT
+Rule 62    OPERADOR -> ORBIT
+Rule 63    OPERADOR -> XORBIT
+Rule 64    OPERADOR -> SHIFTIZQ
+Rule 65    OPERADOR -> SHIFTDER
+Rule 66    TIPO -> INT
+Rule 67    TIPO -> FLOAT
+Rule 68    TIPO -> CHAR
+Rule 69    F -> NUMERO
+Rule 70    F -> ID
+Rule 71    F -> ID CORCHETES
+Rule 72    F -> CADENA
+Rule 73    F -> CHAR_
+
+Terminals, with rules where they appear
+
+ABS                  : 43
+AND                  : 52
+ANDBIT               : 36 41 61
+ARRAY                : 46
+CADENA               : 72
+CHAR                 : 68
+CHAR_                : 73
+CORDER               : 28
+CORIZQ               : 28
+DIFERENTE            : 56
+DIV                  : 49
+DOLAR                : 
+DOSPUNTOS            : 2 8 9
+EXIT                 : 13 18
+FLOAT                : 67
+GOTO                 : 11 14 16 19
+ID                   : 17 20 45 70 71
+IF                   : 11 16
+IGUAL                : 21 22 23 24 25
+IGUALQUE             : 55
+INT                  : 66
+LABEL                : 8 9 11 16 19
+LLAVEDER             : 
+LLAVEIZQ             : 
+MAIN                 : 2
+MAS                  : 47
+MAYORIGUAL           : 57
+MAYORQUE             : 59
+MENORIGUAL           : 58
+MENORQUE             : 60
+MENOS                : 33 38 48
+MODULO               : 51
+NOTBIT               : 35 40
+NOTLOGICA            : 34 39
+NUMERAL              : 
+NUMERO               : 69
+OR                   : 53
+ORBIT                : 62
+PARDER               : 10 11 12 15 16 17 43 44 45 46
+PARIZQ               : 10 11 12 15 16 17 43 44 45 46
+POR                  : 50
+PRINT                : 10 15
+PUNTOCOMA            : 10 11 12 13 14 15 16 17 18 19 21 22 23 24 25
+READ                 : 44
+SHIFTDER             : 65
+SHIFTIZQ             : 64
+UNSET                : 12 17
+XOR                  : 54
+XORBIT               : 63
+error                : 8 10 11 12 13 14 21 22 23 32 33 34 35 36
+
+Nonterminals, with rules where they appear
+
+A                    : 1
+ARRAY_               : 20
+ATOMICO              : 29
+CORCHETE             : 26 27
+CORCHETES            : 22 24 26 71
+DECLARACIONES        : 7
+ETIQUETA             : 5
+EXPRESION            : 15 16 21 24 25 43
+F                    : 28 32 32 37 37 38 39 40 41 42
+FUNCION              : 30
+INSTRUCCIONES        : 6
+OPERACION            : 31
+OPERADOR             : 37
+S                    : 0
+SENTENCIA            : 3 4
+SENTENCIAS           : 2 3
+TIPO                 : 45
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . S
+    (1) S -> . A
+    (2) A -> . MAIN DOSPUNTOS SENTENCIAS
+
+    MAIN            shift and go to state 3
+
+    S                              shift and go to state 1
+    A                              shift and go to state 2
+
+state 1
+
+    (0) S' -> S .
+
+
+
+state 2
+
+    (1) S -> A .
+
+    $end            reduce using rule 1 (S -> A .)
+
+
+state 3
+
+    (2) A -> MAIN . DOSPUNTOS SENTENCIAS
+
+    DOSPUNTOS       shift and go to state 4
+
+
+state 4
+
+    (2) A -> MAIN DOSPUNTOS . SENTENCIAS
+    (3) SENTENCIAS -> . SENTENCIAS SENTENCIA
+    (4) SENTENCIAS -> . SENTENCIA
+    (5) SENTENCIA -> . ETIQUETA
+    (6) SENTENCIA -> . INSTRUCCIONES
+    (7) SENTENCIA -> . DECLARACIONES
+    (8) ETIQUETA -> . LABEL error DOSPUNTOS
+    (9) ETIQUETA -> . LABEL DOSPUNTOS
+    (10) INSTRUCCIONES -> . PRINT PARIZQ error PARDER PUNTOCOMA
+    (11) INSTRUCCIONES -> . IF PARIZQ error PARDER GOTO LABEL PUNTOCOMA
+    (12) INSTRUCCIONES -> . UNSET PARIZQ error PARDER PUNTOCOMA
+    (13) INSTRUCCIONES -> . EXIT error PUNTOCOMA
+    (14) INSTRUCCIONES -> . GOTO error PUNTOCOMA
+    (15) INSTRUCCIONES -> . PRINT PARIZQ EXPRESION PARDER PUNTOCOMA
+    (16) INSTRUCCIONES -> . IF PARIZQ EXPRESION PARDER GOTO LABEL PUNTOCOMA
+    (17) INSTRUCCIONES -> . UNSET PARIZQ ID PARDER PUNTOCOMA
+    (18) INSTRUCCIONES -> . EXIT PUNTOCOMA
+    (19) INSTRUCCIONES -> . GOTO LABEL PUNTOCOMA
+    (20) DECLARACIONES -> . ID ARRAY_
+
+    LABEL           shift and go to state 10
+    PRINT           shift and go to state 11
+    IF              shift and go to state 12
+    UNSET           shift and go to state 14
+    EXIT            shift and go to state 15
+    GOTO            shift and go to state 13
+    ID              shift and go to state 16
+
+    SENTENCIAS                     shift and go to state 5
+    SENTENCIA                      shift and go to state 6
+    ETIQUETA                       shift and go to state 7
+    INSTRUCCIONES                  shift and go to state 8
+    DECLARACIONES                  shift and go to state 9
+
+state 5
+
+    (2) A -> MAIN DOSPUNTOS SENTENCIAS .
+    (3) SENTENCIAS -> SENTENCIAS . SENTENCIA
+    (5) SENTENCIA -> . ETIQUETA
+    (6) SENTENCIA -> . INSTRUCCIONES
+    (7) SENTENCIA -> . DECLARACIONES
+    (8) ETIQUETA -> . LABEL error DOSPUNTOS
+    (9) ETIQUETA -> . LABEL DOSPUNTOS
+    (10) INSTRUCCIONES -> . PRINT PARIZQ error PARDER PUNTOCOMA
+    (11) INSTRUCCIONES -> . IF PARIZQ error PARDER GOTO LABEL PUNTOCOMA
+    (12) INSTRUCCIONES -> . UNSET PARIZQ error PARDER PUNTOCOMA
+    (13) INSTRUCCIONES -> . EXIT error PUNTOCOMA
+    (14) INSTRUCCIONES -> . GOTO error PUNTOCOMA
+    (15) INSTRUCCIONES -> . PRINT PARIZQ EXPRESION PARDER PUNTOCOMA
+    (16) INSTRUCCIONES -> . IF PARIZQ EXPRESION PARDER GOTO LABEL PUNTOCOMA
+    (17) INSTRUCCIONES -> . UNSET PARIZQ ID PARDER PUNTOCOMA
+    (18) INSTRUCCIONES -> . EXIT PUNTOCOMA
+    (19) INSTRUCCIONES -> . GOTO LABEL PUNTOCOMA
+    (20) DECLARACIONES -> . ID ARRAY_
+
+    $end            reduce using rule 2 (A -> MAIN DOSPUNTOS SENTENCIAS .)
+    LABEL           shift and go to state 10
+    PRINT           shift and go to state 11
+    IF              shift and go to state 12
+    UNSET           shift and go to state 14
+    EXIT            shift and go to state 15
+    GOTO            shift and go to state 13
+    ID              shift and go to state 16
+
+    SENTENCIA                      shift and go to state 17
+    ETIQUETA                       shift and go to state 7
+    INSTRUCCIONES                  shift and go to state 8
+    DECLARACIONES                  shift and go to state 9
+
+state 6
+
+    (4) SENTENCIAS -> SENTENCIA .
+
+    LABEL           reduce using rule 4 (SENTENCIAS -> SENTENCIA .)
+    PRINT           reduce using rule 4 (SENTENCIAS -> SENTENCIA .)
+    IF              reduce using rule 4 (SENTENCIAS -> SENTENCIA .)
+    UNSET           reduce using rule 4 (SENTENCIAS -> SENTENCIA .)
+    EXIT            reduce using rule 4 (SENTENCIAS -> SENTENCIA .)
+    GOTO            reduce using rule 4 (SENTENCIAS -> SENTENCIA .)
+    ID              reduce using rule 4 (SENTENCIAS -> SENTENCIA .)
+    $end            reduce using rule 4 (SENTENCIAS -> SENTENCIA .)
+
+
+state 7
+
+    (5) SENTENCIA -> ETIQUETA .
+
+    LABEL           reduce using rule 5 (SENTENCIA -> ETIQUETA .)
+    PRINT           reduce using rule 5 (SENTENCIA -> ETIQUETA .)
+    IF              reduce using rule 5 (SENTENCIA -> ETIQUETA .)
+    UNSET           reduce using rule 5 (SENTENCIA -> ETIQUETA .)
+    EXIT            reduce using rule 5 (SENTENCIA -> ETIQUETA .)
+    GOTO            reduce using rule 5 (SENTENCIA -> ETIQUETA .)
+    ID              reduce using rule 5 (SENTENCIA -> ETIQUETA .)
+    $end            reduce using rule 5 (SENTENCIA -> ETIQUETA .)
+
+
+state 8
+
+    (6) SENTENCIA -> INSTRUCCIONES .
+
+    LABEL           reduce using rule 6 (SENTENCIA -> INSTRUCCIONES .)
+    PRINT           reduce using rule 6 (SENTENCIA -> INSTRUCCIONES .)
+    IF              reduce using rule 6 (SENTENCIA -> INSTRUCCIONES .)
+    UNSET           reduce using rule 6 (SENTENCIA -> INSTRUCCIONES .)
+    EXIT            reduce using rule 6 (SENTENCIA -> INSTRUCCIONES .)
+    GOTO            reduce using rule 6 (SENTENCIA -> INSTRUCCIONES .)
+    ID              reduce using rule 6 (SENTENCIA -> INSTRUCCIONES .)
+    $end            reduce using rule 6 (SENTENCIA -> INSTRUCCIONES .)
+
+
+state 9
+
+    (7) SENTENCIA -> DECLARACIONES .
+
+    LABEL           reduce using rule 7 (SENTENCIA -> DECLARACIONES .)
+    PRINT           reduce using rule 7 (SENTENCIA -> DECLARACIONES .)
+    IF              reduce using rule 7 (SENTENCIA -> DECLARACIONES .)
+    UNSET           reduce using rule 7 (SENTENCIA -> DECLARACIONES .)
+    EXIT            reduce using rule 7 (SENTENCIA -> DECLARACIONES .)
+    GOTO            reduce using rule 7 (SENTENCIA -> DECLARACIONES .)
+    ID              reduce using rule 7 (SENTENCIA -> DECLARACIONES .)
+    $end            reduce using rule 7 (SENTENCIA -> DECLARACIONES .)
+
+
+state 10
+
+    (8) ETIQUETA -> LABEL . error DOSPUNTOS
+    (9) ETIQUETA -> LABEL . DOSPUNTOS
+
+    error           shift and go to state 18
+    DOSPUNTOS       shift and go to state 19
+
+
+state 11
+
+    (10) INSTRUCCIONES -> PRINT . PARIZQ error PARDER PUNTOCOMA
+    (15) INSTRUCCIONES -> PRINT . PARIZQ EXPRESION PARDER PUNTOCOMA
+
+    PARIZQ          shift and go to state 20
+
+
+state 12
+
+    (11) INSTRUCCIONES -> IF . PARIZQ error PARDER GOTO LABEL PUNTOCOMA
+    (16) INSTRUCCIONES -> IF . PARIZQ EXPRESION PARDER GOTO LABEL PUNTOCOMA
+
+    PARIZQ          shift and go to state 21
+
+
+state 13
+
+    (14) INSTRUCCIONES -> GOTO . error PUNTOCOMA
+    (19) INSTRUCCIONES -> GOTO . LABEL PUNTOCOMA
+
+    error           shift and go to state 22
+    LABEL           shift and go to state 23
+
+
+state 14
+
+    (12) INSTRUCCIONES -> UNSET . PARIZQ error PARDER PUNTOCOMA
+    (17) INSTRUCCIONES -> UNSET . PARIZQ ID PARDER PUNTOCOMA
+
+    PARIZQ          shift and go to state 24
+
+
+state 15
+
+    (13) INSTRUCCIONES -> EXIT . error PUNTOCOMA
+    (18) INSTRUCCIONES -> EXIT . PUNTOCOMA
+
+    error           shift and go to state 25
+    PUNTOCOMA       shift and go to state 26
+
+
+state 16
+
+    (20) DECLARACIONES -> ID . ARRAY_
+    (21) ARRAY_ -> . error IGUAL EXPRESION PUNTOCOMA
+    (22) ARRAY_ -> . CORCHETES IGUAL error PUNTOCOMA
+    (23) ARRAY_ -> . IGUAL error PUNTOCOMA
+    (24) ARRAY_ -> . CORCHETES IGUAL EXPRESION PUNTOCOMA
+    (25) ARRAY_ -> . IGUAL EXPRESION PUNTOCOMA
+    (26) CORCHETES -> . CORCHETES CORCHETE
+    (27) CORCHETES -> . CORCHETE
+    (28) CORCHETE -> . CORIZQ F CORDER
+
+    error           shift and go to state 28
+    IGUAL           shift and go to state 29
+    CORIZQ          shift and go to state 32
+
+    ARRAY_                         shift and go to state 27
+    CORCHETES                      shift and go to state 30
+    CORCHETE                       shift and go to state 31
+
+state 17
+
+    (3) SENTENCIAS -> SENTENCIAS SENTENCIA .
+
+    LABEL           reduce using rule 3 (SENTENCIAS -> SENTENCIAS SENTENCIA .)
+    PRINT           reduce using rule 3 (SENTENCIAS -> SENTENCIAS SENTENCIA .)
+    IF              reduce using rule 3 (SENTENCIAS -> SENTENCIAS SENTENCIA .)
+    UNSET           reduce using rule 3 (SENTENCIAS -> SENTENCIAS SENTENCIA .)
+    EXIT            reduce using rule 3 (SENTENCIAS -> SENTENCIAS SENTENCIA .)
+    GOTO            reduce using rule 3 (SENTENCIAS -> SENTENCIAS SENTENCIA .)
+    ID              reduce using rule 3 (SENTENCIAS -> SENTENCIAS SENTENCIA .)
+    $end            reduce using rule 3 (SENTENCIAS -> SENTENCIAS SENTENCIA .)
+
+
+state 18
+
+    (8) ETIQUETA -> LABEL error . DOSPUNTOS
+
+    DOSPUNTOS       shift and go to state 33
+
+
+state 19
+
+    (9) ETIQUETA -> LABEL DOSPUNTOS .
+
+    LABEL           reduce using rule 9 (ETIQUETA -> LABEL DOSPUNTOS .)
+    PRINT           reduce using rule 9 (ETIQUETA -> LABEL DOSPUNTOS .)
+    IF              reduce using rule 9 (ETIQUETA -> LABEL DOSPUNTOS .)
+    UNSET           reduce using rule 9 (ETIQUETA -> LABEL DOSPUNTOS .)
+    EXIT            reduce using rule 9 (ETIQUETA -> LABEL DOSPUNTOS .)
+    GOTO            reduce using rule 9 (ETIQUETA -> LABEL DOSPUNTOS .)
+    ID              reduce using rule 9 (ETIQUETA -> LABEL DOSPUNTOS .)
+    $end            reduce using rule 9 (ETIQUETA -> LABEL DOSPUNTOS .)
+
+
+state 20
+
+    (10) INSTRUCCIONES -> PRINT PARIZQ . error PARDER PUNTOCOMA
+    (15) INSTRUCCIONES -> PRINT PARIZQ . EXPRESION PARDER PUNTOCOMA
+    (29) EXPRESION -> . ATOMICO
+    (30) EXPRESION -> . FUNCION
+    (31) EXPRESION -> . OPERACION
+    (42) ATOMICO -> . F
+    (43) FUNCION -> . ABS PARIZQ EXPRESION PARDER
+    (44) FUNCION -> . READ PARIZQ PARDER
+    (45) FUNCION -> . PARIZQ TIPO PARDER ID
+    (46) FUNCION -> . ARRAY PARIZQ PARDER
+    (32) OPERACION -> . F error F
+    (33) OPERACION -> . MENOS error
+    (34) OPERACION -> . NOTLOGICA error
+    (35) OPERACION -> . NOTBIT error
+    (36) OPERACION -> . ANDBIT error
+    (37) OPERACION -> . F OPERADOR F
+    (38) OPERACION -> . MENOS F
+    (39) OPERACION -> . NOTLOGICA F
+    (40) OPERACION -> . NOTBIT F
+    (41) OPERACION -> . ANDBIT F
+    (69) F -> . NUMERO
+    (70) F -> . ID
+    (71) F -> . ID CORCHETES
+    (72) F -> . CADENA
+    (73) F -> . CHAR_
+
+    error           shift and go to state 35
+    ABS             shift and go to state 41
+    READ            shift and go to state 42
+    PARIZQ          shift and go to state 34
+    ARRAY           shift and go to state 44
+    MENOS           shift and go to state 45
+    NOTLOGICA       shift and go to state 46
+    NOTBIT          shift and go to state 47
+    ANDBIT          shift and go to state 48
+    NUMERO          shift and go to state 49
+    ID              shift and go to state 43
+    CADENA          shift and go to state 50
+    CHAR_           shift and go to state 51
+
+    EXPRESION                      shift and go to state 36
+    ATOMICO                        shift and go to state 37
+    FUNCION                        shift and go to state 38
+    OPERACION                      shift and go to state 39
+    F                              shift and go to state 40
+
+state 21
+
+    (11) INSTRUCCIONES -> IF PARIZQ . error PARDER GOTO LABEL PUNTOCOMA
+    (16) INSTRUCCIONES -> IF PARIZQ . EXPRESION PARDER GOTO LABEL PUNTOCOMA
+    (29) EXPRESION -> . ATOMICO
+    (30) EXPRESION -> . FUNCION
+    (31) EXPRESION -> . OPERACION
+    (42) ATOMICO -> . F
+    (43) FUNCION -> . ABS PARIZQ EXPRESION PARDER
+    (44) FUNCION -> . READ PARIZQ PARDER
+    (45) FUNCION -> . PARIZQ TIPO PARDER ID
+    (46) FUNCION -> . ARRAY PARIZQ PARDER
+    (32) OPERACION -> . F error F
+    (33) OPERACION -> . MENOS error
+    (34) OPERACION -> . NOTLOGICA error
+    (35) OPERACION -> . NOTBIT error
+    (36) OPERACION -> . ANDBIT error
+    (37) OPERACION -> . F OPERADOR F
+    (38) OPERACION -> . MENOS F
+    (39) OPERACION -> . NOTLOGICA F
+    (40) OPERACION -> . NOTBIT F
+    (41) OPERACION -> . ANDBIT F
+    (69) F -> . NUMERO
+    (70) F -> . ID
+    (71) F -> . ID CORCHETES
+    (72) F -> . CADENA
+    (73) F -> . CHAR_
+
+    error           shift and go to state 52
+    ABS             shift and go to state 41
+    READ            shift and go to state 42
+    PARIZQ          shift and go to state 34
+    ARRAY           shift and go to state 44
+    MENOS           shift and go to state 45
+    NOTLOGICA       shift and go to state 46
+    NOTBIT          shift and go to state 47
+    ANDBIT          shift and go to state 48
+    NUMERO          shift and go to state 49
+    ID              shift and go to state 43
+    CADENA          shift and go to state 50
+    CHAR_           shift and go to state 51
+
+    EXPRESION                      shift and go to state 53
+    ATOMICO                        shift and go to state 37
+    FUNCION                        shift and go to state 38
+    OPERACION                      shift and go to state 39
+    F                              shift and go to state 40
+
+state 22
+
+    (14) INSTRUCCIONES -> GOTO error . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 54
+
+
+state 23
+
+    (19) INSTRUCCIONES -> GOTO LABEL . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 55
+
+
+state 24
+
+    (12) INSTRUCCIONES -> UNSET PARIZQ . error PARDER PUNTOCOMA
+    (17) INSTRUCCIONES -> UNSET PARIZQ . ID PARDER PUNTOCOMA
+
+    error           shift and go to state 56
+    ID              shift and go to state 57
+
+
+state 25
+
+    (13) INSTRUCCIONES -> EXIT error . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 58
+
+
+state 26
+
+    (18) INSTRUCCIONES -> EXIT PUNTOCOMA .
+
+    LABEL           reduce using rule 18 (INSTRUCCIONES -> EXIT PUNTOCOMA .)
+    PRINT           reduce using rule 18 (INSTRUCCIONES -> EXIT PUNTOCOMA .)
+    IF              reduce using rule 18 (INSTRUCCIONES -> EXIT PUNTOCOMA .)
+    UNSET           reduce using rule 18 (INSTRUCCIONES -> EXIT PUNTOCOMA .)
+    EXIT            reduce using rule 18 (INSTRUCCIONES -> EXIT PUNTOCOMA .)
+    GOTO            reduce using rule 18 (INSTRUCCIONES -> EXIT PUNTOCOMA .)
+    ID              reduce using rule 18 (INSTRUCCIONES -> EXIT PUNTOCOMA .)
+    $end            reduce using rule 18 (INSTRUCCIONES -> EXIT PUNTOCOMA .)
+
+
+state 27
+
+    (20) DECLARACIONES -> ID ARRAY_ .
+
+    LABEL           reduce using rule 20 (DECLARACIONES -> ID ARRAY_ .)
+    PRINT           reduce using rule 20 (DECLARACIONES -> ID ARRAY_ .)
+    IF              reduce using rule 20 (DECLARACIONES -> ID ARRAY_ .)
+    UNSET           reduce using rule 20 (DECLARACIONES -> ID ARRAY_ .)
+    EXIT            reduce using rule 20 (DECLARACIONES -> ID ARRAY_ .)
+    GOTO            reduce using rule 20 (DECLARACIONES -> ID ARRAY_ .)
+    ID              reduce using rule 20 (DECLARACIONES -> ID ARRAY_ .)
+    $end            reduce using rule 20 (DECLARACIONES -> ID ARRAY_ .)
+
+
+state 28
+
+    (21) ARRAY_ -> error . IGUAL EXPRESION PUNTOCOMA
+
+    IGUAL           shift and go to state 59
+
+
+state 29
+
+    (23) ARRAY_ -> IGUAL . error PUNTOCOMA
+    (25) ARRAY_ -> IGUAL . EXPRESION PUNTOCOMA
+    (29) EXPRESION -> . ATOMICO
+    (30) EXPRESION -> . FUNCION
+    (31) EXPRESION -> . OPERACION
+    (42) ATOMICO -> . F
+    (43) FUNCION -> . ABS PARIZQ EXPRESION PARDER
+    (44) FUNCION -> . READ PARIZQ PARDER
+    (45) FUNCION -> . PARIZQ TIPO PARDER ID
+    (46) FUNCION -> . ARRAY PARIZQ PARDER
+    (32) OPERACION -> . F error F
+    (33) OPERACION -> . MENOS error
+    (34) OPERACION -> . NOTLOGICA error
+    (35) OPERACION -> . NOTBIT error
+    (36) OPERACION -> . ANDBIT error
+    (37) OPERACION -> . F OPERADOR F
+    (38) OPERACION -> . MENOS F
+    (39) OPERACION -> . NOTLOGICA F
+    (40) OPERACION -> . NOTBIT F
+    (41) OPERACION -> . ANDBIT F
+    (69) F -> . NUMERO
+    (70) F -> . ID
+    (71) F -> . ID CORCHETES
+    (72) F -> . CADENA
+    (73) F -> . CHAR_
+
+    error           shift and go to state 60
+    ABS             shift and go to state 41
+    READ            shift and go to state 42
+    PARIZQ          shift and go to state 34
+    ARRAY           shift and go to state 44
+    MENOS           shift and go to state 45
+    NOTLOGICA       shift and go to state 46
+    NOTBIT          shift and go to state 47
+    ANDBIT          shift and go to state 48
+    NUMERO          shift and go to state 49
+    ID              shift and go to state 43
+    CADENA          shift and go to state 50
+    CHAR_           shift and go to state 51
+
+    EXPRESION                      shift and go to state 61
+    ATOMICO                        shift and go to state 37
+    FUNCION                        shift and go to state 38
+    OPERACION                      shift and go to state 39
+    F                              shift and go to state 40
+
+state 30
+
+    (22) ARRAY_ -> CORCHETES . IGUAL error PUNTOCOMA
+    (24) ARRAY_ -> CORCHETES . IGUAL EXPRESION PUNTOCOMA
+    (26) CORCHETES -> CORCHETES . CORCHETE
+    (28) CORCHETE -> . CORIZQ F CORDER
+
+    IGUAL           shift and go to state 62
+    CORIZQ          shift and go to state 32
+
+    CORCHETE                       shift and go to state 63
+
+state 31
+
+    (27) CORCHETES -> CORCHETE .
+
+    IGUAL           reduce using rule 27 (CORCHETES -> CORCHETE .)
+    CORIZQ          reduce using rule 27 (CORCHETES -> CORCHETE .)
+    error           reduce using rule 27 (CORCHETES -> CORCHETE .)
+    MAS             reduce using rule 27 (CORCHETES -> CORCHETE .)
+    MENOS           reduce using rule 27 (CORCHETES -> CORCHETE .)
+    DIV             reduce using rule 27 (CORCHETES -> CORCHETE .)
+    POR             reduce using rule 27 (CORCHETES -> CORCHETE .)
+    MODULO          reduce using rule 27 (CORCHETES -> CORCHETE .)
+    AND             reduce using rule 27 (CORCHETES -> CORCHETE .)
+    OR              reduce using rule 27 (CORCHETES -> CORCHETE .)
+    XOR             reduce using rule 27 (CORCHETES -> CORCHETE .)
+    IGUALQUE        reduce using rule 27 (CORCHETES -> CORCHETE .)
+    DIFERENTE       reduce using rule 27 (CORCHETES -> CORCHETE .)
+    MAYORIGUAL      reduce using rule 27 (CORCHETES -> CORCHETE .)
+    MENORIGUAL      reduce using rule 27 (CORCHETES -> CORCHETE .)
+    MAYORQUE        reduce using rule 27 (CORCHETES -> CORCHETE .)
+    MENORQUE        reduce using rule 27 (CORCHETES -> CORCHETE .)
+    ANDBIT          reduce using rule 27 (CORCHETES -> CORCHETE .)
+    ORBIT           reduce using rule 27 (CORCHETES -> CORCHETE .)
+    XORBIT          reduce using rule 27 (CORCHETES -> CORCHETE .)
+    SHIFTIZQ        reduce using rule 27 (CORCHETES -> CORCHETE .)
+    SHIFTDER        reduce using rule 27 (CORCHETES -> CORCHETE .)
+    PARDER          reduce using rule 27 (CORCHETES -> CORCHETE .)
+    PUNTOCOMA       reduce using rule 27 (CORCHETES -> CORCHETE .)
+    CORDER          reduce using rule 27 (CORCHETES -> CORCHETE .)
+
+
+state 32
+
+    (28) CORCHETE -> CORIZQ . F CORDER
+    (69) F -> . NUMERO
+    (70) F -> . ID
+    (71) F -> . ID CORCHETES
+    (72) F -> . CADENA
+    (73) F -> . CHAR_
+
+    NUMERO          shift and go to state 49
+    ID              shift and go to state 43
+    CADENA          shift and go to state 50
+    CHAR_           shift and go to state 51
+
+    F                              shift and go to state 64
+
+state 33
+
+    (8) ETIQUETA -> LABEL error DOSPUNTOS .
+
+    LABEL           reduce using rule 8 (ETIQUETA -> LABEL error DOSPUNTOS .)
+    PRINT           reduce using rule 8 (ETIQUETA -> LABEL error DOSPUNTOS .)
+    IF              reduce using rule 8 (ETIQUETA -> LABEL error DOSPUNTOS .)
+    UNSET           reduce using rule 8 (ETIQUETA -> LABEL error DOSPUNTOS .)
+    EXIT            reduce using rule 8 (ETIQUETA -> LABEL error DOSPUNTOS .)
+    GOTO            reduce using rule 8 (ETIQUETA -> LABEL error DOSPUNTOS .)
+    ID              reduce using rule 8 (ETIQUETA -> LABEL error DOSPUNTOS .)
+    $end            reduce using rule 8 (ETIQUETA -> LABEL error DOSPUNTOS .)
+
+
+state 34
+
+    (45) FUNCION -> PARIZQ . TIPO PARDER ID
+    (66) TIPO -> . INT
+    (67) TIPO -> . FLOAT
+    (68) TIPO -> . CHAR
+
+    INT             shift and go to state 66
+    FLOAT           shift and go to state 67
+    CHAR            shift and go to state 68
+
+    TIPO                           shift and go to state 65
+
+state 35
+
+    (10) INSTRUCCIONES -> PRINT PARIZQ error . PARDER PUNTOCOMA
+
+    PARDER          shift and go to state 69
+
+
+state 36
+
+    (15) INSTRUCCIONES -> PRINT PARIZQ EXPRESION . PARDER PUNTOCOMA
+
+    PARDER          shift and go to state 70
+
+
+state 37
+
+    (29) EXPRESION -> ATOMICO .
+
+    PARDER          reduce using rule 29 (EXPRESION -> ATOMICO .)
+    PUNTOCOMA       reduce using rule 29 (EXPRESION -> ATOMICO .)
+
+
+state 38
+
+    (30) EXPRESION -> FUNCION .
+
+    PARDER          reduce using rule 30 (EXPRESION -> FUNCION .)
+    PUNTOCOMA       reduce using rule 30 (EXPRESION -> FUNCION .)
+
+
+state 39
+
+    (31) EXPRESION -> OPERACION .
+
+    PARDER          reduce using rule 31 (EXPRESION -> OPERACION .)
+    PUNTOCOMA       reduce using rule 31 (EXPRESION -> OPERACION .)
+
+
+state 40
+
+    (42) ATOMICO -> F .
+    (32) OPERACION -> F . error F
+    (37) OPERACION -> F . OPERADOR F
+    (47) OPERADOR -> . MAS
+    (48) OPERADOR -> . MENOS
+    (49) OPERADOR -> . DIV
+    (50) OPERADOR -> . POR
+    (51) OPERADOR -> . MODULO
+    (52) OPERADOR -> . AND
+    (53) OPERADOR -> . OR
+    (54) OPERADOR -> . XOR
+    (55) OPERADOR -> . IGUALQUE
+    (56) OPERADOR -> . DIFERENTE
+    (57) OPERADOR -> . MAYORIGUAL
+    (58) OPERADOR -> . MENORIGUAL
+    (59) OPERADOR -> . MAYORQUE
+    (60) OPERADOR -> . MENORQUE
+    (61) OPERADOR -> . ANDBIT
+    (62) OPERADOR -> . ORBIT
+    (63) OPERADOR -> . XORBIT
+    (64) OPERADOR -> . SHIFTIZQ
+    (65) OPERADOR -> . SHIFTDER
+
+    PARDER          reduce using rule 42 (ATOMICO -> F .)
+    PUNTOCOMA       reduce using rule 42 (ATOMICO -> F .)
+    error           shift and go to state 71
+    MAS             shift and go to state 73
+    MENOS           shift and go to state 74
+    DIV             shift and go to state 75
+    POR             shift and go to state 76
+    MODULO          shift and go to state 77
+    AND             shift and go to state 78
+    OR              shift and go to state 79
+    XOR             shift and go to state 80
+    IGUALQUE        shift and go to state 81
+    DIFERENTE       shift and go to state 82
+    MAYORIGUAL      shift and go to state 83
+    MENORIGUAL      shift and go to state 84
+    MAYORQUE        shift and go to state 85
+    MENORQUE        shift and go to state 86
+    ANDBIT          shift and go to state 87
+    ORBIT           shift and go to state 88
+    XORBIT          shift and go to state 89
+    SHIFTIZQ        shift and go to state 90
+    SHIFTDER        shift and go to state 91
+
+    OPERADOR                       shift and go to state 72
+
+state 41
+
+    (43) FUNCION -> ABS . PARIZQ EXPRESION PARDER
+
+    PARIZQ          shift and go to state 92
+
+
+state 42
+
+    (44) FUNCION -> READ . PARIZQ PARDER
+
+    PARIZQ          shift and go to state 93
+
+
+state 43
+
+    (70) F -> ID .
+    (71) F -> ID . CORCHETES
+    (26) CORCHETES -> . CORCHETES CORCHETE
+    (27) CORCHETES -> . CORCHETE
+    (28) CORCHETE -> . CORIZQ F CORDER
+
+    error           reduce using rule 70 (F -> ID .)
+    MAS             reduce using rule 70 (F -> ID .)
+    MENOS           reduce using rule 70 (F -> ID .)
+    DIV             reduce using rule 70 (F -> ID .)
+    POR             reduce using rule 70 (F -> ID .)
+    MODULO          reduce using rule 70 (F -> ID .)
+    AND             reduce using rule 70 (F -> ID .)
+    OR              reduce using rule 70 (F -> ID .)
+    XOR             reduce using rule 70 (F -> ID .)
+    IGUALQUE        reduce using rule 70 (F -> ID .)
+    DIFERENTE       reduce using rule 70 (F -> ID .)
+    MAYORIGUAL      reduce using rule 70 (F -> ID .)
+    MENORIGUAL      reduce using rule 70 (F -> ID .)
+    MAYORQUE        reduce using rule 70 (F -> ID .)
+    MENORQUE        reduce using rule 70 (F -> ID .)
+    ANDBIT          reduce using rule 70 (F -> ID .)
+    ORBIT           reduce using rule 70 (F -> ID .)
+    XORBIT          reduce using rule 70 (F -> ID .)
+    SHIFTIZQ        reduce using rule 70 (F -> ID .)
+    SHIFTDER        reduce using rule 70 (F -> ID .)
+    PARDER          reduce using rule 70 (F -> ID .)
+    PUNTOCOMA       reduce using rule 70 (F -> ID .)
+    CORDER          reduce using rule 70 (F -> ID .)
+    CORIZQ          shift and go to state 32
+
+    CORCHETES                      shift and go to state 94
+    CORCHETE                       shift and go to state 31
+
+state 44
+
+    (46) FUNCION -> ARRAY . PARIZQ PARDER
+
+    PARIZQ          shift and go to state 95
+
+
+state 45
+
+    (33) OPERACION -> MENOS . error
+    (38) OPERACION -> MENOS . F
+    (69) F -> . NUMERO
+    (70) F -> . ID
+    (71) F -> . ID CORCHETES
+    (72) F -> . CADENA
+    (73) F -> . CHAR_
+
+    error           shift and go to state 96
+    NUMERO          shift and go to state 49
+    ID              shift and go to state 43
+    CADENA          shift and go to state 50
+    CHAR_           shift and go to state 51
+
+    F                              shift and go to state 97
+
+state 46
+
+    (34) OPERACION -> NOTLOGICA . error
+    (39) OPERACION -> NOTLOGICA . F
+    (69) F -> . NUMERO
+    (70) F -> . ID
+    (71) F -> . ID CORCHETES
+    (72) F -> . CADENA
+    (73) F -> . CHAR_
+
+    error           shift and go to state 98
+    NUMERO          shift and go to state 49
+    ID              shift and go to state 43
+    CADENA          shift and go to state 50
+    CHAR_           shift and go to state 51
+
+    F                              shift and go to state 99
+
+state 47
+
+    (35) OPERACION -> NOTBIT . error
+    (40) OPERACION -> NOTBIT . F
+    (69) F -> . NUMERO
+    (70) F -> . ID
+    (71) F -> . ID CORCHETES
+    (72) F -> . CADENA
+    (73) F -> . CHAR_
+
+    error           shift and go to state 100
+    NUMERO          shift and go to state 49
+    ID              shift and go to state 43
+    CADENA          shift and go to state 50
+    CHAR_           shift and go to state 51
+
+    F                              shift and go to state 101
+
+state 48
+
+    (36) OPERACION -> ANDBIT . error
+    (41) OPERACION -> ANDBIT . F
+    (69) F -> . NUMERO
+    (70) F -> . ID
+    (71) F -> . ID CORCHETES
+    (72) F -> . CADENA
+    (73) F -> . CHAR_
+
+    error           shift and go to state 102
+    NUMERO          shift and go to state 49
+    ID              shift and go to state 43
+    CADENA          shift and go to state 50
+    CHAR_           shift and go to state 51
+
+    F                              shift and go to state 103
+
+state 49
+
+    (69) F -> NUMERO .
+
+    error           reduce using rule 69 (F -> NUMERO .)
+    MAS             reduce using rule 69 (F -> NUMERO .)
+    MENOS           reduce using rule 69 (F -> NUMERO .)
+    DIV             reduce using rule 69 (F -> NUMERO .)
+    POR             reduce using rule 69 (F -> NUMERO .)
+    MODULO          reduce using rule 69 (F -> NUMERO .)
+    AND             reduce using rule 69 (F -> NUMERO .)
+    OR              reduce using rule 69 (F -> NUMERO .)
+    XOR             reduce using rule 69 (F -> NUMERO .)
+    IGUALQUE        reduce using rule 69 (F -> NUMERO .)
+    DIFERENTE       reduce using rule 69 (F -> NUMERO .)
+    MAYORIGUAL      reduce using rule 69 (F -> NUMERO .)
+    MENORIGUAL      reduce using rule 69 (F -> NUMERO .)
+    MAYORQUE        reduce using rule 69 (F -> NUMERO .)
+    MENORQUE        reduce using rule 69 (F -> NUMERO .)
+    ANDBIT          reduce using rule 69 (F -> NUMERO .)
+    ORBIT           reduce using rule 69 (F -> NUMERO .)
+    XORBIT          reduce using rule 69 (F -> NUMERO .)
+    SHIFTIZQ        reduce using rule 69 (F -> NUMERO .)
+    SHIFTDER        reduce using rule 69 (F -> NUMERO .)
+    PARDER          reduce using rule 69 (F -> NUMERO .)
+    PUNTOCOMA       reduce using rule 69 (F -> NUMERO .)
+    CORDER          reduce using rule 69 (F -> NUMERO .)
+
+
+state 50
+
+    (72) F -> CADENA .
+
+    error           reduce using rule 72 (F -> CADENA .)
+    MAS             reduce using rule 72 (F -> CADENA .)
+    MENOS           reduce using rule 72 (F -> CADENA .)
+    DIV             reduce using rule 72 (F -> CADENA .)
+    POR             reduce using rule 72 (F -> CADENA .)
+    MODULO          reduce using rule 72 (F -> CADENA .)
+    AND             reduce using rule 72 (F -> CADENA .)
+    OR              reduce using rule 72 (F -> CADENA .)
+    XOR             reduce using rule 72 (F -> CADENA .)
+    IGUALQUE        reduce using rule 72 (F -> CADENA .)
+    DIFERENTE       reduce using rule 72 (F -> CADENA .)
+    MAYORIGUAL      reduce using rule 72 (F -> CADENA .)
+    MENORIGUAL      reduce using rule 72 (F -> CADENA .)
+    MAYORQUE        reduce using rule 72 (F -> CADENA .)
+    MENORQUE        reduce using rule 72 (F -> CADENA .)
+    ANDBIT          reduce using rule 72 (F -> CADENA .)
+    ORBIT           reduce using rule 72 (F -> CADENA .)
+    XORBIT          reduce using rule 72 (F -> CADENA .)
+    SHIFTIZQ        reduce using rule 72 (F -> CADENA .)
+    SHIFTDER        reduce using rule 72 (F -> CADENA .)
+    PARDER          reduce using rule 72 (F -> CADENA .)
+    PUNTOCOMA       reduce using rule 72 (F -> CADENA .)
+    CORDER          reduce using rule 72 (F -> CADENA .)
+
+
+state 51
+
+    (73) F -> CHAR_ .
+
+    error           reduce using rule 73 (F -> CHAR_ .)
+    MAS             reduce using rule 73 (F -> CHAR_ .)
+    MENOS           reduce using rule 73 (F -> CHAR_ .)
+    DIV             reduce using rule 73 (F -> CHAR_ .)
+    POR             reduce using rule 73 (F -> CHAR_ .)
+    MODULO          reduce using rule 73 (F -> CHAR_ .)
+    AND             reduce using rule 73 (F -> CHAR_ .)
+    OR              reduce using rule 73 (F -> CHAR_ .)
+    XOR             reduce using rule 73 (F -> CHAR_ .)
+    IGUALQUE        reduce using rule 73 (F -> CHAR_ .)
+    DIFERENTE       reduce using rule 73 (F -> CHAR_ .)
+    MAYORIGUAL      reduce using rule 73 (F -> CHAR_ .)
+    MENORIGUAL      reduce using rule 73 (F -> CHAR_ .)
+    MAYORQUE        reduce using rule 73 (F -> CHAR_ .)
+    MENORQUE        reduce using rule 73 (F -> CHAR_ .)
+    ANDBIT          reduce using rule 73 (F -> CHAR_ .)
+    ORBIT           reduce using rule 73 (F -> CHAR_ .)
+    XORBIT          reduce using rule 73 (F -> CHAR_ .)
+    SHIFTIZQ        reduce using rule 73 (F -> CHAR_ .)
+    SHIFTDER        reduce using rule 73 (F -> CHAR_ .)
+    PARDER          reduce using rule 73 (F -> CHAR_ .)
+    PUNTOCOMA       reduce using rule 73 (F -> CHAR_ .)
+    CORDER          reduce using rule 73 (F -> CHAR_ .)
+
+
+state 52
+
+    (11) INSTRUCCIONES -> IF PARIZQ error . PARDER GOTO LABEL PUNTOCOMA
+
+    PARDER          shift and go to state 104
+
+
+state 53
+
+    (16) INSTRUCCIONES -> IF PARIZQ EXPRESION . PARDER GOTO LABEL PUNTOCOMA
+
+    PARDER          shift and go to state 105
+
+
+state 54
+
+    (14) INSTRUCCIONES -> GOTO error PUNTOCOMA .
+
+    LABEL           reduce using rule 14 (INSTRUCCIONES -> GOTO error PUNTOCOMA .)
+    PRINT           reduce using rule 14 (INSTRUCCIONES -> GOTO error PUNTOCOMA .)
+    IF              reduce using rule 14 (INSTRUCCIONES -> GOTO error PUNTOCOMA .)
+    UNSET           reduce using rule 14 (INSTRUCCIONES -> GOTO error PUNTOCOMA .)
+    EXIT            reduce using rule 14 (INSTRUCCIONES -> GOTO error PUNTOCOMA .)
+    GOTO            reduce using rule 14 (INSTRUCCIONES -> GOTO error PUNTOCOMA .)
+    ID              reduce using rule 14 (INSTRUCCIONES -> GOTO error PUNTOCOMA .)
+    $end            reduce using rule 14 (INSTRUCCIONES -> GOTO error PUNTOCOMA .)
+
+
+state 55
+
+    (19) INSTRUCCIONES -> GOTO LABEL PUNTOCOMA .
+
+    LABEL           reduce using rule 19 (INSTRUCCIONES -> GOTO LABEL PUNTOCOMA .)
+    PRINT           reduce using rule 19 (INSTRUCCIONES -> GOTO LABEL PUNTOCOMA .)
+    IF              reduce using rule 19 (INSTRUCCIONES -> GOTO LABEL PUNTOCOMA .)
+    UNSET           reduce using rule 19 (INSTRUCCIONES -> GOTO LABEL PUNTOCOMA .)
+    EXIT            reduce using rule 19 (INSTRUCCIONES -> GOTO LABEL PUNTOCOMA .)
+    GOTO            reduce using rule 19 (INSTRUCCIONES -> GOTO LABEL PUNTOCOMA .)
+    ID              reduce using rule 19 (INSTRUCCIONES -> GOTO LABEL PUNTOCOMA .)
+    $end            reduce using rule 19 (INSTRUCCIONES -> GOTO LABEL PUNTOCOMA .)
+
+
+state 56
+
+    (12) INSTRUCCIONES -> UNSET PARIZQ error . PARDER PUNTOCOMA
+
+    PARDER          shift and go to state 106
+
+
+state 57
+
+    (17) INSTRUCCIONES -> UNSET PARIZQ ID . PARDER PUNTOCOMA
+
+    PARDER          shift and go to state 107
+
+
+state 58
+
+    (13) INSTRUCCIONES -> EXIT error PUNTOCOMA .
+
+    LABEL           reduce using rule 13 (INSTRUCCIONES -> EXIT error PUNTOCOMA .)
+    PRINT           reduce using rule 13 (INSTRUCCIONES -> EXIT error PUNTOCOMA .)
+    IF              reduce using rule 13 (INSTRUCCIONES -> EXIT error PUNTOCOMA .)
+    UNSET           reduce using rule 13 (INSTRUCCIONES -> EXIT error PUNTOCOMA .)
+    EXIT            reduce using rule 13 (INSTRUCCIONES -> EXIT error PUNTOCOMA .)
+    GOTO            reduce using rule 13 (INSTRUCCIONES -> EXIT error PUNTOCOMA .)
+    ID              reduce using rule 13 (INSTRUCCIONES -> EXIT error PUNTOCOMA .)
+    $end            reduce using rule 13 (INSTRUCCIONES -> EXIT error PUNTOCOMA .)
+
+
+state 59
+
+    (21) ARRAY_ -> error IGUAL . EXPRESION PUNTOCOMA
+    (29) EXPRESION -> . ATOMICO
+    (30) EXPRESION -> . FUNCION
+    (31) EXPRESION -> . OPERACION
+    (42) ATOMICO -> . F
+    (43) FUNCION -> . ABS PARIZQ EXPRESION PARDER
+    (44) FUNCION -> . READ PARIZQ PARDER
+    (45) FUNCION -> . PARIZQ TIPO PARDER ID
+    (46) FUNCION -> . ARRAY PARIZQ PARDER
+    (32) OPERACION -> . F error F
+    (33) OPERACION -> . MENOS error
+    (34) OPERACION -> . NOTLOGICA error
+    (35) OPERACION -> . NOTBIT error
+    (36) OPERACION -> . ANDBIT error
+    (37) OPERACION -> . F OPERADOR F
+    (38) OPERACION -> . MENOS F
+    (39) OPERACION -> . NOTLOGICA F
+    (40) OPERACION -> . NOTBIT F
+    (41) OPERACION -> . ANDBIT F
+    (69) F -> . NUMERO
+    (70) F -> . ID
+    (71) F -> . ID CORCHETES
+    (72) F -> . CADENA
+    (73) F -> . CHAR_
+
+    ABS             shift and go to state 41
+    READ            shift and go to state 42
+    PARIZQ          shift and go to state 34
+    ARRAY           shift and go to state 44
+    MENOS           shift and go to state 45
+    NOTLOGICA       shift and go to state 46
+    NOTBIT          shift and go to state 47
+    ANDBIT          shift and go to state 48
+    NUMERO          shift and go to state 49
+    ID              shift and go to state 43
+    CADENA          shift and go to state 50
+    CHAR_           shift and go to state 51
+
+    EXPRESION                      shift and go to state 108
+    ATOMICO                        shift and go to state 37
+    FUNCION                        shift and go to state 38
+    OPERACION                      shift and go to state 39
+    F                              shift and go to state 40
+
+state 60
+
+    (23) ARRAY_ -> IGUAL error . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 109
+
+
+state 61
+
+    (25) ARRAY_ -> IGUAL EXPRESION . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 110
+
+
+state 62
+
+    (22) ARRAY_ -> CORCHETES IGUAL . error PUNTOCOMA
+    (24) ARRAY_ -> CORCHETES IGUAL . EXPRESION PUNTOCOMA
+    (29) EXPRESION -> . ATOMICO
+    (30) EXPRESION -> . FUNCION
+    (31) EXPRESION -> . OPERACION
+    (42) ATOMICO -> . F
+    (43) FUNCION -> . ABS PARIZQ EXPRESION PARDER
+    (44) FUNCION -> . READ PARIZQ PARDER
+    (45) FUNCION -> . PARIZQ TIPO PARDER ID
+    (46) FUNCION -> . ARRAY PARIZQ PARDER
+    (32) OPERACION -> . F error F
+    (33) OPERACION -> . MENOS error
+    (34) OPERACION -> . NOTLOGICA error
+    (35) OPERACION -> . NOTBIT error
+    (36) OPERACION -> . ANDBIT error
+    (37) OPERACION -> . F OPERADOR F
+    (38) OPERACION -> . MENOS F
+    (39) OPERACION -> . NOTLOGICA F
+    (40) OPERACION -> . NOTBIT F
+    (41) OPERACION -> . ANDBIT F
+    (69) F -> . NUMERO
+    (70) F -> . ID
+    (71) F -> . ID CORCHETES
+    (72) F -> . CADENA
+    (73) F -> . CHAR_
+
+    error           shift and go to state 111
+    ABS             shift and go to state 41
+    READ            shift and go to state 42
+    PARIZQ          shift and go to state 34
+    ARRAY           shift and go to state 44
+    MENOS           shift and go to state 45
+    NOTLOGICA       shift and go to state 46
+    NOTBIT          shift and go to state 47
+    ANDBIT          shift and go to state 48
+    NUMERO          shift and go to state 49
+    ID              shift and go to state 43
+    CADENA          shift and go to state 50
+    CHAR_           shift and go to state 51
+
+    EXPRESION                      shift and go to state 112
+    ATOMICO                        shift and go to state 37
+    FUNCION                        shift and go to state 38
+    OPERACION                      shift and go to state 39
+    F                              shift and go to state 40
+
+state 63
+
+    (26) CORCHETES -> CORCHETES CORCHETE .
+
+    IGUAL           reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    CORIZQ          reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    error           reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    MAS             reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    MENOS           reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    DIV             reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    POR             reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    MODULO          reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    AND             reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    OR              reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    XOR             reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    IGUALQUE        reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    DIFERENTE       reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    MAYORIGUAL      reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    MENORIGUAL      reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    MAYORQUE        reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    MENORQUE        reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    ANDBIT          reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    ORBIT           reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    XORBIT          reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    SHIFTIZQ        reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    SHIFTDER        reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    PARDER          reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    PUNTOCOMA       reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+    CORDER          reduce using rule 26 (CORCHETES -> CORCHETES CORCHETE .)
+
+
+state 64
+
+    (28) CORCHETE -> CORIZQ F . CORDER
+
+    CORDER          shift and go to state 113
+
+
+state 65
+
+    (45) FUNCION -> PARIZQ TIPO . PARDER ID
+
+    PARDER          shift and go to state 114
+
+
+state 66
+
+    (66) TIPO -> INT .
+
+    PARDER          reduce using rule 66 (TIPO -> INT .)
+
+
+state 67
+
+    (67) TIPO -> FLOAT .
+
+    PARDER          reduce using rule 67 (TIPO -> FLOAT .)
+
+
+state 68
+
+    (68) TIPO -> CHAR .
+
+    PARDER          reduce using rule 68 (TIPO -> CHAR .)
+
+
+state 69
+
+    (10) INSTRUCCIONES -> PRINT PARIZQ error PARDER . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 115
+
+
+state 70
+
+    (15) INSTRUCCIONES -> PRINT PARIZQ EXPRESION PARDER . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 116
+
+
+state 71
+
+    (32) OPERACION -> F error . F
+    (69) F -> . NUMERO
+    (70) F -> . ID
+    (71) F -> . ID CORCHETES
+    (72) F -> . CADENA
+    (73) F -> . CHAR_
+
+    NUMERO          shift and go to state 49
+    ID              shift and go to state 43
+    CADENA          shift and go to state 50
+    CHAR_           shift and go to state 51
+
+    F                              shift and go to state 117
+
+state 72
+
+    (37) OPERACION -> F OPERADOR . F
+    (69) F -> . NUMERO
+    (70) F -> . ID
+    (71) F -> . ID CORCHETES
+    (72) F -> . CADENA
+    (73) F -> . CHAR_
+
+    NUMERO          shift and go to state 49
+    ID              shift and go to state 43
+    CADENA          shift and go to state 50
+    CHAR_           shift and go to state 51
+
+    F                              shift and go to state 118
+
+state 73
+
+    (47) OPERADOR -> MAS .
+
+    NUMERO          reduce using rule 47 (OPERADOR -> MAS .)
+    ID              reduce using rule 47 (OPERADOR -> MAS .)
+    CADENA          reduce using rule 47 (OPERADOR -> MAS .)
+    CHAR_           reduce using rule 47 (OPERADOR -> MAS .)
+
+
+state 74
+
+    (48) OPERADOR -> MENOS .
+
+    NUMERO          reduce using rule 48 (OPERADOR -> MENOS .)
+    ID              reduce using rule 48 (OPERADOR -> MENOS .)
+    CADENA          reduce using rule 48 (OPERADOR -> MENOS .)
+    CHAR_           reduce using rule 48 (OPERADOR -> MENOS .)
+
+
+state 75
+
+    (49) OPERADOR -> DIV .
+
+    NUMERO          reduce using rule 49 (OPERADOR -> DIV .)
+    ID              reduce using rule 49 (OPERADOR -> DIV .)
+    CADENA          reduce using rule 49 (OPERADOR -> DIV .)
+    CHAR_           reduce using rule 49 (OPERADOR -> DIV .)
+
+
+state 76
+
+    (50) OPERADOR -> POR .
+
+    NUMERO          reduce using rule 50 (OPERADOR -> POR .)
+    ID              reduce using rule 50 (OPERADOR -> POR .)
+    CADENA          reduce using rule 50 (OPERADOR -> POR .)
+    CHAR_           reduce using rule 50 (OPERADOR -> POR .)
+
+
+state 77
+
+    (51) OPERADOR -> MODULO .
+
+    NUMERO          reduce using rule 51 (OPERADOR -> MODULO .)
+    ID              reduce using rule 51 (OPERADOR -> MODULO .)
+    CADENA          reduce using rule 51 (OPERADOR -> MODULO .)
+    CHAR_           reduce using rule 51 (OPERADOR -> MODULO .)
+
+
+state 78
+
+    (52) OPERADOR -> AND .
+
+    NUMERO          reduce using rule 52 (OPERADOR -> AND .)
+    ID              reduce using rule 52 (OPERADOR -> AND .)
+    CADENA          reduce using rule 52 (OPERADOR -> AND .)
+    CHAR_           reduce using rule 52 (OPERADOR -> AND .)
+
+
+state 79
+
+    (53) OPERADOR -> OR .
+
+    NUMERO          reduce using rule 53 (OPERADOR -> OR .)
+    ID              reduce using rule 53 (OPERADOR -> OR .)
+    CADENA          reduce using rule 53 (OPERADOR -> OR .)
+    CHAR_           reduce using rule 53 (OPERADOR -> OR .)
+
+
+state 80
+
+    (54) OPERADOR -> XOR .
+
+    NUMERO          reduce using rule 54 (OPERADOR -> XOR .)
+    ID              reduce using rule 54 (OPERADOR -> XOR .)
+    CADENA          reduce using rule 54 (OPERADOR -> XOR .)
+    CHAR_           reduce using rule 54 (OPERADOR -> XOR .)
+
+
+state 81
+
+    (55) OPERADOR -> IGUALQUE .
+
+    NUMERO          reduce using rule 55 (OPERADOR -> IGUALQUE .)
+    ID              reduce using rule 55 (OPERADOR -> IGUALQUE .)
+    CADENA          reduce using rule 55 (OPERADOR -> IGUALQUE .)
+    CHAR_           reduce using rule 55 (OPERADOR -> IGUALQUE .)
+
+
+state 82
+
+    (56) OPERADOR -> DIFERENTE .
+
+    NUMERO          reduce using rule 56 (OPERADOR -> DIFERENTE .)
+    ID              reduce using rule 56 (OPERADOR -> DIFERENTE .)
+    CADENA          reduce using rule 56 (OPERADOR -> DIFERENTE .)
+    CHAR_           reduce using rule 56 (OPERADOR -> DIFERENTE .)
+
+
+state 83
+
+    (57) OPERADOR -> MAYORIGUAL .
+
+    NUMERO          reduce using rule 57 (OPERADOR -> MAYORIGUAL .)
+    ID              reduce using rule 57 (OPERADOR -> MAYORIGUAL .)
+    CADENA          reduce using rule 57 (OPERADOR -> MAYORIGUAL .)
+    CHAR_           reduce using rule 57 (OPERADOR -> MAYORIGUAL .)
+
+
+state 84
+
+    (58) OPERADOR -> MENORIGUAL .
+
+    NUMERO          reduce using rule 58 (OPERADOR -> MENORIGUAL .)
+    ID              reduce using rule 58 (OPERADOR -> MENORIGUAL .)
+    CADENA          reduce using rule 58 (OPERADOR -> MENORIGUAL .)
+    CHAR_           reduce using rule 58 (OPERADOR -> MENORIGUAL .)
+
+
+state 85
+
+    (59) OPERADOR -> MAYORQUE .
+
+    NUMERO          reduce using rule 59 (OPERADOR -> MAYORQUE .)
+    ID              reduce using rule 59 (OPERADOR -> MAYORQUE .)
+    CADENA          reduce using rule 59 (OPERADOR -> MAYORQUE .)
+    CHAR_           reduce using rule 59 (OPERADOR -> MAYORQUE .)
+
+
+state 86
+
+    (60) OPERADOR -> MENORQUE .
+
+    NUMERO          reduce using rule 60 (OPERADOR -> MENORQUE .)
+    ID              reduce using rule 60 (OPERADOR -> MENORQUE .)
+    CADENA          reduce using rule 60 (OPERADOR -> MENORQUE .)
+    CHAR_           reduce using rule 60 (OPERADOR -> MENORQUE .)
+
+
+state 87
+
+    (61) OPERADOR -> ANDBIT .
+
+    NUMERO          reduce using rule 61 (OPERADOR -> ANDBIT .)
+    ID              reduce using rule 61 (OPERADOR -> ANDBIT .)
+    CADENA          reduce using rule 61 (OPERADOR -> ANDBIT .)
+    CHAR_           reduce using rule 61 (OPERADOR -> ANDBIT .)
+
+
+state 88
+
+    (62) OPERADOR -> ORBIT .
+
+    NUMERO          reduce using rule 62 (OPERADOR -> ORBIT .)
+    ID              reduce using rule 62 (OPERADOR -> ORBIT .)
+    CADENA          reduce using rule 62 (OPERADOR -> ORBIT .)
+    CHAR_           reduce using rule 62 (OPERADOR -> ORBIT .)
+
+
+state 89
+
+    (63) OPERADOR -> XORBIT .
+
+    NUMERO          reduce using rule 63 (OPERADOR -> XORBIT .)
+    ID              reduce using rule 63 (OPERADOR -> XORBIT .)
+    CADENA          reduce using rule 63 (OPERADOR -> XORBIT .)
+    CHAR_           reduce using rule 63 (OPERADOR -> XORBIT .)
+
+
+state 90
+
+    (64) OPERADOR -> SHIFTIZQ .
+
+    NUMERO          reduce using rule 64 (OPERADOR -> SHIFTIZQ .)
+    ID              reduce using rule 64 (OPERADOR -> SHIFTIZQ .)
+    CADENA          reduce using rule 64 (OPERADOR -> SHIFTIZQ .)
+    CHAR_           reduce using rule 64 (OPERADOR -> SHIFTIZQ .)
+
+
+state 91
+
+    (65) OPERADOR -> SHIFTDER .
+
+    NUMERO          reduce using rule 65 (OPERADOR -> SHIFTDER .)
+    ID              reduce using rule 65 (OPERADOR -> SHIFTDER .)
+    CADENA          reduce using rule 65 (OPERADOR -> SHIFTDER .)
+    CHAR_           reduce using rule 65 (OPERADOR -> SHIFTDER .)
+
+
+state 92
+
+    (43) FUNCION -> ABS PARIZQ . EXPRESION PARDER
+    (29) EXPRESION -> . ATOMICO
+    (30) EXPRESION -> . FUNCION
+    (31) EXPRESION -> . OPERACION
+    (42) ATOMICO -> . F
+    (43) FUNCION -> . ABS PARIZQ EXPRESION PARDER
+    (44) FUNCION -> . READ PARIZQ PARDER
+    (45) FUNCION -> . PARIZQ TIPO PARDER ID
+    (46) FUNCION -> . ARRAY PARIZQ PARDER
+    (32) OPERACION -> . F error F
+    (33) OPERACION -> . MENOS error
+    (34) OPERACION -> . NOTLOGICA error
+    (35) OPERACION -> . NOTBIT error
+    (36) OPERACION -> . ANDBIT error
+    (37) OPERACION -> . F OPERADOR F
+    (38) OPERACION -> . MENOS F
+    (39) OPERACION -> . NOTLOGICA F
+    (40) OPERACION -> . NOTBIT F
+    (41) OPERACION -> . ANDBIT F
+    (69) F -> . NUMERO
+    (70) F -> . ID
+    (71) F -> . ID CORCHETES
+    (72) F -> . CADENA
+    (73) F -> . CHAR_
+
+    ABS             shift and go to state 41
+    READ            shift and go to state 42
+    PARIZQ          shift and go to state 34
+    ARRAY           shift and go to state 44
+    MENOS           shift and go to state 45
+    NOTLOGICA       shift and go to state 46
+    NOTBIT          shift and go to state 47
+    ANDBIT          shift and go to state 48
+    NUMERO          shift and go to state 49
+    ID              shift and go to state 43
+    CADENA          shift and go to state 50
+    CHAR_           shift and go to state 51
+
+    EXPRESION                      shift and go to state 119
+    ATOMICO                        shift and go to state 37
+    FUNCION                        shift and go to state 38
+    OPERACION                      shift and go to state 39
+    F                              shift and go to state 40
+
+state 93
+
+    (44) FUNCION -> READ PARIZQ . PARDER
+
+    PARDER          shift and go to state 120
+
+
+state 94
+
+    (71) F -> ID CORCHETES .
+    (26) CORCHETES -> CORCHETES . CORCHETE
+    (28) CORCHETE -> . CORIZQ F CORDER
+
+    error           reduce using rule 71 (F -> ID CORCHETES .)
+    MAS             reduce using rule 71 (F -> ID CORCHETES .)
+    MENOS           reduce using rule 71 (F -> ID CORCHETES .)
+    DIV             reduce using rule 71 (F -> ID CORCHETES .)
+    POR             reduce using rule 71 (F -> ID CORCHETES .)
+    MODULO          reduce using rule 71 (F -> ID CORCHETES .)
+    AND             reduce using rule 71 (F -> ID CORCHETES .)
+    OR              reduce using rule 71 (F -> ID CORCHETES .)
+    XOR             reduce using rule 71 (F -> ID CORCHETES .)
+    IGUALQUE        reduce using rule 71 (F -> ID CORCHETES .)
+    DIFERENTE       reduce using rule 71 (F -> ID CORCHETES .)
+    MAYORIGUAL      reduce using rule 71 (F -> ID CORCHETES .)
+    MENORIGUAL      reduce using rule 71 (F -> ID CORCHETES .)
+    MAYORQUE        reduce using rule 71 (F -> ID CORCHETES .)
+    MENORQUE        reduce using rule 71 (F -> ID CORCHETES .)
+    ANDBIT          reduce using rule 71 (F -> ID CORCHETES .)
+    ORBIT           reduce using rule 71 (F -> ID CORCHETES .)
+    XORBIT          reduce using rule 71 (F -> ID CORCHETES .)
+    SHIFTIZQ        reduce using rule 71 (F -> ID CORCHETES .)
+    SHIFTDER        reduce using rule 71 (F -> ID CORCHETES .)
+    PARDER          reduce using rule 71 (F -> ID CORCHETES .)
+    PUNTOCOMA       reduce using rule 71 (F -> ID CORCHETES .)
+    CORDER          reduce using rule 71 (F -> ID CORCHETES .)
+    CORIZQ          shift and go to state 32
+
+    CORCHETE                       shift and go to state 63
+
+state 95
+
+    (46) FUNCION -> ARRAY PARIZQ . PARDER
+
+    PARDER          shift and go to state 121
+
+
+state 96
+
+    (33) OPERACION -> MENOS error .
+
+    PARDER          reduce using rule 33 (OPERACION -> MENOS error .)
+    PUNTOCOMA       reduce using rule 33 (OPERACION -> MENOS error .)
+
+
+state 97
+
+    (38) OPERACION -> MENOS F .
+
+    PARDER          reduce using rule 38 (OPERACION -> MENOS F .)
+    PUNTOCOMA       reduce using rule 38 (OPERACION -> MENOS F .)
+
+
+state 98
+
+    (34) OPERACION -> NOTLOGICA error .
+
+    PARDER          reduce using rule 34 (OPERACION -> NOTLOGICA error .)
+    PUNTOCOMA       reduce using rule 34 (OPERACION -> NOTLOGICA error .)
+
+
+state 99
+
+    (39) OPERACION -> NOTLOGICA F .
+
+    PARDER          reduce using rule 39 (OPERACION -> NOTLOGICA F .)
+    PUNTOCOMA       reduce using rule 39 (OPERACION -> NOTLOGICA F .)
+
+
+state 100
+
+    (35) OPERACION -> NOTBIT error .
+
+    PARDER          reduce using rule 35 (OPERACION -> NOTBIT error .)
+    PUNTOCOMA       reduce using rule 35 (OPERACION -> NOTBIT error .)
+
+
+state 101
+
+    (40) OPERACION -> NOTBIT F .
+
+    PARDER          reduce using rule 40 (OPERACION -> NOTBIT F .)
+    PUNTOCOMA       reduce using rule 40 (OPERACION -> NOTBIT F .)
+
+
+state 102
+
+    (36) OPERACION -> ANDBIT error .
+
+    PARDER          reduce using rule 36 (OPERACION -> ANDBIT error .)
+    PUNTOCOMA       reduce using rule 36 (OPERACION -> ANDBIT error .)
+
+
+state 103
+
+    (41) OPERACION -> ANDBIT F .
+
+    PARDER          reduce using rule 41 (OPERACION -> ANDBIT F .)
+    PUNTOCOMA       reduce using rule 41 (OPERACION -> ANDBIT F .)
+
+
+state 104
+
+    (11) INSTRUCCIONES -> IF PARIZQ error PARDER . GOTO LABEL PUNTOCOMA
+
+    GOTO            shift and go to state 122
+
+
+state 105
+
+    (16) INSTRUCCIONES -> IF PARIZQ EXPRESION PARDER . GOTO LABEL PUNTOCOMA
+
+    GOTO            shift and go to state 123
+
+
+state 106
+
+    (12) INSTRUCCIONES -> UNSET PARIZQ error PARDER . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 124
+
+
+state 107
+
+    (17) INSTRUCCIONES -> UNSET PARIZQ ID PARDER . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 125
+
+
+state 108
+
+    (21) ARRAY_ -> error IGUAL EXPRESION . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 126
+
+
+state 109
+
+    (23) ARRAY_ -> IGUAL error PUNTOCOMA .
+
+    LABEL           reduce using rule 23 (ARRAY_ -> IGUAL error PUNTOCOMA .)
+    PRINT           reduce using rule 23 (ARRAY_ -> IGUAL error PUNTOCOMA .)
+    IF              reduce using rule 23 (ARRAY_ -> IGUAL error PUNTOCOMA .)
+    UNSET           reduce using rule 23 (ARRAY_ -> IGUAL error PUNTOCOMA .)
+    EXIT            reduce using rule 23 (ARRAY_ -> IGUAL error PUNTOCOMA .)
+    GOTO            reduce using rule 23 (ARRAY_ -> IGUAL error PUNTOCOMA .)
+    ID              reduce using rule 23 (ARRAY_ -> IGUAL error PUNTOCOMA .)
+    $end            reduce using rule 23 (ARRAY_ -> IGUAL error PUNTOCOMA .)
+
+
+state 110
+
+    (25) ARRAY_ -> IGUAL EXPRESION PUNTOCOMA .
+
+    LABEL           reduce using rule 25 (ARRAY_ -> IGUAL EXPRESION PUNTOCOMA .)
+    PRINT           reduce using rule 25 (ARRAY_ -> IGUAL EXPRESION PUNTOCOMA .)
+    IF              reduce using rule 25 (ARRAY_ -> IGUAL EXPRESION PUNTOCOMA .)
+    UNSET           reduce using rule 25 (ARRAY_ -> IGUAL EXPRESION PUNTOCOMA .)
+    EXIT            reduce using rule 25 (ARRAY_ -> IGUAL EXPRESION PUNTOCOMA .)
+    GOTO            reduce using rule 25 (ARRAY_ -> IGUAL EXPRESION PUNTOCOMA .)
+    ID              reduce using rule 25 (ARRAY_ -> IGUAL EXPRESION PUNTOCOMA .)
+    $end            reduce using rule 25 (ARRAY_ -> IGUAL EXPRESION PUNTOCOMA .)
+
+
+state 111
+
+    (22) ARRAY_ -> CORCHETES IGUAL error . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 127
+
+
+state 112
+
+    (24) ARRAY_ -> CORCHETES IGUAL EXPRESION . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 128
+
+
+state 113
+
+    (28) CORCHETE -> CORIZQ F CORDER .
+
+    IGUAL           reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    CORIZQ          reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    error           reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    MAS             reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    MENOS           reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    DIV             reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    POR             reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    MODULO          reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    AND             reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    OR              reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    XOR             reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    IGUALQUE        reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    DIFERENTE       reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    MAYORIGUAL      reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    MENORIGUAL      reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    MAYORQUE        reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    MENORQUE        reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    ANDBIT          reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    ORBIT           reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    XORBIT          reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    SHIFTIZQ        reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    SHIFTDER        reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    PARDER          reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    PUNTOCOMA       reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+    CORDER          reduce using rule 28 (CORCHETE -> CORIZQ F CORDER .)
+
+
+state 114
+
+    (45) FUNCION -> PARIZQ TIPO PARDER . ID
+
+    ID              shift and go to state 129
+
+
+state 115
+
+    (10) INSTRUCCIONES -> PRINT PARIZQ error PARDER PUNTOCOMA .
+
+    LABEL           reduce using rule 10 (INSTRUCCIONES -> PRINT PARIZQ error PARDER PUNTOCOMA .)
+    PRINT           reduce using rule 10 (INSTRUCCIONES -> PRINT PARIZQ error PARDER PUNTOCOMA .)
+    IF              reduce using rule 10 (INSTRUCCIONES -> PRINT PARIZQ error PARDER PUNTOCOMA .)
+    UNSET           reduce using rule 10 (INSTRUCCIONES -> PRINT PARIZQ error PARDER PUNTOCOMA .)
+    EXIT            reduce using rule 10 (INSTRUCCIONES -> PRINT PARIZQ error PARDER PUNTOCOMA .)
+    GOTO            reduce using rule 10 (INSTRUCCIONES -> PRINT PARIZQ error PARDER PUNTOCOMA .)
+    ID              reduce using rule 10 (INSTRUCCIONES -> PRINT PARIZQ error PARDER PUNTOCOMA .)
+    $end            reduce using rule 10 (INSTRUCCIONES -> PRINT PARIZQ error PARDER PUNTOCOMA .)
+
+
+state 116
+
+    (15) INSTRUCCIONES -> PRINT PARIZQ EXPRESION PARDER PUNTOCOMA .
+
+    LABEL           reduce using rule 15 (INSTRUCCIONES -> PRINT PARIZQ EXPRESION PARDER PUNTOCOMA .)
+    PRINT           reduce using rule 15 (INSTRUCCIONES -> PRINT PARIZQ EXPRESION PARDER PUNTOCOMA .)
+    IF              reduce using rule 15 (INSTRUCCIONES -> PRINT PARIZQ EXPRESION PARDER PUNTOCOMA .)
+    UNSET           reduce using rule 15 (INSTRUCCIONES -> PRINT PARIZQ EXPRESION PARDER PUNTOCOMA .)
+    EXIT            reduce using rule 15 (INSTRUCCIONES -> PRINT PARIZQ EXPRESION PARDER PUNTOCOMA .)
+    GOTO            reduce using rule 15 (INSTRUCCIONES -> PRINT PARIZQ EXPRESION PARDER PUNTOCOMA .)
+    ID              reduce using rule 15 (INSTRUCCIONES -> PRINT PARIZQ EXPRESION PARDER PUNTOCOMA .)
+    $end            reduce using rule 15 (INSTRUCCIONES -> PRINT PARIZQ EXPRESION PARDER PUNTOCOMA .)
+
+
+state 117
+
+    (32) OPERACION -> F error F .
+
+    PARDER          reduce using rule 32 (OPERACION -> F error F .)
+    PUNTOCOMA       reduce using rule 32 (OPERACION -> F error F .)
+
+
+state 118
+
+    (37) OPERACION -> F OPERADOR F .
+
+    PARDER          reduce using rule 37 (OPERACION -> F OPERADOR F .)
+    PUNTOCOMA       reduce using rule 37 (OPERACION -> F OPERADOR F .)
+
+
+state 119
+
+    (43) FUNCION -> ABS PARIZQ EXPRESION . PARDER
+
+    PARDER          shift and go to state 130
+
+
+state 120
+
+    (44) FUNCION -> READ PARIZQ PARDER .
+
+    PARDER          reduce using rule 44 (FUNCION -> READ PARIZQ PARDER .)
+    PUNTOCOMA       reduce using rule 44 (FUNCION -> READ PARIZQ PARDER .)
+
+
+state 121
+
+    (46) FUNCION -> ARRAY PARIZQ PARDER .
+
+    PARDER          reduce using rule 46 (FUNCION -> ARRAY PARIZQ PARDER .)
+    PUNTOCOMA       reduce using rule 46 (FUNCION -> ARRAY PARIZQ PARDER .)
+
+
+state 122
+
+    (11) INSTRUCCIONES -> IF PARIZQ error PARDER GOTO . LABEL PUNTOCOMA
+
+    LABEL           shift and go to state 131
+
+
+state 123
+
+    (16) INSTRUCCIONES -> IF PARIZQ EXPRESION PARDER GOTO . LABEL PUNTOCOMA
+
+    LABEL           shift and go to state 132
+
+
+state 124
+
+    (12) INSTRUCCIONES -> UNSET PARIZQ error PARDER PUNTOCOMA .
+
+    LABEL           reduce using rule 12 (INSTRUCCIONES -> UNSET PARIZQ error PARDER PUNTOCOMA .)
+    PRINT           reduce using rule 12 (INSTRUCCIONES -> UNSET PARIZQ error PARDER PUNTOCOMA .)
+    IF              reduce using rule 12 (INSTRUCCIONES -> UNSET PARIZQ error PARDER PUNTOCOMA .)
+    UNSET           reduce using rule 12 (INSTRUCCIONES -> UNSET PARIZQ error PARDER PUNTOCOMA .)
+    EXIT            reduce using rule 12 (INSTRUCCIONES -> UNSET PARIZQ error PARDER PUNTOCOMA .)
+    GOTO            reduce using rule 12 (INSTRUCCIONES -> UNSET PARIZQ error PARDER PUNTOCOMA .)
+    ID              reduce using rule 12 (INSTRUCCIONES -> UNSET PARIZQ error PARDER PUNTOCOMA .)
+    $end            reduce using rule 12 (INSTRUCCIONES -> UNSET PARIZQ error PARDER PUNTOCOMA .)
+
+
+state 125
+
+    (17) INSTRUCCIONES -> UNSET PARIZQ ID PARDER PUNTOCOMA .
+
+    LABEL           reduce using rule 17 (INSTRUCCIONES -> UNSET PARIZQ ID PARDER PUNTOCOMA .)
+    PRINT           reduce using rule 17 (INSTRUCCIONES -> UNSET PARIZQ ID PARDER PUNTOCOMA .)
+    IF              reduce using rule 17 (INSTRUCCIONES -> UNSET PARIZQ ID PARDER PUNTOCOMA .)
+    UNSET           reduce using rule 17 (INSTRUCCIONES -> UNSET PARIZQ ID PARDER PUNTOCOMA .)
+    EXIT            reduce using rule 17 (INSTRUCCIONES -> UNSET PARIZQ ID PARDER PUNTOCOMA .)
+    GOTO            reduce using rule 17 (INSTRUCCIONES -> UNSET PARIZQ ID PARDER PUNTOCOMA .)
+    ID              reduce using rule 17 (INSTRUCCIONES -> UNSET PARIZQ ID PARDER PUNTOCOMA .)
+    $end            reduce using rule 17 (INSTRUCCIONES -> UNSET PARIZQ ID PARDER PUNTOCOMA .)
+
+
+state 126
+
+    (21) ARRAY_ -> error IGUAL EXPRESION PUNTOCOMA .
+
+    LABEL           reduce using rule 21 (ARRAY_ -> error IGUAL EXPRESION PUNTOCOMA .)
+    PRINT           reduce using rule 21 (ARRAY_ -> error IGUAL EXPRESION PUNTOCOMA .)
+    IF              reduce using rule 21 (ARRAY_ -> error IGUAL EXPRESION PUNTOCOMA .)
+    UNSET           reduce using rule 21 (ARRAY_ -> error IGUAL EXPRESION PUNTOCOMA .)
+    EXIT            reduce using rule 21 (ARRAY_ -> error IGUAL EXPRESION PUNTOCOMA .)
+    GOTO            reduce using rule 21 (ARRAY_ -> error IGUAL EXPRESION PUNTOCOMA .)
+    ID              reduce using rule 21 (ARRAY_ -> error IGUAL EXPRESION PUNTOCOMA .)
+    $end            reduce using rule 21 (ARRAY_ -> error IGUAL EXPRESION PUNTOCOMA .)
+
+
+state 127
+
+    (22) ARRAY_ -> CORCHETES IGUAL error PUNTOCOMA .
+
+    LABEL           reduce using rule 22 (ARRAY_ -> CORCHETES IGUAL error PUNTOCOMA .)
+    PRINT           reduce using rule 22 (ARRAY_ -> CORCHETES IGUAL error PUNTOCOMA .)
+    IF              reduce using rule 22 (ARRAY_ -> CORCHETES IGUAL error PUNTOCOMA .)
+    UNSET           reduce using rule 22 (ARRAY_ -> CORCHETES IGUAL error PUNTOCOMA .)
+    EXIT            reduce using rule 22 (ARRAY_ -> CORCHETES IGUAL error PUNTOCOMA .)
+    GOTO            reduce using rule 22 (ARRAY_ -> CORCHETES IGUAL error PUNTOCOMA .)
+    ID              reduce using rule 22 (ARRAY_ -> CORCHETES IGUAL error PUNTOCOMA .)
+    $end            reduce using rule 22 (ARRAY_ -> CORCHETES IGUAL error PUNTOCOMA .)
+
+
+state 128
+
+    (24) ARRAY_ -> CORCHETES IGUAL EXPRESION PUNTOCOMA .
+
+    LABEL           reduce using rule 24 (ARRAY_ -> CORCHETES IGUAL EXPRESION PUNTOCOMA .)
+    PRINT           reduce using rule 24 (ARRAY_ -> CORCHETES IGUAL EXPRESION PUNTOCOMA .)
+    IF              reduce using rule 24 (ARRAY_ -> CORCHETES IGUAL EXPRESION PUNTOCOMA .)
+    UNSET           reduce using rule 24 (ARRAY_ -> CORCHETES IGUAL EXPRESION PUNTOCOMA .)
+    EXIT            reduce using rule 24 (ARRAY_ -> CORCHETES IGUAL EXPRESION PUNTOCOMA .)
+    GOTO            reduce using rule 24 (ARRAY_ -> CORCHETES IGUAL EXPRESION PUNTOCOMA .)
+    ID              reduce using rule 24 (ARRAY_ -> CORCHETES IGUAL EXPRESION PUNTOCOMA .)
+    $end            reduce using rule 24 (ARRAY_ -> CORCHETES IGUAL EXPRESION PUNTOCOMA .)
+
+
+state 129
+
+    (45) FUNCION -> PARIZQ TIPO PARDER ID .
+
+    PARDER          reduce using rule 45 (FUNCION -> PARIZQ TIPO PARDER ID .)
+    PUNTOCOMA       reduce using rule 45 (FUNCION -> PARIZQ TIPO PARDER ID .)
+
+
+state 130
+
+    (43) FUNCION -> ABS PARIZQ EXPRESION PARDER .
+
+    PARDER          reduce using rule 43 (FUNCION -> ABS PARIZQ EXPRESION PARDER .)
+    PUNTOCOMA       reduce using rule 43 (FUNCION -> ABS PARIZQ EXPRESION PARDER .)
+
+
+state 131
+
+    (11) INSTRUCCIONES -> IF PARIZQ error PARDER GOTO LABEL . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 133
+
+
+state 132
+
+    (16) INSTRUCCIONES -> IF PARIZQ EXPRESION PARDER GOTO LABEL . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 134
+
+
+state 133
+
+    (11) INSTRUCCIONES -> IF PARIZQ error PARDER GOTO LABEL PUNTOCOMA .
+
+    LABEL           reduce using rule 11 (INSTRUCCIONES -> IF PARIZQ error PARDER GOTO LABEL PUNTOCOMA .)
+    PRINT           reduce using rule 11 (INSTRUCCIONES -> IF PARIZQ error PARDER GOTO LABEL PUNTOCOMA .)
+    IF              reduce using rule 11 (INSTRUCCIONES -> IF PARIZQ error PARDER GOTO LABEL PUNTOCOMA .)
+    UNSET           reduce using rule 11 (INSTRUCCIONES -> IF PARIZQ error PARDER GOTO LABEL PUNTOCOMA .)
+    EXIT            reduce using rule 11 (INSTRUCCIONES -> IF PARIZQ error PARDER GOTO LABEL PUNTOCOMA .)
+    GOTO            reduce using rule 11 (INSTRUCCIONES -> IF PARIZQ error PARDER GOTO LABEL PUNTOCOMA .)
+    ID              reduce using rule 11 (INSTRUCCIONES -> IF PARIZQ error PARDER GOTO LABEL PUNTOCOMA .)
+    $end            reduce using rule 11 (INSTRUCCIONES -> IF PARIZQ error PARDER GOTO LABEL PUNTOCOMA .)
+
+
+state 134
+
+    (16) INSTRUCCIONES -> IF PARIZQ EXPRESION PARDER GOTO LABEL PUNTOCOMA .
+
+    LABEL           reduce using rule 16 (INSTRUCCIONES -> IF PARIZQ EXPRESION PARDER GOTO LABEL PUNTOCOMA .)
+    PRINT           reduce using rule 16 (INSTRUCCIONES -> IF PARIZQ EXPRESION PARDER GOTO LABEL PUNTOCOMA .)
+    IF              reduce using rule 16 (INSTRUCCIONES -> IF PARIZQ EXPRESION PARDER GOTO LABEL PUNTOCOMA .)
+    UNSET           reduce using rule 16 (INSTRUCCIONES -> IF PARIZQ EXPRESION PARDER GOTO LABEL PUNTOCOMA .)
+    EXIT            reduce using rule 16 (INSTRUCCIONES -> IF PARIZQ EXPRESION PARDER GOTO LABEL PUNTOCOMA .)
+    GOTO            reduce using rule 16 (INSTRUCCIONES -> IF PARIZQ EXPRESION PARDER GOTO LABEL PUNTOCOMA .)
+    ID              reduce using rule 16 (INSTRUCCIONES -> IF PARIZQ EXPRESION PARDER GOTO LABEL PUNTOCOMA .)
+    $end            reduce using rule 16 (INSTRUCCIONES -> IF PARIZQ EXPRESION PARDER GOTO LABEL PUNTOCOMA .)
+

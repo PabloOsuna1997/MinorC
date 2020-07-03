@@ -1,0 +1,213 @@
+/*
+IDENTIFICADORES: es secuencia de letras, y/o números, y/o guión bajo, que inicia con una letra. Distingue entre mayúsculas y minúsculas
+                o tambien una lista de asteriscos
+PALABRAS RESERVEDADES:  dentificadores reservados. Entre algunos están: auto break case char const continue default 
+                        do double else enum extern float for goto if int register return 
+                        sizeof struct switch void while.
+SECUENCIAS DE ESCAPE:   \\ Backlash, \’ apostrophe, \” comilla doble, \n nueva línea, \r retroceso, y \t tabulación.
+FUNCIONES DE LECTURA:   printf y scanf (según el formato de la referencia del lenguaje C).
+*/
+
+###----------------------------gramatica ascendente
+
+S -> A
+A -> INSTRUCCIONES_GLOBALES             /* verificar si el main */
+
+INSTRUCCIONES_GLOBALES -> INSTRUCCIONES_GLOBALES DECLARACION_GLOBAL
+                | DECLARACION_GLOBAL
+
+DECLARACION_GLOBAL ->  DECLA_VARIABLES
+                        | DECLA_FUNCIONES
+                        | DECLA_STRUCTS
+
+##-------------------------------------------------seccion de variables ----------------------------------------
+DECLA_VARIABLES -> TIPO ID LISTA_ID ';'
+
+LISTA_ID -> VARIABLES ',' ID ASIGNA 
+            | ASIGNA
+
+ASIGNA -> IGUAL ASIG
+           |e
+
+ASIG -> '=' EXPRESION
+            |CORCHETES '=' EXPRESION                            /* ej: int a[1][1] = 3*/
+            | e
+
+CORCHETES -> CORCHETES CORCHETE
+            |CORCHETE
+
+CORCHETE -> '[' VALOR ']'
+
+VALOR -> EXPRESION
+        | e
+
+###-------------------------------------------------seccion de funciones ---------------------------------------
+
+DECLA_FUNCIONES -> TIPO ID '(' RECEPCION_PARAMETROS ')' '{' INSTRUCCIONES_INTERNAS '}'
+
+RECEPCION_PARAMETROS -> RECEPCION_PARAMETROS ',' PARAM
+                        | PARAM
+                        | e
+
+PARAM -> TIPO ID
+
+###-------------------------------------------------seccion de struct -------------------------------------------
+
+DECLA_STRUCTS -> 'struct' ID '{' ATRIBUTOS '}' ';'
+                |'struct' ID ID ASIG  ';'                             /* ej: struct nodo *myNode; */
+
+ATRIBUTOS -> ATRIBUTOS ATR
+            |ATR                                                        /*validar unicamente que sean variables y otros structs*/
+
+ATR -> DECLA_VARIABLES
+        |'struct' ID ID ASIGNA ';' 
+
+
+##---------------------------------------------------------------------------------------------------------------
+INSTRUCCIONES_INTERNAS -> INSTRUCCIONES_INTERNAS INSTR_IN
+                        | INSTR_IN
+
+INSTR_IN ->     DECLA_VARIABLES
+                | DECLA_STRUCTS   //pendiente porque solo deberian hacerse asignaciones de un struct ya creado
+                | ASIGNACIONES
+                | NATIVAS
+                | IF 
+                | FOR
+                | WHILE
+                | DO WHILE
+                | SWITCH
+                | LLAMADAFUNCION
+                | INCRE_DECRE
+                | ID ':'                /*  etiqueta   */
+
+##--------------------------------------------asignaciones ----------------------------------------------
+ASIGNACIONES -> ID OP_ASIGNACION EXPRESION ';'                  //-> para variables
+                | 'struct' ID ID '=' '('struct ID')''malloc''(' 'sizeof' '('struct ID ')' ')' ';'
+                | ID ACCESO_ATRIBUTO OP_ASIGNACION EXPRESION ';'         //-> para structs //-> para structs punteros
+                | ID ID ASIG ';'                                //caso de  punto lista[2];
+
+ACCESO_ATRIBUTO -> LISTA_PUNTOS
+                    |LISTA_FLECHAS
+
+LISTA_PUNTOS -> LISTA_PUNTOS '.' ID
+                | '.' ID
+
+LISTA_FLECHA -> LISTA_FLECHA '-' '>' ID
+                | '-' '>' ID
+
+OP_ASIGNACION -> '='
+                |'+='
+                |'-='
+                |'*='
+                |'/='
+                |'%='
+                |'<<='
+                |'>>='
+                |'&='
+                |'^='
+                |'|='
+
+##------------------------------------------incremento o decremento----------------------------------
+INCRE_DECRE -> SIG ID SIG
+
+SIG -> '+' '+'
+        | '-''-'
+        | e
+
+##------------------------------------------nativas----------------------------------
+NATIVAS -> 'printf' '(' EXPRESION ')' ';'
+        | 'return' EXPRESION ';'
+        | 'continue' ';'
+        | 'break' ';'
+        | goto ID ';'
+
+##------------------------------------------if else ----------------------------------
+IF -> 'if' '(' EXPRESION ')' '{' INSTRUCCIONES_INTERNAS '}' ELSE
+
+ELSE -> 'else' IF
+        | 'else' {' INSTRUCCIONES_INTERNAS '}'
+        | e
+
+##------------------------------------------ for ----------------------------------
+FOR -> 'for' '(' DECLA_VARIABLES ';' EXPRESION ';' INCRE_DECRE ')' '{' INSTRUCCIONES_INTERNAS '}'
+
+##------------------------------------------ while ----------------------------------
+WHIILE -> 'while' '(' EXPRESION ')' '{' INSTRUCCIONES_INTERNAS '}'
+
+##------------------------------------------ do-while ----------------------------------
+DO -> 'do' '{' INSTRUCCIONES_INTERNAS '}' 'while' '(' EXPRESION ')' ';'
+
+##-------------------------------------------switch------------------------------------
+SWITCH -> 'switch' '(' EXPRESION ')''{' LISTA_CASES' DEFAULT}'
+
+LISTA_CASES -> LISTA_CASES CASE 
+                | CASE
+                
+CASE -> 'case' EXPRESION ':' INSTRUCCIONES_INTERNAS BREAK
+
+BREAK -> 'break'
+        | e
+
+DEFAULT -> 'default' ':' INSTRUCCIONES_INTERNAS BREAK
+        | e
+
+EXPRESION -> LOGICAS
+        
+LOGICAS -> LOGICAS '&&' LOGICAS
+            |LOGICAS '||' LOGICAS
+            |'!' LOGICAS
+            | LOGICAS_BIT
+
+LOGICAS_BIT -> LOGICAS_BIT '<<' LOGICAS_BIT
+                | LOGICAS_BIT '>>' LOGICAS_BIT
+                | LOGICAS_BIT '&' LOGICAS_BIT
+                | LOGICAS_BIT '|' LOGICAS_BIT
+                | LOGICAS_BIT '^' LOGICAS_BIT
+                | '~' LOGICAS_BIT
+                | RELACIONALES
+
+RELACIONALES -> RELACIONALES '==' RELACIONALES
+                |RELACIONALES '!=' RELACIONALES
+                |RELACIONALES '<' RELACIONALES
+                |RELACIONALES '>' RELACIONALES
+                |RELACIONALES '<=' RELACIONALES
+                |RELACIONALES '>=' RELACIONALES
+                |ARITMETICAS
+
+ARITMETICAS -> ARITMETICAS '+' ARITMETICAS
+                |ARITMETICAS '-' ARITMETICAS
+                |ARITMETICAS '*' ARITMETICAS
+                |ARITMETICAS '/' ARITMETICAS
+                |ARITMETICAS '%' ARITMETICAS
+                |'-' ARITMETICAS                
+                | '(' EXPRESION ')'                
+                | '[' LISTA_EXPRESIONES ']'                             /* ej: [2,3,4,5+6] */                
+                | 'sizeof' '(' ID ')'
+                | '(' TIPO ')' EXPRESION                                /* casteo */
+                | EXPRESION '?' EXPRESION ':' EXPRESION ';'             /*   ternario   */
+                | F
+
+LISTA_EXPRESIONES -> LISTA_EXPRESIONES ',' EXPRESION                    /*  ej: [2,3,4,5+6]  */
+                    | EXPRESION
+
+F -> ID CORCHETES
+    | NUM
+    | CADENA
+    | CHAR
+    | '&' ID 
+    | LLAMADAFUNCION
+    | ID
+
+LLAMADAFUNCION -> ID '(' PARAMETROS ')' ';'
+                | ID '(' ')' ';'
+
+PARAMETROS -> PARAMETROS , EXPRESION
+            | EXPRESION
+
+TIPO -> int
+        |char
+        |double
+        |float
+        |struct
+        |void
+
